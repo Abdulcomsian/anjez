@@ -9,6 +9,8 @@ use App\Http\Controllers\studentContentController;
 use App\Http\Controllers\studentDashboardContrller;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\adminDashboardController;
+use App\Http\Controllers\Auth\LoginController as AuthLoginController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,15 +29,20 @@ use App\Http\Controllers\adminDashboardController;
 
 // User Routes
 Route::get('/', [IndexController::class, 'index']);
-Route::get('/signup', [signupController::class, 'signup']);
-Route::post('/login', [loginController::class, 'login']);
 Route::get('/studentcontent',[studentContentController::class,'studentcontent']);
 Route::get('/payments',[paymentController::class,'payments']);
 Route::match(['GET', 'POST'], '/studentDashboard', [studentDashboardContrller::class, 'studentDashboard']);
 
-Route::get('/AdminDashboard', [adminDashboardController::class, 'AdminDashboard']);
+Route::get('/AdminDashboard', [adminDashboardController::class, 'AdminDashboard'])->middleware('auth')->name('admin-dashboard');
 
 
+//Auth Routes
+Route::get('logout', [AuthLoginController::class, 'logout'])->name('logout');
+Route::get('/login', [loginController::class, 'create'])->name('login');
+Route::post('/login-user', [loginController::class, 'login'])->name('login-user');
+
+Route::get('/signup', [signupController::class, 'create']);
+Route::post('signup-user', [signupController::class, 'signupUser'])->name('user.signup');
 
 // // Admin Routes
 // Route::get('/signup', [adminDashboardController::class, 'signup']);

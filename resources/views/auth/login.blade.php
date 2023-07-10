@@ -105,10 +105,12 @@
                     <div class="col-8" id="no" onclick="showNumber()" style="cursor: pointer;"> Phone Number</div>
                 </div>
                 <div class="form-container">
-                    <form>
+                    <form action="{{ route('login-user') }}" method="POST">
+                        @csrf
                         <div id="emails">
                             <label for="email" class="form-label">Email</label>
                             <input
+                                name="email"
                                 type="text"
                                 class="form-control"
                                 id="email"
@@ -118,11 +120,12 @@
 
                         <div id="numd" class="mb-3 d-flex flex-column" style="display: none !important;">
                             <label for="phone" class="form-label">Phone Number</label>
-                            <input type="tel" id="phone-input" class="form-control">
+                            <input type="tel" id="phone-input" name="phone_no" class="form-control">
                         </div>
                         <div>
                             <label for="password" class="form-label">Password</label>
                             <input
+                                name="password"
                                 type="password"
                                 class="form-control"
                                 id="password"
