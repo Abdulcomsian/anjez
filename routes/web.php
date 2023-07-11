@@ -8,6 +8,7 @@ use App\Http\Controllers\paymentController;
 use App\Http\Controllers\studentContentController;
 use App\Http\Controllers\studentDashboardContrller;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\adminDashboardController;
 use App\Http\Controllers\Auth\LoginController as AuthLoginController;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +35,19 @@ Route::get('/payments',[paymentController::class,'payments']);
 Route::match(['GET', 'POST'], '/studentDashboard', [studentDashboardContrller::class, 'studentDashboard']);
 
 Route::get('/AdminDashboard', [adminDashboardController::class, 'AdminDashboard'])->middleware('auth')->name('admin-dashboard');
+
+
+// add Courses
+
+Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+Route::get('add-course', [CourseController::class, 'create'])->name('courses.create');
+Route::post('/save_course', [CourseController::class, 'store'])->name('courses.store');
+Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');
+Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
+Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
+
+
+Route::get('/test', [CourseController::class, 'test']);
 
 
 //Auth Routes

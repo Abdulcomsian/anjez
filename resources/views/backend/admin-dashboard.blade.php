@@ -1,4 +1,4 @@
-{{-- <html lang="en">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
@@ -62,13 +62,13 @@
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@200;400;500;600;700&family=Lexend:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700&family=Noto+Sans:wght@400;500;600;700;800&family=Nunito:wght@200;300;400;500;600;700&display=swap"
     rel="stylesheet">
-</head> --}}
+</head>
 
 
 
-@extends('backend.layouts.main')
+{{-- @extends('backend.layouts.main') --}}
 
-@section('content')
+{{-- @section('content') --}}
 
   <div>
     <!-- Navbar code -->
@@ -941,4 +941,4 @@
       });
     }
   </script>
-@endsection
+{{-- @endsection --}}
