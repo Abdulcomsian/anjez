@@ -515,8 +515,6 @@
             </div>
 
 
-
-
             <!-- course section  -->
             <div class="user mt-5 pb-5" id="course-section" style="display: none;">
               <div class="container">

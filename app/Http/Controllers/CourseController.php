@@ -22,14 +22,15 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
             'title' => 'required',
             'price' => 'required',
             'status' => 'required',
             'description' => 'required',
-            'feature_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'feature_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+// dd($request->input('status'));
         $course = new Course;
         $course->title = $request->input('title');
         $course->price = $request->input('price');
@@ -39,7 +40,7 @@ class CourseController extends Controller
         if ($request->hasFile('feature_image')) {
             $image = $request->file('feature_image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('Courses'), $imageName);
+            $image->move(public_path('course_content/courses'), $imageName);
             $course->feature_image = $imageName;
         }
 
@@ -48,7 +49,7 @@ class CourseController extends Controller
 
         $course->save();
 
-        return redirect()->route('admin-dashboard')->with('success', 'Course added successfully');
+        return redirect()->route('courses.index')->with('success', 'Course added successfully');
     }
 
     public function edit($id)

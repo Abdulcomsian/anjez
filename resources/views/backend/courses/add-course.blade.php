@@ -1,10 +1,11 @@
 @extends('backend.layouts.main')
 
 @section('content')
+
 <div id="course" style="display: block;">
 
 <!-- <div class="user mt-5 pb-5" id="course" style="display: none;"> -->
-<div class="user mt-5 pb-5" id="add-course">
+       <div class="user mt-5 pb-5" id="add-course">
               <div class="container">
                 <div class="row ">
                   <div class="col mt-4 d-flex justify-content-start">
@@ -29,28 +30,29 @@
                   </div>
                 </div>
                 <hr>
-                <form action="{{ route('courses.store') }}">
+                  <form action="{{ route('courses.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                   <div class="row">
                     <div class="col star course">
                       <label for="title" class="form-label">Course Title</label>
-                      <input type="text" class="form-control" id="firstname" />
+                      <input type="text" name="title" class="form-control" id="firstname" />
                     </div>
                     <div class="col star course">
-                      <label for="price" class="form-label"> Price</label>
-                      <input type="text" class="form-control">
+                      <label for="price"class="form-label"> Price</label>
+                      <input type="price" name="price" class="form-control">
                     </div>
                     <div class="col course">
                       <label for="state" class="form-label"> State</label>
-                      <select class="form-select" aria-label="Default select example">
-                        <option selected> Active </option>
+                      <select class="form-select" name="status"  aria-label="Default select example">
+                        <option selected value="1"> Active </option>
                         <option value="2"> Draft </option>
                       </select>
                     </div>
                   </div>
                   <div class="row mt-4">
                     <div class="col course">
-                      <label for="description" class="form-label"> Description</label>
-                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                      <label for="description"  class="form-label"> Description</label>
+                      <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5"></textarea>
                     </div>
                     <div class="col">
                       <div class="col star course">
@@ -73,11 +75,11 @@
                     <div class="row">
                       <div class="col d-flex justify-content-start gap-4">
                         <button class="can mt-3" onclick="backToCourses()"> Cancel </button>
-                        <button class="add mt-3"> Add </button>
+                        <button type="submit" class="add mt-3"> Add </button>
                       </div>
                     </div>
                   </div>
                 </form>
               </div>
-            </div>
+        </div>
 @endsection
