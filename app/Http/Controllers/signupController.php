@@ -33,20 +33,11 @@ class signupController extends Controller
         {
             $sign_user = $this->auth_service->signupUser($validated_data);
             if($sign_user)
-            {
                 return redirect()->route('login')->with('message','User Added Successfully');
-                // return redirect()->route('login');
-            }
             else
-            {
                 return redirect()->back()->with('error', 'Something went wrong');
-            }
         }
         else
-        {
             return redirect()->back()->with('error', "Validation Error");
-            // dd("Validation Error");
-        }
-        // dd($validated_data);
     }
 }
