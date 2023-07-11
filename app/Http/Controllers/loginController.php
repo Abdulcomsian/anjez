@@ -25,15 +25,13 @@ class loginController extends Controller
     {
         $login = $this->auth_service->login($request->all());
         if($login)
-            return redirect()->route('admin-dashboard');
+        return redirect()->route('admin-dashboard');
     }
 
     public function logout ()
     {
         Session::flush();
         Auth::logout();
-
         return Redirect('login');
     }
-
 }
