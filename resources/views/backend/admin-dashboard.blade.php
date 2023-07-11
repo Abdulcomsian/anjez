@@ -132,8 +132,8 @@
                   </span>
                 </a>
               </li>
-              <li class="nav-item w-100 px-lg-3 px-sm-0 mt-3 " id="three" onclick=" course()">
-                <a href="#" class="nav-link align-middle">
+              <li class="nav-item w-100 px-lg-3 px-sm-0 mt-3">
+                <a href="{{ route('courses.index') }}" class="nav-link align-middle">
                   <i class="fs-5 bi-card-list menu-item-icon"></i>
                   <span class="ms-2 d-none d-sm-inline font-noto-sans ">
                     Courses
@@ -604,7 +604,7 @@
             </div>
 
             <!-- course lesson list  -->
-            <div class="user mt-5 pb-5" id="course-lesson-list" style="display: none;">
+            {{-- <div class="user mt-5 pb-5" id="course-lesson-list" style="display: none;">
               <div class="container">
                 <div class="row ">
                   <div class="col mt-4 d-flex justify-content-start">
@@ -715,7 +715,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
 
 
             <!-- quiz modal  -->
@@ -816,6 +816,7 @@
       document.getElementById("three").classList.remove("menu-item-active")
     }
     function course() {
+
       document.getElementById("users").style.display = "none";
       document.getElementById("course").style.display = "block";
       document.getElementById("content").style.display = "none"
@@ -939,6 +940,11 @@
         // Open the modal again
         $('#exampleModalCenterthree').modal('show');
       });
+    }
+
+    function gotoCourseView()
+    {
+        windows.location.href = "{{ route('courses.index') }}";
     }
   </script>
 {{-- @endsection --}}

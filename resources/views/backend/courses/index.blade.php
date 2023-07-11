@@ -2,7 +2,6 @@
 
 @section('content')
 <div id="course" style="display: block;">
-
 <!-- <div class="user mt-5 pb-5" id="course" style="display: none;"> -->
     <div class="user mt-5 pb-5" id="main-course">
         <div class="container">
@@ -30,6 +29,7 @@
             </div>
           </div>
           <hr>
+
           <div class="row courses d-flex justify-content-between">
             <div class="col-1"> <span> ID </span> </div>
             <div class="col-3"> <span> TITLE </span> </div>
@@ -40,25 +40,29 @@
             <div class="col-1"><span>Action</span></div>
           </div>
           <hr class="mt-4">
-          <div class="row course mt-2">
-            <div class="col-1"> <span> 1 </span> </div>
-            <div class="col-3"> <span style="color: #2572CC;" onclick="courseSection()"> Physics </span> </div>
-            <div class="col-2"> <img src="{{ url('assets/images/8138748 1 (1).png') }}" alt=""> </div>
-            <div class="col-2"> <span> 2 </span> </div>
-            <div class="col-1"><span> $100 </span></div>
-            <div class="col-2"> <span style="color: #1CB104;">Active</span></div>
-            <!-- <div class="col-1"><img src="..../../assets/images/dots.png" alt=""></div> -->
-            <div class="col-1 dots">
-              <div class="dropdown dropdown-quiz">
-                <img class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                  aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="">
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Edit</a>
-                  <a class="dropdown-item" href="#">Delete</a>
+          @forelse ($courses as $course)
+            <div class="row course mt-2">
+                <div class="col-1"> <span> {{ $course->id }} </span> </div>
+                <div class="col-3"> <span style="color: #2572CC;"><a href="{{ route('course.index',['id'=>$course->id]) }}" style="text-decoration: none"> {{ $course->title ?? '--' }}</a> </span> </div>
+                <div class="col-2"> <img src="{{ url('assets/courses/'.$course->feature_image) }}" alt=""> </div>
+                <div class="col-2"> <span> 2 </span> </div>
+                <div class="col-1"><span> {{ $course->price }} </span></div>
+                <div class="col-2"> @if($course->status == 'active') <span style="color: #1CB104;">{{ $course->status }}</span> @else <span style="color: #e93e28;"> {{ $course->status }}</span> @endif</div>
+                <!-- <div class="col-1"><img src="..../../assets/images/dots.png" alt=""></div> -->
+                <div class="col-1 dots">
+                <div class="dropdown dropdown-quiz">
+                    <img class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="">
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{ url('courses/'.$course->id.'/edit') }}">Edit</a>
+                    <a class="dropdown-item" href="{{ route('courses.destroy',['id'=>$course->id]) }}">Delete</a>
+                    </div>
                 </div>
-              </div>
+                </div>
             </div>
-          </div>
+            @empty
+                <div class="col-1"> <span> No Course Found </span> </div>
+            @endforelse
         </div>
       </div>
     </div>

@@ -11,6 +11,8 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\adminDashboardController;
 use App\Http\Controllers\Auth\LoginController as AuthLoginController;
+use App\Http\Controllers\LessonController;
+use App\Http\Controllers\SectionController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -40,11 +42,11 @@ Route::get('/AdminDashboard', [adminDashboardController::class, 'AdminDashboard'
 // add Courses
 
 Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-Route::get('add-course', [CourseController::class, 'create'])->name('courses.create');
-Route::post('/save_course', [CourseController::class, 'store'])->name('courses.store');
+Route::get('create-course', [CourseController::class, 'create'])->name('courses.create');
+Route::post('/save-course', [CourseController::class, 'store'])->name('courses.store');
 Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');
 Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
-Route::delete('/courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
+Route::get('/course-delete/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 
 
 Route::get('/test', [CourseController::class, 'test']);
@@ -66,3 +68,13 @@ Route::post('signup-user', [signupController::class, 'signupUser'])->name('user.
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Course Section
+Route::controller(SectionController::class)->middleware('auth')->prefix('course')->group( function () {
+    Route::get('/{id}/section', 'index')->name('course.index');
+} );
+
+//Course Lesson
+Route::controller(LessonController::class)->middleware('auth')->prefix('course/section')->group( function () {
+    Route::get('/{id}/lesson', 'index')->name('lessons.index');
+} );
