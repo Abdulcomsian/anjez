@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model
@@ -15,5 +17,10 @@ class Course extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function courseSections () :HasOne
+    {
+        return $this->hasOne(Section::class);
     }
 }

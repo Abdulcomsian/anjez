@@ -32,23 +32,27 @@
         <div class="col-2"><span>Action</span></div>
       </div>
       <hr class="mt-4">
-      <div class="row course d-flex justify-content-between mt-2">
-        <div class="col-2"> <span> 1 </span> </div>
-        <div class="col-2"> <span> Section-1 </span> </div>
-        <div class="col-2"> <span style="color: #2572CC;" onclick="showLessonList()"> <a href="{{ route('lessons.index',['id'=>1]) }}" style="text-decoration: none">Lesson:0</a>  </span> </div>
-        <div class="col-2"> <span style="color: #1CB104;">Active</span></div>
-        <!-- <div class="col-2 dots"><img src="..../../assets/images/dots.png" alt=""></div> -->
-        <div class="col-2 dots">
-          <div class="dropdown dropdown-quiz">
-            <img class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="">
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Edit</a>
-              <a class="dropdown-item" href="#">Delete</a>
+        @forelse ($data['sections'] as $section)
+            <div class="row course d-flex justify-content-between mt-2">
+                <div class="col-2"> <span> {{ $section->id }} </span> </div>
+                <div class="col-2"> <span> {{ $section->title }} </span> </div>
+                <div class="col-2"> <span style="color: #2572CC;" onclick="showLessonList()"> <a href="{{ route('lessons.index',['id'=>1]) }}" style="text-decoration: none">{{ $section->course->title }}</a>  </span> </div>
+                <div class="col-2"> <span style="color: #1CB104;">Active</span></div>
+                <!-- <div class="col-2 dots"><img src="..../../assets/images/dots.png" alt=""></div> -->
+                <div class="col-2 dots">
+                <div class="dropdown dropdown-quiz">
+                    <img class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="">
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Edit</a>
+                    <a class="dropdown-item" href="#">Delete</a>
+                    </div>
+                </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
+        @empty
+            <div class="col-2"> <span> No Section Found </span> </div>
+        @endforelse
     </div>
   </div>
 
@@ -59,30 +63,36 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content p-5">
         <div class="modal-header">
-          <h5 class="modal-title course-heading-text" id="exampleModalLongTitle">Add Lesson</h5>
+          <h5 class="modal-title course-heading-text" id="exampleModalLongTitle">Add Section</h5>
           <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button> -->
         </div>
         <div class="modal-body">
-          <form>
+          <form method="POST" action="{{ route('course.store') }}">
+            @csrf
             <div class="row">
               <div class="col star course">
+                <input type="hidden" name="course_id" value="{{ $data['id'] }}">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="firstname" />
+                <input type="text" class="form-control" name="title" id="firstname" />
               </div>
             </div>
             <div class="row mt-3">
               <div class="col star course">
+                  {{-- <input type="text" class="form-control" id="firstname" /> --}}
                 <label for="status" class="form-label">Status</label>
-                <input type="text" class="form-control" id="firstname" />
+                <select class="form-select" name="status" aria-label="Default select example">
+                    <option value="active"> Active </option>
+                    <option value="draft"> Draft </option>
+                </select>
               </div>
             </div>
-          </form>
         </div>
         <div class="modal-footer d-flex justify-content-center">
-          <button class="add mt-3" style="width: 100%;"> Add Section </button>
+            <button class="add mt-3" style="width: 100%;"> Add Section </button>
         </div>
+    </form>
       </div>
     </div>
   </div>

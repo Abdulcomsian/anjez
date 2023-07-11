@@ -72,6 +72,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //Course Section
 Route::controller(SectionController::class)->middleware('auth')->prefix('course')->group( function () {
     Route::get('/{id}/section', 'index')->name('course.index');
+    Route::post('store', 'store')->name('course.store');
+
 } );
 
 //Course Lesson
