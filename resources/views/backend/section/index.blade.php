@@ -31,27 +31,27 @@
         <div class="col-2"> <span>STATUS</span></div>
         <div class="col-2"><span>Action</span></div>
       </div>
-      <hr class="mt-4">
-        @forelse ($data['sections'] as $section)
+      @forelse ($data['sections'] as $key=>$section)
+            <hr class="mt-4">
             <div class="row course d-flex justify-content-between mt-2">
-                <div class="col-2"> <span> {{ $section->id }} </span> </div>
-                <div class="col-2"> <span> {{ $section->title }} </span> </div>
-                <div class="col-2"> <span style="color: #2572CC;" onclick="showLessonList()"> <a href="{{ route('lessons.index',['id'=>1]) }}" style="text-decoration: none">{{ $section->course->title }}</a>  </span> </div>
-                <div class="col-2"> <span style="color: #1CB104;">Active</span></div>
+                <div class="col-2"> <span> {{ $key+1 }} </span> </div>
+                <div class="col-2"> <span> {{ $section->title ?? '--' }} </span> </div>
+                <div class="col-2"> <span style="color: #2572CC;"> <a href="{{ route('lessons.index',['id'=>$section->id]) }}" style="text-decoration: none">Lesson: {{ $section->lessons_count }}</a>  </span> </div>
+                <div class="col-2"> @if($section->status == 'active') <span style="color: #1CB104;">{{ $section->status }}</span> @else <span style="color: #e93e28;"> {{ $section->status }}</span> @endif</div>
                 <!-- <div class="col-2 dots"><img src="..../../assets/images/dots.png" alt=""></div> -->
                 <div class="col-2 dots">
                 <div class="dropdown dropdown-quiz">
                     <img class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="">
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Edit</a>
-                    <a class="dropdown-item" href="#">Delete</a>
+                        <p class="dropdown-item edit-btn"  data-id="{{ $section->id }}">Edit</p>
+                        <a href="{{ route('section.delete',['id'=>$section->id]) }}" class="dropdown-item">Delete</a>
                     </div>
                 </div>
                 </div>
             </div>
         @empty
-            <div class="col-2"> <span> No Section Found </span> </div>
+            <div class="col-10"> <span> No Section Found </span> </div>
         @endforelse
     </div>
   </div>
@@ -69,19 +69,19 @@
           </button> -->
         </div>
         <div class="modal-body">
-          <form method="POST" action="{{ route('course.store') }}">
+          <form method="POST" action="{{ route('section.store') }}">
             @csrf
             <div class="row">
               <div class="col star course">
                 <input type="hidden" name="course_id" value="{{ $data['id'] }}">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" name="title" id="firstname" />
+                <input type="text" class="form-control" name="title" />
               </div>
             </div>
             <div class="row mt-3">
               <div class="col star course">
                   {{-- <input type="text" class="form-control" id="firstname" /> --}}
-                <label for="status" class="form-label">Status</label>
+                <label for="status" class="form-label">Status fff</label>
                 <select class="form-select" name="status" aria-label="Default select example">
                     <option value="active"> Active </option>
                     <option value="draft"> Draft </option>
@@ -97,4 +97,94 @@
     </div>
   </div>
 
+  {{-- Update Modal --}}
+  <div class="modal fade" id="updateSectionModal" tabindex="-1" role="dialog"
+    aria-labelledby="updateSectionModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content p-5">
+        <div class="modal-header">
+          <h5 class="modal-title course-heading-text" id="exampleModalLongTitle">Update Section</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="{{ route('section.update') }}">
+            @csrf
+            <div class="row">
+              <div class="col star course">
+                <input type="hidden" name="course_id" id="course_id">
+                <input type="hidden" name="section_id" id="section_id">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" name="title" id="title" />
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col star course">
+                <label for="status" class="form-label">Status fff</label>
+                <select class="form-select" id="status" name="status" aria-label="Default select example">
+                    <option value="active"> Active </option>
+                    <option value="draft"> Draft </option>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+            <button class="add mt-3" style="width: 100%;"> Update Section </button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+  <script>
+
+$(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
+
+    $(document).on('click', '.edit-btn', function () {
+        let id = $(this).data('id');
+        $.ajax({
+            type: "GET",
+            url: '{{ url('course/edit/section') }}/'+id,
+            success: function (response) {
+                if(response.status)
+                {
+                    console.log(response.data);
+                    $('#updateSectionModal').modal('show');
+                    $('#title').val(response.data.title);
+                    $('#status').val(response.data.status)
+                    $('#section_id').val(response.data.id);
+                    $('#course_id').val(response.data.course_id);
+                }
+            }
+        });
+    });
+
+    $(document).on('click', '.delete-btn', function () {
+        let id = $(this).data('id');
+        $.ajax({
+            type: "GET",
+            url: '{{ url('course/delete/section') }}/'+id,
+            success: function (response) {
+                if(response.status)
+                {
+                    window.location.reload();
+                    // console.log(response.data);
+                    // $('#updateSectionModal').modal('show');
+                    // $('#title').val(response.data.title);
+                    // $('#status').val(response.data.status)
+                    // $('#section_id').val(response.data.id);
+                    // $('#course_id').val(response.data.course_id);
+                }
+            }
+        });
+    });
+
+  </script>
 @endsection
+

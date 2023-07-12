@@ -11,7 +11,7 @@ class Course extends Model
 {
     use SoftDeletes;
 
-    const PATH = 'assets/courses/';
+    const PATH = 'assets/courses-content/course-images/';
     protected $fillable = ['title', 'price', 'status', 'description', 'feature_image', 'user_id'];
 
     public function user()

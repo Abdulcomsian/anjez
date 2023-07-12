@@ -71,19 +71,21 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //Course Section
 Route::controller(SectionController::class)->middleware('auth')->prefix('course')->group( function () {
-    Route::get('/{id}/section', 'index')->name('course.index');
-    Route::post('store', 'store')->name('course.store');
+    Route::get('section/{id}', 'index')->name('section.index');
+    Route::post('store', 'store')->name('section.store');
+    Route::get('edit/section/{id}', 'edit')->name('section.edit');
+    Route::get('delete/section/{id}', 'delete')->name('section.delete');
+    Route::post('update/section', 'update')->name('section.update');
 
 } );
 
 // lesson Route
-Route::middleware('auth')->prefix('course/section')->group(function () {
+Route::middleware('auth')->prefix('section')->group(function () {
     Route::get('/{id}/lesson', [LessonController::class, 'index'])->name('lessons.index');
     Route::post('/{id}/lesson', [LessonController::class, 'store'])->name('lessons.store');
 });
 
 // Quiz Route
-
 Route::get('/guiz', [QuizController::class, 'index'])->name('quiz.index');
 
 

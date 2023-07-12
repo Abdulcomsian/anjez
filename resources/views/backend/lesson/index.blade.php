@@ -37,9 +37,9 @@
             <hr class="mt-4">
 
             <!-- Iterate over lesson data -->
-            @foreach ($lessons as $lesson)
+            @foreach ($lessons as $key=>$lesson)
             <div class="row course d-flex justify-content-between mt-2">
-                <div class="col-2"> <span> {{ $lesson->id }} </span> </div>
+                <div class="col-2"> <span> {{ $key+1 }} </span> </div>
                 <div class="col-2"> <span> {{ $lesson->title }} </span> </div>
                 <div class="col-2"> <span style="color: #2572CC;"> {{ $lesson->video_url }} </span> </div>
                 <div class="col-2"> <span style="color: #2572CC;"> Quiz 0 </span></div>
