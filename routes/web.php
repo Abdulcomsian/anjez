@@ -8,11 +8,13 @@ use App\Http\Controllers\paymentController;
 use App\Http\Controllers\studentContentController;
 use App\Http\Controllers\studentDashboardContrller;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\adminDashboardController;
 use App\Http\Controllers\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -74,7 +76,18 @@ Route::controller(SectionController::class)->middleware('auth')->prefix('course'
 
 } );
 
-//Course Lesson
-Route::controller(LessonController::class)->middleware('auth')->prefix('course/section')->group( function () {
-    Route::get('/{id}/lesson', 'index')->name('lessons.index');
-} );
+// lesson Route
+Route::middleware('auth')->prefix('course/section')->group(function () {
+    Route::get('/{id}/lesson', [LessonController::class, 'index'])->name('lessons.index');
+    Route::post('/{id}/lesson', [LessonController::class, 'store'])->name('lessons.store');
+});
+
+// Quiz Route
+
+Route::get('/guiz', [QuizController::class, 'index'])->name('quiz.index');
+
+
+// User Route
+
+Route::get('/users', [userController::class, 'index'])->name('users.index');
+// Route::get('create-user', [userController::class, 'create'])->name('users.create');

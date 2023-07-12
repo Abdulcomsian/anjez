@@ -94,6 +94,7 @@ class CourseController extends Controller
     public function destroy($id)
     {
         $course = Course::findOrFail($id);
+
         //Zeeshan TT code
         $feature_image = Course::PATH.$course['feature_image'];
         if(File::exists($feature_image))
