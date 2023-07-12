@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Traits\Image;
+use Illuminate\Support\Facades\File;
 
 class CourseController extends Controller
 {
+    use Image;
     public function index()
     {
-        // dd("test");
-        // $courses = Course::all();
-        return view('backend.courses.index');
+        $courses = Course::all();
+        return view('backend.courses.index', compact('courses'));
         // return view('backend.admin-dashboard', compact('courses'));
     }
 
@@ -30,25 +32,15 @@ class CourseController extends Controller
             'description' => 'required',
             // 'feature_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-// dd($request->input('status'));
-        $course = new Course;
-        $course->title = $request->input('title');
-        $course->price = $request->input('price');
-        $course->status = $request->input('status');
-        $course->description = $request->input('description');
 
-        if ($request->hasFile('feature_image')) {
-            $image = $request->file('feature_image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('course_content/courses'), $imageName);
-            $course->feature_image = $imageName;
-        }
-
-        // Assuming you have an authenticated user
+        $course = new Course();
+        $course->title = $validatedData['title'];
+        $course->price = $validatedData['price'];
+        $course->status = $validatedData['status'];
+        $course->description = $validatedData['description'];
+        $course->feature_image = $this->storeImage(Course::PATH, $validatedData['feature_image'] ?? '');
         $course->user_id = auth()->user()->id;
-
         $course->save();
-
         return redirect()->route('courses.index')->with('success', 'Course added successfully');
     }
 
@@ -68,18 +60,31 @@ class CourseController extends Controller
             'feature_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        //zeeshan rabnawaz code comment by zeeshan after refactoring i-e can be refactor more
+        // $course->title = $request->input('title');
+        // $course->price = $request->input('price');
+        // $course->status = $request->input('status');
+        // $course->description = $request->input('description');
         $course = Course::findOrFail($id);
-        $course->title = $request->input('title');
-        $course->price = $request->input('price');
-        $course->status = $request->input('status');
-        $course->description = $request->input('description');
-
-        if ($request->hasFile('feature_image')) {
-            $image = $request->file('feature_image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $course->feature_image = $imageName;
+        $course->title = $validatedData['title'];
+        $course->price = $validatedData['price'];
+        $course->status = $validatedData['status'];
+        $course->description = $validatedData['description'];
+        $course->user_id = auth()->user()->id;
+        $image = Course::PATH.$course->feature_image;
+        if(File::exists($image))
+        {
+            $delete_file = File::delete($image);
+            if($delete_file)
+                $course->feature_image = $this->storeImage(Course::PATH, $validatedData['feature_image'] ?? '');
         }
+
+        // if ($request->hasFile('feature_image')) {
+        //     $image = $request->file('feature_image');
+        //     $imageName = time() . '.' . $image->getClientOriginalExtension();
+        //     $image->move(public_path('images'), $imageName);
+        //     $course->feature_image = $imageName;
+        // }
 
         $course->save();
 
@@ -89,6 +94,12 @@ class CourseController extends Controller
     public function destroy($id)
     {
         $course = Course::findOrFail($id);
+        //Zeeshan TT code
+        $feature_image = Course::PATH.$course['feature_image'];
+        if(File::exists($feature_image))
+        {
+            File::delete($feature_image);
+        }
         $course->delete();
 
         return redirect()->route('courses.index')->with('success', 'Course deleted successfully');

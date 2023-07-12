@@ -31,29 +31,27 @@ class AuthService implements AuthInterface
         {
             return false;
         }
-
     }
 
     public function login ($request)
     {
         if(isset($request['email']))
         {
-            $emailCredientials =
+            $credientials =
             [
                 'email' => $request['email'],
                 'password' => $request['password'],
             ];
-            return (Auth::attempt($emailCredientials) ? true : false);
         }
         else
         {
-            $phoneNoCredientials =
+            $credientials =
             [
                 'phone_no' => $request['phone_no'],
                 'password' => $request['password'],
             ];
-            return (Auth::attempt($phoneNoCredientials) ? true : false);
         }
+        return (Auth::attempt($credientials) ? true : false);
     }
 
 }

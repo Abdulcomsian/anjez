@@ -6,5 +6,9 @@ use Illuminate\Http\Request;
 
 class LessonController extends Controller
 {
-    //
+    public function index ($id)
+    {
+        $id = (int)$id;
+        return view('backend.lesson.index');
+    }
 }

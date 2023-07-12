@@ -30,7 +30,7 @@
                   </div>
                 </div>
                 <hr>
-                  <form action="{{ route('courses.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('courses.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                   <div class="row">
                     <div class="col star course">
@@ -38,23 +38,27 @@
                       <input type="text" name="title" class="form-control" id="firstname" />
                     </div>
                     <div class="col star course">
-                      <label for="price"class="form-label"> Price</label>
-                      <input type="price" name="price" class="form-control">
+                      <label for="price" class="form-label"> Price</label>
+                      <input type="number" name="price" class="form-control">
                     </div>
                     <div class="col course">
-                      <label for="state" class="form-label"> State</label>
-                      <select class="form-select" name="status"  aria-label="Default select example">
-                        <option selected value="1"> Active </option>
-                        <option value="2"> Draft </option>
+                      <label for="state" class="form-label"> Status</label>
+                      <select class="form-select" name="status" aria-label="Default select example">
+                        <option value="active"> Active </option>
+                        <option value="draft"> Draft </option>
                       </select>
                     </div>
                   </div>
                   <div class="row mt-4">
                     <div class="col course">
-                      <label for="description"  class="form-label"> Description</label>
+                      <label for="description" class="form-label"> Description</label>
                       <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5"></textarea>
                     </div>
                     <div class="col">
+                        <label for="">Feature Image</label>
+                        <input type="file" class="form-control" name="feature_image">
+                    </div>
+                    {{-- <div class="col">
                       <div class="col star course">
                         <label for="icon" class="form-label">icon</label>
                         <div class="drag">
@@ -64,11 +68,12 @@
                           <div class="drag-text-2 d-flex justify-content-center">
                             <p> or </p>
                           </div>
-                          <div class="drag-btn d-flex justify-content-center"><button id="fileButton"> Browse files
+                          <div class="drag-btn d-flex justify-content-center">
+                            <button id="fileButton"> Browse files
                             </button> </div>
                         </div>
                       </div>
-                    </div>
+                    </div> --}}
                   </div>
 
                   <div class="btns">
