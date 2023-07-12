@@ -49,8 +49,6 @@ Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.
 Route::get('/course-delete/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
 
 
-Route::get('/test', [CourseController::class, 'test']);
-
 
 //Auth Routes
 Route::get('logout', [AuthLoginController::class, 'logout'])->name('logout');

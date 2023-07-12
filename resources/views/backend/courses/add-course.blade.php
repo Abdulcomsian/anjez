@@ -1,10 +1,11 @@
 @extends('backend.layouts.main')
 
 @section('content')
+
 <div id="course" style="display: block;">
 
 <!-- <div class="user mt-5 pb-5" id="course" style="display: none;"> -->
-<div class="user mt-5 pb-5" id="add-course">
+       <div class="user mt-5 pb-5" id="add-course">
               <div class="container">
                 <div class="row ">
                   <div class="col mt-4 d-flex justify-content-start">
@@ -85,5 +86,5 @@
                   </div>
                 </form>
               </div>
-            </div>
+        </div>
 @endsection

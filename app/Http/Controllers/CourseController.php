@@ -24,12 +24,13 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
             'title' => 'required',
             'price' => 'required',
             'status' => 'required',
             'description' => 'required',
-            'feature_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'feature_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $course = new Course();
