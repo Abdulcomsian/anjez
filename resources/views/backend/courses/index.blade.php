@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="course" style="display: block;">
-<!-- <div class="user mt-5 pb-5" id="course" style="display: none;"> -->
+{{-- <div class="user mt-5 pb-5" id="course" style="display: none;"> --}}
     <div class="user mt-5 pb-5" id="main-course">
         <div class="container">
           <div class="row ">

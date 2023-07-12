@@ -16,7 +16,7 @@
               <li class="nav-item">
                 <div class="profile-content">
                   <div>
-                    <img src="./assets/profile-images/profile1.jpg" alt="" />
+                    <img src="{{ url('assets/profile-images/profile1.jpg') }}" alt="" />
                   </div>
                   <div class="jane"><span> Jane Doe </span></div>
                   <div><i class="bi bi-chevron-down"></i></div>
