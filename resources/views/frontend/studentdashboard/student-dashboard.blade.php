@@ -1,11 +1,12 @@
-{{-- @extends('frontend.layouts.main')
+@extends('frontend.studentdashboard.layouts.main')
 
 @section('content')
-    {{-- <!-- Navbar code -->
+
+    <!-- Navbar code -->
     <div>
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ url('assets/images/Group 6.png') }}" /></a>
+          <a class="navbar-brand" href="{{ route('studentdashboard.student-dashboard') }}"><img src="{{ url('assets/images/Group 6.png') }}" /></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -37,10 +38,10 @@
           </div>
         </div>
       </nav>
-    </div> --}}
+    </div>
 
     <!-- Main Content -->
-    {{-- <div>
+    <div>
       <div class="main-content">
         <div class="greeting-text">
           <div class="text-line-1">
@@ -231,12 +232,12 @@
             </div>
           </div>
         </div>
-      </div> --}}
-    {{-- </div>  --}}
+      </div>
+    </div>
 
     <!-- footer-code -->
 
-    {{-- <script>
+    <script>
       // JavaScript code
       var today = new Date();
       var hour = today.getHours();
@@ -255,4 +256,4 @@
       var date = today.toLocaleDateString(undefined, options);
       document.getElementById("date").textContent = date;
     </script>
-@endsection --}}
+@endsection
