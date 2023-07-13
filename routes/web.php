@@ -34,14 +34,12 @@ use Illuminate\Support\Facades\Auth;
 
 // User Routes
 Route::get('/', [IndexController::class, 'index']);
-Route::get('/studentcontent',[studentContentController::class,'studentcontent']);
-Route::get('/payments',[paymentController::class,'payments']);
-Route::match(['GET', 'POST'], '/studentDashboard', [studentDashboardContrller::class, 'studentDashboard']);
 
-Route::get('/AdminDashboard', [adminDashboardController::class, 'AdminDashboard'])->middleware('auth')->name('admin-dashboard');
+// Admin Route
+Route::get('/AdminDashboard', [adminDashboardController::class, 'AdminDashboard'])->middleware('auth')->name('admindashboard.admin-index');
 
 
-// add Courses
+// Add Courses Routes
 
 Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
 Route::get('create-course', [CourseController::class, 'create'])->name('courses.create');
@@ -53,6 +51,7 @@ Route::get('/course-delete/{id}', [CourseController::class, 'destroy'])->name('c
 
 
 //Auth Routes
+
 Route::get('logout', [AuthLoginController::class, 'logout'])->name('logout');
 Route::get('/login', [loginController::class, 'create'])->name('login');
 Route::post('/login-user', [loginController::class, 'login'])->name('login-user');
@@ -90,6 +89,14 @@ Route::get('/guiz', [QuizController::class, 'index'])->name('quiz.index');
 
 
 // User Route
-
 Route::get('/users', [userController::class, 'index'])->name('users.index');
 // Route::get('create-user', [userController::class, 'create'])->name('users.create');
+
+
+// Client Side Routes
+
+Route::get('/studentcontent',[studentContentController::class,'studentcontent']);
+
+Route::get('/payments',[paymentController::class,'payments']);
+
+Route::match(['GET', 'POST'], '/studentDashboard', [studentDashboardContrller::class, 'studentDashboard']);
