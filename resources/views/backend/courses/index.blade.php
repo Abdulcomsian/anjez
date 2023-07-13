@@ -40,9 +40,9 @@
             <div class="col-1"><span>Action</span></div>
           </div>
           <hr class="mt-4">
-          @forelse ($courses as $course)
+          @forelse ($courses as $key=>$course)
             <div class="row course mt-2">
-                <div class="col-1"> <span> {{ $course->id }} </span> </div>
+                <div class="col-1"> <span> {{ $key+1 }} </span> </div>
                 <div class="col-3"> <span style="color: #2572CC;"><a href="{{ route('section.index', ['id'=>$course->id]) }}" style="text-decoration: none"> {{ $course->title ?? '--' }}</a> </span> </div>
                 <div class="col-2"> <img src="{{ url('assets/courses-content/course-images/'.$course->feature_image) }}" alt=""> </div>
                 <div class="col-2"> <span> 2 </span> </div>
