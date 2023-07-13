@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repo\Auth\AuthInterface;
 use App\Repo\Auth\AuthService;
+use App\Repo\Quiz\QuizInterface;
+use App\Repo\Quiz\QuizService;
 use App\Repo\Section\SectionInterface;
 use App\Repo\Section\SectionService;
 use Illuminate\Auth\Events\Registered;
@@ -31,6 +33,7 @@ class EventServiceProvider extends ServiceProvider
     {
         $this->app->bind(AuthInterface::class, AuthService::class);
         $this->app->bind(SectionInterface::class, SectionService::class);
+        $this->app->bind(QuizInterface::class, QuizService::class);
     }
 
     /**

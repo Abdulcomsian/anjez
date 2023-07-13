@@ -50,8 +50,9 @@
                             aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="">
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="#">Edit</a>
-                            <a class="dropdown-item" href="#">Delete</a>
-                            <a class="dropdown-item" href="{{ route('quiz.index') }}">Create Quiz</a>
+                            <a class="dropdown-item" href="{{ route('lesson.delete',['id'=>$lesson->id]) }}">Delete</a>
+                            {{-- <a class="dropdown-item" onclick="isAllowToCreateLesson()" href="{{ route('quiz.index', ['id'=>$lesson->id]) }}">Create Quiz</a> --}}
+                            <p class="dropdown-item" onclick="isAllowToCreateLesson()" href="{{ route('quiz.index', ['id'=>$lesson->id]) }}">Create Quiz</p>
                         </div>
                     </div>
                 </div>
@@ -129,4 +130,12 @@
        </div>
    </div>
 </div>
+
+<script>
+    function isAllowToCreateLesson ()
+    {
+        alert('dd');
+        return;
+    }
+</script>
 @endsection

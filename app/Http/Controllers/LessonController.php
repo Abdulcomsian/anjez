@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Lesson;
+use App\Traits\Image;
+use Exception;
+use Illuminate\Support\Facades\File;
+
 // use App\Http\Controllers\toastError();
 
 class LessonController extends Controller
 {
+    use Image;
     public function index($id)
     {
-        $lessons = Lesson::where('section_id', $id)->get();
+        $lessons = Lesson::where('section_id', $id)->orderBy('id', 'desc')->get();
         return view('backend.lesson.index', compact('lessons', 'id'));
     }
 
@@ -41,12 +46,12 @@ try{
         $lesson->section_id = $id;
 
         // Thumbnail handling code
-        if ($request->hasFile('thumbnail')) {
-            $thumbnail = $request->file('thumbnail');
-            $thumbnailPath = $thumbnail->store('thumbnails', 'public');
-            $lesson->thumbnail = $thumbnailPath;
-        }
-
+        // if ($request->hasFile('thumbnail')) {
+        //     $thumbnail = $request->file('thumbnail');
+        //     $thumbnailPath = $thumbnail->store('thumbnails', 'public');
+        //     $lesson->thumbnail = $thumbnailPath;
+        // }
+        $lesson->thumbnail = $this->storeImage(Lesson::PATH, $request['thumbnail'] ?? '');
         $lesson->save();
 
         return redirect()->route('lessons.index', $id)->with('success', 'Lesson added successfully');
@@ -56,5 +61,21 @@ try{
         }
     }
 
+    public function delete ($id)
+    {
+        try
+        {
+            $id = (int)$id;
+            $lesson = Lesson::find($id);
+            $image = Lesson::PATH.$lesson->thumbnail;
+            if(File::exists($image));
+                File::delete($image);
+            $lesson->delete();
+            return redirect()->back()->with('success', 'Lesson Deleted Successfully');
+        }
+        catch (Exception $ex) {
+            return redirect()->back()->with('danger', 'Error'.$ex->getMessage());
+        }
+    }
 
 }

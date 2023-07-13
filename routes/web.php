@@ -82,10 +82,12 @@ Route::controller(SectionController::class)->middleware('auth')->prefix('course'
 Route::middleware('auth')->prefix('section')->group(function () {
     Route::get('/{id}/lesson', [LessonController::class, 'index'])->name('lessons.index');
     Route::post('/{id}/lesson', [LessonController::class, 'store'])->name('lessons.store');
+    Route::get('/{id}/lesson/delete', [LessonController::class, 'delete'])->name('lesson.delete');
 });
 
 // Quiz Route
-Route::get('/guiz', [QuizController::class, 'index'])->name('quiz.index');
+Route::get('quiz/{id}', [QuizController::class, 'index'])->name('quiz.index');
+Route::post('store', [QuizController::class, 'store'])->name('quiz.store');
 
 
 // User Route

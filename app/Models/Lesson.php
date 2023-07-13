@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lesson extends Model
 {
+    protected $table = 'lessons';
+    const PATH = 'assets/courses-content/lesson-images/';
+
     protected $fillable = [
         'title',
         'video_url',
