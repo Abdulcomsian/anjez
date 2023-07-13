@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Lesson extends Model
 {
@@ -16,6 +17,11 @@ class Lesson extends Model
         'thumbnail',
         'section_id',
     ];
+
+    public function quizes () :HasOne
+    {
+        return $this->hasOne(Quiz::class);
+    }
 
     // Define any relationships or additional methods as needed
 }

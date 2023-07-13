@@ -174,12 +174,6 @@ $(document).ready(function () {
                 if(response.status)
                 {
                     window.location.reload();
-                    // console.log(response.data);
-                    // $('#updateSectionModal').modal('show');
-                    // $('#title').val(response.data.title);
-                    // $('#status').val(response.data.status)
-                    // $('#section_id').val(response.data.id);
-                    // $('#course_id').val(response.data.course_id);
                 }
             }
         });

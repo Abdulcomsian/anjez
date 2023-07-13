@@ -86,6 +86,8 @@ Route::middleware('auth')->prefix('section')->group(function () {
     Route::get('/{id}/lesson', [LessonController::class, 'index'])->name('lessons.index');
     Route::post('/{id}/lesson', [LessonController::class, 'store'])->name('lessons.store');
     Route::get('/{id}/lesson/delete', [LessonController::class, 'delete'])->name('lesson.delete');
+    Route::get('/lesson/edit/{id}', [LessonController::class, 'edit'])->name('lesson.edit');
+    Route::get('/lesson/quiz/{id}', [LessonController::class, 'getLessonQuizes'])->name('lesson.quiz');
 });
 
 // Quiz Route

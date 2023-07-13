@@ -19,7 +19,7 @@ class QuizController extends Controller
         $data =
         [
             'id'    => $id,
-            'quizes'  => Quiz::all()
+            'quizes'  => Quiz::where('lesson_id',$id)->get()
         ];
         return view('backend.quiz.index', compact('data'));
     }

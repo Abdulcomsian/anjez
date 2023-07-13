@@ -102,27 +102,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($data['quizes'] as $quiz)
-                        <tr>
-                            <td class="question-id-column">{{ $quiz->id }}</td>
-                            <td class="description-column">{{ $quiz->question }}</td>
-                            <td  >
-                            <div class="dropdown dropdown-quiz">
-                                <img class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="" style="cursor: pointer;">
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Edit</a>
-                                <a class="dropdown-item" href="#">Delete</a>
+                    @if(count($data['quizes'])>0)
+                        @forelse ($data['quizes'] as $quiz)
+                            <tr>
+                                <td class="question-id-column">{{ $quiz->id }}</td>
+                                <td class="description-column">{{ $quiz->question }}</td>
+                                <td  >
+                                <div class="dropdown dropdown-quiz">
+                                    <img class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="" style="cursor: pointer;">
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Edit</a>
+                                    <a class="dropdown-item" href="#">Delete</a>
 
+                                    </div>
                                 </div>
-                            </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td>No Quiz Found</td>
-                        </tr>
-                    @endforelse
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td>No Quiz Found</td>
+                                <td></td>
+                            </tr>
+                        @endforelse
+                    @else
+                    <td class="description-column">No Question Found</td>
+                    @endif
                 </tbody>
             </table>
             </div>
