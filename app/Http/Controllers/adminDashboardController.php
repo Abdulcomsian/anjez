@@ -9,6 +9,6 @@ class adminDashboardController extends Controller
 
     public function AdminDashboard()
     {
-        return view('backend.admin-dashboard');
+        return view('backend.admindashboard.admin-index');
     }
 }
