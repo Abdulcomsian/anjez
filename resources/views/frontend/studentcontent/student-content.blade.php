@@ -1,13 +1,12 @@
-{{-- @extends('frontend.layouts.main')
+@extends('frontend.studentcontent.layouts.main')
 
 @section('content')
 
-  <div>
         <!-- Navbar code -->
-        <div>
+        {{-- <div>
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ url('/studentcontent') }}"><img src="{{ url('assets/images/Group 6.png') }}" /></a>
+                    <a class="navbar-brand" href="{{ route('studentcontent.student-content') }}"><img src="{{ url('assets/images/Group 6.png') }}" /></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -39,13 +38,15 @@
                     </div>
                 </div>
             </nav>
-        </div>
+        </div> --}}
 
         <!-- Side-Navbar -->
 
-        <div class="container-fluid mt-1">
-            <div class="row flex-nowrap" style="min-height: 100vh;">
-                <div class="col-auto col-md-3 col-xl-2 px-0 bg-white">
+        {{-- <div class="container-fluid mt-1"> --}}
+            {{-- <div class="row flex-nowrap" style="min-height: 100vh;"> --}}
+
+
+                {{-- <div class="col-auto col-md-3 col-xl-2 px-0 bg-white">
                     <div class="d-flex flex-column align-items-center align-items-sm-start pt-2 text-white">
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100 mt-3"
                             id="menu">
@@ -126,7 +127,7 @@
                             </div>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
 
                 <script>
                     function dropOne() {
@@ -165,7 +166,7 @@
                                 <span>Subscribe now to unlock a world of knowledge and never miss out
                                     on our latest updates, lessons, and exclusive content.</span>
                             </div>
-                            <div class="col mt-3"> <button class="px-4" type="button"> <a href="{{ url('/payments') }}">
+                            <div class="col mt-3"> <button class="px-4" type="button"> <a href="{{ route('payments') }}">
                                         Subscribe </a> </button></div>
                         </div>
                         <div class="contents px-4 mt-4 pt-1">
@@ -364,8 +365,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+
+            {{-- </div>
+        </div> --}}
+
     </div>
 
     <script src="/quiz.js"></script>
@@ -427,4 +430,4 @@
         }
 
     </script>
-@endsection --}}
+@endsection

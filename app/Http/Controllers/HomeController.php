@@ -24,7 +24,7 @@ class HomeController extends Controller
 
     public function index (Request $request)
     {
-        return redirect()->route('admin-dashboard');
+        return redirect()->route('admindashboard.admin-index');
     }
 
 }
