@@ -45,8 +45,9 @@ Route::get('/courses', [CourseController::class, 'index'])->name('courses.index'
 Route::get('create-course', [CourseController::class, 'create'])->name('courses.create');
 Route::post('/save-course', [CourseController::class, 'store'])->name('courses.store');
 Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');
-Route::put('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
+Route::post('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
 Route::get('/course-delete/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
+
 
 
 
@@ -69,14 +70,16 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Course Section
-Route::controller(SectionController::class)->middleware('auth')->prefix('course')->group( function () {
+Route::controller(SectionController::class)->middleware('auth')->prefix('course')->group( function ()
+{
     Route::get('section/{id}', 'index')->name('section.index');
     Route::post('store', 'store')->name('section.store');
     Route::get('edit/section/{id}', 'edit')->name('section.edit');
-    Route::get('delete/section/{id}', 'delete')->name('section.delete');
     Route::post('update/section', 'update')->name('section.update');
+    Route::get('delete/section/{id}', 'delete')->name('section.delete');
 
 } );
+
 
 // lesson Route
 Route::middleware('auth')->prefix('section')->group(function () {
@@ -97,8 +100,10 @@ Route::get('/users', [userController::class, 'index'])->name('users.index');
 
 // Client Side Routes
 
-Route::get('/studentcontent',[studentContentController::class,'studentcontent']);
+Route::get('/student-content',[studentContentController::class,'student_content'])->name('studentcontent.student-content');
 
-Route::get('/payments',[paymentController::class,'payments']);
+Route::match(['GET', 'POST'], '/student-dashboard', [studentDashboardContrller::class, 'student_dashboard'])->name('studentdashboard.student-dashboard');
 
-Route::match(['GET', 'POST'], '/studentDashboard', [studentDashboardContrller::class, 'studentDashboard']);
+Route::get('/payments',[paymentController::class,'payments'])->name('payments');
+
+

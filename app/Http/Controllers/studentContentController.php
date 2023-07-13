@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class studentContentController extends Controller
 {
-    public function studentcontent()
+    public function student_content()
     {
-        return view('frontend.student-content');
+        return view('frontend.studentcontent.student-content');
     }
 }

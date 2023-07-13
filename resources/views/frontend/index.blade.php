@@ -25,10 +25,10 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item ">
-                <a class="nav-link" href="{{ url('/studentDashboard') }}"><span>student-dashboard</span></a>
+                <a class="nav-link" href="{{ url('/student-dashboard') }}"><span>Student-Dashboard</span></a>
                 </li>
                 <li class="nav-item ">
-                <a class="nav-link" href="{{ url('/AdminDashboard') }}"><span>Admin-dashboard</span></a>
+                <a class="nav-link" href="{{ url('/AdminDashboard') }}"><span>Admin-Dashboard</span></a>
                 </li>
                 <li class="nav-item">
                 <div class="language-change d-flex align-items-center gap-2">
@@ -79,7 +79,7 @@
                 <button class="signu-up"><a href="{{ url('/signup') }}"> Sign Up </a> </button>
               </div>
               <div class="button-2">
-                <button class="signu-up"><a href="{{ url('/studentcontent') }}"> View Courses</a> </button>
+                <button class="signu-up"><a href="{{ url('/student-content') }}"> View Courses</a> </button>
               </div>
             </div>
           </div>
