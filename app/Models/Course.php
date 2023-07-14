@@ -19,8 +19,8 @@ class Course extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function courseSections () :HasOne
+    public function sections () :HasMany
     {
-        return $this->hasOne(Section::class);
+        return $this->hasMany(Section::class);
     }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\Lesson;
 use App\Traits\Image;
+use Exception;
 use Illuminate\Support\Facades\File;
 
 
@@ -14,7 +16,7 @@ class CourseController extends Controller
 
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::where('user_id', auth()->user()->id)->get();
         return view('backend.courses.index', compact('courses'));
     }
 
@@ -80,28 +82,54 @@ class CourseController extends Controller
             $image->move(public_path('assets/courses-content/course-images'), $imageName);
             $course->feature_image = $imageName;
         }
-
         $course->save();
-
         return redirect()->route('courses.index')->with('success', 'Course updated successfully');
     }
 
     public function destroy($id)
     {
-        $course = Course::findOrFail($id);
-
-        // Delete associated data (if any) before deleting the course
-        // For example, if there is a relationship with sections, you can delete them like this:
-        // $course->sections()->delete();
-
-        $imagePath = public_path('assets/courses-content/course-images') . '/' . $course->feature_image;
-        if (File::exists($imagePath)) {
-            File::delete($imagePath);
+        try
+        {
+            $course = Course::with('sections.lessons.quizes.options')->findOrFail($id);
+            dd($course);
+            foreach($course->sections as $section)
+            {
+                if(count($section->lessons)>0)
+                {
+                    foreach($section->lessons as $lesson)
+                    {
+                        foreach($lesson->quizes as $quiz)
+                        {
+                            foreach($quiz->options as $option)
+                            {
+                                // $option->delete();
+                            }
+                            // $quiz->delete();
+                        }
+                        $file = Lesson::PATH.$lesson->thumbnail;
+                        if(File::exists($file))
+                        {
+                            // File::delete($file);
+                        }
+                        dd($lesson);
+                        // dd($lesson->delete());
+                        // $lesson->delete();
+                    }
+                    $section->delete();
+                }
+            }
+            $imagePath = public_path('assets/courses-content/course-images') . '/' . $course->feature_image;
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+            $course->delete();
+            return redirect()->route('courses.index')->with('success', 'Course deleted successfully');
+            //code...
         }
-
-        $course->delete();
-
-        return redirect()->route('courses.index')->with('success', 'Course deleted successfully');
+        catch (Exception $ex)
+        {
+            dd($ex->getMessage());
+        }
     }
 
 }

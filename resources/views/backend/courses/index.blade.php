@@ -61,7 +61,7 @@
                 </div>
             </div>
             @empty
-                <div class="col-1"> <span> No Course Found </span> </div>
+                <div class="col-9"> <span> No Course Found </span> </div>
             @endforelse
         </div>
       </div>

@@ -81,7 +81,7 @@
             <div class="row mt-3">
               <div class="col star course">
                   {{-- <input type="text" class="form-control" id="firstname" /> --}}
-                <label for="status" class="form-label">Status fff</label>
+                <label for="status" class="form-label">Status</label>
                 <select class="form-select" name="status" aria-label="Default select example">
                     <option value="active"> Active </option>
                     <option value="draft"> Draft </option>

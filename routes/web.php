@@ -91,9 +91,10 @@ Route::middleware('auth')->prefix('section')->group(function () {
 });
 
 // Quiz Route
-Route::get('quiz/{id}', [QuizController::class, 'index'])->name('quiz.index');
+Route::get('lesson/quiz/{id}', [QuizController::class, 'index'])->name('quiz.index');
 Route::post('store', [QuizController::class, 'store'])->name('quiz.store');
-
+Route::get('quiz-delete/{id}', [QuizController::class, 'delete'])->name('quiz.delete');
+Route::get('quiz/{id}', [QuizController::class, 'edit'])->name('quiz.name');
 
 // User Route
 Route::get('/users', [userController::class, 'index'])->name('users.index');
@@ -109,3 +110,5 @@ Route::match(['GET', 'POST'], '/student-dashboard', [studentDashboardContrller::
 Route::get('/payments',[paymentController::class,'payments'])->name('payments');
 
 
+//User
+Route::post('store-user', [userController::class, 'store'])->name('user.store');

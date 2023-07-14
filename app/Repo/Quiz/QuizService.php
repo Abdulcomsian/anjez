@@ -14,16 +14,21 @@ class QuizService implements QuizInterface
         try
         {
             if(isset($id))
+            {
                 $quiz = Quiz::find($id);
+                $quiz_options  = QuizOption::where('quiz_id', $id)->first();
+            }
             else
+            {
                 $quiz = new Quiz();
-            DB::transaction( function () use ($quiz, $data) {
+                $quiz_options = new QuizOption();
+            }
+            DB::transaction( function () use ($quiz, $quiz_options, $data) {
                 $quiz->question             = $data['question'];
                 $quiz->correct_answer       = $data['correct_answer'];
                 $quiz->lesson_id            = (int)$data['lesson_id'];
                 $quiz->save();
 
-                $quiz_options               = new QuizOption();
                 $quiz_options->option1      = $data['option1'];
                 $quiz_options->option2      = $data['option2'];
                 $quiz_options->option3      = $data['option3'];
@@ -36,6 +41,30 @@ class QuizService implements QuizInterface
         catch (Exception $ex)
         {
             return null;
+        }
+    }
+
+    public function delete($id)
+    {
+        $quiz = Quiz::with('options')->find((int)$id);
+        if(!is_null($quiz->options) && !empty($quiz->options))
+        {
+            $quiz->options->delete();
+        }
+        $is_delete = $quiz->delete();
+        return $is_delete ? true : false;
+    }
+
+    public function edit ($id)
+    {
+        if(isset($id) && !empty($id))
+        {
+            $quiz = Quiz::with('options')->find($id);
+            return $quiz;
+        }
+        else
+        {
+            return false;
         }
     }
 }

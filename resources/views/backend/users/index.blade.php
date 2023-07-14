@@ -26,88 +26,37 @@
       </div>
       <hr>
       <div class="row up pt-3">
-        <div class="col-3"> NAME </div>
-        <div class="col-3"> EMAIL </div>
-        <div class="col-2">BILLING DATE</div>
-        <div class="col-2">STATUS</div>
-        <div class="col-2">AMOUNT</div>
+        <div class="col-3"> FIRST NAME </div>
+        <div class="col-2"> LAST NAME </div>
+        <div class="col-2">EMAIL</div>
+        <div class="col-2">PHONE NO</div>
+        <div class="col-2">CREATED AT</div>
       </div>
       <hr>
-      <div class="row py-2">
-        <div class="col-3">
-          <!-- <img src="/assets/images/Outline.png" alt=""> -->
-          <input type="checkbox">
-          <span class="ms-sm-3 named"> Jane Cooper</span>
+      @forelse ($users as $user)
+        <div class="row py-2">
+            <div class="col-3">
+            <!-- <img src="/assets/images/Outline.png" alt=""> -->
+            <input type="checkbox">
+            <span class="ms-sm-2 named"> {{ $user->first_name ?? '--' }}</span>
+            </div>
+            <div class="col-2 named"> <span> {{ $user->last_name ?? '--' }} </span> </div>
+            <div class="col-2 named"> <span> {{ $user->email ?? '--' }} </span> </div>
+            {{-- <div class="col-2"> <span> <input type="date" style="width: 94%; border: none;">  </span></div> --}}
+            <div class="col-2">
+                {{ $user->phone_no ?? '' }}
+            </div>
+            <div class="col-2">
+            <div class="amount"> {{ $user->created_at->format('M d Y g:i A') ?? '--' }} </div>
+            </div>
         </div>
-        <div class="col-3 named"> <span> janecooper@gmail.com </span> </div>
-        <div class="col-2"> <span> <input type="date" style="width: 94%; border: none;"> </span></div>
-        <div class="col-2">
-          <div class="subcribe text-center py-1"> Subscribed </div>
-        </div>
-        <div class="col-2">
-          <div class="amount"> $500.00 </div>
-        </div>
-      </div>
-      <hr>
-      <div class="row py-2">
-        <div class="col-3">
-          <!-- <img src="/assets/images/Outline.png" alt=""> -->
-          <input type="checkbox">
-          <span class="ms-sm-3 named"> Jane Cooper</span>
-        </div>
-        <div class="col-3 named"> <span> janecooper@gmail.com </span> </div>
-        <div class="col-2"> <span> <input type="date" style="width: 94%; border: none;"> </span></div>
-        <div class="col-2">
-          <div class="subcribe text-center py-1"> Subscribed </div>
-        </div>
-        <div class="col-2">
-          <div class="amount"> $500.00 </div>
-        </div>
-      </div>
-      <hr>
-      <div class="row py-2">
-        <div class="col-3">
-          <!-- <img src="/assets/images/Outline.png" alt=""> -->
-          <input type="checkbox">
-          <span class="ms-sm-3 named"> Jane Cooper</span>
-        </div>
-        <div class="col-3 named"> <span> janecooper@gmail.com </span> </div>
-        <div class="col-2"> <span> <input type="date" style="width: 94%; border: none;"> </span></div>
-        <div class="col-2"> </div>
-        <div class="col-2">
-          <div class="amount"> $500.00 </div>
-        </div>
-      </div>
-      <hr>
-      <div class="row py-2">
-        <div class="col-3">
-          <!-- <img src="/assets/images/Outline.png" alt=""> -->
-          <input type="checkbox">
-          <span class="ms-sm-3 named"> Jane Cooper</span>
-        </div>
-        <div class="col-3 named"> <span> janecooper@gmail.com </span> </div>
-        <div class="col-2"> <span> <input type="date" style="width: 94%; border: none;"> </span></div>
-        <div class="col-2">
-          <div class="subcribe text-center py-1"> Subscribed </div>
-        </div>
-        <div class="col-2">
-          <div class="amount"> $500.00 </div>
-        </div>
-      </div>
-      <hr>
-      <div class="row py-2">
-        <div class="col-3">
-          <input type="checkbox">
-          <span class="ms-sm-3 named"> Jane Cooper</span>
-        </div>
-        <div class="col-3 named"> <span> janecooper@gmail.com </span> </div>
-        <div class="col-2"> <span> <input type="date" style="width: 94%; border: none;"> </span></div>
-        <div class="col-2"> </div>
-        <div class="col-2">
-          <div class="amount"> $500.00 </div>
-        </div>
-      </div>
-      <hr>
+        <hr>
+      @empty
+        <div class="col-md-12">No User Found</div>
+      @endforelse
+
+
+
     </div>
   </div>
 
@@ -122,36 +71,43 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="form-container" style="margin-top: -2rem !important;">
-                  <form>
-                    <div class="nav-div">
-                      <div class="px-5">
-                        <label for="firstname" class="form-label">First Name</label>
-                        <input style="width: 100%" type="text" class="form-control" id="firstname"
-                          placeholder="First Name" />
-                      </div>
-                    </div>
-                    <div class="nav-div">
-                      <div class="px-5">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="email" placeholder="Your Email" />
-                      </div>
-                    </div>
-                    <div class="nav-div">
-                      <div class="px-5">
-                        <label for="Date" class="form-label"> Date</label>
-                        <input type="date" class="form-control" placeholder="DD/MM/YYYY">
-                      </div>
-                    </div>
-                    <div class="nav-div">
-                      <div class="px-5">
-                        <label for="price" class="form-label">Price</label>
-                        <input type="text" class="form-control" placeholder="$ 500" />
-                      </div>
-                    </div>
-                    <div class="px-5 mb-5">
-                      <button type="submit"> Add User </button>
-                    </div>
-                  </form>
+                    <form action="{{ route('user.store') }}" method="POST">
+                        @csrf
+                        <div class="nav-div">
+                          <div class="px-5">
+                            <label for="firstname" class="form-label">First Name</label>
+                            <input style="width: 100%" type="text" name="first_name" class="form-control" id="first_name"
+                              placeholder="First Name" />
+                          </div>
+                        </div>
+                        <div class="nav-div">
+                          <div class="px-5">
+                            <label for="email" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" />
+                          </div>
+                        </div>
+                        <div class="nav-div">
+                          <div class="px-5">
+                            <label for="Date" class="form-label"> Email</label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" />
+                          </div>
+                        </div>
+                        <div class="nav-div">
+                          <div class="px-5">
+                            <label for="" class="form-label">Phone No</label>
+                            <input type="text" class="form-control" name="phone_no" placeholder="Phone No" />
+                          </div>
+                        </div>
+                        <div class="nav-div">
+                          <div class="px-5">
+                            <label for="" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Password" />
+                          </div>
+                        </div>
+                        <div class="px-5 mb-5">
+                          <button type="submit"> Add User </button>
+                        </div>
+                      </form>
                 </div>
               </div>
             </div>

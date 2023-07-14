@@ -17,6 +17,7 @@
                 <div class="col">
                   <div class="quiz-modal-input">
                     <input type="hidden" name="lesson_id" value="{{ $data['id'] }}">
+                    <input type="hidden" name="quiz_id" id="quiz_id">
                     <label for="question" class="form-label" style="font-weight: bold;">Question</label>
                     <input type="text" class="form-control" id="question" name="question"
                       placeholder="Question" />
@@ -103,17 +104,17 @@
                 </thead>
                 <tbody>
                     @if(count($data['quizes'])>0)
-                        @forelse ($data['quizes'] as $quiz)
+                        @forelse ($data['quizes'] as $key=>$quiz)
                             <tr>
-                                <td class="question-id-column">{{ $quiz->id }}</td>
+                                <td class="question-id-column">{{ $key+1 }}</td>
                                 <td class="description-column">{{ $quiz->question }}</td>
                                 <td  >
                                 <div class="dropdown dropdown-quiz">
                                     <img class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="" style="cursor: pointer;">
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Edit</a>
-                                    <a class="dropdown-item" href="#">Delete</a>
+                                    <p class="dropdown-item edit-btn" data-id="{{ $quiz->id }}">Edit</p>
+                                    <a class="dropdown-item" href="{{ route('quiz.delete',['id'=>$quiz->id]) }}">Delete</a>
 
                                     </div>
                                 </div>
@@ -127,6 +128,7 @@
                         @endforelse
                     @else
                     <td class="description-column">No Question Found</td>
+                    <td></td>
                     @endif
                 </tbody>
             </table>
@@ -136,6 +138,27 @@
       </div>
 </div>
 
+<script>
+     $(document).on('click', '.edit-btn', function () {
+        let id = $(this).data('id');
+        $.ajax({
+            type: "GET",
+            url: '{{ url('quiz') }}/'+id,
+            success: function (response) {
+                if(response.status)
+                {
+                    $('#quiz_id').val(response.data.id);
+                    $('#question').val(response.data.question);
+                    $('#option1').val(response.data.options.option1);
+                    $('#option2').val(response.data.options.option2);
+                    $('#option3').val(response.data.options.option3);
+                    $('#option4').val(response.data.options.option4);
+                    $('#correct-option').val(response.data.correct_answer);
+                }
+            }
+        });
+    });
+</script>
 
 @endsection
 

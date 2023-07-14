@@ -25,7 +25,7 @@ class loginController extends Controller
     {
         $login = $this->auth_service->login($request->all());
         if($login)
-        return redirect()->route('admin-dashboard');
+        return redirect()->route('admindashboard.admin-index');
     }
 
     public function logout ()

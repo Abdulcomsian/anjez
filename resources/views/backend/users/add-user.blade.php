@@ -12,30 +12,36 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="form-container" style="margin-top: -2rem !important;">
-              <form>
+              <form action="{{ user.store }}" method="POST">
                 <div class="nav-div">
                   <div class="px-5">
                     <label for="firstname" class="form-label">First Name</label>
-                    <input style="width: 100%" type="text" class="form-control" id="firstname"
+                    <input style="width: 100%" type="text" name="first_name" class="form-control" id="first_name"
                       placeholder="First Name" />
                   </div>
                 </div>
                 <div class="nav-div">
                   <div class="px-5">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="email" placeholder="Your Email" />
+                    <label for="email" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" />
                   </div>
                 </div>
                 <div class="nav-div">
                   <div class="px-5">
-                    <label for="Date" class="form-label"> Date</label>
-                    <input type="date" class="form-control" placeholder="DD/MM/YYYY">
+                    <label for="Date" class="form-label"> Email</label>
+                    <input type="text" class="form-control" name="email" id="email" placeholder="Your Email" />
                   </div>
                 </div>
                 <div class="nav-div">
                   <div class="px-5">
-                    <label for="price" class="form-label">Price</label>
-                    <input type="text" class="form-control" placeholder="$ 500" />
+                    <label for="" class="form-label">Phone No</label>
+                    <input type="text" class="form-control" name="phone_no" placeholder="Phone No" />
+                  </div>
+                </div>
+                <div class="nav-div">
+                  <div class="px-5">
+                    <label for="" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password" />
                   </div>
                 </div>
                 <div class="px-5 mb-5">

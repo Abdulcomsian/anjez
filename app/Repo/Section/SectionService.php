@@ -52,8 +52,12 @@ class SectionService implements SectionInterface
     {
         try
         {
-            $section = Section::find((int)$id)->delete();
-            return $section;
+            $section = Section::with('lessons')->find((int)$id);
+            if(isset($section->lessons) && count($section->lessons)>0)
+            {
+                $section->lessons->each->delete(); //or use foreach
+            }
+            return $section->delete();
         }
         catch (Exception $ex)
         {

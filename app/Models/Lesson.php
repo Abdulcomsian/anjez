@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Lesson extends Model
@@ -18,10 +19,8 @@ class Lesson extends Model
         'section_id',
     ];
 
-    public function quizes () :HasOne
+    public function quizes () :HasMany
     {
-        return $this->hasOne(Quiz::class);
+        return $this->hasMany(Quiz::class);
     }
-
-    // Define any relationships or additional methods as needed
 }

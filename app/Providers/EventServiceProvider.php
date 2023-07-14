@@ -8,6 +8,8 @@ use App\Repo\Quiz\QuizInterface;
 use App\Repo\Quiz\QuizService;
 use App\Repo\Section\SectionInterface;
 use App\Repo\Section\SectionService;
+use App\Repo\User\UserInterface;
+use App\Repo\User\UserService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -34,6 +36,7 @@ class EventServiceProvider extends ServiceProvider
         $this->app->bind(AuthInterface::class, AuthService::class);
         $this->app->bind(SectionInterface::class, SectionService::class);
         $this->app->bind(QuizInterface::class, QuizService::class);
+        $this->app->bind(UserInterface::class, UserService::class);
     }
 
     /**
