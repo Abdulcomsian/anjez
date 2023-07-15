@@ -52,16 +52,32 @@ class SectionService implements SectionInterface
     {
         try
         {
-            $section = Section::with('lessons')->find((int)$id);
-            if(isset($section->lessons) && count($section->lessons)>0)
+            $section = Section::with('lessons.quizes.options')->find((int)$id);
+            if(count($section->lessons)>0)
             {
-                $section->lessons->each->delete(); //or use foreach
+                foreach($section->lessons as $lesson)
+                {
+                    // dd($lesson);
+                    // dd($lesson->delete());
+                    if(count($lesson->quizes)>0)
+                    {
+                        foreach($lesson->quizes as $quiz)
+                        {
+                            if(!empty($quiz->options) || isset($quiz->options))
+                            {
+                                // $quiz->options->delete();
+                            }
+                            // $quiz->delete();
+                        }
+                    }
+                    $lesson->delete();
+                }
             }
             return $section->delete();
         }
         catch (Exception $ex)
         {
-            return apiErrorResponse("", "Section Not Found");
+            return apiErrorResponse("Error", $ex->getMessage());
         }
     }
 }

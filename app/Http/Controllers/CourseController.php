@@ -16,7 +16,7 @@ class CourseController extends Controller
 
     public function index()
     {
-        $courses = Course::where('user_id', auth()->user()->id)->get();
+        $courses = Course::withCount('sections')->where('user_id', auth()->user()->id)->get();
         return view('backend.courses.index', compact('courses'));
     }
 
@@ -91,38 +91,42 @@ class CourseController extends Controller
         try
         {
             $course = Course::with('sections.lessons.quizes.options')->findOrFail($id);
-            dd($course);
-            foreach($course->sections as $section)
+            if(count($course->sections)>0 || isset($course->sections))
             {
-                if(count($section->lessons)>0)
+                foreach($course->sections as $section)
                 {
-                    foreach($section->lessons as $lesson)
+                    if(count($section->lessons)>0 || isset($section->lessons))
                     {
-                        foreach($lesson->quizes as $quiz)
+                        foreach($section->lessons as $lesson)
                         {
-                            foreach($quiz->options as $option)
+                            if(count($lesson->quizes)>0 || isset($lesson->quizes))
                             {
-                                // $option->delete();
+                                foreach($lesson->quizes as $quiz)
+                                {
+                                    if(isset($quiz->options) || !empty($quiz->options))
+                                    {
+                                        $quiz->options->delete();
+                                    }
+                                    $quiz->delete();
+                                }
                             }
-                            // $quiz->delete();
+                            $file = Lesson::PATH.$lesson->thumbnail;
+                            if(File::exists($file))
+                            {
+                                File::delete($file);
+                            }
+                            $lesson->delete();
                         }
-                        $file = Lesson::PATH.$lesson->thumbnail;
-                        if(File::exists($file))
-                        {
-                            // File::delete($file);
-                        }
-                        dd($lesson);
-                        // dd($lesson->delete());
-                        // $lesson->delete();
                     }
                     $section->delete();
                 }
+                $imagePath = public_path('assets/courses-content/course-images') . '/' . $course->feature_image;
+                if (File::exists($imagePath))
+                {
+                    File::delete($imagePath);
+                }
+                $course->delete();
             }
-            $imagePath = public_path('assets/courses-content/course-images') . '/' . $course->feature_image;
-            if (File::exists($imagePath)) {
-                File::delete($imagePath);
-            }
-            $course->delete();
             return redirect()->route('courses.index')->with('success', 'Course deleted successfully');
             //code...
         }
