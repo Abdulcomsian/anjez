@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('option2')->nullable();
             $table->string('option3')->nullable();
             $table->string('option4')->nullable();
-            $table->foreignId('quiz_id')->constrained();
+            $table->foreignId('quiz_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -45,7 +45,7 @@
                 <div class="col-1"> <span> {{ $key+1 }} </span> </div>
                 <div class="col-3"> <span style="color: #2572CC;"><a href="{{ route('section.index', ['id'=>$course->id]) }}" style="text-decoration: none"> {{ $course->title ?? '--' }}</a> </span> </div>
                 <div class="col-2"> <img src="{{ url('assets/courses-content/course-images/'.$course->feature_image) }}" alt=""> </div>
-                <div class="col-2"> <span> 2 </span> </div>
+                <div class="col-2"> <span> {{ $course['sections_count'] }} </span> </div>
                 <div class="col-1"><span> {{ $course->price }} </span></div>
                 <div class="col-2"> @if($course->status == 'active') <span style="color: #1CB104;">{{ $course->status }}</span> @else <span style="color: #e93e28;"> {{ $course->status }}</span> @endif</div>
                 <!-- <div class="col-1"><img src="..../../assets/images/dots.png" alt=""></div> -->

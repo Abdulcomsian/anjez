@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
 use App\Models\Section;
 use App\Repo\Section\SectionInterface;
+use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Termwind\Components\Raw;
 
 class SectionController extends Controller
 {
@@ -68,10 +66,17 @@ class SectionController extends Controller
 
     public function delete ($id)
     {
-        $section = $this->section->delete($id);
-        if($section)
-            return redirect()->back()->with('success', 'Section Deleted Successfully');
-        else
-            return redirect()->back()->with('danger', 'Something went wrong');
+        try
+        {
+            $section = $this->section->delete($id);
+            if($section)
+                return redirect()->back()->with('success', 'Section Deleted Successfully');
+            else
+                return redirect()->back()->with('danger', 'Something went wrong');
+        }
+        catch (Exception $ex)
+        {
+            return redirect()->back()->with('danger', $ex->getMessage());
+        }
     }
 }

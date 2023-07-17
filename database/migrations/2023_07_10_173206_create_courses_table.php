@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('description')->nullable();
             $table->string('feature_image')->nullable();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
