@@ -14,7 +14,7 @@
                 </a>
             </li>
             <div class="one" onclick="dropOne()">
-                <li class="dropdown font-noto-sans  nav-item  w-100 px-lg-3 px-sm-0 mt-3 ms-3 "
+                <li class="dropdown font-noto-sans  nav-item  w-100 px-lg-3 px-sm-0 mt-3 ms-3"
                     onclick="dropOne()">
                     <img src="{{ url('assets/images/corses icon.png') }}" alt="" onclick="dropOne()">
                     <a class="dropdown-toggle ms-2 " data-toggle="dropdown" href="#"

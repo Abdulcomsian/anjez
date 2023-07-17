@@ -8,6 +8,6 @@ class paymentController extends Controller
 {
     public function payments()
     {
-        return view('frontend.payment');
+        return view('frontend.payments.payment');
     }
 }
