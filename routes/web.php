@@ -36,17 +36,17 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [IndexController::class, 'index']);
 
 // Admin Route
-Route::get('/AdminDashboard', [adminDashboardController::class, 'AdminDashboard'])->middleware('auth')->name('admindashboard.admin-index');
+Route::get('/AdminDashboard', [adminDashboardController::class, 'AdminDashboard'])->middleware(['auth', 'isAdmin'])->name('admindashboard.admin-index');
 
 
 // Add Courses Routes
 
-Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-Route::get('create-course', [CourseController::class, 'create'])->name('courses.create');
-Route::post('/save-course', [CourseController::class, 'store'])->name('courses.store');
-Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->name('courses.edit');
-Route::post('/courses/{id}', [CourseController::class, 'update'])->name('courses.update');
-Route::get('/course-delete/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
+Route::get('/courses', [CourseController::class, 'index'])->middleware(['auth', 'isAdmin'])->name('courses.index');
+Route::get('create-course', [CourseController::class, 'create'])->middleware(['auth', 'isAdmin'])->name('courses.create');
+Route::post('/save-course', [CourseController::class, 'store'])->middleware(['auth', 'isAdmin'])->name('courses.store');
+Route::get('/courses/{id}/edit', [CourseController::class, 'edit'])->middleware(['auth', 'isAdmin'])->name('courses.edit');
+Route::post('/courses/{id}', [CourseController::class, 'update'])->middleware(['auth', 'isAdmin'])->name('courses.update');
+Route::get('/course-delete/{id}', [CourseController::class, 'destroy'])->middleware(['auth', 'isAdmin'])->name('courses.destroy');
 
 
 
@@ -70,7 +70,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Course Section
-Route::controller(SectionController::class)->middleware('auth')->prefix('course')->group( function ()
+Route::controller(SectionController::class)->middleware(['auth', 'isAdmin'])->prefix('course')->group( function ()
 {
     Route::get('section/{id}', 'index')->name('section.index');
     Route::post('store', 'store')->name('section.store');
@@ -82,7 +82,7 @@ Route::controller(SectionController::class)->middleware('auth')->prefix('course'
 
 
 // lesson Route
-Route::middleware('auth')->prefix('section')->group(function () {
+Route::middleware(['auth', 'isAdmin'])->prefix('section')->group(function () {
     Route::get('/{id}/lesson', [LessonController::class, 'index'])->name('lessons.index');
     Route::post('/{id}/lesson', [LessonController::class, 'store'])->name('lessons.store');
     Route::get('/{id}/lesson/delete', [LessonController::class, 'delete'])->name('lesson.delete');
@@ -91,13 +91,13 @@ Route::middleware('auth')->prefix('section')->group(function () {
 });
 
 // Quiz Route
-Route::get('lesson/quiz/{id}', [QuizController::class, 'index'])->name('quiz.index');
-Route::post('store', [QuizController::class, 'store'])->name('quiz.store');
-Route::get('quiz-delete/{id}', [QuizController::class, 'delete'])->name('quiz.delete');
-Route::get('quiz/{id}', [QuizController::class, 'edit'])->name('quiz.name');
+Route::get('lesson/quiz/{id}', [QuizController::class, 'index'])->middleware(['auth', 'isAdmin'])->name('quiz.index');
+Route::post('store', [QuizController::class, 'store'])->middleware(['auth', 'isAdmin'])->name('quiz.store');
+Route::get('quiz-delete/{id}', [QuizController::class, 'delete'])->middleware(['auth', 'isAdmin'])->name('quiz.delete');
+Route::get('quiz/{id}', [QuizController::class, 'edit'])->middleware(['auth', 'isAdmin'])->name('quiz.name');
 
 // User Route
-Route::get('/users', [userController::class, 'index'])->name('users.index');
+Route::get('/users', [userController::class, 'index'])->middleware(['auth', 'isAdmin'])->name('users.index');
 // Route::get('create-user', [userController::class, 'create'])->name('users.create');
 
 

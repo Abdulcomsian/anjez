@@ -26,8 +26,9 @@
       </div>
       <hr>
       <div class="row up pt-3">
-        <div class="col-3"> FIRST NAME </div>
+        <div class="col-2"> FIRST NAME </div>
         <div class="col-2"> LAST NAME </div>
+        <div class="col-2"> ROLE </div>
         <div class="col-2">EMAIL</div>
         <div class="col-2">PHONE NO</div>
         <div class="col-2">CREATED AT</div>
@@ -35,20 +36,12 @@
       <hr>
       @forelse ($users as $user)
         <div class="row py-2">
-            <div class="col-3">
-            <!-- <img src="/assets/images/Outline.png" alt=""> -->
-            <input type="checkbox">
-            <span class="ms-sm-2 named"> {{ $user->first_name ?? '--' }}</span>
-            </div>
+            <div class="col-2"><span class="ms-sm-2 named"> {{ $user->first_name ?? '--' }}</span></div>
             <div class="col-2 named"> <span> {{ $user->last_name ?? '--' }} </span> </div>
+            <div class="col-2 named"> <span> {{ $user->type ?? '--' }} </span> </div>
             <div class="col-2 named"> <span> {{ $user->email ?? '--' }} </span> </div>
-            {{-- <div class="col-2"> <span> <input type="date" style="width: 94%; border: none;">  </span></div> --}}
-            <div class="col-2">
-                {{ $user->phone_no ?? '' }}
-            </div>
-            <div class="col-2">
-            <div class="amount"> {{ $user->created_at->format('M d Y g:i A') ?? '--' }} </div>
-            </div>
+            <div class="col-2">{{ $user->phone_no ?? '' }}</div>
+            <div class="col-2"><div class="amount"> {{ dateConversion($user->created_at ?? '') ?? '--' }} </div></div>
         </div>
         <hr>
       @empty

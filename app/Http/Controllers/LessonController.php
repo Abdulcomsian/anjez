@@ -8,8 +8,6 @@ use App\Traits\Image;
 use Exception;
 use Illuminate\Support\Facades\File;
 
-// use App\Http\Controllers\toastError();
-
 class LessonController extends Controller
 {
     use Image;
@@ -71,10 +69,19 @@ class LessonController extends Controller
         try
         {
             $id = (int)$id;
-            $lesson = Lesson::with('quizes')->find($id);
+            $lesson = Lesson::with('quizes.options')->find($id);
             if(isset($lesson->quizes) && count($lesson->quizes)>0)
             {
-                $lesson->quizes->each->delete(); //or use foreach loop
+                foreach($lesson->quizes as $quiz)
+                {
+                    if(isset($quiz->options) && !empty($quiz->options))
+                    {
+                        $quiz->options->delete();
+                    }
+                    $quiz->delete();
+                }
+                // if(isset($))
+                // $lesson->quizes->each->delete(); //or use foreach loop
             }
             $image = Lesson::PATH.$lesson->thumbnail;
             if(File::exists($image));

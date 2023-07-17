@@ -53,3 +53,11 @@ if(!function_exists('apiErrorResponse'))
         ]);
     }
 }
+
+if(!function_exists('dateConversion'))
+{
+    function dateConversion ($date)
+    {
+        return $date->format('M d Y g:i A');
+    }
+}

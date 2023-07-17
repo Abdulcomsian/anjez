@@ -57,17 +57,15 @@ class SectionService implements SectionInterface
             {
                 foreach($section->lessons as $lesson)
                 {
-                    // dd($lesson);
-                    // dd($lesson->delete());
                     if(count($lesson->quizes)>0)
                     {
                         foreach($lesson->quizes as $quiz)
                         {
                             if(!empty($quiz->options) || isset($quiz->options))
                             {
-                                // $quiz->options->delete();
+                                $quiz->options->delete();
                             }
-                            // $quiz->delete();
+                            $quiz->delete();
                         }
                     }
                     $lesson->delete();
