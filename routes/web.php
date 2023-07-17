@@ -108,7 +108,7 @@ Route::get('/student-content',[studentContentController::class,'student_content'
 Route::match(['GET', 'POST'], '/student-dashboard', [studentDashboardContrller::class, 'student_dashboard'])->name('studentdashboard.student-dashboard');
 
 Route::get('/payments',[paymentController::class,'payments'])->name('payments');
-
+                   
 
 //User
 Route::post('store-user', [userController::class, 'store'])->name('user.store');

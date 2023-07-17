@@ -65,7 +65,7 @@
                 <div class="card-body">
                   <div class="card-text">
                     <div class="text-line-1">
-                      <span><a href="{{ url('student-content.html')}}"> Biology </a> </span>
+                      <span><a href="{{ url('/student-content') }}"> Biology </a> </span>
                     </div>
                     <div class="text-line-2">
                       <span>Lorem ipsum dolor sit amet consectetur</span>

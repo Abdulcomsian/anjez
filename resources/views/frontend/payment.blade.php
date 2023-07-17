@@ -1,4 +1,4 @@
-
+{{--
     @extends('frontend.layouts.main')
 
     @section('content')
@@ -209,4 +209,4 @@
                 </div>
             </div>
         </div>
-@endsection
+@endsection --}}
