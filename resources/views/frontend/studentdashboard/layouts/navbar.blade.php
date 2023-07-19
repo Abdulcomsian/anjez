@@ -1,4 +1,4 @@
-{{-- <!-- Navbar code -->
+<!-- Navbar code -->
 <div>
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
@@ -34,4 +34,4 @@
         </div>
       </div>
     </nav>
-  </div> --}}
+  </div>

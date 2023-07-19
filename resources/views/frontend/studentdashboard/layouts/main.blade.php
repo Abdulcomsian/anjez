@@ -3,7 +3,7 @@
 
 @yield('content')
 
-{{-- @include('frontend.studentdashboard.layouts.sidebar') --}}
+{{-- @include('frontend.studentdashboard.layouts.course.sidebar') --}}
 {{-- @include('frontend.studentdashboard.layouts.footer') --}}
 
 

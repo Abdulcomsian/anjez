@@ -44,8 +44,8 @@
                     <div class="col course">
                       <label for="state" class="form-label"> Status</label>
                       <select class="form-select" name="status" aria-label="Default select example">
-                        <option value="active"> Active </option>
-                        <option value="draft"> Draft </option>
+                        <option value="Active"> Active </option>
+                        <option value="Draft"> Draft </option>
                       </select>
                     </div>
                   </div>

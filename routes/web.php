@@ -12,6 +12,7 @@ use App\Http\Controllers\QuizController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\adminDashboardController;
 use App\Http\Controllers\Auth\LoginController as AuthLoginController;
+use App\Http\Controllers\CourseDetailController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\userController;
@@ -105,10 +106,14 @@ Route::get('/users', [userController::class, 'index'])->middleware(['auth', 'isA
 
 Route::get('/student-content',[studentContentController::class,'student_content'])->name('studentcontent.student-content');
 
-Route::match(['GET', 'POST'], '/student-dashboard', [studentDashboardContrller::class, 'student_dashboard'])->name('studentdashboard.student-dashboard');
+Route::get('/student-dashboard', [studentDashboardContrller::class, 'student_dashboard'])->name('studentdashboard.student-dashboard');
 
 Route::get('/payments',[paymentController::class,'payments'])->name('payments');
-                   
+
 
 //User
 Route::post('store-user', [userController::class, 'store'])->name('user.store');
+
+Route::controller(CourseDetailController::class)->middleware('auth')->group( function () {
+    Route::get('course-details/{id}', 'courseDetails')->name('course.details');
+} );

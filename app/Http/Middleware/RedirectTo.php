@@ -21,7 +21,7 @@ class RedirectTo
         }
         else
         {
-            dd('User Dashboard is coming Soon');
+            return redirect()->route('studentdashboard.student-dashboard');
         }
     }
 }

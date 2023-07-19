@@ -23,6 +23,7 @@ class AuthService implements AuthInterface
                 $user->country_code = $country_code ?? null;
                 $user->phone_no     = $request['phone_no'] ?? null;
                 $user->password     = Hash::make($request['password']);
+                $user->type         = "Student" ?? null;
                 $user->save();
             });
             return true;

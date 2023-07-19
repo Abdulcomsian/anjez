@@ -27,7 +27,8 @@ class signupController extends Controller
             'email'=>'required|email',
             'phone_no'=>'required',
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
-            'password_confirmation' => 'min:6'
+            'password_confirmation' => 'min:6',
+            'type'  => 'Student'
         ]);
         if($validated_data)
         {

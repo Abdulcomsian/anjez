@@ -28,6 +28,7 @@ class userController extends Controller
 
     public function store (Request $request)
     {
+        dd($request->all());
         try
         {
             $validated_data = $this->validate($request,[
@@ -37,9 +38,10 @@ class userController extends Controller
                 'phone_no'  => 'required|numeric',
                 'password'  => 'required'
             ]);
+            dd($validated_data);
             $user = $this->user->store($validated_data);
             if($user)
-                return redirect()->back()->with('success', 'Course deleted successfully');
+                return redirect()->back()->with('success', 'User Created Successfully');
             else
                 return redirect()->back()->with('danger', 'User Not Created');
 
