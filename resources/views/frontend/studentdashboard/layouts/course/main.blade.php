@@ -2,5 +2,5 @@
 @include('frontend.studentdashboard.layouts.navbar')
 
 @yield('content')
-@include('frontend.studentdashboard.layouts.course.sidebar')
+{{-- @include('frontend.studentdashboard.layouts.course.sidebar') --}}
 

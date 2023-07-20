@@ -9,8 +9,7 @@
 
     <div class="container-fluid mt-1">
         <div class="row flex-nowrap" style="min-height: 100vh;">
-            @include('frontend.studentdashboard.layouts.course.sidebar', ['courses'=>$data['courses']])
-
+            {{ view('frontend.studentdashboard.layouts.course.sidebar', [ 'courses'=>$data['courses'] ]) }}
             <!-- right side content  -->
             <div class="col py-3 pb-5" id="student-content">
                 <div class="student-content">
@@ -34,16 +33,24 @@
                     <div class="contents px-4 mt-4 pt-1">
                         <div class="contents-heading d-flex justify-content-center mt-4 "> Contents </div>
                         <div class="row mt-4">
+                            @forelse ($data['course']['sections'] as $section)
+                                @foreach($section['lessons'] as $key=>$lesson)
+                                    <div class="col py-2">
+                                        <p>Lesson {{ $key+1 }} - {{ $lesson->title }}</p>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="cate mt-2 ">
+                                            <p>Free</p>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @empty
                             <div class="col py-2">
-                                <p>Lesson 1 - Lorem ipsum dolor sit amet</p>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <div class="cate mt-2 ">
-                                    <p>Free</p>
-                                </div>
+                                <h4>No Lesson Found !</h4>
                             </div>
-                            <div class="col py-2">
+                            @endforelse
+                            {{-- <div class="col py-2">
                                 <p>Lesson 2 - Lorem ipsum dolor sit amet</p>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -51,8 +58,8 @@
                                 <div class="cate-2 mt-2">
                                     <img src="{{ asset('assets/courses-content/course-images/crown.png') }}" alt="">
                                 </div>
-                            </div>
-                            <div class="col py-2">
+                            </div> --}}
+                            {{-- <div class="col py-2">
                                 <p>Lesson 3 - Lorem ipsum dolor sit amet</p>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -60,10 +67,10 @@
                                 <div class="cate-2 mt-2">
                                     <img src="{{ asset('assets/courses-content/course-images/crown.png') }}" alt="">
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
-                        <div class="row mt-4">
+                        {{-- <div class="row mt-4">
                             <div class="col py-2">
                                 <p>Lesson 4 - Lorem ipsum dolor sit amet</p>
                                 <div class="progress">
@@ -91,9 +98,9 @@
                                     <img src="./assets/images/crown.png" alt="">
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="row mt-4">
+                        {{-- <div class="row mt-4">
                             <div class="col py-2">
                                 <p>Lesson 7 - Lorem ipsum dolor sit amet</p>
                                 <div class="progress">
@@ -121,7 +128,7 @@
                                     <img src="./assets/images/crown.png" alt="">
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
