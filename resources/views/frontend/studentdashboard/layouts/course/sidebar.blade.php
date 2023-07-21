@@ -8,12 +8,12 @@
                 </li>
             </div>
             <!-- dropdown-one  -->
-             @forelse ($courses as $key=>$course)
-                <div id="drop-one" onclick="dropTwo{{ $course->id }}()" class="">
+            @forelse ($courses as $key=>$course)
+                <div onclick="course{{ $course->id }}()" class="">
                     <div class="d-flex ms-4 mt-3">
                         <div class="sub-name ms-2"> <span class="span_tag"> {{ strtoupper($course->title[0]) }} </span> </div>
                         @if(count($course['sections'])>0)
-                            <a class="dropdown-toggle ms-2 mt-2 subject" data-toggle="dropdown" href="#" onclick="bio()" aria-expanded="false">
+                            <a class="dropdown-toggle ms-2 mt-2 subject main-topic-{{ $course->id }}" data-toggle="dropdown" href="javascript:void(0);" aria-expanded="false">
                                 {{ $course->title }} <span class="caret"></span></a>
                         @else
                             <a style="color: black" class="ms-2 mt-2 subject" href="#">
@@ -22,20 +22,20 @@
                     </div>
                 </div>
                 <!-- dropdown-two  -->
-                <div id="drop-two" class="">
+                <div id="section{{ $course->id }}" class="">
                     <div class="two d-flex flex-column mt-3 pb-3">
                             @foreach($course['sections'] as $mainTopic)
                             {{-- <a class=" ms-2 mt-3 main-topic" href="#">{{$mainTopic->title}}<span class="caret"></span></a> --}}
                             @if(count($mainTopic->lessons)>0)
-                                <a class="dropdown-toggle ms-2 mt-3 main-topic " data-toggle="dropdown" href="#" onclick="dropthree()"> {{$mainTopic->title}}
+                                <a class="dropdown-toggle ms-2 mt-3 sub-topic-{{ $mainTopic->id }}" onclick="section{{$mainTopic->id}}()" data-toggle="dropdown" href="javascript:void(0);" > {{$mainTopic->title}}
                                     <span class="caret"></span>
                                 </a>
                                 <!-- dropdown three  -->
                                 @if(count($mainTopic->lessons)>0)
-                                <div id="drop-three" class="">
+                                <div id="lesson{{ $mainTopic->id }}" class="">
                                     @foreach ($mainTopic->lessons as $lesson)
                                         <div class="three d-flex flex-column">
-                                            <a class="ms-4 mt-3 px-2" id="sub" href="#" onclick="subTopic()" style=" width: 100%;"> {{ $lesson->title }}
+                                            <a class="ms-4 mt-3 px-2" id="sub" href="javascript:void(0);" onClick="subTopic()" style=" width: 100%;"> {{ $lesson->title }}
                                                 <span class="caret"></span></a>
                                         </div>
 
@@ -43,7 +43,7 @@
                                 </div>
                                 @endif
                             @else
-                                <a class=" ms-2 mt-3 main-topic" href="#">{{$mainTopic->title}}<span class="caret"></span></a>
+                                <a class=" ms-2 mt-3" href="#">{{$mainTopic->title}}<span class="caret"></span></a>
                             @endif
                                 {{-- <a class=" ms-4 mt-3 px-2 " href="#" style=" width: 100%;"> Sub Topic <span class="caret"></span></a> --}}
                             {{-- <a class=" ms-2 mt-3 main-topic" href="#"> Main Topic <span class="caret"></span></a>
@@ -81,43 +81,17 @@
 
 <script>
     @foreach ($courses as $course)
-        function dropOne'{{ $course->id }}'() {
-            document.getElementById("drop-one").classList.toggle("toggles");
-            // document.getElementById("drop-one1").classList.toggle("toggles");
-            // document.getElementById("drop-one2").classList.toggle("toggles");
-            // document.getElementById("drop-one3").classList.toggle("toggles");
-            document.getElementById("drop-two").classList.add("toggles")
-            // dropTwo()
-        }
-        function dropTwo'{{ $course->id }}'() {
-            document.getElementById("drop-two").classList.toggle("toggles");
-        }
-        function dropthree'{{ $course->id }}'() {
-            document.getElementById("drop-three").classList.toggle("toggles");
-        }
-
-        function tag(title)
+        function course{{ $course->id }}()
         {
-            return title.charAt(0).toUpperCase();
+            let section{{ $course->id }} = document.getElementById('section{{ $course->id }}');
+            section{{ $course->id }}.classList.toggle('toggles');
         }
-
-        $(document).ready(function () {
-            $('.span_tag').text( tag('{{ $course->title }}') );
-        });
+        @foreach ($course->sections as $section)
+            function section{{ $section->id }}()
+            {
+                let lesson{{ $section->id }} = document.getElementById('lesson{{ $section->id }}');
+                lesson{{ $section->id }}.classList.toggle('toggles');
+            }
+        @endforeach
     @endforeach
-
-    function dropthree'{{ $course->id }}'() {
-            document.getElementById("drop-three").classList.toggle("toggles");
-        }
-
-    function dropOne() {
-            document.getElementById("drop-one").classList.toggle("toggles");
-            document.getElementById("drop-one1").classList.toggle("toggles");
-            document.getElementById("drop-one2").classList.toggle("toggles");
-            document.getElementById("drop-one3").classList.toggle("toggles");
-            document.getElementById("drop-two").classList.add("toggles")
-            // dropTwo()
-        }
-
-
 </script>
