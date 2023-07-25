@@ -123,7 +123,27 @@ class LessonController extends Controller
         {
             return apiErrorResponse($ex->getMessage(), "Error Occured");
         }
+    }
 
+    public function lesson ($id)
+    {
+        try
+        {
+            $lesson = Lesson::find($id);
+            if(isset($lesson) && !is_null($lesson))
+            {
+                return apiSuccessResponse(['lesson'=>$lesson], "Lesson Found");
+            }
+            else
+            {
+                return apiErrorResponse(" ","Error Occured");
+
+            }
+        }
+        catch (Exception $ex)
+        {
+            return apiErrorResponse($ex->getMessage(), "Error Occured");
+        }
     }
 
 }

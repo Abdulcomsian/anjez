@@ -90,6 +90,7 @@ Route::middleware(['auth', 'isAdmin'])->prefix('section')->group(function () {
     Route::get('/lesson/edit/{id}', [LessonController::class, 'edit'])->name('lesson.edit');
     Route::get('/lesson/quiz/{id}', [LessonController::class, 'getLessonQuizes'])->name('lesson.quiz');
 });
+Route::get('/get-lesson/{id}', [LessonController::class, 'lesson'])->name('specific.lesson');
 
 // Quiz Route
 Route::get('lesson/quiz/{id}', [QuizController::class, 'index'])->middleware(['auth', 'isAdmin'])->name('quiz.index');

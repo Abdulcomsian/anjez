@@ -11,7 +11,7 @@
         <div class="row flex-nowrap" style="min-height: 100vh;">
             {{ view('frontend.studentdashboard.layouts.course.sidebar', [ 'courses'=>$data['courses'] ]) }}
             <!-- right side content  -->
-            <div class="col py-3 pb-5" id="student-content">
+            <div class="col py-3 pb-5" id="courses">
                 <div class="student-content">
                     <div class="row d-flex justify-content-between">
                         <div class="col  d-flex justify-content-start">
@@ -132,8 +132,7 @@
                     </div>
                 </div>
             </div>
-
-
+           
             <!-- lesson videos lectures  -->
             <div class="col py-3 dis" id="lectures">
                 <div class="lecture">

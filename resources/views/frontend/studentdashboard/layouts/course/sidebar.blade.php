@@ -35,7 +35,7 @@
                                 <div id="lesson{{ $mainTopic->id }}" class="">
                                     @foreach ($mainTopic->lessons as $lesson)
                                         <div class="three d-flex flex-column">
-                                            <a class="ms-4 mt-3 px-2" id="sub" href="javascript:void(0);" onClick="subTopic()" style=" width: 100%;"> {{ $lesson->title }}
+                                            <a class="ms-4 mt-3 px-2" id="sub" href="javascript:void(0);" onClick="lesson{{ $lesson->id }}()" style=" width: 100%;"> {{ $lesson->title }}
                                                 <span class="caret"></span></a>
                                         </div>
 
@@ -79,8 +79,98 @@
     </div>
 </div>
 
+<div id="lessons" class="d-none">
+    <div class="col py-3" id="lessons">
+        <div class="lecture">
+            <div class="upss pb-3 px-3" style="background-color: white;">
+                <div class="row pt-4 pb-2">
+                    <div class="col">
+                        <span id="title"> </span>
+                    </div>
+                    <div class="col me-5">
+                        <div class="cates  ">
+                            <p>Free</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p id="description"></p>
+                    </div>
+                </div>
+                <div class="progress">
+                    <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+            <div class="embed-responsive embed-responsive-21by9 mt-4" id="video-container">
+                <video id="myVideo" class="embed-responsive-item" src="./assets/videos/THAILAND IN 30 SECONDS - CINEMATIC VIDEO- 4k.mp4" controls=""></video>
+                <button id="video-button" data-toggle="modal" data-target="#exampleModal">Test Your
+                    Knowledge</button>
+
+            </div>
+
+            <div class="row mt-4">
+                <div class="col">
+                    <div class="dropdown">
+                        <button class="btn attach dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Course Attachments
+                        </button>
+                        <div class="dropdown-menu pe-5" aria-labelledby="dropdownMenuButton" style="">
+                            <a class="dropdown-item" href="#">Attachment 1</a>
+                            <a class="dropdown-item" href="#">Attachment 2</a>
+                            <a class="dropdown-item" href="#">Attachment 3</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Modal -->
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog custom-modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body px-5">
+                            <div class=" d-flex flex-column">
+                                <h5> Answer the questions below</h5>
+                                <p class="m-auto"><span id="currQuesNum"></span> / <span id="totalQuesNum"></span></p>
+                                <div class="question m-auto" id="ques"></div>
+                            </div>
+
+                            <div class="options mt-5" id="opt"></div>
+                            <div class="modal-footer d-flex flex-column justify-content-center">
+                                <button onclick="checkAns()" id="btn"></button>
+                            </div>
+                            <div class="row d-flex justify-content-center pb-5 mt-4">
+                                <div class="col-4">
+                                    <button id="restartBtn" onclick="restartQuiz()" style="display: none;">Restart Quiz</button>
+                                    <div id="score" style="display: none;"></div>
+                                </div>
+                                <div class="col-4">
+                                    <button id="restartBtn2" style="display: none;"> <a href="./student-content.html"> Back to Home</a> </button>
+                                    <div id="score" style="display: none;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- {{ view('frontend.studentdashboard.layouts.course.lessons') }} --}}
+</div>
+
 <script>
     @foreach ($courses as $course)
+
+
         function course{{ $course->id }}()
         {
             let section{{ $course->id }} = document.getElementById('section{{ $course->id }}');
@@ -89,9 +179,39 @@
         @foreach ($course->sections as $section)
             function section{{ $section->id }}()
             {
+                let courses = document.getElementById('courses');
+                let lessons = document.getElementById('lessons');
                 let lesson{{ $section->id }} = document.getElementById('lesson{{ $section->id }}');
+
                 lesson{{ $section->id }}.classList.toggle('toggles');
+                courses.classList.remove('d-none');
+                lessons.classList.add('d-none');
             }
+            @foreach($section->lessons as $lesson)
+            {
+                function lesson{{ $lesson->id }}()
+                {
+                    let id = {{ $lesson->id }};
+                    let courses = document.getElementById('courses');
+                    let lessons = document.getElementById('lessons');
+
+                    courses.classList.add('d-none');
+                    lessons.classList.remove('d-none');
+
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('get-lesson/') }}/"+id,
+                        success: function (response) {
+                            let title = document.getElementById('title');
+                            let description = document.getElementById('description');
+
+                            title.innerHTML = response.data.lesson.title;
+                            description.innerHTML = response.data.lesson.description;
+                        }
+                    });
+                }
+            }
+            @endforeach
         @endforeach
     @endforeach
 </script>

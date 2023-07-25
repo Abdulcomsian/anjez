@@ -34,7 +34,7 @@ if(!function_exists('apiSuccessResponse'))
     {
         return response()->json([
             'data'          => $data ?? null,
-            'message'       => $message ?? 'Data Inserted',
+            'message'       => $message,
             'status'        => true,
             'status_code'   => 200
         ]);
