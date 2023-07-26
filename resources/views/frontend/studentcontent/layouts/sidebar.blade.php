@@ -25,7 +25,7 @@
             <!-- dropdown-one  -->
             <div id="drop-one" onclick="dropTwo()">
                 <div class="d-flex ms-4 mt-3">
-                    <div class="sub-name ms-2"> <span> B </span> </div>
+                    <div class="sub-name0 ms-2"> <span> B </span> </div>
                     <a class="dropdown-toggle ms-2 mt-2 subject" data-toggle="dropdown" href="#"
                         onclick="bio()">
                         Biology <span class="caret"></span></a>

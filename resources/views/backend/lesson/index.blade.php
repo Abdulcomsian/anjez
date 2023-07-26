@@ -98,13 +98,12 @@
                 <div class="row mt-3">
                     <div class="col course">
                         <label for="description" class="form-label">Description</label>
-                        {{-- <textarea class="form-control" id="description" name="description" rows="4"></textarea> --}}
-                        <textarea class="form-control" id="description" name="lesson[description]" rows="4"></textarea>
+                        <textarea id="editor" name="lesson[description]"></textarea>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col">
-                        <label for="">Thumbnail</label>
+                        <label for="">Attachment</label>
                         {{-- <input type="file" class="form-control" name="thumbnail"> --}}
                         <input type="file" class="form-control" id="thumbnail" name="thumbnail" />
                     </div>
@@ -124,13 +123,15 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="can" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="can" data-dismiss="exampleModalCentertwo">Cancel</button>
                     <button type="submit" class="add">Add</button>
                 </div>
             </form>
        </div>
    </div>
 </div>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
 
 <script>
        $(document).on('click', '.edit-btn', function () {
@@ -182,5 +183,17 @@
         $('#video_url').val('')
         $('#description').val('');
     }
+
+    ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+
+    let cancel_btn = document.getElementsByClassName('can')[0];
+    cancel_btn.addEventListener('click', function() {
+        $('#exampleModalCentertwo').modal('hide');
+    });
+
 </script>
 @endsection

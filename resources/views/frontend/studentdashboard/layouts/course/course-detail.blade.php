@@ -132,9 +132,9 @@
                     </div>
                 </div>
             </div>
-           
+
             <!-- lesson videos lectures  -->
-            <div class="col py-3 dis" id="lectures">
+            {{-- <div class="col py-3 dis" id="lectures">
                 <div class="lecture">
                     <div class="upss pb-3 px-3" style="background-color: white;">
                         <div class="row pt-4 pb-2">
@@ -157,7 +157,7 @@
                         </div>
                     </div>
                     <div class="embed-responsive embed-responsive-21by9 mt-4" id="video-container">
-                        <video id="myVideo" class="embed-responsive-item" src="./assets/videos/THAILAND IN 30 SECONDS - CINEMATIC VIDEO- 4k.mp4" controls=""></video>
+                        <video id="myVideo" class="embed-responsive-item" src="./" controls=""></video>
                         <button id="video-button" data-toggle="modal" data-target="#exampleModal">Test Your
                             Knowledge</button>
 
@@ -216,7 +216,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
+
         </div>
     </div>
 </div>

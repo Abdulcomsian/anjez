@@ -1,3 +1,4 @@
+
 <div class="col-auto col-md-3 col-xl-2 px-0 bg-white">
     <div class="d-flex flex-column align-items-center align-items-sm-start pt-2 text-white">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100 mt-3" id="menu">
@@ -9,9 +10,16 @@
             </div>
             <!-- dropdown-one  -->
             @forelse ($courses as $key=>$course)
+            <?php
+                if($key>=4)
+                {
+                    $key=1;
+                    ++$key;
+                }
+            ?>
                 <div onclick="course{{ $course->id }}()" class="">
                     <div class="d-flex ms-4 mt-3">
-                        <div class="sub-name ms-2"> <span class="span_tag"> {{ strtoupper($course->title[0]) }} </span> </div>
+                        <div class="sub-name{{ $key }} ms-2"> <span class="span_tag"> {{ strtoupper($course->title[0]) }} </span> </div>
                         @if(count($course['sections'])>0)
                             <a class="dropdown-toggle ms-2 mt-2 subject main-topic-{{ $course->id }}" data-toggle="dropdown" href="javascript:void(0);" aria-expanded="false">
                                 {{ $course->title }} <span class="caret"></span></a>
@@ -22,35 +30,38 @@
                     </div>
                 </div>
                 <!-- dropdown-two  -->
-                <div id="section{{ $course->id }}" class="">
-                    <div class="two d-flex flex-column mt-3 pb-3">
+                @if(isset($course->sections) && count($course->sections)>0)
+                    <div id="section{{ $course->id }}" class="">
+                        <div class="two d-flex flex-column mt-3 pb-3">
                             @foreach($course['sections'] as $mainTopic)
-                            {{-- <a class=" ms-2 mt-3 main-topic" href="#">{{$mainTopic->title}}<span class="caret"></span></a> --}}
-                            @if(count($mainTopic->lessons)>0)
-                                <a class="dropdown-toggle ms-2 mt-3 sub-topic-{{ $mainTopic->id }}" onclick="section{{$mainTopic->id}}()" data-toggle="dropdown" href="javascript:void(0);" > {{$mainTopic->title}}
-                                    <span class="caret"></span>
-                                </a>
-                                <!-- dropdown three  -->
+                                {{-- <a class=" ms-2 mt-3 main-topic" href="#">{{$mainTopic->title}}<span class="caret"></span></a> --}}
                                 @if(count($mainTopic->lessons)>0)
-                                <div id="lesson{{ $mainTopic->id }}" class="">
-                                    @foreach ($mainTopic->lessons as $lesson)
-                                        <div class="three d-flex flex-column">
-                                            <a class="ms-4 mt-3 px-2" id="sub" href="javascript:void(0);" onClick="lesson{{ $lesson->id }}()" style=" width: 100%;"> {{ $lesson->title }}
-                                                <span class="caret"></span></a>
-                                        </div>
+                                    <a class="dropdown-toggle ms-2 mt-3 sub-topic-{{ $mainTopic->id }}" onclick="section{{$mainTopic->id}}()" data-toggle="dropdown" href="javascript:void(0);" > {{$mainTopic->title}}
+                                        <span class="caret"></span>
+                                    </a>
+                                    <!-- dropdown three  -->
+                                    @if(count($mainTopic->lessons)>0)
+                                    <div id="lesson{{ $mainTopic->id }}" class="">
+                                        @foreach ($mainTopic->lessons as $lesson)
+                                            <div class="three d-flex flex-column">
+                                                <a class="ms-4 mt-3 px-2" id="sub" href="javascript:void(0);" onClick="lesson{{ $lesson->id }}()" style=" width: 100%;"> {{ $lesson->title }}
+                                                    <span class="caret"></span></a>
+                                            </div>
 
-                                    @endforeach
-                                </div>
+                                        @endforeach
+                                    </div>
+                                    @endif
+                                @else
+                                    <a class=" ms-2 mt-3" href="#">{{$mainTopic->title}}<span class="caret"></span></a>
                                 @endif
-                            @else
-                                <a class=" ms-2 mt-3" href="#">{{$mainTopic->title}}<span class="caret"></span></a>
-                            @endif
-                                {{-- <a class=" ms-4 mt-3 px-2 " href="#" style=" width: 100%;"> Sub Topic <span class="caret"></span></a> --}}
-                            {{-- <a class=" ms-2 mt-3 main-topic" href="#"> Main Topic <span class="caret"></span></a>
-                            <a class=" ms-2 mt-3 main-topic" href="#"> Main Topic <span class="caret"></span></a> --}}
-                            @endforeach
+                                    {{-- <a class=" ms-4 mt-3 px-2 " href="#" style=" width: 100%;"> Sub Topic <span class="caret"></span></a> --}}
+                                {{-- <a class=" ms-2 mt-3 main-topic" href="#"> Main Topic <span class="caret"></span></a>
+                                <a class=" ms-2 mt-3 main-topic" href="#"> Main Topic <span class="caret"></span></a> --}}
+                                @endforeach
+
                         </div>
-                </div>
+                    </div>
+                @endif
             @empty
             @endforelse
 
@@ -102,13 +113,19 @@
                     <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
-            <div class="embed-responsive embed-responsive-21by9 mt-4" id="video-container">
+            {{-- <div class="embed-responsive embed-responsive-21by9 mt-4" id="video-container">
                 <video id="myVideo" class="embed-responsive-item" src="./assets/videos/THAILAND IN 30 SECONDS - CINEMATIC VIDEO- 4k.mp4" controls=""></video>
                 <button id="video-button" data-toggle="modal" data-target="#exampleModal">Test Your
                     Knowledge</button>
 
+            </div> --}}
+            <div class="embed-responsive embed-responsive-16by9 mt-4" id="video-container">
+                <video id="myVideo" class="embed-responsive-item"
+                    src="{{ asset('assets/videos/THAILAND IN 30 SECONDS - CINEMATIC VIDEO- 4k.mp4') }}" controls></video>
+                <button id="video-button" data-toggle="modal" data-target="#exampleModal">Test Your
+                    Knowledge
+                </button>
             </div>
-
             <div class="row mt-4">
                 <div class="col">
                     <div class="dropdown">
@@ -133,13 +150,14 @@
                         <div class="modal-header">
 
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
+                                <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body px-5">
                             <div class=" d-flex flex-column">
                                 <h5> Answer the questions below</h5>
-                                <p class="m-auto"><span id="currQuesNum"></span> / <span id="totalQuesNum"></span></p>
+                                <p class="m-auto"><span id="currQuesNum"></span> / <span
+                                        id="totalQuesNum"></span></p>
                                 <div class="question m-auto" id="ques"></div>
                             </div>
 
@@ -149,11 +167,13 @@
                             </div>
                             <div class="row d-flex justify-content-center pb-5 mt-4">
                                 <div class="col-4">
-                                    <button id="restartBtn" onclick="restartQuiz()" style="display: none;">Restart Quiz</button>
+                                    <button id="restartBtn" onclick="restartQuiz()"
+                                        style="display: none;">Restart Quiz</button>
                                     <div id="score" style="display: none;"></div>
                                 </div>
                                 <div class="col-4">
-                                    <button id="restartBtn2" style="display: none;"> <a href="./student-content.html"> Back to Home</a> </button>
+                                    <button id="restartBtn2" style="display: none;"> <a
+                                            href="./student-content.html"> Back to Home</a> </button>
                                     <div id="score" style="display: none;"></div>
                                 </div>
                             </div>
@@ -166,11 +186,14 @@
 
     {{-- {{ view('frontend.studentdashboard.layouts.course.lessons') }} --}}
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/js/quiz.js') }}"></script>
+    {{-- <script src="./assets/js/student-content.js"></script>
+    <script src="./assets/js/placeholder.js"></script> --}}
 
 <script>
+    let colors = ['#7b61ff', '#ff6187', '#52ccc5', '#fbba15']
     @foreach ($courses as $course)
-
-
         function course{{ $course->id }}()
         {
             let section{{ $course->id }} = document.getElementById('section{{ $course->id }}');
@@ -214,4 +237,20 @@
             @endforeach
         @endforeach
     @endforeach
+
+    var video = document.getElementById("myVideo");
+        var progressBar = document.getElementById("progress-bar");
+
+        // When the video is paused, update the progress bar accordingly
+        video.addEventListener("pause", function () {
+            var progress = (video.currentTime / video.duration) * 100;
+            progressBar.style.width = progress + "%";
+            progressBar.setAttribute("aria-valuenow", progress);
+        });
+
+        // When the video ends, set the progress bar to 100%
+        video.addEventListener("ended", function () {
+            progressBar.style.width = "100%";
+            progressBar.setAttribute("aria-valuenow", 100);
+        });
 </script>

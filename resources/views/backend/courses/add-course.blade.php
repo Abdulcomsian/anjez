@@ -52,12 +52,11 @@
                   <div class="row mt-4">
                     <div class="col course">
                       <label for="description" class="form-label"> Description</label>
-                      <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5"></textarea>
+                      <textarea id="editor" name="description"></textarea>
+
+                      {{-- <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5"></textarea> --}}
                     </div>
-                    <div class="col">
-                        <label for="">Feature Image</label>
-                        <input type="file" class="form-control" name="feature_image">
-                    </div>
+
                     {{-- <div class="col">
                       <div class="col star course">
                         <label for="icon" class="form-label">icon</label>
@@ -75,6 +74,13 @@
                       </div>
                     </div> --}}
                   </div>
+                  <div class="row mt-4">
+                      <div class="col-4">
+                        <label for="">Feature Image</label>
+                        <input type="file" class="form-control" name="feature_image">
+                    </div>
+
+                  </div>
 
                   <div class="btns">
                     <div class="row">
@@ -87,4 +93,13 @@
                 </form>
               </div>
         </div>
+        <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
+
+        <script>
+             ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+        </script>
 @endsection
