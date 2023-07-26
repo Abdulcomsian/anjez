@@ -11,7 +11,7 @@
             </div>
           </div>
           <div class=" setQuiz">
-            <form action="{{ route('quiz.store') }}" method="POST">
+            <form action="{{ route('quiz.store') }}" method="POST" class="quiz_form">
                 @csrf
               <div class="row">
                 <div class="col">
@@ -28,13 +28,13 @@
                 <div class="col">
                   <div class="quiz-modal-input mt-3">
                     <label for="question" class="form-label">Option 1</label>
-                    <input type="text" class="form-control" name="option1" id="option1" placeholder="Option 1" />
+                    <input type="text" class="form-control"  name="option1" id="option1" placeholder="Option 1" />
                   </div>
                 </div>
                 <div class="col">
                   <div class="quiz-modal-input mt-3">
                     <label for="question" class="form-label">Option 2</label>
-                    <input type="text" class="form-control" name="option2" id="option2" placeholder="Option 2" />
+                    <input type="text" class="form-control"  name="option2" id="option2" placeholder="Option 2" />
                   </div>
                 </div>
               </div>
@@ -42,13 +42,13 @@
                 <div class="col">
                   <div class="quiz-modal-input mt-3">
                     <label for="question" class="form-label">Option 3</label>
-                    <input type="text" class="form-control" name="option3" id="option3" placeholder="Option 3" />
+                    <input type="text" class="form-control"  name="option3" id="option3" placeholder="Option 3" />
                   </div>
                 </div>
                 <div class="col">
                   <div class="quiz-modal-input mt-3">
                     <label for="question" class="form-label">Option 4</label>
-                    <input type="text" class="form-control" name="option4" id="option4" placeholder="Option 4" />
+                    <input type="text" class="form-control"  name="option4" id="option4" placeholder="Option 4" />
                   </div>
                 </div>
               </div>
@@ -57,8 +57,8 @@
                 <div class="col">
                   <div class="quiz-modal-input mt-3">
                     <label for="question" class="form-label">Correct Answer</label>
-                    <input type="text" class="form-control" name="correct_answer" id="correct-option" placeholder="Correct Answer" />
-                    <div id="correct-option-error" class="error-message"></div>
+                    <input type="text" class="form-control"  onkeyup="checkCorrectAnswer()" name="correct_answer" id="correct-option" placeholder="Correct Answer" />
+                    <div id="correct-option-error" class="error-message d-none" > Answer doesn’t match any of the provided options</div>
                   </div>
                 </div>
               </div>
@@ -139,7 +139,7 @@
 </div>
 
 <script>
-     $(document).on('click', '.edit-btn', function () {
+    $(document).on('click', '.edit-btn', function () {
         let id = $(this).data('id');
         $.ajax({
             type: "GET",
@@ -153,11 +153,49 @@
                     $('#option2').val(response.data.options.option2);
                     $('#option3').val(response.data.options.option3);
                     $('#option4').val(response.data.options.option4);
-                    $('#correct-option').val(response.data.correct_answer);
+                    $('#correct-option').val(response.data.options.correct_answer);
                 }
             }
         });
     });
+
+    let cancel = document.getElementsByClassName('can')[0];
+    cancel.addEventListener('click', function(){
+        $('.quiz_form')[0].reset();
+        $('#quiz_id').removeAttr('value');
+    });
+
+    function checkCorrectAnswer()
+    {
+        let options = [], opt1, opt2, opt3, opt4, corr_opt, error_msg, publish_btn;
+
+        opt1 = document.getElementById('option1').value;
+        opt2 = document.getElementById('option2').value;
+        opt3 = document.getElementById('option3').value;
+        opt4 = document.getElementById('option4').value;
+        corr_opt = document.getElementById('correct-option').value;
+
+        error_msg = document.getElementsByClassName('error-message')[0];
+        publish_btn = document.getElementById('publish-btn');
+
+        options.push(opt1, opt2, opt3, opt4);
+        is_exists = options.includes(corr_opt);
+        
+        if(!is_exists)
+        {
+            error_msg.classList.remove('d-none');
+            error_msg.classList.add('d-block');
+            publish_btn.setAttribute('disabled', true);
+        }
+        else
+        {
+            error_msg.classList.add('d-none');
+            error_msg.classList.remove('d-block');
+            publish_btn.removeAttribute('disabled');
+
+        }
+    }
+
 </script>
 
 @endsection

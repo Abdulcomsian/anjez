@@ -103,7 +103,6 @@ class QuizController extends Controller
 
     public function update(Request $request)
     {
-        dd($request->all());
         try
         {
             $validated_data = $this->validate($request,[
