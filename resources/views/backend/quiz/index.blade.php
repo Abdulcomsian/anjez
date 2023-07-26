@@ -28,13 +28,13 @@
                 <div class="col">
                   <div class="quiz-modal-input mt-3">
                     <label for="question" class="form-label">Option 1</label>
-                    <input type="text" class="form-control"  name="option1" id="option1" placeholder="Option 1" />
+                    <input type="text" class="form-control" onkeyup="checkCorrectAnswer()" name="option1" id="option1" placeholder="Option 1" />
                   </div>
                 </div>
                 <div class="col">
                   <div class="quiz-modal-input mt-3">
                     <label for="question" class="form-label">Option 2</label>
-                    <input type="text" class="form-control"  name="option2" id="option2" placeholder="Option 2" />
+                    <input type="text" class="form-control" onkeyup="checkCorrectAnswer()" name="option2" id="option2" placeholder="Option 2" />
                   </div>
                 </div>
               </div>
@@ -42,13 +42,13 @@
                 <div class="col">
                   <div class="quiz-modal-input mt-3">
                     <label for="question" class="form-label">Option 3</label>
-                    <input type="text" class="form-control"  name="option3" id="option3" placeholder="Option 3" />
+                    <input type="text" class="form-control" onkeyup="checkCorrectAnswer()" name="option3" id="option3" placeholder="Option 3" />
                   </div>
                 </div>
                 <div class="col">
                   <div class="quiz-modal-input mt-3">
                     <label for="question" class="form-label">Option 4</label>
-                    <input type="text" class="form-control"  name="option4" id="option4" placeholder="Option 4" />
+                    <input type="text" class="form-control" onkeyup="checkCorrectAnswer()" name="option4" id="option4" placeholder="Option 4" />
                   </div>
                 </div>
               </div>
@@ -180,7 +180,7 @@
 
         options.push(opt1, opt2, opt3, opt4);
         is_exists = options.includes(corr_opt);
-        
+
         if(!is_exists)
         {
             error_msg.classList.remove('d-none');
