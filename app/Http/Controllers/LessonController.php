@@ -129,7 +129,7 @@ class LessonController extends Controller
     {
         try
         {
-            $lesson = Lesson::find($id);
+            $lesson = Lesson::with(['quizes', 'quizes.options'])->find($id);
             if(isset($lesson) && !is_null($lesson))
             {
                 return apiSuccessResponse(['lesson'=>$lesson], "Lesson Found");

@@ -25,7 +25,6 @@ class QuizService implements QuizInterface
             }
             DB::transaction( function () use ($quiz, $quiz_options, $data) {
                 $quiz->question             = $data['question'];
-                $quiz->correct_answer       = $data['correct_answer'];
                 $quiz->lesson_id            = (int)$data['lesson_id'];
                 $quiz->save();
 
@@ -33,6 +32,7 @@ class QuizService implements QuizInterface
                 $quiz_options->option2      = $data['option2'];
                 $quiz_options->option3      = $data['option3'];
                 $quiz_options->option4      = $data['option4'];
+                $quiz_options->correct_answer=$data['correct_answer'];
                 $quiz_options->quiz_id      = $quiz->id;
                 $quiz_options->save();
             });

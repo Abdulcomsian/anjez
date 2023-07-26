@@ -16,6 +16,7 @@ class QuizOption extends Model
         'option2',
         'option3',
         'option4',
+        'correct_answer',
         'quiz_id'
     ];
 }

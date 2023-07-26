@@ -225,6 +225,7 @@
                         type: "GET",
                         url: "{{ url('get-lesson/') }}/"+id,
                         success: function (response) {
+                            console.log(response);
                             let title = document.getElementById('title');
                             let description = document.getElementById('description');
 
