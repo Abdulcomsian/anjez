@@ -118,3 +118,44 @@ Route::post('store-user', [userController::class, 'store'])->name('user.store');
 Route::controller(CourseDetailController::class)->middleware('auth')->group( function () {
     Route::get('course-details/{id}', 'courseDetails')->name('course.details');
 } );
+
+
+
+//new route starts here
+
+
+Route::get("index" , function(){
+    return view('test.index');
+});
+
+Route::get("login1" , function(){
+    return view('test.login');
+});
+
+Route::get("admin-dashboard" , function(){
+    return view('test.admin-dashboard');
+});
+
+Route::get("payment" , function(){
+    return view('test.payment');
+});
+
+Route::get("privacy-policy" , function(){
+    return view('test.privacy-policy');
+});
+
+Route::get("signup" , function(){
+    return view('test.signup');
+});
+
+Route::get("student-content2" , function(){
+    return view('test.student-content');
+});
+
+Route::get("student-dashboard" , function(){
+    return view('test.student-dashboard');
+});
+
+Route::get("term-and-condition" , function(){
+    return view('test.terms-conditions');
+});
