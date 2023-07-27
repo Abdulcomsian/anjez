@@ -152,9 +152,9 @@ Route::get("student-content2" , function(){
     return view('test.student-content');
 });
 
-Route::get("student-dashboard" , function(){
-    return view('test.student-dashboard');
-});
+// Route::get("student-dashboard" , function(){
+//     return view('test.student-dashboard');
+// });
 
 Route::get("term-and-condition" , function(){
     return view('test.terms-conditions');

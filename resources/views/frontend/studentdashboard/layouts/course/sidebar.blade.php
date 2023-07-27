@@ -90,7 +90,7 @@
     </div>
 </div>
 
-<div id="lessons" class="d-none">
+<div id="lessons" class="d-none col-md-10">
     <div class="col py-3" id="lessons">
         <div class="lecture">
             <div class="upss pb-3 px-3" style="background-color: white;">
@@ -113,13 +113,31 @@
                     <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
-            {{-- <div class="embed-responsive embed-responsive-21by9 mt-4" id="video-container">
+            <div class="embed-responsive embed-responsive-21by9 mt-4" id="video-container">
                 <video id="myVideo" class="embed-responsive-item" src="./assets/videos/THAILAND IN 30 SECONDS - CINEMATIC VIDEO- 4k.mp4" controls=""></video>
                 <button id="video-button" data-toggle="modal" data-target="#exampleModal">Test Your
                     Knowledge</button>
 
-            </div> --}}
-            <div class="embed-responsive embed-responsive-16by9 mt-4" id="video-container">
+            </div>
+            <div class="row mt-4 justify-content-between">
+                <div class="col-4">
+                    <div class="dropdown">
+                        <button class="btn attach dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 10px; border-radius: 8px;">
+                            Course Attachments
+                        </button>
+                        <div class="dropdown-menu pe-5" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Attachment 1</a>
+                            <a class="dropdown-item" href="#">Attachment 2</a>
+                            <a class="dropdown-item" href="#">Attachment 3</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 d-flex justify-content-end">
+                    <button class="video-button-2" style="padding: 10px; border-radius: 8px;" id="test_quiz_btn">Test Your
+                        Knowledge</button>
+                </div>
+            </div>
+            {{-- <div class="embed-responsive embed-responsive-16by9 mt-4" id="video-container">
                 <video id="myVideo" class="embed-responsive-item"
                     src="{{ asset('assets/videos/THAILAND IN 30 SECONDS - CINEMATIC VIDEO- 4k.mp4') }}" controls></video>
                 <button id="video-button" data-toggle="modal" data-target="#exampleModal">Test Your
@@ -139,15 +157,15 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
 
             <!-- Modal -->
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="quizModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog custom-modal-dialog" role="document">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header" style="display: flex; justify-content:end">
 
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -254,4 +272,6 @@
             progressBar.style.width = "100%";
             progressBar.setAttribute("aria-valuenow", 100);
         });
+
+
 </script>

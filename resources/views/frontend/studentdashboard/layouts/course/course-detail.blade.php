@@ -221,4 +221,16 @@
         </div>
     </div>
 </div>
+
+{{-- Modal --}}
+
+<script>
+    $(document).on('click','#dropdownMenuButton', function(){
+        $('.dropdown-menu').toggleClass('show');
+    });
+
+    $(document).on('click', '#test_quiz_btn', function(){
+        $('#quizModal').modal('show');
+    });
+</script>
 @endsection
