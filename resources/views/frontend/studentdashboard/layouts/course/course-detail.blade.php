@@ -250,7 +250,9 @@
                     <div class="option"><input type="radio" name="answer" value="0"><label>Earth</label></div>
                     <div class="option"><input type="radio" name="answer" value="0"><label>Earth</label></div> --}}
                 </div>
+                <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.</div>
                 <div class="modal-footer d-flex flex-column justify-content-center">
+                    <input type="hidden" name="lesson_id" class="lesson_id">
                     <button onclick="checkAns()" id="btn">Next Question</button>
                 </div>
                 <div class="row d-flex justify-content-center pb-5 mt-4">

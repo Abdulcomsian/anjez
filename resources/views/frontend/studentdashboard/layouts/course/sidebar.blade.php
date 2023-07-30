@@ -181,11 +181,9 @@
                     $.ajax({
                         type: "GET",
                         url: "{{ url('get-lesson/') }}/"+id,
-                        beforeSend: function() {
-
-                        },
                         success: function (response) {
                             console.log(response.data.lesson);
+                            $('.lesson_id').val(response.data.lesson.id)
                             let lesson_quizes = response.data.lesson.quizes;
                             let title = document.getElementById('title');
                             let description = document.getElementById('description');
@@ -234,10 +232,10 @@
     {
         $('.correct_answer').val(correct_opt);
         $('#ques').text(qstn);
-        $('#opts').append(`<div class="option"><input type="radio" name="answer" value="${option1}"><label>${option1}</label></div>
-        <div class="option"><input type="radio" name="answer" value="${option2}"><label>${option2}</label></div>
-        <div class="option"><input type="radio" name="answer" value="${option3}"><label>${option3}</label></div>
-        <div class="option"><input type="radio" name="answer" value="${option4}"><label>${option4}</label></div>`);
+        $('#opts').append(`<div class="option"><input type="radio" name="answer" value="${option1}"><label style="text-decoration: none">${option1}</label></div>
+        <div class="option"><input type="radio" name="answer" value="${option2}"><label style="text-decoration: none">${option2}</label></div>
+        <div class="option"><input type="radio" name="answer" value="${option3}"><label style="text-decoration: none">${option3}</label></div>
+        <div class="option"><input type="radio" name="answer" value="${option4}"><label style="text-decoration: none">${option4}</label></div>`);
     }
 
     var video = document.getElementById("myVideo");
