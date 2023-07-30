@@ -223,6 +223,54 @@
 </div>
 
 {{-- Modal --}}
+<div class="modal fade" id="quizModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="display: flex; justify-content:end ">
+
+                <button type="button" class="close" class="" data-dismiss="modal" aria-label="Close" style="background: none;
+                color: black;font-weight: bold;">
+                    <span aria-hidden="true" class="close_modal_btn" style="font-size: 23px">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body px-5">
+                <div class="d-flex flex-column">
+                    <h5> Answer the questions below</h5>
+                    <p class="m-auto"><span id="currQuesNum">1</span> / <span
+                            id="totalQuesNum"></span></p>
+                    <div class="question m-auto" id="ques">
+
+                    </div>
+                </div>
+
+                <input type="hidden" name="correct_answer" class="correct_answer">
+                <div class="options mt-5" id="opts">
+                    {{-- <div class="option"><input type="radio" name="answer" value="0"><label>Earth</label></div>
+                    <div class="option"><input type="radio" name="answer" value="0"><label>Earth</label></div>
+                    <div class="option"><input type="radio" name="answer" value="0"><label>Earth</label></div>
+                    <div class="option"><input type="radio" name="answer" value="0"><label>Earth</label></div> --}}
+                </div>
+                <div class="modal-footer d-flex flex-column justify-content-center">
+                    <button onclick="checkAns()" id="btn">Next Question</button>
+                </div>
+                <div class="row d-flex justify-content-center pb-5 mt-4">
+                    <div class="col-4">
+                        <button id="restartBtn" onclick="restartQuiz()"
+                            style="display: none;">Restart Quiz</button>
+                        <div id="score" style="display: none;"></div>
+                    </div>
+                    <div class="col-4">
+                        <button id="restartBtn2" style="display: none;"> <a
+                                href="./student-content.html"> Back to Home</a> </button>
+                        <div id="score" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <script>
     $(document).on('click','#dropdownMenuButton', function(){
@@ -231,6 +279,12 @@
 
     $(document).on('click', '#test_quiz_btn', function(){
         $('#quizModal').modal('show');
+
     });
+
+    $(document).on('click', '.close_modal_btn', function(){
+        $('#quizModal').modal('hide');
+    });
+
 </script>
 @endsection

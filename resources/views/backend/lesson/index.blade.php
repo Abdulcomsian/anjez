@@ -148,7 +148,7 @@
                     // $('#updateSectionModal').modal('show');
                     $('#title').val(response.data.title);
                     $('#video_url').val(response.data.video_url)
-                    $('#description').val(response.data.description);
+                    $('#editor').val(response.data.description);
                     $('#thumbnail').text(response.data.thumbnail);
                     // $('#course_id').val(response.data.course_id);
                 }

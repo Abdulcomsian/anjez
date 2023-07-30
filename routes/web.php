@@ -58,7 +58,7 @@ Route::get('logout', [AuthLoginController::class, 'logout'])->name('logout');
 Route::get('/login', [loginController::class, 'create'])->name('login');
 Route::post('/login-user', [loginController::class, 'login'])->name('login-user');
 
-Route::get('/signup', [signupController::class, 'create']);
+Route::get('/signup', [signupController::class, 'create'])->name('signup-page');
 Route::post('signup-user', [signupController::class, 'signupUser'])->name('user.signup');
 
 // // Admin Routes
@@ -144,9 +144,9 @@ Route::get("privacy-policy" , function(){
     return view('test.privacy-policy');
 });
 
-Route::get("signup" , function(){
-    return view('test.signup');
-});
+// Route::get("signup" , function(){
+//     return view('test.signup');
+// });
 
 Route::get("student-content2" , function(){
     return view('test.student-content');

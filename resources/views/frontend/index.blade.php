@@ -45,12 +45,12 @@
             </li>
 
             <li class="nav-item left-line">
-              <a class="nav-link" href="./login.html">
+              <a class="nav-link" href="{{ route('login') }}">
                 <span data-translate="log-in">Log In</span>
               </a>
             </li>
             <li class="nav-item">
-              <a href="./signup.html">
+              <a href="{{ route('signup-page') }}">
                 <button data-translate="sign-up">Sign Up</button>
               </a>
             </li>
