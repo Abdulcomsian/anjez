@@ -236,7 +236,7 @@
             <div class="modal-body px-5">
                 <div class="d-flex flex-column">
                     <h5> Answer the questions below</h5>
-                    <p class="m-auto"><span id="currQuesNum">1</span> / <span
+                    <p class="m-auto"><span id="currQuesNum"></span> / <span
                             id="totalQuesNum"></span></p>
                     <div class="question m-auto" id="ques">
 
@@ -245,17 +245,16 @@
 
                 <input type="hidden" name="correct_answer" class="correct_answer">
                 <div class="options mt-5" id="opts">
-                    {{-- <div class="option"><input type="radio" name="answer" value="0"><label>Earth</label></div>
-                    <div class="option"><input type="radio" name="answer" value="0"><label>Earth</label></div>
-                    <div class="option"><input type="radio" name="answer" value="0"><label>Earth</label></div>
-                    <div class="option"><input type="radio" name="answer" value="0"><label>Earth</label></div> --}}
                 </div>
                 <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.</div>
                 <div class="modal-footer d-flex flex-column justify-content-center">
                     <input type="hidden" name="lesson_id" class="lesson_id">
+                    <input type="hidden" name="question_no" class="question_no">
+                    <input type="hidden" name="score" class="score" value="0">
+                    <input type="hidden" name="total_qstns" class="total_qstns" value="0">
                     <button onclick="checkAns()" id="btn">Next Question</button>
                 </div>
-                <div class="row d-flex justify-content-center pb-5 mt-4">
+                {{-- <div class="row d-flex justify-content-center pb-5 mt-4">
                     <div class="col-4">
                         <button id="restartBtn" onclick="restartQuiz()"
                             style="display: none;">Restart Quiz</button>
@@ -266,7 +265,7 @@
                                 href="./student-content.html"> Back to Home</a> </button>
                         <div id="score" style="display: none;"></div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -280,6 +279,19 @@
     });
 
     $(document).on('click', '#test_quiz_btn', function(){
+        let total_qstns = $('.total_qstns').val();
+        if(total_qstns == 1)
+        {
+            $('#btn').text("Finish");
+            $('#btn').removeAttr('onclick');
+            $('#btn').addClass('finish');
+        }
+        else
+        {
+            $('#btn').text("Next Question");
+            $('#btn').attr('onclick', 'checkAns()');
+            $('#btn').removeAttr('class');
+        }
         $('#quizModal').modal('show');
 
     });
