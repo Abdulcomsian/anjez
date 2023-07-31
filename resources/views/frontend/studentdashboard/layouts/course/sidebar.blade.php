@@ -336,7 +336,6 @@
             {
                 $('#btn').text("Next Question");
                 $('#btn').removeClass('finish');
-                // $('#btn').addAtt('onclick');
             }
 
             if(response.data.lesson.quizes != null && response.data.lesson.quizes.length>0 && response.data.lesson.quizes != [])
@@ -431,25 +430,24 @@ $(document).on('click', '.finish', function(){
 function restartQuiz()
 {
     $('.modal-body').empty();
-    // nextQuestion();
     $('.modal-body').append(`<div class="d-flex flex-column">
-                    <h5> Answer the questions below</h5>
-                    <p class="m-auto"><span id="currQuesNum"></span> / <span
-                            id="totalQuesNum"></span></p>
-                    <div class="question m-auto" id="ques">
+        <h5> Answer the questions below</h5>
+        <p class="m-auto"><span id="currQuesNum"></span> / <span
+                id="totalQuesNum"></span></p>
+        <div class="question m-auto" id="ques">
 
-                    </div>
-                </div>
+        </div>
+    </div>
 
-                <input type="hidden" name="correct_answer" class="correct_answer">
-                <div class="options mt-5" id="opts">
-                </div>
-                <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.</div>
-                <div class="modal-footer d-flex flex-column justify-content-center">
-                    <input type="hidden" name="lesson_id" class="lesson_id">
-                    <input type="hidden" name="question_no" class="question_no">
-                    <button onclick="checkAns()" id="btn">Next Question</button>
-                </div>`);
+    <input type="hidden" name="correct_answer" class="correct_answer">
+    <div class="options mt-5" id="opts">
+    </div>
+    <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.</div>
+    <div class="modal-footer d-flex flex-column justify-content-center">
+        <input type="hidden" name="lesson_id" class="lesson_id">
+        <input type="hidden" name="question_no" class="question_no">
+        <button onclick="checkAns()" id="btn">Next Question</button>
+    </div>`);
 }
 
 function redirect ()
