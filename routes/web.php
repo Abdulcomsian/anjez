@@ -15,6 +15,7 @@ use App\Http\Controllers\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\CourseDetailController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\StudentScoreController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Auth;
 
@@ -158,4 +159,9 @@ Route::get("student-content2" , function(){
 
 Route::get("term-and-condition" , function(){
     return view('test.terms-conditions');
+});
+
+
+Route::controller(StudentScoreController::class)->middleware('auth')->group(function(){
+    Route::get('save-score', 'store')->name('score.store');
 });

@@ -243,15 +243,18 @@
                     </div>
                 </div>
 
-                <input type="hidden" name="correct_answer" class="correct_answer">
                 <div class="options mt-5" id="opts">
                 </div>
-                <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.</div>
+                <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.  Correct Option is <span id='corr_ans'> .</span> Reason <span id="corr_ans_reason"></span> </div>
+                {{-- <div style="color: green" class="d-none correct-answer-div"></div> --}}
+
                 <div class="modal-footer d-flex flex-column justify-content-center">
+                    <input type="hidden" name="correct_answer" class="correct_answer">
                     <input type="hidden" name="lesson_id" class="lesson_id">
                     <input type="hidden" name="question_no" class="question_no">
                     <input type="hidden" name="score" class="score" value="0">
                     <input type="hidden" name="total_qstns" class="total_qstns" value="0">
+                    <input type="hidden" name="correct-answer-description" class="correct_answer_description">
                     <button onclick="checkAns()" id="btn">Next Question</button>
                 </div>
                 {{-- <div class="row d-flex justify-content-center pb-5 mt-4">

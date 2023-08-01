@@ -33,6 +33,7 @@ class QuizService implements QuizInterface
                 $quiz_options->option3      = $data['option3'];
                 $quiz_options->option4      = $data['option4'];
                 $quiz_options->correct_answer=$data['correct_answer'];
+                $quiz_options->correct_answer_description=$data['correct_answer_description'];
                 $quiz_options->quiz_id      = $quiz->id;
                 $quiz_options->save();
             });

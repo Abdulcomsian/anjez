@@ -54,12 +54,18 @@
               </div>
 
               <div class="row">
-                <div class="col">
+                <div class="col-md-6">
                   <div class="quiz-modal-input mt-3">
                     <label for="question" class="form-label">Correct Answer</label>
                     <input type="text" class="form-control"  onkeyup="checkCorrectAnswer()" name="correct_answer" id="correct-option" placeholder="Correct Answer" />
                     <div id="correct-option-error" class="error-message d-none" > Answer doesn’t match any of the provided options</div>
                   </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="quiz-modal-input mt-3">
+                        <label for=""  class="form-label">Correct Answer Reason</label>
+                        <textarea id="editor" class="editor" name="correct_answer_description"></textarea>
+                    </div>
                 </div>
               </div>
 
@@ -139,6 +145,12 @@
 </div>
 
 <script>
+
+    ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
     $(document).on('click', '.edit-btn', function () {
         let id = $(this).data('id');
         $.ajax({
@@ -147,6 +159,7 @@
             success: function (response) {
                 if(response.status)
                 {
+                    console.log(response.data.options);
                     $('#quiz_id').val(response.data.id);
                     $('#question').val(response.data.question);
                     $('#option1').val(response.data.options.option1);
@@ -154,6 +167,10 @@
                     $('#option3').val(response.data.options.option3);
                     $('#option4').val(response.data.options.option4);
                     $('#correct-option').val(response.data.options.correct_answer);
+                    // var editor = ClassicEditor.instances.editor.setData('ddddd');
+                    // editor.setData("ddddd");
+                    // CKEDITOR.instances.editor.setData( 'sss' );
+                    // CKEDITOR.instances['editor'].setData(response.data.options.correct_answer_description);
                 }
             }
         });
@@ -195,6 +212,7 @@
 
         }
     }
+
 
 </script>
 
