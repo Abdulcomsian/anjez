@@ -101,12 +101,12 @@
                         <textarea id="editor" name="lesson[description]"></textarea>
                     </div>
                 </div>
-                <div class="row mt-3 d-none ed2">
+                {{-- <div class="row mt-3 d-none ed2">
                     <div class="col course course_description">
                         <label for="description" class="form-label">Description</label>
                         <textarea id="editor2" name="lesson[description]"></textarea>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row mt-3">
                     <div class="col">
                         <label for="">Attachment</label>
@@ -157,7 +157,7 @@
                     $('#thumbnail').text(response.data.thumbnail);
                     // ('.ck').empty();
                     ClassicEditor
-                    .create( document.querySelector( '#editor2' ) )
+                    .create( document.querySelector( '#editor1' ) )
                     .then(editor => {
                         editor.setData(response.data.description); // Assuming 'content' is the field containing the CKEditor data in your database
                     })
@@ -203,11 +203,16 @@
         // $('#description').val('');
     }
 
+    console.log('Before CKEditor initialization');
     ClassicEditor
-    .create( document.querySelector( '#editor' ) )
-    .catch( error => {
-        console.error( error );
-    } );
+        .create( document.querySelector( '#editor' ) )
+        .then( editor => {
+            console.log('CKEditor initialized');
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+    console.log('After CKEditor initialization');
 
     let cancel_btn = document.getElementsByClassName('can')[0];
     cancel_btn.addEventListener('click', function() {

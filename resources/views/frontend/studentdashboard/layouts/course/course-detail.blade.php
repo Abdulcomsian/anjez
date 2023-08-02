@@ -25,7 +25,7 @@
                     </div>
                     <div class="row flex-column">
                         <div class="col-7 textss text-start ">
-                            <span>{{ $data['course']->description }}</span>
+                            <span>{!! $data['course']->description !!}</span>
                         </div>
                         <div class="col mt-3"> <button class="px-4" type="button"> <a href="/payment.html">
                                     Subscribe </a> </button></div>

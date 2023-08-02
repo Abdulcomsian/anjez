@@ -77,7 +77,7 @@
                             <span><a href="{{ url('/student-content') }}"> {{ $course->title}} </a> </span>
                             </div>
                             <div class="text-line-2">
-                            <span>{{ $course->description }}</span>
+                            <span>{!! $course->description !!}</span>
                             </div>
                             <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0"
