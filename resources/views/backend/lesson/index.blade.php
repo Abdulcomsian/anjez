@@ -95,18 +95,12 @@
                         <input type="text" class="form-control" id="video_url" name="lesson[video_url]" />
                     </div>
                 </div>
-                <div class="row mt-3 ed1">
+                <div class="row mt-3">
                     <div class="col course course_description">
                         <label for="description" class="form-label">Description</label>
                         <textarea id="editor" name="lesson[description]"></textarea>
                     </div>
                 </div>
-                {{-- <div class="row mt-3 d-none ed2">
-                    <div class="col course course_description">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea id="editor2" name="lesson[description]"></textarea>
-                    </div>
-                </div> --}}
                 <div class="row mt-3">
                     <div class="col">
                         <label for="">Attachment</label>
@@ -147,25 +141,19 @@
             success: function (response) {
                 if(response.status)
                 {
-                    $('.ed1').addClass('d-none');
-                    $('.ed2').removeClass('d-none');
                     $('#exampleModalCentertwo').modal('show');
                     console.log(response.data);
-                    // $('#updateSectionModal').modal('show');
                     $('#title').val(response.data.title);
                     $('#video_url').val(response.data.video_url)
                     $('#thumbnail').text(response.data.thumbnail);
-                    // ('.ck').empty();
                     ClassicEditor
-                    .create( document.querySelector( '#editor1' ) )
+                    .create( document.querySelector('#editor') )
                     .then(editor => {
                         editor.setData(response.data.description); // Assuming 'content' is the field containing the CKEditor data in your database
                     })
                     .catch( error => {
                         console.error( error );
                     } );
-                    // $('#editor').text(response.data.description);
-                    // $('#course_id').val(response.data.course_id);
                 }
             }
         });
@@ -196,11 +184,6 @@
         $('#exampleModalCentertwo').modal('show');
         $('#title').val('');
         $('#video_url').val('')
-        $('.ed1').removeClass('d-none');
-        $('.ed2').addClass('d-none');
-
-        // let editor2 = $('#editor2').remove();
-        // $('#description').val('');
     }
 
     console.log('Before CKEditor initialization');

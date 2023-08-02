@@ -11,7 +11,7 @@ class studentDashboardContrller extends Controller
     {
         $data =
         [
-            'courses'   => Course::whereStatus('Active')->get()
+            'courses'   => Course::with('sections.lessons.quiz_scores')->whereStatus('Active')->get()
         ];
         return view('frontend.studentdashboard.student-dashboard', compact('data'));
     }

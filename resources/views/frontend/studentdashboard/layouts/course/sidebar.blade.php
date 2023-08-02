@@ -44,7 +44,7 @@
                                     <div id="lesson{{ $mainTopic->id }}" class="">
                                         @foreach ($mainTopic->lessons as $lesson)
                                             <div class="three d-flex flex-column">
-                                                <a class="ms-4 mt-3 px-2" id="sub" href="javascript:void(0);" onClick="lesson{{ $lesson->id }}()" style=" width: 100%;"> {{ $lesson->title }}
+                                                <a class="ms-4 mt-3 px-2" id="sub" href="javascript:void(0);" onclick="lesson{{ $lesson->id }}()" style=" width: 100%;"> {{ $lesson->title }}
                                                     <span class="caret"></span></a>
                                             </div>
 
@@ -212,8 +212,7 @@
                                 $('.test-knowledge-btn').removeClass('d-none');
                                 $('#currQuesNum').text(1);
                                 lesson_quizes.forEach((qstn, index) => {
-                                    // console.log(qstn, qstn.options);
-                                    // console.log("qstn = ",qstn, "index = ", index);
+
                                     if(index == 0)
                                     {
                                         $('.correct_answer_description').text(qstn.options.correct_answer_description);
@@ -224,11 +223,7 @@
                                 let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
                                 $('#totalQuesNum').text(quiz_qstns_length);
                             }
-                            // else if(response.data.lesson.quizes.length == 1)
-                            // {
-                            //     $('.test-knowledge-btn').removeClass('d-none');
-                            //     finishQuestions();
-                            // }
+
                             else
                             {
                                 $('.options').empty();
@@ -380,18 +375,6 @@
             }
         }
     });
-
-//   if (currQuestion < Questions.length - 1) {
-//     currQuestion++;
-//     loadQues();
-//   } else {
-//     document.getElementById("opt").remove();
-//     document.getElementById("ques").remove();
-//     document.getElementById("btn").remove();
-//     document.getElementById("restartBtn").style.display = "inline-block";
-//     document.getElementById("restartBtn2").style.display = "inline-block";
-//     loadScore();
-//   }
 }
 
 function finishQuestions(){
@@ -444,6 +427,7 @@ function finishQuestions(){
         </div>
         <input type="hidden" name="lesson_id" class="lesson_id" value="${lesson_id}">
         <input type="hidden" name="question_no" class="question_no" value="0">
+        <input type="hidden" name="total_qstns" class="total_qstns" value="${total_qstns}">
         <div class="modal-footer d-flex flex-column justify-content-center">
 
         </div>
@@ -479,7 +463,6 @@ function restartQuiz()
             type: "GET",
             url: "{{ url('get-lesson/') }}/"+id,
             success: function (response) {
-                // console.log(response.data.lesson);
                 $('.lesson_id').val(response.data.lesson.id)
                 let lesson_quizes = response.data.lesson.quizes;
                 let title = document.getElementById('title');
@@ -487,18 +470,7 @@ function restartQuiz()
 
                 title.innerHTML = response.data.lesson.title;
                 description.innerHTML = response.data.lesson.description;
-                if(response.data.lesson.thumbnail != null)
-                {
-                    $('.dropdown-menu').empty();
-                    $('.dropdown-menu').append(`<a class="dropdown-item" href="{{ asset('assets/courses-content/lesson-images/${response.data.lesson.thumbnail}') }}" target="_blank" >${response.data.lesson.thumbnail}</a>`);
-                }
-                else
-                {
-                    $('.dropdown-menu').empty();
-                    $('.dropdown-menu').removeClass('show')
-                }
 
-                // console.log(response.data.lesson.quizes);
                 if(response.data.lesson.quizes != null && response.data.lesson.quizes.length>0 && response.data.lesson.quizes!=[])
                 {
                     $('.total_qstns').val(response.data.lesson.quizes.length);
@@ -507,12 +479,9 @@ function restartQuiz()
                     $('.test-knowledge-btn').removeClass('d-none');
                     $('#currQuesNum').text(1);
                     lesson_quizes.forEach((qstn, index) => {
-                        console.log(qstn.options);
-                        // console.log("qstn = ",qstn, "index = ", index);
                         if(index == 0)
                         {
                             $('.correct_answer_description').text(qstn.options.correct_answer_description);
-
                             $('.correct_answer').val(qstn.options.correct_answer);
                             showQuiz(qstn.question, qstn.options.option1, qstn.options.option2, qstn.options.option3, qstn.options.option4, qstn.options.correct_answer);
                         }
@@ -520,11 +489,7 @@ function restartQuiz()
                     let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
                     $('#totalQuesNum').text(quiz_qstns_length);
                 }
-                // else if(response.data.lesson.quizes.length == 1)
-                // {
-                //     $('.test-knowledge-btn').removeClass('d-none');
-                //     finishQuestions();
-                // }
+
                 else
                 {
                     $('.options').empty();
@@ -534,18 +499,17 @@ function restartQuiz()
 
                     $('.correct_answer').val('');
                     $('.ques').text('')
-                    // showQuiz();
-
-                    // console.log("else");
                     let quiz_qstns_length = 0;
                     $('#totalQuesNum').text(quiz_qstns_length);
                 }
             }
         });
-
+    let total_qstns = parseInt($('.total_qstns').val());
     $('.modal-body').empty();
-
-    $('.modal-body').append(`<div class="d-flex flex-column">
+    if(total_qstns == 1)
+    {
+        console.log("if", total_qstns);
+        $('.modal-body').append(`<div class="d-flex flex-column">
         <h5> Answer the questions below</h5>
         <p class="m-auto"><span id="currQuesNum"></span> / <span
                 id="totalQuesNum"></span></p>
@@ -566,26 +530,36 @@ function restartQuiz()
         <input type="hidden" name="correct-answer-description" class="correct_answer_description">
         <input type="hidden" name="score" class="score" value="0">
         <input type="hidden" name="total_qstns" class="total_qstns">
-        <button id="btn" class="finish d-none">Finish</button>
-        <button onclick="checkAns()" id="btn" class="next-qstn">Next Question</button>
+            <button id="btn" class="finish">Finish</button>
     </div>`);
-    // let total_qstns = parseInt($('.total_qstns').val());
+    }
+    else
+    {
+        $('.modal-body').append(`<div class="d-flex flex-column">
+        <h5> Answer the questions below</h5>
+        <p class="m-auto"><span id="currQuesNum"></span> / <span
+                id="totalQuesNum"></span></p>
+        <div class="question m-auto" id="ques">
 
-    // console.log("type", typeof total_qstns, 'total', total_qstns);
-    // if(total_qstns == 1 || total_qstns == '1')
-    // {
-    //     console.log(total_qstns);
-    //     console.log("1");
-    //     $('.finish').removeClass('d-none');
-    //     $('.next-qstn').addClass('d-none');
-    // }
-    // else
-    // {
-    //     console.log(total_qstns);
-    //     console.log("2");
-    //     $('.finish').addClass('d-none');
-    //     $('.next-qstn').removeClass('d-none');
-    // }
+        </div>
+    </div>
+
+    <div class="options mt-5" id="opts">
+    </div>
+    <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.  Correct Option is <span id='corr_ans'> .</span> Reason <span id="corr_ans_reason"></span> </div>
+
+
+    <div class="modal-footer d-flex flex-column justify-content-center">
+        <input type="hidden" name="correct_answer" class="correct_answer">
+        <input type="hidden" name="lesson_id" class="lesson_id">
+        <input type="hidden" name="question_no" class="question_no">
+        <input type="hidden" name="correct-answer-description" class="correct_answer_description">
+        <input type="hidden" name="score" class="score" value="0">
+        <input type="hidden" name="total_qstns" class="total_qstns">
+            <button onclick="checkAns()" id="btn" class="next-qstn">Next Question</button>
+    </div>`);
+
+    }
 }
 
 function redirect () {

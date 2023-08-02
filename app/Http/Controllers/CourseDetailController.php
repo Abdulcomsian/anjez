@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use Illuminate\Http\Request;
 
 class CourseDetailController extends Controller
 {
@@ -12,8 +11,8 @@ class CourseDetailController extends Controller
         $id = (int)$id;
         $data =
         [
-            'course'    =>  Course::with('sections.lessons')->find($id),
-            'courses'   => Course::with('sections.lessons')->get()
+            'course'    =>  Course::with('sections.lessons.quiz_scores')->find($id),
+            'courses'   => Course::with('sections.lessons.quiz_scores')->get()
         ];
         return view('frontend.studentdashboard.layouts.course.course-detail', compact('data'));
     }
