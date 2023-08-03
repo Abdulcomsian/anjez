@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Crypt;
 
 
 if(!function_exists('countryCode'))
@@ -59,5 +60,37 @@ if(!function_exists('dateConversion'))
     function dateConversion ($date)
     {
         return $date->format('M d Y g:i A');
+    }
+}
+
+if (!function_exists('encryptParams')) {
+    function encryptParams($params): array|string
+    {
+        if (is_array($params))
+        {
+            $data = [];
+            foreach ($params as $item)
+            {
+                $data[] = Crypt::encryptString($item);
+            }
+            return $data;
+        }
+        return Crypt::encryptString($params);
+    }
+}
+
+if (!function_exists('decryptParams')) {
+    function decryptParams($params): array|string
+    {
+        if (is_array($params))
+        {
+            $data = [];
+            foreach ($params as $item)
+            {
+                $data[] = Crypt::decryptString($item);
+            }
+            return $data;
+        }
+        return Crypt::decryptString($params);
     }
 }

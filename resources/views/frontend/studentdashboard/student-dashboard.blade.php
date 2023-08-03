@@ -23,7 +23,7 @@
             @forelse ($data['courses'] as $course)
                 <div class="col-lg-3 col-md-6 col-sm-8">
                     <div class="card sample-card">
-                        <a href="{{ route('course.details', ['id'=>$course->id]) }}">
+                        <a href="{{ route('course.details', ['id'=>encryptParams($course->id)]) }}">
                         <div class="card-img-container">
                             @if(isset($course->feature_image))
                                 <img src="{{ asset('assets/courses-content/course-images/'.$course->feature_image) }}" class="card-img-top img-fluid" alt="..." />

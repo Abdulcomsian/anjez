@@ -8,7 +8,7 @@ class CourseDetailController extends Controller
 {
     public function courseDetails($id)
     {
-        $id = (int)$id;
+        $id = (int)decryptParams($id);
         $data =
         [
             'course'    =>  Course::with('sections.lessons.quiz_scores')->find($id),
