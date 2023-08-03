@@ -32,12 +32,14 @@
                             @forelse ($data['course']['sections'] as $section)
                                 @foreach($section['lessons'] as $key=>$lesson)
                                     <div class="col py-2">
-                                        <a href="#" style="text-decoration: none" onclick="lesson({{ $lesson->id }})">Lesson {{ $key+1 }} - {{ $lesson->title }}</a>
+                                        <a href="{{ route('lesson.quizes',['id'=>encryptParams($lesson->id)]) }}" style="text-decoration: none" >Lesson {{ $key+1 }} - {{ $lesson->title }}</a>
                                         <?php
-                                        try {
+                                        try
+                                        {
                                             $percentage = ($lesson->quiz_scores ? $lesson->quiz_scores->score_taken : 0)/($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0)*100;
-                                        } catch (\Throwable $th) {
-                                            //throw $th;
+                                        }
+                                        catch (\Throwable $th)
+                                        {
                                             $percentage = 0;
                                         }
                                         ?>

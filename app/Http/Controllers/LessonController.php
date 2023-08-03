@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
+use App\Models\Section;
 use App\Traits\Image;
 use Exception;
 use Illuminate\Support\Facades\File;
@@ -147,4 +148,26 @@ class LessonController extends Controller
         }
     }
 
+    public function lessonQuizes($id)
+    {
+        $id = (int)decryptParams($id);
+        $data =
+        [
+            'lesson'    => Lesson::with('quizes.options')->find($id),
+            'courses'   => Course::with('sections.lessons.quiz_scores')->get()
+        ];
+        return view('frontend.studentdashboard.layouts.lesson.lesson-detail', compact('data'));
+    }
+
+    public function nextLesson($id)
+    {
+        $id = (int)$id;
+        $lesson = Lesson::select('section_id', 'id')->find($id);
+        $lesson_id = $lesson['id'];
+        $section_id = $lesson['section_id'];
+        $next_lesson_id = Lesson::where('section_id', $section_id)->where('id', '>', $id)->min('id');
+        $next_lesson = Lesson::find($next_lesson_id);
+        dd("Working Fine", $next_lesson);
+        return view('frontend.studentdashboard.layouts.course.course-detail', compact('data'));
+    }
 }

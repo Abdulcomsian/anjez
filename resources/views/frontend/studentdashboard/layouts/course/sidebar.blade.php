@@ -44,7 +44,9 @@
                                     <div id="lesson{{ $mainTopic->id }}" class="">
                                         @foreach ($mainTopic->lessons as $lesson)
                                             <div class="three d-flex flex-column">
-                                                <a class="ms-4 mt-3 px-2" id="sub" href="javascript:void(0);" onclick="lesson{{ $lesson->id }}()" style=" width: 100%;"> {{ $lesson->title }}
+                                                {{-- <a class="ms-4 mt-3 px-2" id="sub" href="javascript:void(0);" onclick="lesson{{ $lesson->id }}()" style=" width: 100%;"> {{ $lesson->title }} --}}
+                                                <a class="ms-4 mt-3 px-2" id="sub" href="{{ route('lesson.quizes',['id'=>encryptParams($lesson->id)]) }}" style=" width: 100%;"> {{ $lesson->title }}
+                                                {{-- <a class="ms-4 mt-3 px-2" id="sub" href="{{ url('course/'.encryptParams($course->id).'/lesson/'.encryptParams($lesson->id)) }}" style=" width: 100%;"> {{ $lesson->title }} --}}
                                                     <span class="caret"></span></a>
                                             </div>
 
@@ -90,7 +92,7 @@
     </div>
 </div>
 
-<div id="lessons" class="d-none col-md-10">
+{{-- <div id="lessons" class="d-none col-md-10">
     <div class="col py-3" id="lessons">
         <div class="lecture">
             <div class="upss pb-3 px-3" style="background-color: white;">
@@ -128,7 +130,7 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             {{-- <a class="dropdown-item" href="#">Attachment 1</a>
                             <a class="dropdown-item" href="#">Attachment 2</a>
-                            <a class="dropdown-item" href="#">Attachment 3</a> --}}
+                            <a class="dropdown-item" href="#">Attachment 3</a>
                         </div>
                     </div>
                 </div>
@@ -142,8 +144,8 @@
         </div>
     </div>
 
-    {{-- {{ view('frontend.studentdashboard.layouts.course.lessons') }} --}}
-</div>
+</div> --}}
+{{-- {{ view('frontend.studentdashboard.layouts.course.lessons') }} --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="{{ asset('assets/js/quiz.js') }}"></script>
     {{-- <script src="./assets/js/student-content.js"></script>
@@ -178,84 +180,74 @@
                     courses.classList.add('d-none');
                     lessons.classList.remove('d-none');
 
-                    $.ajax({
-                        type: "GET",
-                        url: "{{ url('get-lesson/') }}/"+id,
-                        success: function (response) {
-                            // console.log(response.data.lesson);
-                            $('.lesson_id').val(response.data.lesson.id)
-                            let lesson_quizes = response.data.lesson.quizes;
-                            let title = document.getElementById('title');
-                            let description = document.getElementById('description');
+                    // $.ajax({
+                    //     type: "GET",
+                    //     url: "{{ url('get-lesson/') }}/"+id,
+                    //     success: function (response) {
+                    //         // console.log(response.data.lesson);
+                    //         $('.lesson_id').val(response.data.lesson.id)
+                    //         let lesson_quizes = response.data.lesson.quizes;
+                    //         let title = document.getElementById('title');
+                    //         let description = document.getElementById('description');
 
-                            title.innerHTML = response.data.lesson.title;
-                            description.innerHTML = response.data.lesson.description;
-                            if(response.data.lesson.thumbnail != null)
-                            {
-                                $('.dropdown-menu').empty();
-                                $('.dropdown-menu').append(`<a class="dropdown-item" href="{{ asset('assets/courses-content/lesson-images/${response.data.lesson.thumbnail}') }}" target="_blank" >${response.data.lesson.thumbnail}</a>`);
-                            }
-                            else
-                            {
-                                $('.dropdown-menu').empty();
-                                $('.dropdown-menu').removeClass('show')
-                            }
+                    //         title.innerHTML = response.data.lesson.title;
+                    //         description.innerHTML = response.data.lesson.description;
+                    //         if(response.data.lesson.thumbnail != null)
+                    //         {
+                    //             $('.dropdown-menu').empty();
+                    //             $('.dropdown-menu').append(`<a class="dropdown-item" href="{{ asset('assets/courses-content/lesson-images/${response.data.lesson.thumbnail}') }}" target="_blank" >${response.data.lesson.thumbnail}</a>`);
+                    //         }
+                    //         else
+                    //         {
+                    //             $('.dropdown-menu').empty();
+                    //             $('.dropdown-menu').removeClass('show')
+                    //         }
 
-                            // console.log(response.data.lesson.quizes);
-                            if(response.data.lesson.quizes != null && response.data.lesson.quizes.length>0 && response.data.lesson.quizes!=[])
-                            {
+                    //         // console.log(response.data.lesson.quizes);
+                    //         if(response.data.lesson.quizes != null && response.data.lesson.quizes.length>0 && response.data.lesson.quizes!=[])
+                    //         {
 
-                                $('.total_qstns').val(response.data.lesson.quizes.length);
+                    //             $('.total_qstns').val(response.data.lesson.quizes.length);
 
-                                $('.options').empty();
-                                $('.question_no').val(0);
-                                $('.test-knowledge-btn').removeClass('d-none');
-                                $('#currQuesNum').text(1);
-                                lesson_quizes.forEach((qstn, index) => {
+                    //             $('.options').empty();
+                    //             $('.question_no').val(0);
+                    //             $('.test-knowledge-btn').removeClass('d-none');
+                    //             $('#currQuesNum').text(1);
+                    //             lesson_quizes.forEach((qstn, index) => {
 
-                                    if(index == 0)
-                                    {
-                                        $('.correct_answer_description').text(qstn.options.correct_answer_description);
-                                        $('.correct_answer').val(qstn.options.correct_answer);
-                                        showQuiz(qstn.question, qstn.options.option1, qstn.options.option2, qstn.options.option3, qstn.options.option4, qstn.options.correct_answer);
-                                    }
-                                });
-                                let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
-                                $('#totalQuesNum').text(quiz_qstns_length);
-                            }
+                    //                 if(index == 0)
+                    //                 {
+                    //                     $('.correct_answer_description').text(qstn.options.correct_answer_description);
+                    //                     $('.correct_answer').val(qstn.options.correct_answer);
+                    //                     showQuiz(qstn.question, qstn.options.option1, qstn.options.option2, qstn.options.option3, qstn.options.option4, qstn.options.correct_answer);
+                    //                 }
+                    //             });
+                    //             let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
+                    //             $('#totalQuesNum').text(quiz_qstns_length);
+                    //         }
 
-                            else
-                            {
-                                $('.options').empty();
-                                $('.test-knowledge-btn').addClass('d-none');
+                    //         else
+                    //         {
+                    //             $('.options').empty();
+                    //             $('.test-knowledge-btn').addClass('d-none');
 
-                                $('#currQuesNum').text(0);
+                    //             $('#currQuesNum').text(0);
 
-                                $('.correct_answer').val('');
-                                $('.ques').text('')
-                                // showQuiz();
+                    //             $('.correct_answer').val('');
+                    //             $('.ques').text('')
+                    //             // showQuiz();
 
-                                // console.log("else");
-                                let quiz_qstns_length = 0;
-                                $('#totalQuesNum').text(quiz_qstns_length);
-                            }
-                        }
-                    });
+                    //             // console.log("else");
+                    //             let quiz_qstns_length = 0;
+                    //             $('#totalQuesNum').text(quiz_qstns_length);
+                    //         }
+                    //     }
+                    // });
                 }
             }
             @endforeach
         @endforeach
     @endforeach
-
-    function showQuiz (qstn, option1, option2, option3, option4, correct_opt)
-    {
-        $('.correct_answer').val(correct_opt);
-        $('#ques').text(qstn);
-        $('#opts').append(`<div class="option"><input type="radio" name="answer" value="${option1}"><label style="text-decoration: none">${option1}</label></div>
-        <div class="option"><input type="radio" name="answer" value="${option2}"><label style="text-decoration: none">${option2}</label></div>
-        <div class="option"><input type="radio" name="answer" value="${option3}"><label style="text-decoration: none">${option3}</label></div>
-        <div class="option"><input type="radio" name="answer" value="${option4}"><label style="text-decoration: none">${option4}</label></div>`);
-    }
 
     var video = document.getElementById("myVideo");
     var progressBar = document.getElementById("progress-bar");
@@ -273,297 +265,297 @@
         progressBar.setAttribute("aria-valuenow", 100);
     });
 
-    function checkAns() {
-        const selectedAns = document.querySelector('input[name="answer"]:checked');
-        let corr_ans_desc = $('.correct_answer_description').text(); // correct answer description
-        // console.log('corr_ans_desc', corr_ans_desc);
-        let correct_value = $('.correct_answer').val();
-        if (selectedAns) {
-            // console.log(selectedAns.value);
-            const selectedAnsValue = selectedAns.value;
-            console.log(correct_value);
-            if (selectedAnsValue == correct_value) {
-                let score = parseInt($('.score').val());
-                // console.log("score", score);
-                score+=1;
-                $('.score').val(score);
+    // function checkAns() {
+    //     const selectedAns = document.querySelector('input[name="answer"]:checked');
+    //     let corr_ans_desc = $('.correct_answer_description').val(); // correct answer description
+    //     // console.log('corr_ans_desc', corr_ans_desc);
+    //     let correct_value = $('.correct_answer').val();
+    //     if (selectedAns) {
+    //         // console.log(selectedAns.value);
+    //         const selectedAnsValue = selectedAns.value;
+    //         console.log(correct_value);
+    //         if (selectedAnsValue == correct_value) {
+    //             let score = parseInt($('.score').val());
+    //             // console.log("score", score);
+    //             score+=1;
+    //             $('.score').val(score);
 
-                $('.incorrect-answer-div').removeClass('d-block').addClass('d-none');
+    //             $('.incorrect-answer-div').removeClass('d-block').addClass('d-none');
 
-                // console.log("Correct");
-                let question_no = parseInt($('.question_no').val());
-                question_no+=1;
-                $('.question_no').val(question_no);
-                // console.log("check ans qstn no", question_no);
-            }
-            else{
-                $('#corr_ans').text(correct_value);
-                $('#corr_ans_reason').text(corr_ans_desc);
-                $('.incorrect-answer-div').removeClass('d-none').addClass('d-block');
-                // console.log("Incorrect");
-                return;
-            }
+    //             // console.log("Correct");
+    //             let question_no = parseInt($('.question_no').val());
+    //             question_no+=1;
+    //             $('.question_no').val(question_no);
+    //             // console.log("check ans qstn no", question_no);
+    //         }
+    //         else{
+    //             $('#corr_ans').text(correct_value);
+    //             $('#corr_ans_reason').val(corr_ans_desc);
+    //             $('.incorrect-answer-div').removeClass('d-none').addClass('d-block');
+    //             // console.log("Incorrect");
+    //             return;
+    //         }
 
-            nextQuestion();
-        } else {
-            $('#corr_ans').text(correct_value);
-            $('#corr_ans_reason').text(corr_ans_desc);
-            $('.incorrect-answer-div').removeClass('d-none').addClass('d-block');
-            // console.log("Please select an answer");
-            return;
-        }
-    }
+    //         nextQuestion();
+    //     } else {
+    //         $('#corr_ans').text(correct_value);
+    //         $('#corr_ans_reason').text(corr_ans_desc);
+    //         $('.incorrect-answer-div').removeClass('d-none').addClass('d-block');
+    //         // console.log("Please select an answer");
+    //         return;
+    //     }
+    // }
 
-    function nextQuestion() {
+//     function nextQuestion() {
 
-    let corr_ans_desc = $('.correct_answer_description').text(); // correct answer description
+//     let corr_ans_desc = $('.correct_answer_description').val(); // correct answer description
 
-    let id = parseInt($('.lesson_id').val());
-    let question_no = parseInt($('.question_no').val());
-    console.log("lesson id", id);
-    $.ajax({
-        type: "GET",
-        url: '{{url("get-lesson/")}}/'+id,
-        success: function (response) {
-            $('#currQuesNum').text(question_no+1);
-            // console.log(response.data.lesson);
-            $('.lesson_id').val(response.data.lesson.id)
-            let lesson_quizes = response.data.lesson.quizes;
-            let title = document.getElementById('title');
-            let description = document.getElementById('description');
+//     let id = parseInt($('.lesson_id').val());
+//     let question_no = parseInt($('.question_no').val());
+//     console.log("lesson id", id);
+//     $.ajax({
+//         type: "GET",
+//         url: '{{url("get-lesson/")}}/'+id,
+//         success: function (response) {
+//             $('#currQuesNum').text(question_no+1);
+//             // console.log(response.data.lesson);
+//             $('.lesson_id').val(response.data.lesson.id)
+//             let lesson_quizes = response.data.lesson.quizes;
+//             let title = document.getElementById('title');
+//             let description = document.getElementById('description');
 
-            let quiz_count = lesson_quizes.length;
+//             let quiz_count = lesson_quizes.length;
 
-            title.innerHTML = response.data.lesson.title;
-            description.innerHTML = response.data.lesson.description;
+//             title.innerHTML = response.data.lesson.title;
+//             description.innerHTML = response.data.lesson.description;
 
-            if(question_no+1 == quiz_count)
-            {
-                $('#btn').text("Finish");
-                $('#btn').removeAttr('onclick');
-                $('#btn').addClass('finish');
-            }
-            else
-            {
-                $('#btn').text("Next Question");
-                $('#btn').removeClass('finish');
-            }
+//             if(question_no+1 == quiz_count)
+//             {
+//                 $('#btn').text("Finish");
+//                 $('#btn').removeAttr('onclick');
+//                 $('#btn').addClass('finish');
+//             }
+//             else
+//             {
+//                 $('#btn').text("Next Question");
+//                 $('#btn').removeClass('finish');
+//             }
 
-            if(response.data.lesson.quizes != null && response.data.lesson.quizes.length>0 && response.data.lesson.quizes != [])
-            {
-                $('.options').empty();
+//             if(response.data.lesson.quizes != null && response.data.lesson.quizes.length>0 && response.data.lesson.quizes != [])
+//             {
+//                 $('.options').empty();
 
-                lesson_quizes.forEach((qstn, index) => {
+//                 lesson_quizes.forEach((qstn, index) => {
 
-                    // console.log("qstn = ",qstn, "index = ", index);
-                    if(index == question_no)
-                    {
-                        $('.correct_answer_description').text(qstn.options.correct_answer_description);
-                        $('.correct_answer').val(qstn.options.correct_answer);
-                        showQuiz(qstn.question, qstn.options.option1, qstn.options.option2, qstn.options.option3, qstn.options.option4, qstn.options.correct_answer);
-                    }
+//                     // console.log("qstn = ",qstn, "index = ", index);
+//                     if(index == question_no)
+//                     {
+//                         $('.correct_answer_description').val(qstn.options.correct_answer_description);
+//                         $('.correct_answer').val(qstn.options.correct_answer);
+//                         showQuiz(qstn.question, qstn.options.option1, qstn.options.option2, qstn.options.option3, qstn.options.option4, qstn.options.correct_answer);
+//                     }
 
-                });
-                let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
-                // $('#totalQuesNum').text(quiz_qstns_length);
-            }
-            else
-            {
-                // console.log("else");
-                let quiz_qstns_length = 0;
-                $('#totalQuesNum').text(quiz_qstns_length);
-            }
-        }
-    });
-}
+//                 });
+//                 let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
+//                 // $('#totalQuesNum').text(quiz_qstns_length);
+//             }
+//             else
+//             {
+//                 // console.log("else");
+//                 let quiz_qstns_length = 0;
+//                 $('#totalQuesNum').text(quiz_qstns_length);
+//             }
+//         }
+//     });
+// }
 
-function finishQuestions(){
-    let corr_ans_desc = $('.correct_answer_description').text(); // correct answer description
+// function finishQuestions(){
+//     let corr_ans_desc = $('.correct_answer_description').val(); // correct answer description
 
-    const selectedAns = document.querySelector('input[name="answer"]:checked');
-    let total_qstns = parseInt($('.total_qstns').val());
-    let lesson_id = parseInt($('.lesson_id').val());
-    let correct_value = $('.correct_answer').val();
-        if (selectedAns) {
-            const selectedAnsValue = selectedAns.value;
-            if (selectedAnsValue == correct_value) {
-                let score = parseInt($('.score').val());
-                score+=1;
-                $('.score').val(score);
-                $('.incorrect-answer-div').removeClass('d-block').addClass('d-none');
-                let question_no = parseInt($('.question_no').val());
-                question_no+=1;
-                $('.question_no').val(question_no);
-                $.ajax({
-                    type: "GET",
-                    url: "{{ route('score.store') }}",
-                    data: {
-                        lesson_id: lesson_id,
-                        total_score: total_qstns,
-                        score: score
-                    },
-                    success: function (response) {
-                        console.log(response);
-                    }
-                });
-            }
-            else{
-                $('#corr_ans').text(correct_value);
-                $('#corr_ans_reason').text(corr_ans_desc);
-                $('.incorrect-answer-div').removeClass('d-none').addClass('d-block');
-                return;
-            }
-        } else {
-            $('#corr_ans').text(correct_value);
-                $('#corr_ans_reason').text(corr_ans_desc);
-            $('.incorrect-answer-div').removeClass('d-none').addClass('d-block');
-            return;
-        }
+//     const selectedAns = document.querySelector('input[name="answer"]:checked');
+//     let total_qstns = parseInt($('.total_qstns').val());
+//     let lesson_id = parseInt($('.lesson_id').val());
+//     let correct_value = $('.correct_answer').val();
+//         if (selectedAns) {
+//             const selectedAnsValue = selectedAns.value;
+//             if (selectedAnsValue == correct_value) {
+//                 let score = parseInt($('.score').val());
+//                 score+=1;
+//                 $('.score').val(score);
+//                 $('.incorrect-answer-div').removeClass('d-block').addClass('d-none');
+//                 let question_no = parseInt($('.question_no').val());
+//                 question_no+=1;
+//                 $('.question_no').val(question_no);
+//                 $.ajax({
+//                     type: "GET",
+//                     url: "{{ route('score.store') }}",
+//                     data: {
+//                         lesson_id: lesson_id,
+//                         total_score: total_qstns,
+//                         score: score
+//                     },
+//                     success: function (response) {
+//                         console.log(response);
+//                     }
+//                 });
+//             }
+//             else{
+//                 $('#corr_ans').text(correct_value);
+//                 $('#corr_ans_reason').text(corr_ans_desc);
+//                 $('.incorrect-answer-div').removeClass('d-none').addClass('d-block');
+//                 return;
+//             }
+//         } else {
+//             $('#corr_ans').text(correct_value);
+//             $('#corr_ans_reason').text(corr_ans_desc);
+//             $('.incorrect-answer-div').removeClass('d-none').addClass('d-block');
+//             return;
+//         }
 
-        let new_score = $('.score').val();
-    $('.modal-body').empty();
-    $('.modal-body').append(`<div id="score" style="display: block;"><h2>Congratulations!</h2> <p> You answered </p> <h2> <span id="new_score">${new_score}</span> / <span id="total_score">${total_qstns}</span> </h2> <h3> question correct </h3></div>
-        <div class=" d-flex flex-column">
-        </div>
-        <input type="hidden" name="lesson_id" class="lesson_id" value="${lesson_id}">
-        <input type="hidden" name="question_no" class="question_no" value="0">
-        <input type="hidden" name="total_qstns" class="total_qstns" value="${total_qstns}">
-        <div class="modal-footer d-flex flex-column justify-content-center">
+//         let new_score = $('.score').val();
+//     $('.modal-body').empty();
+//     $('.modal-body').append(`<div id="score" style="display: block;"><h2>Congratulations!</h2> <p> You answered </p> <h2> <span id="new_score">${new_score}</span> / <span id="total_score">${total_qstns}</span> </h2> <h3> question correct </h3></div>
+//         <div class=" d-flex flex-column">
+//         </div>
+//         <input type="hidden" name="lesson_id" class="lesson_id" value="${lesson_id}">
+//         <input type="hidden" name="question_no" class="question_no" value="0">
+//         <input type="hidden" name="total_qstns" class="total_qstns" value="${total_qstns}">
+//         <div class="modal-footer d-flex flex-column justify-content-center">
 
-        </div>
-        <div class="row d-flex justify-content-center pb-5 mt-4">
-            <div class="col-3">
-                <button id="restartBtn" onclick="restartQuiz()" style="display: inline-block;">Restart Quiz</button>
+//         </div>
+//         <div class="row d-flex justify-content-center pb-5 mt-4">
+//             <div class="col-3">
+//                 <button id="restartBtn" onclick="restartQuiz()" style="display: inline-block;">Restart Quiz</button>
 
-            </div>
-            <div class="col-3">
-                <button id="restartBtn2" style="display: inline-block;"> <a href="#" onclick="redirect()"> Back to Home</a> </button>
-                <div id="score" style="display: none;"></div>
-            </div>
-            <div class="col-3">
-                <button id="restartBtn2" style="display: inline-block;"> <a href="#" onclick="redirect()"> Next Lesson</a> </button>
-            </div>
-        </div>`
-    )
+//             </div>
+//             <div class="col-3">
+//                 <button id="restartBtn2" style="display: inline-block;"> <a href="#" onclick="redirect()"> Back to Home</a> </button>
+//                 <div id="score" style="display: none;"></div>
+//             </div>
+//             <div class="col-3">
+//                 <button id="restartBtn2" style="display: inline-block;"> <a href="#" onclick="redirect()"> Next Lesson</a> </button>
+//             </div>
+//         </div>`
+//     )
 
-}
+// }
 
-$(document).on('click', '.finish', function(){
-    finishQuestions();
-});
+// $(document).on('click', '.finish', function(){
+//     finishQuestions();
+// });
 
-function restartQuiz()
-{
-    let id = $('.lesson_id').val();
-    // console.log("lesson_id", id);
-    $('#new_score').text(0);
-    $('#total_score').text(0);
-    let new_score = $('.score').val();
-    $.ajax({
-            type: "GET",
-            url: "{{ url('get-lesson/') }}/"+id,
-            success: function (response) {
-                $('.lesson_id').val(response.data.lesson.id)
-                let lesson_quizes = response.data.lesson.quizes;
-                let title = document.getElementById('title');
-                let description = document.getElementById('description');
+// function restartQuiz()
+// {
+//     let id = $('.lesson_id').val();
+//     // console.log("lesson_id", id);
+//     $('#new_score').text(0);
+//     $('#total_score').text(0);
+//     let new_score = $('.score').val();
+//     $.ajax({
+//             type: "GET",
+//             url: "{{ url('get-lesson/') }}/"+id,
+//             success: function (response) {
+//                 $('.lesson_id').val(response.data.lesson.id)
+//                 let lesson_quizes = response.data.lesson.quizes;
+//                 let title = document.getElementById('title');
+//                 let description = document.getElementById('description');
 
-                title.innerHTML = response.data.lesson.title;
-                description.innerHTML = response.data.lesson.description;
+//                 title.innerHTML = response.data.lesson.title;
+//                 description.innerHTML = response.data.lesson.description;
 
-                if(response.data.lesson.quizes != null && response.data.lesson.quizes.length>0 && response.data.lesson.quizes!=[])
-                {
-                    $('.total_qstns').val(response.data.lesson.quizes.length);
-                    $('.options').empty();
-                    $('.question_no').val(0);
-                    $('.test-knowledge-btn').removeClass('d-none');
-                    $('#currQuesNum').text(1);
-                    lesson_quizes.forEach((qstn, index) => {
-                        if(index == 0)
-                        {
-                            $('.correct_answer_description').text(qstn.options.correct_answer_description);
-                            $('.correct_answer').val(qstn.options.correct_answer);
-                            showQuiz(qstn.question, qstn.options.option1, qstn.options.option2, qstn.options.option3, qstn.options.option4, qstn.options.correct_answer);
-                        }
-                    });
-                    let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
-                    $('#totalQuesNum').text(quiz_qstns_length);
-                }
+//                 if(response.data.lesson.quizes != null && response.data.lesson.quizes.length>0 && response.data.lesson.quizes!=[])
+//                 {
+//                     $('.total_qstns').val(response.data.lesson.quizes.length);
+//                     $('.options').empty();
+//                     $('.question_no').val(0);
+//                     $('.test-knowledge-btn').removeClass('d-none');
+//                     $('#currQuesNum').text(1);
+//                     lesson_quizes.forEach((qstn, index) => {
+//                         if(index == 0)
+//                         {
+//                             $('.correct_answer_description').val(qstn.options.correct_answer_description);
+//                             $('.correct_answer').val(qstn.options.correct_answer);
+//                             showQuiz(qstn.question, qstn.options.option1, qstn.options.option2, qstn.options.option3, qstn.options.option4, qstn.options.correct_answer);
+//                         }
+//                     });
+//                     let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
+//                     $('#totalQuesNum').text(quiz_qstns_length);
+//                 }
 
-                else
-                {
-                    $('.options').empty();
-                    $('.test-knowledge-btn').addClass('d-none');
+//                 else
+//                 {
+//                     $('.options').empty();
+//                     $('.test-knowledge-btn').addClass('d-none');
 
-                    $('#currQuesNum').text(0);
+//                     $('#currQuesNum').text(0);
 
-                    $('.correct_answer').val('');
-                    $('.ques').text('')
-                    let quiz_qstns_length = 0;
-                    $('#totalQuesNum').text(quiz_qstns_length);
-                }
-            }
-        });
-    let total_qstns = parseInt($('.total_qstns').val());
-    $('.modal-body').empty();
-    if(total_qstns == 1)
-    {
-        console.log("if", total_qstns);
-        $('.modal-body').append(`<div class="d-flex flex-column">
-        <h5> Answer the questions below</h5>
-        <p class="m-auto"><span id="currQuesNum"></span> / <span
-                id="totalQuesNum"></span></p>
-        <div class="question m-auto" id="ques">
+//                     $('.correct_answer').val('');
+//                     $('.ques').text('')
+//                     let quiz_qstns_length = 0;
+//                     $('#totalQuesNum').text(quiz_qstns_length);
+//                 }
+//             }
+//         });
+//     let total_qstns = parseInt($('.total_qstns').val());
+//     $('.modal-body').empty();
+//     if(total_qstns == 1)
+//     {
+//         console.log("if", total_qstns);
+//         $('.modal-body').append(`<div class="d-flex flex-column">
+//         <h5> Answer the questions below</h5>
+//         <p class="m-auto"><span id="currQuesNum"></span> / <span
+//                 id="totalQuesNum"></span></p>
+//         <div class="question m-auto" id="ques">
 
-        </div>
-    </div>
+//         </div>
+//     </div>
 
-    <div class="options mt-5" id="opts">
-    </div>
-    <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.  Correct Option is <span id='corr_ans'> .</span> Reason <span id="corr_ans_reason"></span> </div>
-
-
-    <div class="modal-footer d-flex flex-column justify-content-center">
-        <input type="hidden" name="correct_answer" class="correct_answer">
-        <input type="hidden" name="lesson_id" class="lesson_id">
-        <input type="hidden" name="question_no" class="question_no">
-        <input type="hidden" name="correct-answer-description" class="correct_answer_description">
-        <input type="hidden" name="score" class="score" value="0">
-        <input type="hidden" name="total_qstns" class="total_qstns">
-            <button id="btn" class="finish">Finish</button>
-    </div>`);
-    }
-    else
-    {
-        $('.modal-body').append(`<div class="d-flex flex-column">
-        <h5> Answer the questions below</h5>
-        <p class="m-auto"><span id="currQuesNum"></span> / <span
-                id="totalQuesNum"></span></p>
-        <div class="question m-auto" id="ques">
-
-        </div>
-    </div>
-
-    <div class="options mt-5" id="opts">
-    </div>
-    <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.  Correct Option is <span id='corr_ans'> .</span> Reason <span id="corr_ans_reason"></span> </div>
+//     <div class="options mt-5" id="opts">
+//     </div>
+//     <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.  Correct Option is <span id='corr_ans'> .</span> Reason <span id="corr_ans_reason"></span> </div>
 
 
-    <div class="modal-footer d-flex flex-column justify-content-center">
-        <input type="hidden" name="correct_answer" class="correct_answer">
-        <input type="hidden" name="lesson_id" class="lesson_id">
-        <input type="hidden" name="question_no" class="question_no">
-        <input type="hidden" name="correct-answer-description" class="correct_answer_description">
-        <input type="hidden" name="score" class="score" value="0">
-        <input type="hidden" name="total_qstns" class="total_qstns">
-            <button onclick="checkAns()" id="btn" class="next-qstn">Next Question</button>
-    </div>`);
+//     <div class="modal-footer d-flex flex-column justify-content-center">
+//         <input type="hidden" name="correct_answer" class="correct_answer">
+//         <input type="hidden" name="lesson_id" class="lesson_id">
+//         <input type="hidden" name="question_no" class="question_no">
+//         <input type="hidden" name="correct-answer-description" class="correct_answer_description">
+//         <input type="hidden" name="score" class="score" value="0">
+//         <input type="hidden" name="total_qstns" class="total_qstns">
+//             <button id="btn" class="finish">Finish</button>
+//     </div>`);
+//     }
+//     else
+//     {
+//         $('.modal-body').append(`<div class="d-flex flex-column">
+//         <h5> Answer the questions below</h5>
+//         <p class="m-auto"><span id="currQuesNum"></span> / <span
+//                 id="totalQuesNum"></span></p>
+//         <div class="question m-auto" id="ques">
 
-    }
-}
+//         </div>
+//     </div>
 
-function redirect () {
-    window.location.reload();
-}
+//     <div class="options mt-5" id="opts">
+//     </div>
+//     <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.  Correct Option is <span id='corr_ans'> .</span> Reason <span id="corr_ans_reason"></span> </div>
+
+
+//     <div class="modal-footer d-flex flex-column justify-content-center">
+//         <input type="hidden" name="correct_answer" class="correct_answer">
+//         <input type="hidden" name="lesson_id" class="lesson_id">
+//         <input type="hidden" name="question_no" class="question_no">
+//         <input type="hidden" name="correct-answer-description" class="correct_answer_description">
+//         <input type="hidden" name="score" class="score" value="0">
+//         <input type="hidden" name="total_qstns" class="total_qstns">
+//             <button onclick="checkAns()" id="btn" class="next-qstn">Next Question</button>
+//     </div>`);
+
+//     }
+// }
+
+// function redirect () {
+//     window.location.reload();
+// }
 
 </script>

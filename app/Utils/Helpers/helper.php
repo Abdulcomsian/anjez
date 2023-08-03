@@ -94,3 +94,12 @@ if (!function_exists('decryptParams')) {
         return Crypt::decryptString($params);
     }
 }
+
+if (!function_exists('filter_strip_tags'))
+{
+
+    function filter_strip_tags($field): string
+    {
+        return trim(strip_tags($field));
+    }
+}

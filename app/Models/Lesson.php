@@ -28,7 +28,6 @@ class Lesson extends Model
         return $this->hasMany(Quiz::class);
     }
 
-
     public function quiz_scores()
     {
         return $this->hasOne(StudentScore::class)->latest();

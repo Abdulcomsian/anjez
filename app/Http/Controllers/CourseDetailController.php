@@ -12,7 +12,7 @@ class CourseDetailController extends Controller
         $data =
         [
             'course'    =>  Course::with('sections.lessons.quiz_scores')->find($id),
-            'courses'   => Course::with('sections.lessons.quiz_scores')->get()
+            'courses'   =>  Course::with('sections.lessons.quiz_scores')->get(),
         ];
         return view('frontend.studentdashboard.layouts.course.course-detail', compact('data'));
     }
