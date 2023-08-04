@@ -384,7 +384,7 @@ function finishQuestions(){
                 <div id="score" style="display: none;"></div>
             </div>
             <div class="col-3">
-                <button id="restartBtn2" style="display: inline-block;"> <a href="{{ route('lesson.next',['id'=>$data['lesson']->id ] ) }}" > Next Lesson</a> </button>
+                <button id="restartBtn2" style="display: inline-block;"> <a href="{{ route('lesson.next',['id'=>encryptParams($data['lesson']->id) ] ) }}" > Next Lesson</a> </button>
             </div>
         </div>`
     )

@@ -21,6 +21,7 @@
           <div class="row">
 
             @forelse ($data['courses'] as $course)
+            {{-- @dump($course); --}}
                 <div class="col-lg-3 col-md-6 col-sm-8">
                     <div class="card sample-card">
                         <a href="{{ route('course.details', ['id'=>encryptParams($course->id)]) }}">
@@ -36,14 +37,50 @@
                         <div class="card-body">
                         <div class="card-text">
                             <div class="text-line-1">
-                            <span><a href="{{ url('/student-content') }}"> {{ $course->title}} </a> </span>
+                                <span><a href="{{ url('/student-content') }}"> {{ $course->title}} </a> </span>
                             </div>
                             <div class="text-line-2">
-                            <span>{!! $course->description !!}</span>
+                                <span>{!! $course->description !!}</span>
                             </div>
+                            <?php
+                                if(isset($course->sections) && count($course->sections)>0 && !is_null($course->sections) && !empty($course->sections))
+                                {
+                                    $total = 0;
+                                    $lesson_count = 0;
+                                    foreach($course->sections as $section)
+                                    {
+                                        if(isset($section->lessons) && count($section->lessons)>0 && !is_null($section->lessons) && !empty($section->lessons))
+                                        {
+                                            foreach($section->lessons as $lesson)
+                                            {
+                                                if(isset($lesson->quiz_scores))
+                                                {
+                                                    $taken_score = (int)($lesson->quiz_scores ?$lesson->quiz_scores->score_taken : 0);
+                                                    $total_score = (int)($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0);
+                                                    $percentage = ($taken_score/$total_score)*100;
+                                                    $total+=$percentage;
+                                                }
+                                            }
+                                            $lesson_count += count($section->lessons);
+                                            try
+                                            {
+                                                $progress = $total/$lesson_count;
+                                            }
+                                            catch (\Throwable $th)
+                                            {
+                                                //
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    $progress = 0;
+                                }
+                            ?>
                             <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0"
-                                aria-valuemax="100" style="width: 75%"></div>
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{ $progress }}" aria-valuemin="0"
+                                aria-valuemax="100" style="width: {{ $progress }}%"></div>
                             </div>
                         </div>
                         </div>

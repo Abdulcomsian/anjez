@@ -120,7 +120,7 @@ Route::controller(CourseDetailController::class)->middleware('auth')->group( fun
     Route::get('course-details/{id}', 'courseDetails')->name('course.details');
 } );
 
-Route::controller(LessonController::class)->middleware('auth')->group(function(){
+Route::controller(LessonController::class)->group(function(){
     Route::get('lesson-quizes/{id}', 'lessonQuizes')->name('lesson.quizes');
     Route::get('next-lesson/{id}', 'nextLesson')->name('lesson.next');
 });
