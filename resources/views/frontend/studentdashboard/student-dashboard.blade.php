@@ -45,26 +45,35 @@
                             <?php
                                 if(isset($course->sections) && count($course->sections)>0 && !is_null($course->sections) && !empty($course->sections))
                                 {
-                                    $total = 0;
+                                    $mark_as_read_lessons = 0;
                                     $lesson_count = 0;
                                     foreach($course->sections as $section)
                                     {
                                         if(isset($section->lessons) && count($section->lessons)>0 && !is_null($section->lessons) && !empty($section->lessons))
                                         {
+                                            // $mark_as_lessons +=$section->lesso
                                             foreach($section->lessons as $lesson)
                                             {
-                                                if(isset($lesson->quiz_scores))
+                                                if($lesson->is_complete)
                                                 {
-                                                    $taken_score = (int)($lesson->quiz_scores ?$lesson->quiz_scores->score_taken : 0);
-                                                    $total_score = (int)($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0);
-                                                    $percentage = ($taken_score/$total_score)*100;
-                                                    $total+=$percentage;
+                                                    // dd($lesson);
+                                                    $mark_as_read_lessons+=1;
                                                 }
+                                                // dump($mark_as_read_lessons);
+                                            //     if(isset($lesson->quiz_scores))
+                                            //     {
+                                            //         $taken_score = (int)($lesson->quiz_scores ? $lesson->quiz_scores->score_taken : 0);
+                                            //         $total_score = (int)($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0);
+                                            //         $percentage = ($taken_score/$total_score)*100;
+                                            //         $total+=$percentage;
+                                            //         $progress = $total;
+                                            //     }
                                             }
                                             $lesson_count += count($section->lessons);
+                                            // dump($mark_as_read_lessons, $lesson_count);
                                             try
                                             {
-                                                $progress = $total/$lesson_count;
+                                                $progress = ($mark_as_read_lessons/$lesson_count)*100;
                                             }
                                             catch (\Throwable $th)
                                             {

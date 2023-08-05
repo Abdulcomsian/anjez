@@ -153,7 +153,7 @@ class LessonController extends Controller
         $id = (int)decryptParams($id);
         $data =
         [
-            'lesson'    => Lesson::with('quizes.options')->find($id),
+            'lesson'    => Lesson::with('quizes.options')->findOrFail($id),
             'courses'   => Course::with('sections.lessons.quiz_scores')->get()
         ];
         return view('frontend.studentdashboard.layouts.lesson.lesson-detail', compact('data'));
@@ -179,7 +179,7 @@ class LessonController extends Controller
         }
         else
         {
-            return redirect()->back();
+            return redirect()->route('studentdashboard.student-dashboard');
         }
     }
 }

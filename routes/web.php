@@ -167,6 +167,7 @@ Route::get("term-and-condition" , function(){
 
 Route::controller(StudentScoreController::class)->middleware('auth')->group(function(){
     Route::get('save-score', 'store')->name('score.store');
+    Route::get('lesson/mark-as-read/{id}', 'lessonMarkAsRead')->name('lesson.mark-as-read');
 });
 
 

@@ -25,9 +25,7 @@ class StudentScoreController extends Controller
 
             if($student_score->score_taken == $student_score->total_score)
             {
-                $lesson = Lesson::find($lesson_id);
-                $lesson->is_complete = 1;
-                $lesson->save();
+                self::markAsRead($lesson_id);
             }
             return apiSuccessResponse("", "Score Saved");
 
@@ -36,5 +34,18 @@ class StudentScoreController extends Controller
         {
             return apiErrorResponse($ex->getMessage());
         }
+    }
+
+    public static function markAsRead($lesson_id)
+    {
+        $lesson = Lesson::find($lesson_id);
+        $lesson->is_complete = 1;
+        $lesson->save();
+    }
+
+    public function lessonMarkAsRead($lesson_id)
+    {
+        self::markAsRead($lesson_id);
+        return redirect()->back();
     }
 }

@@ -49,11 +49,19 @@
                                     </div>
                                 </div>
                             @endif
-                            @if(isset($data['lesson']->thumbnail) && !empty($data['lesson']->thumbnail) && !is_null($data['lesson']->thumbnail))
-                                <div class="col-4 d-flex justify-content-end test-knowledge-btn">
+
+                            @if(count($data['lesson']->quizes)>0)
+                                <div class="@if(count($data['lesson']->quizes)>0) offset-8 @endif col-4 d-flex justify-content-end test-knowledge-btn">
                                     <button class="video-button-2" style="padding: 10px; border-radius: 8px;" id="test_quiz_btn">Test Your
                                         Knowledge
                                     </button>
+                                </div>
+                            @else
+                                <div class="offset-8 col-4 d-flex justify-content-end">
+                                    <a href="{{ route('lesson.mark-as-read',['id'=>$data['lesson']->id]) }}">
+                                        <button class="mark-as-read" style="padding: 10px; border-radius: 8px;">Mark As Read
+                                        </button>
+                                    </a>
                                 </div>
                             @endif
                         </div>
@@ -82,34 +90,34 @@
                     <p class="m-auto"><span id="currQuesNum">1</span> / <span
                             id="totalQuesNum">{{ (int)count($data['lesson']->quizes) }}</span></p>
                     <div class="question m-auto" id="ques">
-                        {{ $data['lesson']->quizes[0]->question }}
+                        {{ $data['lesson']->quizes[0]->question ?? '' }}
                     </div>
                 </div>
 
                 <div class="options mt-5" id="opts">
                     <div class="option">
-                        <input type="radio" name="answer" value="{{ $data['lesson']->quizes[0]->options->option1 }}"><label style="text-decoration: none">{{ $data['lesson']->quizes[0]->options->option1 }}</label>
+                        <input type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option1 : '' }}"><label style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option1 : '' }}</label>
                     </div>
                     <div class="option">
-                        <input type="radio" name="answer" value="{{ $data['lesson']->quizes[0]->options->option2 }}"><label style="text-decoration: none">{{ $data['lesson']->quizes[0]->options->option2 }}</label>
+                        <input type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option2 : '' }}"><label style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option2 : '' }}</label>
                     </div>
                     <div class="option">
-                        <input type="radio" name="answer" value="{{ $data['lesson']->quizes[0]->options->option3 }}"><label style="text-decoration: none">{{ $data['lesson']->quizes[0]->options->option3 }}</label>
+                        <input type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option3 : '' }}"><label style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option3 : '' }}</label>
                     </div>
                     <div class="option">
-                        <input type="radio" name="answer" value="{{ $data['lesson']->quizes[0]->options->option4 }}"><label style="text-decoration: none">{{ $data['lesson']->quizes[0]->options->option4 }}</label>
+                        <input type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option4 : '' }}"><label style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option4 : '' }}</label>
                     </div>
                 </div>
                 <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.  Correct Option is <span id='corr_ans'> .</span> Reason <span id="corr_ans_reason"></span> </div>
                 {{-- <div style="color: green" class="d-none correct-answer-div"></div> --}}
 
                 <div class="modal-footer d-flex flex-column justify-content-center">
-                    <input type="hidden" name="correct_answer" class="correct_answer" value="{{ $data['lesson']->quizes[0]->options->correct_answer }}">
+                    <input type="hidden" name="correct_answer" class="correct_answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->correct_answer : '' }}">
                     <input type="hidden" name="lesson_id" class="lesson_id" value="{{ $data['lesson']->id }}">
                     <input type="hidden" name="question_no" class="question_no">
                     <input type="hidden" name="score" class="score" value="0">
                     <input type="hidden" name="total_qstns" class="total_qstns" value="{{ (int)count($data['lesson']->quizes) }}">
-                    <input type="hidden" name="correct-answer-description" class="correct_answer_description" value="{{ $data['lesson']->quizes[0]->options->correct_answer_description }}">
+                    <input type="hidden" name="correct-answer-description" class="correct_answer_description" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->correct_answer_description : '' }}">
                     <button onclick="checkAns()" id="btn">Next Question</button>
                 </div>
 
@@ -508,5 +516,15 @@ function restartQuiz()
 function redirect () {
     window.location.reload();
 }
+$(document).on('click', 'mark-as-read', function(){
+    let lesson_id = parseInt($('.lesson_id').val());
+    $.ajax({
+        type: "GET",
+        url: "{{ url('lesson/mark-as-read') }}/"+lesson_id,
+        success: function (response) {
+            window.location.reload();
+        }
+    });
+});
 </script>
 @endsection
