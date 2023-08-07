@@ -17,10 +17,21 @@
                 <div>
                   <img src="{{ url('assets/profile-images/profile1.jpg') }}" alt="" />
                 </div>
-                <div class="jane"><span> Jane Doe </span></div>
-                <div><i class="bi bi-chevron-down"></i></div>
+                <div class="jane"><span> {{ auth()->user()->first_name ?? 'Student' }} </span></div>
+                <div>
+                    <i class="bi bi-chevron-down" onclick="$('.dropdown-menu').toggleClass('d-block')"></i>
+                    <div class="dropdown">
+                        {{-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Dropdown button
+                        </button> --}}
+                        <div class="dropdown-menu" style="left: -100px;top: 40px;" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="{{ route('logout') }}"><i class="bi bi-arrow-return-left"></i>Logout</a>
+                        </div>
+                      </div>
+                </div>
               </div>
             </li>
+
             <li class="nav-item">
               <div class="language-change">
                 <div>

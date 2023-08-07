@@ -18,7 +18,7 @@
                   <div>
                     <img src="{{ url('assets/profile-images/profile1.jpg') }}" alt="" />
                   </div>
-                  <div class="jane"><span> Jane Doe </span></div>
+                  <div class="jane"><span> {{ auth()->user()->first_name ?? 'Admin' }} </span></div>
                   <div><i class="bi bi-chevron-down"></i></div>
                 </div>
               </li>

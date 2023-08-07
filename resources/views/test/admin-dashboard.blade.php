@@ -366,7 +366,7 @@
                         src="./assets/images/button icon.png"
                         alt=""
                         style="margin-right: 1%"
-                       
+
                       />
                       <span  data-translate="filter"></span>
                       <!-- Filter -->
@@ -503,7 +503,7 @@
                     <h5
                       class="modal-title ps-4 ms-2 mt-4 userd"
                       id="exampleModalLabel"
-                     
+
                     >
                     <span  data-translate="add-user"></span>
                       <!-- Add User -->
@@ -621,7 +621,7 @@
                           src="./assets/images/button icon.png"
                           alt=""
                           style="margin-right: 1%"
-                          
+
                         />
                         <span data-translate="filter"></span>
                         <!-- Filter -->
@@ -698,10 +698,10 @@
                         </div> -->
                         <div class="col d-flex">
                           <p class="steps" data-translate="Dashboard-/-Courses-/">
-                            Dashboard / Courses / 
+                            Dashboard / Courses /
                           </p>
                           <span  class="steps" data-translate="create-course" style="font-weight: bold;">
-                           
+
                           </span>
                         </div>
                       </div>
@@ -730,7 +730,7 @@
                           alt=""
                           style="margin-right: 1%"
                         />
-                  
+
                         <span data-translate="filter"></span>
                       </button>
                     </div>
@@ -857,7 +857,7 @@
                           alt=""
                           style="margin-right: 1%"
                         />
-                      
+
                         <span data-translate="filter"></span>
                       </button>
                     </div>
@@ -1011,7 +1011,7 @@
                           alt=""
                           style="margin-right: 1%"
                         />
-                    
+
                         <span data-translate="filter"></span>
                       </button>
                     </div>
@@ -1126,7 +1126,7 @@
                             />
                           </div>
                         </div>
-                        <div class="row mt-3"> 
+                        <div class="row mt-3">
                           <div class="col course form-ar">
                             <label for="status" class="form-label" data-translate="description"
                               >Description</label
@@ -1165,7 +1165,7 @@
                       </form>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="can" data-dismiss="modal" data-translate="cancel"> 
+                      <button type="button" class="can" data-dismiss="modal" data-translate="cancel">
                         Cancel
                       </button>
                       <button type="button" class="add" data-translate="add">Add</button>
