@@ -19,10 +19,18 @@
                     <img src="{{ url('assets/profile-images/profile1.jpg') }}" alt="" />
                   </div>
                   <div class="jane"><span> {{ auth()->user()->first_name ?? 'Admin' }} </span></div>
-                  <div><i class="bi bi-chevron-down"></i></div>
+                  {{-- <div><i class="bi bi-chevron-down"></i></div> --}}
+                  <div>
+                    <i class="bi bi-chevron-down" onclick="$('#logout').toggleClass('d-block')"></i>
+                    <div class="dropdown">
+                        <div class="dropdown-menu" id="logout" style="left: -160px;top: 40px;" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="{{ route('logout') }}"><i class="bi bi-arrow-return-left"></i>Logout</a>
+                        </div>
+                      </div>
+                </div>
                 </div>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <div class="language-change">
                   <div>
                     <i class="bi bi-globe"></i>
@@ -30,7 +38,38 @@
                   <div class="jane"><span> English </span></div>
                   <div><i class="bi bi-chevron-down"></i></div>
                 </div>
-              </li>
+              </li> --}}
+              <li class="nav-item">
+              <div class="language-change">
+                <div>
+                  <i class="bi bi-globe"></i>
+                </div>
+                <div class="jane"><span> English </span></div>
+                <div>
+                    <li class="bi bi-chevron-down"  onclick="$('#langauges').toggleClass('d-block')">
+                        <div class="dropdown">
+                            <div class="dropdown-menu" id="langauges" style="left: -160px;top: 40px;" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#">English</a>
+                              <a class="dropdown-item" href="#">Arabic</a>
+                            </div>
+                        </div>
+                        {{-- <ul class="dropdown-menu" style="right: 4px;top: 83px;" id="languages" aria-labelledby="dropdownMenu2">
+                          <li>
+                            <button class="dropdown-item" type="button" id="englishButton" onclick="onLangChange('English')">
+                              English
+                            </button>
+                          </li>
+                          <li>
+                            <button class="dropdown-item" type="button" id="arabicButton" onclick="onLangChange('Arabic')">
+                              Arabic
+                            </button>
+                          </li>
+                        </ul> --}}
+
+                    </li>
+                </div>
+              </div>
+            </li>
             </ul>
           </div>
         </div>

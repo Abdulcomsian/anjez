@@ -46,6 +46,6 @@ class StudentScoreController extends Controller
     public function lessonMarkAsRead($lesson_id)
     {
         self::markAsRead($lesson_id);
-        return redirect()->back();
+        return redirect()->back()->withSuccess('Lesson Read');
     }
 }

@@ -11,7 +11,7 @@
               <div class="small_div "> <img src="{{ url('assets/images/Group-1.svg') }}" alt="" srcset=""> </div>
             </div>
             <h5 class="card-title d-flex justify-content-center mt-5"> Total Students </h5>
-            <p class="card-text d-flex justify-content-center mt-2">800</p>
+            <p class="card-text d-flex justify-content-center mt-2">{{ $data['students'] ?? 0 }}</p>
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@
               <div class="small_div "> <img src="./assets/images/Group 325.svg" alt="" srcset=""> </div>
             </div>
             <h5 class="card-title  d-flex justify-content-center mt-5">Total Courses</h5>
-            <p class="card-text  d-flex justify-content-center mt-2">30</p>
+            <p class="card-text  d-flex justify-content-center mt-2">{{ $data['courses'] ?? 0 }}</p>
           </div>
         </div>
       </div>

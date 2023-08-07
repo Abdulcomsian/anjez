@@ -19,12 +19,9 @@
                 </div>
                 <div class="jane"><span> {{ auth()->user()->first_name ?? 'Student' }} </span></div>
                 <div>
-                    <i class="bi bi-chevron-down" onclick="$('.dropdown-menu').toggleClass('d-block')"></i>
+                    <i class="bi bi-chevron-down" onclick="$('#logout').toggleClass('d-block')"></i>
                     <div class="dropdown">
-                        {{-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Dropdown button
-                        </button> --}}
-                        <div class="dropdown-menu" style="left: -100px;top: 40px;" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-menu" id="logout" style="left: -160px;top: 40px;" aria-labelledby="dropdownMenuButton">
                           <a class="dropdown-item" href="{{ route('logout') }}"><i class="bi bi-arrow-return-left"></i>Logout</a>
                         </div>
                       </div>
@@ -38,8 +35,20 @@
                   <i class="bi bi-globe"></i>
                 </div>
                 <div class="jane"><span> English </span></div>
-                <div><i class="bi bi-chevron-down"></i></div>
+                <div onclick="$('#languages').toggleClass('d-block')"><i class="bi bi-chevron-down"></i></div>
               </div>
+              <ul class="dropdown-menu" style="right: 4px;top: 83px;" id="languages" aria-labelledby="dropdownMenu2">
+                <li>
+                  <button class="dropdown-item" type="button" id="englishButton" onclick="onLangChange('English')">
+                    English
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item" type="button" id="arabicButton" onclick="onLangChange('Arabic')">
+                    Arabic
+                  </button>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>

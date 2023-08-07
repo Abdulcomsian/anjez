@@ -10,14 +10,14 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav"></div>
           <ul class="navbar-nav">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <a class="nav-link" href="./student-dashboard.html"><span>student-dashboard</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./admin-dashboard.html"><span>Admin-dashboard</span></a>
-            </li>
+            </li> --}}
             <li class="nav-item">
               <div class="dropdown">
                 <div class="language-div dropdown-toggle" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -29,7 +29,7 @@
                   </div>
                   <div><i class="bi bi-chevron-down"></i></div>
                 </div>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <ul class="dropdown-menu" style="left: -5px;top: 40px;" aria-labelledby="dropdownMenu2">
                   <li>
                     <button class="dropdown-item" type="button" id="englishButton" onclick="onLangChange('English')">
                       English
@@ -44,16 +44,24 @@
               </div>
             </li>
 
-            <li class="nav-item left-line">
-              <a class="nav-link" href="{{ route('login') }}">
-                <span data-translate="log-in">Log In</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('signup-page') }}">
-                <button data-translate="sign-up">Sign Up</button>
-              </a>
-            </li>
+            @if(!Auth::check())
+                <li class="nav-item left-line">
+                <a class="nav-link" href="{{ route('login') }}">
+                    <span data-translate="log-in">Log In</span>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a href="{{ route('signup-page') }}">
+                    <button data-translate="sign-up">Sign Up</button>
+                </a>
+                </li>
+            @else
+                <li class="nav-item">
+                    <a href="{{ route('studentdashboard.student-dashboard') }}">
+                        <button data-translate="sign-up">Dashboard</button>
+                    </a>
+                </li>
+            @endif
           </ul>
         </div>
       </div>
