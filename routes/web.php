@@ -17,6 +17,7 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StudentScoreController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\PlanController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -124,8 +125,18 @@ Route::controller(LessonController::class)->group(function(){
     Route::get('lesson-quizes/{id}', 'lessonQuizes')->name('lesson.quizes');
     Route::get('next-lesson/{id}', 'nextLesson')->name('lesson.next');
 });
-
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(['auth'])->group(function () {
+    Route::get('plans', [PlanController::class, 'index']);
+    Route::get('plans/{plan}', [PlanController::class, 'show'])->name("plans.show");
+    Route::post('subscription', [PlanController::class, 'subscription'])->name("subscription.create");
+    Route::get('webhook', [PlanController::class, 'handleWebhook'])->name("webhook");
+    Route::get('check-plan', [PlanController::class, 'checkPlan'])->name("check_plan");
+});
+Route::get('/create-payment-intent', [PlanController::class, 'createPaymentIntent'])->name('create-payment-intent');
+Route::post('/process-payment', [PlanController::class, 'processPayment'])->name('process-payment');
+Route::get('/payment-form', [PlanController::class, 'showPaymentForm'])->name('payment-form');
+Route::get('/payment-success', [PlanController::class, 'paymentSuccess'])->name('success');
 //new route starts here
 
 Route::get("index" , function(){

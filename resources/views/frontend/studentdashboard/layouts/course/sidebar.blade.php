@@ -1,4 +1,6 @@
-
+@php 
+use App\Helpers\Helper;
+@endphp
 <div class="col-auto col-md-3 col-xl-2 px-0 bg-white">
     <div class="d-flex flex-column align-items-center align-items-sm-start pt-2 text-white">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100 mt-3" id="menu">
@@ -42,14 +44,37 @@
                                     <!-- dropdown three  -->
                                     @if(count($mainTopic->lessons)>0)
                                     <div id="lesson{{ $mainTopic->id }}" class="">
+                                        @php
+                                            $count = 0;
+                                        @endphp 
                                         @foreach ($mainTopic->lessons as $lesson)
+                                            @php
+                                            $count++;
+                                            @endphp 
+                                            @if($count == 1)
                                             <div class="three d-flex flex-column">
                                                 {{-- <a class="ms-4 mt-3 px-2" id="sub" href="javascript:void(0);" onclick="lesson{{ $lesson->id }}()" style=" width: 100%;"> {{ $lesson->title }} --}}
                                                 <a class="ms-4 mt-3 px-2" id="sub" href="{{ route('lesson.quizes',['id'=>encryptParams($lesson->id)]) }}" style=" width: 100%;"> {{ $lesson->title }}
                                                 {{-- <a class="ms-4 mt-3 px-2" id="sub" href="{{ url('course/'.encryptParams($course->id).'/lesson/'.encryptParams($lesson->id)) }}" style=" width: 100%;"> {{ $lesson->title }} --}}
                                                     <span class="caret"></span></a>
                                             </div>
-
+                                            @else
+                                                @if(Helper::isPaymentActive())
+                                                <div class="three d-flex flex-column">
+                                                    {{-- <a class="ms-4 mt-3 px-2" id="sub" href="javascript:void(0);" onclick="lesson{{ $lesson->id }}()" style=" width: 100%;"> {{ $lesson->title }} --}}
+                                                    <a class="ms-4 mt-3 px-2" id="sub" href="{{ route('lesson.quizes',['id'=>encryptParams($lesson->id)]) }}" style=" width: 100%;"> {{ $lesson->title }}
+                                                    {{-- <a class="ms-4 mt-3 px-2" id="sub" href="{{ url('course/'.encryptParams($course->id).'/lesson/'.encryptParams($lesson->id)) }}" style=" width: 100%;"> {{ $lesson->title }} --}}
+                                                        <span class="caret"></span></a>
+                                                </div>
+                                                @else
+                                                <div class="three d-flex flex-column">
+                                                    {{-- <a class="ms-4 mt-3 px-2" id="sub" href="javascript:void(0);" onclick="lesson{{ $lesson->id }}()" style=" width: 100%;"> {{ $lesson->title }} --}}
+                                                    <a class="ms-4 mt-3 px-2" id="sub" href="{{ route('payments') }}" style=" width: 100%;"> {{ $lesson->title }}
+                                                    {{-- <a class="ms-4 mt-3 px-2" id="sub" href="{{ url('course/'.encryptParams($course->id).'/lesson/'.encryptParams($lesson->id)) }}" style=" width: 100%;"> {{ $lesson->title }} --}}
+                                                        <span class="caret"></span></a>
+                                                </div>
+                                                @endif
+                                            @endif
                                         @endforeach
                                     </div>
                                     @endif

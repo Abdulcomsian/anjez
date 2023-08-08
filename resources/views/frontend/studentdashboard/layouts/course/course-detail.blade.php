@@ -1,3 +1,6 @@
+@php 
+use App\Helpers\Helper;
+@endphp
 @extends('frontend.studentdashboard.layouts.course.main')
 
 @section('content')
@@ -31,8 +34,50 @@
                         <div class="row mt-4">
                             @forelse ($data['course']['sections'] as $section)
                                 @foreach($section['lessons'] as $key=>$lesson)
+                                    @if($key == 0)
+                                        <div class="col py-2">
+                                            <a href="{{ route('lesson.quizes',['id'=>encryptParams($lesson->id)]) }}" style="text-decoration: none" >Lesson {{ $key+1 }} - {{ $lesson->title }}</a>
+                                            <?php
+                                            try
+                                            {
+                                                $percentage = ($lesson->quiz_scores ? $lesson->quiz_scores->score_taken : 0)/($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0)*100;
+                                            }
+                                            catch (\Throwable $th)
+                                            {
+                                                $percentage = 0;
+                                            }
+                                            ?>
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" style="width:{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="cate mt-2 ">
+                                                <p>Free</p>
+                                            </div>
+                                        </div>
+                                    @else
+                                    @if(Helper::isPaymentActive())
+                                        <div class="col py-2">
+                                            <a href="{{ route('lesson.quizes',['id'=>encryptParams($lesson->id)]) }}" style="text-decoration: none" >Lesson {{ $key+1 }} - {{ $lesson->title }}</a>
+                                            <?php
+                                        try
+                                            {
+                                                $percentage = ($lesson->quiz_scores ? $lesson->quiz_scores->score_taken : 0)/($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0)*100;
+                                            }
+                                            catch (\Throwable $th)
+                                            {
+                                                $percentage = 0;
+                                            }
+                                            ?>
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" style="width:{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            <div class="cate mt-2 ">
+                                                <p>Free</p>
+                                            </div>
+                                        </div>
+                                    @else
                                     <div class="col py-2">
-                                        <a href="{{ route('lesson.quizes',['id'=>encryptParams($lesson->id)]) }}" style="text-decoration: none" >Lesson {{ $key+1 }} - {{ $lesson->title }}</a>
+                                        <a href="{{ route('payments') }}" style="text-decoration: none" >Lesson {{ $key+1 }} - {{ $lesson->title }}</a>
                                         <?php
                                         try
                                         {
@@ -50,6 +95,9 @@
                                             <p>Free</p>
                                         </div>
                                     </div>
+                                    @endif
+                                    
+                                    @endif
                                 @endforeach
                             @empty
                             <div class="col py-2">
