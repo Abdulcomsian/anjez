@@ -30,24 +30,31 @@
                   <div><i class="bi bi-chevron-down"></i></div>
                 </div>
                 <ul class="dropdown-menu" style="left: -5px;top: 40px;" aria-labelledby="dropdownMenu2">
+
                   <li>
-                    <form action="{{ route('language.change',['id'=>'en']) }}" method="post">
-                    @csrf
-                    <button class="dropdown-item" type="submit" id="englishButton" onclick="onLangChange('English')">
-                        English
-                    </button>
-                    </form>
+                    <a class="eng_btn_bg" rel="alternate" hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
+                        {{-- <button    ton class="dropdown-item" type="button" id="englishButton" onclick="onLangChange('English')"> --}}
+                            English
+                        {{-- </button> --}}
+                        {{-- English --}}
+                    </a>
+                    {{-- <form action="{{ route('language.change',['id'=>'en']) }}" method="post">
+                    @csrf --}}
+                    {{-- </form> --}}
                     {{-- <a href="{{ route('language.change',['lang'=>'en']) }}">
                     </a> --}}
 
                   </li>
                   <li>
-                    <form action="{{ route('language.change',['id'=>'ar']) }}" method="post">
-                    @csrf
-                        <button class="dropdown-item" type="submit" id="arabicButton" onclick="onLangChange('Arabic')">
+                    {{-- <form action="{{ route('language.change',['id'=>'ar']) }}" method="post">
+                    @csrf --}}
+                    <a class="eng_btn_bg" rel="alternate" hreflang="ar" href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
+                        {{-- <button class="dropdown-item" type="button" id="arabicButton" onclick="onLangChange('Arabic')"> --}}
                           Arabic
-                        </button>
-                    </form>
+                        {{-- </button> --}}
+                        {{-- English --}}
+                    </a>
+                    {{-- </form> --}}
 
                   </li>
                 </ul>
@@ -57,12 +64,12 @@
             @if(!Auth::check())
                 <li class="nav-item left-line">
                 <a class="nav-link" href="{{ route('login') }}">
-                    <span data-translate="log-in">Login</span>
+                    <span data-translate="log-in">{{ __('lang.navbar.login') }}</span>
                 </a>
                 </li>
                 <li class="nav-item">
                 <a href="{{ route('signup-page') }}">
-                    <button data-translate="sign-up">Sign Up</button>
+                    <button data-translate="sign-up">{{ __('lang.navbar.signup') }}</button>
                 </a>
                 </li>
             @else
@@ -88,27 +95,26 @@
           <img class="last" src="./assets/images/Sparkle.png" alt="" />
         </div>
         <div class="text-line-1">
-          <span data-translate="heading-1">Lorem ipsum dolor sit amet</span>
+          <span data-translate="heading-1">{{ __('lang.section1.heading1') }}</span>
         </div>
         <div class="text-line-2">
-          <span data-translate="heading-2">consectetur </span>
+          <span data-translate="heading-2">{{ __('lang.section1.heading2') }} </span>
         </div>
         <div class="text-line-3">
           <span>
-            Lorem ipsum dolor sit amet consectetur. Id nec et sollicitudin
-            ac diam quis quisque cras. Rhoncus tempus nam sed adipiscing.
+            {{ __('lang.section1.text') }}
           </span>
         </div>
         <div class="button-section">
           <div class="button-1">
             <button class="signu-up">
-              <a href="./signup.html" data-translate="sign-up"> Sign Up </a>
+              <a href="./signup.html" data-translate="sign-up">{{ __('lang.navbar.signup') }}</a>
             </button>
           </div>
           <div class="button-2">
             <button class="signu-up">
               <a href="./student-content.html" data-translate="view-courses">
-                View Courses
+                {{ __('lang.section1.view_courses') }}
               </a>
             </button>
           </div>
@@ -127,28 +133,24 @@
           </div>
           <div class="section-right">
             <div class="text-line-1">
-              <span class="span-1" data-translate="why">Why</span>
+              <span class="span-1" data-translate="why">{{ __('lang.section2.why') }}</span>
               <span class="span-2" data-translate="subscribe?">
-                Subscribe?
+                {{ __('lang.section2.subscribe') }}
               </span>
             </div>
             <div class="text-line-2">
-              <span>
-                Lorem ipsum dolor sit amet consectetur. Nibh non ac
-                tincidunt habitant tellus fermentum vitae. Nec porta urna
-                vulputate aliquet neque sagittis elit laoreet. Nibh non ac
-                tincidunt habitant
+              <span>{{ __('lang.section2.text') }}
               </span>
             </div>
             <div class="button-line">
               <div class="button-1">
                 <button data-translate="subscribe-now">
-                  Subscribe Now
+                  {{ __('lang.section2.subscribe_now') }}
                 </button>
               </div>
               <div class="button-2">
                 <button data-translate="explore-courses">
-                  Explore Courses
+                  {{ __('lang.section2.explore_courses') }}
                 </button>
               </div>
             </div>
@@ -165,14 +167,10 @@
         <div class="section-3-main">
           <div class="section-left">
             <div class="text-line-1">
-              <span data-translate="online-lectures">Online Lectures</span>
+              <span data-translate="online-lectures">{{ __('lang.section3.online_lectures') }}</span>
             </div>
             <div class="text-line-2">
-              <span>
-                Lorem ipsum dolor sit amet consectetur. Nibh non ac
-                tincidunt habitant tellus fermentum vitae. Nec porta urna
-                vulputate aliquet neque sagittis elit laoreet. Nibh non ac
-                tincidunt habitant
+              <span>{{ __('lang.section3.online_lectures_text') }}
               </span>
             </div>
           </div>
@@ -195,15 +193,12 @@
           <div class="section-right">
             <div class="text-line-1">
               <span data-translate="any-time-any-where">
-                Any Time, Any Where
+                {{ __('lang.section3.any_time_any_where') }}
               </span>
             </div>
             <div class="text-line-2">
               <span>
-                Lorem ipsum dolor sit amet consectetur. Nibh non ac
-                tincidunt habitant tellus fermentum vitae. Nec porta urna
-                vulputate aliquet neque sagittis elit laoreet. Nibh non ac
-                tincidunt habitant
+                {{ __('lang.section3.any_time_any_where_text') }}
               </span>
             </div>
           </div>
@@ -219,14 +214,10 @@
         <div class="section-5-main">
           <div class="section-left">
             <div class="text-line-1">
-              <span data-translate="solved-papers">Solve Papers</span>
+              <span data-translate="solved-papers">{{ __('lang.section3.solve_papers') }}</span>
             </div>
             <div class="text-line-2">
-              <span>
-                Lorem ipsum dolor sit amet consectetur. Nibh non ac
-                tincidunt habitant tellus fermentum vitae. Nec porta urna
-                vulputate aliquet neque sagittis elit laoreet. Nibh non ac
-                tincidunt habitant
+              <span>{{ __('lang.section3.solve_papers_text') }}
               </span>
             </div>
           </div>
@@ -249,15 +240,12 @@
           <div class="section-right">
             <div class="text-line-1">
               <span data-translate="collection-of-courses">
-                Collection of Courses
+                {{ __('lang.section3.collection_of_courses') }}
               </span>
             </div>
             <div class="text-line-2">
               <span>
-                Lorem ipsum dolor sit amet consectetur. Nibh non ac
-                tincidunt habitant tellus fermentum vitae. Nec porta urna
-                vulputate aliquet neque sagittis elit laoreet. Nibh non ac
-                tincidunt habitant
+                {{ __('lang.section3.collection_of_courses_text') }}
               </span>
             </div>
           </div>
@@ -271,12 +259,12 @@
     <div class="section-7">
       <div class="container section-title">
         <div class="text-line-1">
-          <span class="span-1" data-translate="student">Student</span>
-          <span class="span-2" data-translate="feedback">Feedback</span>
+          <span class="span-1" data-translate="student">{{ __('lang.student_feedback.student') }}</span>
+          <span class="span-2" data-translate="feedback">{{ __('lang.student_feedback.feedback') }}</span>
         </div>
         <div class="text-line-2">
           <span>
-            Lorem ipsum dolor sit amet consectetur. Feugiat id imperdiet mi
+            {{ __('lang.student_feedback.student_feedback_text') }}
           </span>
         </div>
       </div>
@@ -566,17 +554,15 @@
       <div class="container">
         <div class="section-8-main">
           <div class="text-line-1 d-flex justify-content-center">
-            <span data-translate="join-us-today!">Join Us Today!</span>
+            <span data-translate="join-us-today!">{{ __('lang.join_us.join_us_today') }}</span>
           </div>
           <div class="text-line-2">
-            <span>
-              Lorem ipsum dolor sit amet consectetur. Faucibus feugiat
-              adipiscing nibh in aliquam viverra volutpat viverra.
+            <span>{{ __('lang.join_us.join_us_today_text') }}
             </span>
           </div>
           <div>
             <a href="{{ route('signup-page') }}">
-              <button data-translate="sign-up">Sign Up</button>
+              <button data-translate="sign-up">{{ __('lang.navbar.signup') }}</button>
             </a>
           </div>
         </div>
@@ -591,28 +577,28 @@
         <div>
           <a>
             <span class="border-class" data-translate="careers">
-              Careers
+                {{ __('lang.footer.careers') }}
             </span>
           </a>
         </div>
         <div>
           <a href="./privacy-policy.html">
             <span class="border-class" data-translate="privacy-policy">
-              Privacy Policy
+                {{ __('lang.footer.privacy_policy') }}
             </span>
           </a>
         </div>
         <div>
           <a href="./terms-conditions.html">
             <span data-translate="terms-conditions">
-              Terms & Conditions
+                {{ __('lang.footer.terms_conditions') }}
             </span>
           </a>
         </div>
       </div>
       <div class="footer-line-2">
         <div>
-          <span>© 2023 Anjez Inc. </span>
+          <span>© <span id="year_span">{{ date('Y') }}</span> {{ __('lang.footer.angez_inc') }} </span>
         </div>
       </div>
     </footer>

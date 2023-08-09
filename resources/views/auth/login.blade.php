@@ -92,38 +92,38 @@
             <div>
                 <div class="text-container">
                     <div class="text-line-1">
-                        <span> Welcome to <span>Anjez</span> </span>
+                        <span> {{ __('lang.login_form.welcome_to') }} <span>{{ __('lang.login_form.angez') }}</span> </span>
                     </div>
                     <div class="text-line-2">
                         <span>
-                            Don't have any account? <a href="{{ url('/signup') }}">Sigup</a>
+                            {{ __('lang.login_form.dont_have_any_account') }} <a href="{{ url('/signup') }}">{{ __('lang.navbar.signup') }}</a>
                         </span>
                     </div>
                 </div>
                 <div class="row d-flex justify-content-start mt-5">
-                    <div class="col-2 show" id="mail" onclick="showEmail()" style="cursor: pointer;"> Email </div>
-                    <div class="col-8" id="no" onclick="showNumber()" style="cursor: pointer;"> Phone Number</div>
+                    <div class="col-2 show" id="mail" onclick="showEmail()" style="cursor: pointer;"> {{ __('lang.login_form.email') }} </div>
+                    <div class="col-8" id="no" onclick="showNumber()" style="cursor: pointer;"> {{ __('lang.login_form.phone_number') }}</div>
                 </div>
                 <div class="form-container">
                     <form action="{{ route('login-user') }}" method="POST">
                         @csrf
                         <div id="emails">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label">{{ __('lang.login_form.email') }}</label>
                             <input
                                 name="email"
                                 type="text"
                                 class="form-control"
                                 id="email"
-                                placeholder="Your Email"
+                                placeholder="{{ __('lang.login_form.your_email') }}"
                             />
                         </div>
 
                         <div id="numd" class="mb-3 d-flex flex-column" style="display: none !important;">
-                            <label for="phone" class="form-label">Phone Number</label>
+                            <label for="phone" class="form-label">{{ __('lang.login_form.phone_number') }}</label>
                             <input type="tel" id="phone-input" name="phone_no" class="form-control">
                         </div>
                         <div>
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">{{ __('lang.login_form.password') }}</label>
                             <input
                                 name="password"
                                 type="password"
@@ -133,7 +133,7 @@
                             />
                         </div>
                         <div>
-                            <button type="submit">Log In</button>
+                            <button type="submit">{{ __('lang.navbar.login') }}</button>
                         </div>
                     </form>
                 </div>

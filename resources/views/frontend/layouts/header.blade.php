@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {{-- <html lang="en"> --}}
+{{-- <html lang="{{ LaravelLocalization::getCurrentLocale() }}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}" data-textdirection="{{ LaravelLocalization::getCurrentLocaleDirection() }}"> --}}
 <html lang="{{ LaravelLocalization::getCurrentLocale() }}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}" data-textdirection="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
 
 <head>

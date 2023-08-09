@@ -17,11 +17,11 @@
             <div>
                 <div class="text-container mt-3">
                     <div class="text-line-1 mt-5">
-                        <span> Get started with <span>Anjez</span> </span>
+                        <span>{{ __('lang.signup_form.get_started_with') }}<span>{{ __('lang.login_form.angez') }}</span> </span>
                     </div>
                     <div class="text-line-2">
                         <span>
-                            Already have an account? <a href="{{ url('/login') }}">Log in</a>
+                            {{ __('lang.signup_form.already_have_an_account') }} <a href="{{ url('/login') }}">{{ __('lang.navbar.login') }}</a>
                         </span>
                     </div>
                 </div>
@@ -30,34 +30,34 @@
                         @csrf
                         <div class="nav-div">
                             <div>
-                                <label for="firstname" class="form-label">First Name</label>
+                                <label for="firstname" class="form-label">{{ __('lang.signup_form.first_name') }}</label>
                                 <input style="width: 100%" type="text" class="form-control" name="first_name" id="firstname"
-                                    placeholder="First Name" />
+                                    placeholder="{{ __('lang.signup_form.first_name') }}" />
                             </div>
                             <div>
-                                <label for="lastname" class="form-label">Last Name</label>
+                                <label for="lastname" class="form-label">{{ __('lang.signup_form.last_name') }}</label>
                                 <input style="width: 100%" type="text" class="form-control" name="last_name" id="lastname"
-                                    placeholder="Last Name" />
+                                    placeholder="{{ __('lang.signup_form.last_name') }}" />
                             </div>
                         </div>
                         <div>
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" name="email" id="email" placeholder="Your Email" />
+                            <label for="email" class="form-label">{{ __('lang.login_form.email') }}</label>
+                            <input type="text" class="form-control" name="email" id="email" placeholder="{{ __('lang.login_form.email') }}" />
                         </div>
                         <div class="d-flex flex-column">
-                            <label for="phone" class="form-label">Phone Number</label>
+                            <label for="phone" class="form-label">{{ __('lang.login_form.phone_number') }}</label>
                             <input type="tel" id="phone" class="form-control" name="phone_no" placeholder="123456789">
                         </div>
                         <div>
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">{{ __('lang.login_form.password') }}</label>
                             <input type="password" class="form-control" name="password" id="password" placeholder="********" />
                         </div>
                         <div>
-                            <label for="confirmpassword" class="form-label">Confirm Password</label>
+                            <label for="confirmpassword" class="form-label">{{ __('lang.signup_form.confirm_password') }}</label>
                             <input type="password" class="form-control" name="password_confirmation" id="confirmpassword" placeholder="********" />
                         </div>
                         <div>
-                            <button type="submit">Sign Up</button>
+                            <button type="submit">{{ __('lang.navbar.signup') }}</button>
                         </div>
                     </form>
                 </div>
