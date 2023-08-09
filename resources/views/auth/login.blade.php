@@ -96,7 +96,7 @@
                     </div>
                     <div class="text-line-2">
                         <span>
-                            Don't have any account? <a href="{{ url('/signup') }}">Sign Up</a>
+                            Don't have any account? <a href="{{ url('/signup') }}">Sigup</a>
                         </span>
                     </div>
                 </div>

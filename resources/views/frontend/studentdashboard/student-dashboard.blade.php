@@ -37,7 +37,7 @@
                         <div class="card-body">
                         <div class="card-text">
                             <div class="text-line-1">
-                                <span><a href="{{ url('/student-content') }}"> {{ $course->title}} </a> </span>
+                                <span><a href="{{ route('course.details', ['id'=>encryptParams($course->id)]) }}"> {{ $course->title}} </a> </span>
                             </div>
                             <div class="text-line-2">
                                 <span>{!! $course->description !!}</span>

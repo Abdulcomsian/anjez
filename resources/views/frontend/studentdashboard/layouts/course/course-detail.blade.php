@@ -1,4 +1,4 @@
-@php 
+@php
 use App\Helpers\Helper;
 @endphp
 @extends('frontend.studentdashboard.layouts.course.main')
@@ -34,7 +34,7 @@ use App\Helpers\Helper;
                         <div class="row mt-4">
                             @forelse ($data['course']['sections'] as $section)
                                 @foreach($section['lessons'] as $key=>$lesson)
-                                    @if($key == 0)
+                                @if($key == 0)
                                         <div class="col py-2">
                                             <a href="{{ route('lesson.quizes',['id'=>encryptParams($lesson->id)]) }}" style="text-decoration: none" >Lesson {{ $key+1 }} - {{ $lesson->title }}</a>
                                             <?php
@@ -71,6 +71,7 @@ use App\Helpers\Helper;
                                             <div class="progress">
                                                 <div class="progress-bar" role="progressbar" style="width:{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
+
                                             <div class="cate mt-2 ">
                                                 <p>Free</p>
                                             </div>
@@ -93,10 +94,12 @@ use App\Helpers\Helper;
                                         </div>
                                         <div class="cate mt-2 ">
                                             <p>Free</p>
+                                            {{-- <img src="{{ asset('assets/images/crown.png') }}" alt=""> --}}
+
                                         </div>
                                     </div>
                                     @endif
-                                    
+
                                     @endif
                                 @endforeach
                             @empty

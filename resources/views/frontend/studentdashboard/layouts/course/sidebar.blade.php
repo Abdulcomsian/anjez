@@ -1,4 +1,4 @@
-@php 
+@php
 use App\Helpers\Helper;
 @endphp
 <div class="col-auto col-md-3 col-xl-2 px-0 bg-white">
@@ -38,7 +38,8 @@ use App\Helpers\Helper;
                             @foreach($course['sections'] as $mainTopic)
                                 {{-- <a class=" ms-2 mt-3 main-topic" href="#">{{$mainTopic->title}}<span class="caret"></span></a> --}}
                                 @if(count($mainTopic->lessons)>0)
-                                    <a class="dropdown-toggle ms-2 mt-3 sub-topic-{{ $mainTopic->id }}" onclick="section{{$mainTopic->id}}()" data-toggle="dropdown" href="javascript:void(0);" > {{$mainTopic->title}}
+                                    {{-- <a class="dropdown-toggle ms-2 mt-3 sub-topic-{{ $mainTopic->id }}" onclick="section{{$mainTopic->id}}()" data-toggle="dropdown" href="#" > {{$mainTopic->title}} --}}
+                                    <a class="dropdown-toggle ms-2 mt-3 sub-topic-{{ $mainTopic->id }}" onclick="section{{$mainTopic->id}}()" data-toggle="dropdown" href="{{ route('course.details', ['id'=>encryptParams($course->id)]) }}" > {{$mainTopic->title}}
                                         <span class="caret"></span>
                                     </a>
                                     <!-- dropdown three  -->
@@ -46,11 +47,11 @@ use App\Helpers\Helper;
                                     <div id="lesson{{ $mainTopic->id }}" class="">
                                         @php
                                             $count = 0;
-                                        @endphp 
+                                        @endphp
                                         @foreach ($mainTopic->lessons as $lesson)
                                             @php
                                             $count++;
-                                            @endphp 
+                                            @endphp
                                             @if($count == 1)
                                             <div class="three d-flex flex-column">
                                                 {{-- <a class="ms-4 mt-3 px-2" id="sub" href="javascript:void(0);" onclick="lesson{{ $lesson->id }}()" style=" width: 100%;"> {{ $lesson->title }} --}}
@@ -79,7 +80,7 @@ use App\Helpers\Helper;
                                     </div>
                                     @endif
                                 @else
-                                    <a class=" ms-2 mt-3" href="#">{{$mainTopic->title}}<span class="caret"></span></a>
+                                    <a class=" ms-2 mt-3" href="{{ route('course.details', ['id'=>encryptParams($course->id)]) }}">{{$mainTopic->title}}<span class="caret"></span></a>
                                 @endif
                                     {{-- <a class=" ms-4 mt-3 px-2 " href="#" style=" width: 100%;"> Sub Topic <span class="caret"></span></a> --}}
                                 {{-- <a class=" ms-2 mt-3 main-topic" href="#"> Main Topic <span class="caret"></span></a>

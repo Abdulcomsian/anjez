@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Crypt;
-
+use Carbon\Carbon;
 
 if(!function_exists('countryCode'))
 {
@@ -101,5 +101,14 @@ if (!function_exists('filter_strip_tags'))
     function filter_strip_tags($field): string
     {
         return trim(strip_tags($field));
+    }
+}
+
+if (!function_exists('editDateColumn')) {
+    function editDateColumn($date)
+    {
+        $date = new Carbon($date);
+
+        return "<span>" . $date->format('h:i A') . "</span> <br> <span class='text-primary fw-bold'>" . $date->format('d/m/Y') . "</span>";
     }
 }

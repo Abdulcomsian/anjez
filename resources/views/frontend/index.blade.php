@@ -31,14 +31,24 @@
                 </div>
                 <ul class="dropdown-menu" style="left: -5px;top: 40px;" aria-labelledby="dropdownMenu2">
                   <li>
-                    <button class="dropdown-item" type="button" id="englishButton" onclick="onLangChange('English')">
-                      English
+                    <form action="{{ route('language.change',['id'=>'en']) }}" method="post">
+                    @csrf
+                    <button class="dropdown-item" type="submit" id="englishButton" onclick="onLangChange('English')">
+                        English
                     </button>
+                    </form>
+                    {{-- <a href="{{ route('language.change',['lang'=>'en']) }}">
+                    </a> --}}
+
                   </li>
                   <li>
-                    <button class="dropdown-item" type="button" id="arabicButton" onclick="onLangChange('Arabic')">
-                      Arabic
-                    </button>
+                    <form action="{{ route('language.change',['id'=>'ar']) }}" method="post">
+                    @csrf
+                        <button class="dropdown-item" type="submit" id="arabicButton" onclick="onLangChange('Arabic')">
+                          Arabic
+                        </button>
+                    </form>
+
                   </li>
                 </ul>
               </div>
@@ -47,7 +57,7 @@
             @if(!Auth::check())
                 <li class="nav-item left-line">
                 <a class="nav-link" href="{{ route('login') }}">
-                    <span data-translate="log-in">Log In</span>
+                    <span data-translate="log-in">Login</span>
                 </a>
                 </li>
                 <li class="nav-item">
@@ -565,7 +575,7 @@
             </span>
           </div>
           <div>
-            <a href="./signup.html">
+            <a href="{{ route('signup-page') }}">
               <button data-translate="sign-up">Sign Up</button>
             </a>
           </div>

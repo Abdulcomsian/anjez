@@ -1,24 +1,26 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\QuizController;
+use App\Http\Controllers\userController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\signupController;
 use App\Http\Controllers\paymentController;
+use App\Http\Controllers\SectionController;
+use App\Http\Controllers\CourseDetailController;
+use App\Http\Controllers\StudentScoreController;
+use App\Http\Controllers\adminDashboardController;
 use App\Http\Controllers\studentContentController;
 use App\Http\Controllers\studentDashboardContrller;
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\QuizController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\adminDashboardController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Auth\LoginController as AuthLoginController;
-use App\Http\Controllers\CourseDetailController;
-use App\Http\Controllers\LessonController;
-use App\Http\Controllers\SectionController;
-use App\Http\Controllers\StudentScoreController;
-use App\Http\Controllers\userController;
-use App\Http\Controllers\PlanController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ChangeLanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,11 @@ use Illuminate\Support\Facades\Auth;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::group([
+    'prefix' => LaravelLocalization::setlocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+], function () {
 
 // User Routes
 Route::get('/', [IndexController::class, 'index']);
@@ -182,3 +189,6 @@ Route::controller(StudentScoreController::class)->middleware('auth')->group(func
 });
 
 
+});
+
+Route::post('change-language\{id}', [ChangeLanguageController::class, 'changeLanguage'])->name('language.change');
