@@ -175,4 +175,20 @@ class PlanController extends Controller
         return redirect()->route('studentdashboard.student-dashboard');
     }
 
+    public function tabby()
+    {
+        return view('tabby');
+    }
+
+    public function tabbySuccess()
+    {
+            $payment = new Payment();
+            $payment->user_id = auth()->user()->id;
+            $payment->status = 'active';
+            $payment->start_date = Carbon::now();
+            $payment->end_date = Carbon::now()->addYear(); // Adding 
+            $payment->save();
+            return redirect()->route('studentdashboard.student-dashboard');
+    }
+
 }
