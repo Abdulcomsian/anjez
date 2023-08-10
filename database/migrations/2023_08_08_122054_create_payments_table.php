@@ -18,6 +18,7 @@ return new class extends Migration
             $table->datetime('start_date');
             $table->datetime('end_date');
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->enum('payment_method', ['stripe', 'tabby']);
             $table->timestamps();
         });
     }

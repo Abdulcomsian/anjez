@@ -34,5 +34,11 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'tabby' => [
+        'key' => env('TABBY_KEY'),
+        'secret' => env('TABBY_SECRET'),
+        'merchant' => env('TABBY_MERCHANT'),
+    ],
+
 
 ];
