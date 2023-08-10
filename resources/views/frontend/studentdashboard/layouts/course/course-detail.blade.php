@@ -40,7 +40,7 @@ use App\Helpers\Helper;
                                     @endphp
                                 @else
                                     @php
-                                        $link = route('payment_method');
+                                        $link = route('payments');
                                     @endphp                                
                                 @endif
                                     <div class="col py-2">

@@ -62,7 +62,7 @@ use App\Helpers\Helper;
                                             @else
                                                 <div class="three d-flex flex-column">
                                                     {{-- <a class="ms-4 mt-3 px-2" id="sub" href="javascript:void(0);" onclick="lesson{{ $lesson->id }}()" style=" width: 100%;"> {{ $lesson->title }} --}}
-                                                    <a class="ms-4 mt-3 px-2" id="sub" href="{{ route('payment_method') }}" style=" width: 100%;"> {{ $lesson->title }}
+                                                    <a class="ms-4 mt-3 px-2" id="sub" href="{{ route('payments') }}" style=" width: 100%;"> {{ $lesson->title }}
                                                     {{-- <a class="ms-4 mt-3 px-2" id="sub" href="{{ url('course/'.encryptParams($course->id).'/lesson/'.encryptParams($lesson->id)) }}" style=" width: 100%;"> {{ $lesson->title }} --}}
                                                         <span class="caret"></span></a>
                                                 </div>

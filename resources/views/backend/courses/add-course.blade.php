@@ -37,10 +37,10 @@
                       <label for="title" class="form-label">Course Title</label>
                       <input type="text" name="title" class="form-control" id="firstname" />
                     </div>
-                    <div class="col star course">
+                    {{-- <div class="col star course">
                       <label for="price" class="form-label"> Price</label>
                       <input type="number" name="price" class="form-control">
-                    </div>
+                    </div> --}}
                     <div class="col course">
                       <label for="state" class="form-label"> Status</label>
                       <select class="form-select" name="status" aria-label="Default select example">
