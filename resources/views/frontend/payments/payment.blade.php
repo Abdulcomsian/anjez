@@ -185,7 +185,12 @@
               </div>
           </div>
           <div class="col-lg-5 mt-5">
+              <div class="row mt-4">
+                <a class="" href="{{route('payments')}}">Stripe</a>
+                <a class="" href="{{route('tabby')}}">Tabby</a>
+              </div>
                <div class="cards" >
+                    
                       <div class="cards-heading m-auto "> <p class="pt-2">Enter Card Information </p>  </div>
                       <form id="payment-form" action="{{ route('process-payment') }}" method="POST">
                         @csrf

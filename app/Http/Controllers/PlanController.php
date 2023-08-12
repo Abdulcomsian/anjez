@@ -7,11 +7,13 @@ use App\Models\Plan;
 use App\Models\User;
 use App\Http\Helpers\Helper;
 use App\Models\Payment;
+use App\Models\Course;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Stripe\Stripe;
 use Stripe\Webhook;
 use Stripe\PaymentIntent;
+use Illuminate\Support\Facades\Http;
 
 class PlanController extends Controller
 {
@@ -163,6 +165,7 @@ class PlanController extends Controller
             $payment->status = 'active';
             $payment->start_date = Carbon::now();
             $payment->end_date = Carbon::now()->addYear(); // Adding 
+            $payment->payment_method = 'stripe'; 
             $payment->save();
         }
 
@@ -177,7 +180,52 @@ class PlanController extends Controller
 
     public function tabby()
     {
-        return view('tabby');
+        $token = config('services.tabby.key');
+        $merchant = config('services.tabby.merchant');
+        // Define the API endpoint URL
+        $apiUrl = 'https://api.tabby.ai/api/v2/checkout';
+
+        // Define the payload with the parameters you provided
+        $payload = [
+            "payment" => [
+                "amount" => "1000",
+                "currency" => 'aed',
+                // ... (other payment parameters)
+            ],
+            "lang" => "en",
+            "merchant_code" => $merchant,
+            "merchant_urls" => [
+                "success" => route('tabby_success'),
+                "cancel" => route('studentdashboard.student-dashboard'),
+                "failure" => route('studentdashboard.student-dashboard')
+            ]
+        ];
+
+
+        // Define the headers, including the Bearer token
+        $headers = [
+            'Authorization' => 'Bearer '.$token,
+            'Content-Type' => 'application/json',
+        ];
+
+        // Make the POST request using Laravel's HTTP client
+        $response = Http::withHeaders($headers)->post($apiUrl, $payload);
+
+        // Check the response status code
+        if ($response->successful()) {
+            // Request successful, you can access the response data like this:
+            $responseData = $response->json();
+            $web_url = $responseData['configuration']['available_products']['installments'][0]['web_url'];
+            return redirect($web_url);
+            return response()->json($responseData);
+        } else {
+            $errorResponse = [
+                'message' => 'Request failed',
+                'status' => $response->status(),
+                'body' => $response->body()
+            ];
+            return response()->json($errorResponse, $response->status());
+        }
     }
 
     public function tabbySuccess()
@@ -187,8 +235,20 @@ class PlanController extends Controller
             $payment->status = 'active';
             $payment->start_date = Carbon::now();
             $payment->end_date = Carbon::now()->addYear(); // Adding 
+            $payment->payment_method = 'tabby'; 
             $payment->save();
             return redirect()->route('studentdashboard.student-dashboard');
+    }
+
+    public function paymentMethods(){
+        // $course = Course::with('sections.lessons.quiz_scores')->find($id);
+        $courses = Course::with('sections.lessons.quiz_scores')->get();
+        $data =
+        [
+            // 'course'    =>  $course,
+            'courses'   =>  $courses,
+        ];
+        return view ('payment_method', compact('data'));
     }
 
 }

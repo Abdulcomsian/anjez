@@ -33,10 +33,10 @@
                     <label for="title" class="form-label">Course Title</label>
                     <input type="text" name="title" class="form-control" id="title" value="{{ $course->title }}" />
                 </div>
-                <div class="col star course">
+                {{-- <div class="col star course">
                     <label for="price" class="form-label">Price</label>
                     <input type="number" name="price" class="form-control" value="{{ $course->price }}">
-                </div>
+                </div> --}}
                 <div class="col course">
                     <label for="status" class="form-label">Status</label>
                     <select class="form-select" name="status" aria-label="Default select example">

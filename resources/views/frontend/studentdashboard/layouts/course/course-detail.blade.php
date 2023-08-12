@@ -8,7 +8,7 @@ use App\Helpers\Helper;
 
     <div class="container-fluid mt-1">
         <div class="row flex-nowrap" style="min-height: 100vh;">
-            {{ view('frontend.studentdashboard.layouts.course.sidebar', [ 'courses'=>$data['courses'] ]) }}
+            {{ view('frontend.studentdashboard.layouts.course.sidebar', [ 'courses'=>$data['courses'], 'is_payment_active'=>$data['is_payment_active'] ]) }}
             <!-- right side content  -->
             <div class="col py-3 pb-5" id="courses">
                 <div class="student-content">
@@ -34,51 +34,17 @@ use App\Helpers\Helper;
                         <div class="row mt-4">
                             @forelse ($data['course']['sections'] as $section)
                                 @foreach($section['lessons'] as $key=>$lesson)
-                                @if($key == 0)
-                                        <div class="col py-2">
-                                            <a href="{{ route('lesson.quizes',['id'=>encryptParams($lesson->id)]) }}" style="text-decoration: none" >Lesson {{ $key+1 }} - {{ $lesson->title }}</a>
-                                            <?php
-                                            try
-                                            {
-                                                $percentage = ($lesson->quiz_scores ? $lesson->quiz_scores->score_taken : 0)/($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0)*100;
-                                            }
-                                            catch (\Throwable $th)
-                                            {
-                                                $percentage = 0;
-                                            }
-                                            ?>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width:{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            <div class="cate mt-2 ">
-                                                <p>Free</p>
-                                            </div>
-                                        </div>
-                                    @else
-                                    @if(Helper::isPaymentActive())
-                                        <div class="col py-2">
-                                            <a href="{{ route('lesson.quizes',['id'=>encryptParams($lesson->id)]) }}" style="text-decoration: none" >Lesson {{ $key+1 }} - {{ $lesson->title }}</a>
-                                            <?php
-                                        try
-                                            {
-                                                $percentage = ($lesson->quiz_scores ? $lesson->quiz_scores->score_taken : 0)/($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0)*100;
-                                            }
-                                            catch (\Throwable $th)
-                                            {
-                                                $percentage = 0;
-                                            }
-                                            ?>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width:{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-
-                                            <div class="cate mt-2 ">
-                                                <p>Free</p>
-                                            </div>
-                                        </div>
-                                    @else
+                                @if ($data['is_payment_active'] || $key === 0)
+                                    @php
+                                        $link = route('lesson.quizes',['id'=>encryptParams($lesson->id)]);
+                                    @endphp
+                                @else
+                                    @php
+                                        $link = route('payments');
+                                    @endphp                                
+                                @endif
                                     <div class="col py-2">
-                                        <a href="{{ route('payments') }}" style="text-decoration: none" >Lesson {{ $key+1 }} - {{ $lesson->title }}</a>
+                                        <a href="{{ $link }}" style="text-decoration: none" >Lesson {{ $key+1 }} - {{ $lesson->title }}</a>
                                         <?php
                                         try
                                         {
@@ -92,15 +58,20 @@ use App\Helpers\Helper;
                                         <div class="progress">
                                             <div class="progress-bar" role="progressbar" style="width:{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
-                                        <div class="cate mt-2 ">
-                                            <p>Free</p>
-                                            {{-- <img src="{{ asset('assets/images/crown.png') }}" alt=""> --}}
-
-                                        </div>
+                                            @if ($data['is_payment_active'] || $key === 0)
+                                                @if($key === 0)
+                                                    <div class="cate mt-2 ">
+                                                                <p>Free</p>
+                                                    </div>
+                                                    @elseif($data['is_payment_active'])
+                                                    {{-- <p></p> --}}
+                                                @endif
+                                            @else
+                                            <div class="cate mt-2 ">
+                                                    <img src="{{ asset('assets/images/crown.png') }}" alt=""> 
+                                            </div>   
+                                            @endif
                                     </div>
-                                    @endif
-
-                                    @endif
                                 @endforeach
                             @empty
                             <div class="col py-2">

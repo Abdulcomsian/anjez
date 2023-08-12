@@ -144,7 +144,10 @@ Route::get('/create-payment-intent', [PlanController::class, 'createPaymentInten
 Route::post('/process-payment', [PlanController::class, 'processPayment'])->name('process-payment');
 Route::get('/payment-form', [PlanController::class, 'showPaymentForm'])->name('payment-form');
 Route::get('/payment-success', [PlanController::class, 'paymentSuccess'])->name('success');
+Route::get('/payment-methods', [PlanController::class, 'paymentMethods'])->name('payment_method');
 //new route starts here
+Route::get('/tabby', [PlanController::class, 'tabby'])->name('tabby');
+Route::get('/tabby-success', [PlanController::class, 'tabbySuccess'])->name('tabby_success');
 
 Route::get("index" , function(){
     return view('test.index');

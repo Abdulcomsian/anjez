@@ -29,7 +29,7 @@ class CourseController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required',
-            'price' => 'required',
+            // 'price' => 'required',
             'status' => 'required',
             'description' => 'required',
             'title_ar' => 'required',
@@ -41,7 +41,7 @@ class CourseController extends Controller
 
         $course = new Course();
         $course->title = $validatedData['title'];
-        $course->price = $validatedData['price'];
+        // $course->price = $validatedData['price'];
         $course->status = $validatedData['status'];
         $course->description = $validatedData['description'];
         $course->title_ar = $validatedData['title_ar'];
@@ -65,7 +65,7 @@ class CourseController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required',
-            'price' => 'required',
+            // 'price' => 'required',
             'status' => 'required',
             'description' => 'required',
             'feature_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -73,7 +73,7 @@ class CourseController extends Controller
 
         $course = Course::findOrFail($id);
         $course->title = $validatedData['title'];
-        $course->price = $validatedData['price'];
+        // $course->price = $validatedData['price'];
         $course->status = $validatedData['status'];
         $course->description = $validatedData['description'];
         $course->user_id = auth()->user()->id;

@@ -31,7 +31,9 @@
                             </div>
                         </div>
                         <div class="embed-responsive embed-responsive-21by9 mt-4" id="video-container">
-                            <video id="myVideo" class="embed-responsive-item" src="./assets/videos/THAILAND IN 30 SECONDS - CINEMATIC VIDEO- 4k.mp4" controls=""></video>
+                            {{-- <video id="myVideo" class="embed-responsive-item" src="./assets/videos/THAILAND IN 30 SECONDS - CINEMATIC VIDEO- 4k.mp4" controls=""></video> --}}
+                            {!!$data['lesson']->video_url!!}
+
                             <button id="video-button" data-toggle="modal" data-target="#exampleModal">Test Your
                                 Knowledge</button>
 
