@@ -47,7 +47,7 @@
                 <div class="col-2"> <img src="{{ url('assets/courses-content/course-images/'.$course->feature_image) }}" alt=""> </div>
                 <div class="col-2"> <span> {{ $course['sections_count'] }} </span> </div>
                 <div class="col-1"><span> {{ $course->price }} </span></div>
-                <div class="col-2"> @if($course->status == 'active') <span style="color: #1CB104;">{{ $course->status }}</span> @else <span style="color: #e93e28;"> {{ $course->status }}</span> @endif</div>
+                <div class="col-2"> @if($course->status == 'Active') <span style="color: #1CB104;">{{ $course->status }}</span> @else <span style="color: #e93e28;"> {{ $course->status }}</span> @endif</div>
                 <!-- <div class="col-1"><img src="..../../assets/images/dots.png" alt=""></div> -->
                 <div class="col-1 dots">
                 <div class="dropdown dropdown-quiz">

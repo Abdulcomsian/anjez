@@ -32,7 +32,11 @@ class CourseController extends Controller
             'price' => 'required',
             'status' => 'required',
             'description' => 'required',
-            'feature_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'title_ar' => 'required',
+            'price_ar' => 'required',
+            'status_ar' => 'required',
+            'description_ar' => 'required',
+            'feature_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $course = new Course();
@@ -40,6 +44,10 @@ class CourseController extends Controller
         $course->price = $validatedData['price'];
         $course->status = $validatedData['status'];
         $course->description = $validatedData['description'];
+        $course->title_ar = $validatedData['title_ar'];
+        $course->price_ar = $validatedData['price_ar'];
+        $course->status_ar = $validatedData['status_ar'];
+        $course->description_ar = $validatedData['description_ar'];
         $course->feature_image = $this->storeImage(Course::PATH, $validatedData['feature_image'] ?? '');
         $course->user_id = auth()->user()->id;
         $course->save();

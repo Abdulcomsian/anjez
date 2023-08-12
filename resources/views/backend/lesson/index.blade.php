@@ -82,10 +82,18 @@
                 @csrf
                 <div class="row">
                     <input type="hidden" name="lesson_id" class="lesson_id">
-                    <div class="col star course">
-                        <label for="title" class="form-label">Title</label>
-                        {{-- <input type="text" class="form-control" id="title" name="title" /> --}}
-                        <input type="text" class="form-control" id="title" name="lesson[title]" />
+                    <div class="row m-0 p-0">
+                        <div class="col star course">
+                            <label for="title" class="form-label">Title (En) </label>
+                            {{-- <input type="text" class="form-control" id="title" name="title" /> --}}
+                            <input type="text" class="form-control" id="title" name="lesson[title]" />
+                        </div>
+                        <div class="col star course">
+                            <label for="title" class="form-label">Title (Ar) </label>
+                            {{-- <input type="text" class="form-control" id="title" name="title" /> --}}
+                            <input type="text" class="form-control" id="title" name="lesson[title_ar]" />
+                        </div>
+
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -97,8 +105,14 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col course course_description">
-                        <label for="description" class="form-label">Description</label>
+                        <label for="description" class="form-label">Description (En) </label>
                         <textarea id="editor" name="lesson[description]"></textarea>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col course course_description">
+                        <label for="description" class="form-label">Description (Ar) </label>
+                        <textarea id="editor_ar" name="lesson[description_ar]"></textarea>
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -189,6 +203,14 @@
     console.log('Before CKEditor initialization');
     ClassicEditor
         .create( document.querySelector( '#editor' ) )
+        .then( editor => {
+            console.log('CKEditor initialized');
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+    ClassicEditor
+        .create( document.querySelector( '#editor_ar' ) )
         .then( editor => {
             console.log('CKEditor initialized');
         } )

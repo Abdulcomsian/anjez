@@ -31,6 +31,8 @@ class SectionController extends Controller
         $validated_data = $this->validate($request,[
             'title'=>'required',
             'status'=>'required',
+            'title_ar'=>'required',
+            'status_ar'=>'required',
             'course_id'=>'required|exists:courses,id'
         ]);
         $section = $this->section->storeOrUpdate($validated_data, $id=null);

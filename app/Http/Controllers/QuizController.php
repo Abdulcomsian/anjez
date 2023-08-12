@@ -35,6 +35,13 @@ class QuizController extends Controller
             'option4'       => 'required',
             'correct_answer'=> 'required',
             'correct_answer_description'=> 'required',
+            'question_ar'      => 'required',
+            'option1_ar'       => 'required',
+            'option2_ar'       => 'required',
+            'option3_ar'       => 'required',
+            'option4_ar'       => 'required',
+            'correct_answer_ar'=> 'required',
+            'correct_answer_description_ar'=> 'required',
             'lesson_id'     =>'required|exists:lessons,id',
             'quiz_id'       =>'nullable|exists:quizzes,id',
         ]);

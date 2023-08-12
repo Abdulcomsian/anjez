@@ -31,30 +31,57 @@
                 </div>
                 <hr>
                 <form action="{{ route('courses.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                  <div class="row">
-                    <div class="col star course">
-                      <label for="title" class="form-label">Course Title</label>
-                      <input type="text" name="title" class="form-control" id="firstname" />
+                @csrf
+                    <div class="row">
+                        <div class="col star course">
+                            <label for="title" class="form-label">Course Title (En) </label>
+                            <input type="text" name="title" class="form-control" id="firstname" />
+                        </div>
+                        <div class="col star course">
+                            <label for="title" class="form-label">Course Title (Ar) </label>
+                            <input type="text" name="title_ar" class="form-control" id="firstname" />
+                        </div>
+
                     </div>
-                    <div class="col star course">
-                      <label for="price" class="form-label"> Price</label>
-                      <input type="number" name="price" class="form-control">
+                    <div class="row mt-4">
+                        <div class="col star course">
+                            <label for="price" class="form-label"> Price (En) </label>
+                            <input type="number" name="price" class="form-control">
+                        </div>
+                        <div class="col star course">
+                            <label for="price" class="form-label"> Price (Ar) </label>
+                            <input type="number" name="price_ar" class="form-control">
+                        </div>
                     </div>
-                    <div class="col course">
-                      <label for="state" class="form-label"> Status</label>
-                      <select class="form-select" name="status" aria-label="Default select example">
-                        <option value="Active"> Active </option>
-                        <option value="Draft"> Draft </option>
-                      </select>
+                    <div class="row mt-4">
+                        <div class="col-6 course">
+                            <label for="state" class="form-label"> Status (En) </label>
+                            <select class="form-select" name="status" aria-label="Default select example">
+                                <option value="Active"> Active </option>
+                                <option value="Draft"> Draft </option>
+                            </select>
+                        </div>
+                        <div class="col-6 course">
+                            <label for="state" class="form-label"> Status (Ar) </label>
+                            <select class="form-select" name="status_ar" aria-label="Default select example">
+                                <option value="فعال"> فعال </option>
+                                <option value="مسودہ"> مسودہ </option>
+                            </select>
+                        </div>
                     </div>
-                  </div>
                   <div class="row mt-4">
-                    <div class="col course">
-                      <label for="description" class="form-label"> Description</label>
+                    <div class="col-6 course">
+                      <label for="description" class="form-label"> Description (En) </label>
                       <textarea id="editor" name="description"></textarea>
 
                       {{-- <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5"></textarea> --}}
+                    </div>
+
+                    <div class="col-6 course">
+                        <label for="description" class="form-label"> Description (Ar) </label>
+                        <textarea id="editor_ar" name="description_ar"></textarea>
+
+                        {{-- <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5"></textarea> --}}
                     </div>
 
                     {{-- <div class="col">
@@ -75,7 +102,7 @@
                     </div> --}}
                   </div>
                   <div class="row mt-4">
-                      <div class="col-4">
+                      <div class="col-6">
                         <label for="">Feature Image</label>
                         <input type="file" class="form-control" name="feature_image">
                     </div>
@@ -98,6 +125,12 @@
         <script>
              ClassicEditor
     .create( document.querySelector( '#editor' ) )
+    .catch( error => {
+        console.error( error );
+    } );
+
+     ClassicEditor
+    .create( document.querySelector( '#editor_ar' ) )
     .catch( error => {
         console.error( error );
     } );

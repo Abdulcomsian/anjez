@@ -13,7 +13,7 @@ class Course extends Model
     use HasFactory, SoftDeletes;
 
     const PATH = 'assets/courses-content/course-images/';
-    protected $fillable = ['title', 'price', 'status', 'description', 'feature_image', 'user_id'];
+    protected $fillable = ['title', 'price', 'status', 'description','title_ar', 'price_ar', 'status_ar', 'description_ar', 'feature_image', 'user_id'];
 
     public function user()
     {

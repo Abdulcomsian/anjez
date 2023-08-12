@@ -72,19 +72,32 @@
           <form method="POST" action="{{ route('section.store') }}">
             @csrf
             <div class="row">
-              <div class="col star course">
+              <div class="col-6 star course">
                 <input type="hidden" name="course_id" value="{{ $data['id'] }}">
-                <label for="title" class="form-label">Title</label>
+                <label for="title" class="form-label">Title (En) </label>
                 <input type="text" class="form-control" name="title" />
+              </div>
+              <div class="col-6 star course">
+                <input type="hidden" name="course_id" value="{{ $data['id'] }}">
+                <label for="title" class="form-label">Title (Ar) </label>
+                <input type="text" class="form-control" name="title_ar" />
               </div>
             </div>
             <div class="row mt-3">
-              <div class="col star course">
+              <div class="col-6 star course">
                   {{-- <input type="text" class="form-control" id="firstname" /> --}}
                 <label for="status" class="form-label">Status</label>
                 <select class="form-select" name="status" aria-label="Default select example">
                     <option value="active"> Active </option>
                     <option value="draft"> Draft </option>
+                </select>
+              </div>
+              <div class="col-6 star course">
+                  {{-- <input type="text" class="form-control" id="firstname" /> --}}
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" name="status_ar" aria-label="Default select example">
+                    <option value="فعال"> فعال </option>
+                    <option value="مسودہ"> مسودہ </option>
                 </select>
               </div>
             </div>

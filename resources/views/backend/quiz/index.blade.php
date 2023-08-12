@@ -14,41 +14,78 @@
             <form action="{{ route('quiz.store') }}" method="POST" class="quiz_form">
                 @csrf
               <div class="row">
-                <div class="col">
+                <div class="col-6">
                   <div class="quiz-modal-input">
                     <input type="hidden" name="lesson_id" value="{{ $data['id'] }}">
                     <input type="hidden" name="quiz_id" id="quiz_id">
-                    <label for="question" class="form-label" style="font-weight: bold;">Question</label>
+                    <label for="question" class="form-label" style="font-weight: bold;">Question (En) </label>
                     <input type="text" class="form-control" id="question" name="question"
-                      placeholder="Question" />
+                      placeholder="Question En" />
                   </div>
+                </div>
+                <div class="col-6">
+                    <label for="question" class="form-label" style="font-weight: bold;">Question (Ar) </label>
+                    <input type="text" class="form-control" id="question_ar" name="question_ar"
+                      placeholder="Question Ar" />
                 </div>
               </div>
               <div class="row">
                 <div class="col">
                   <div class="quiz-modal-input mt-3">
-                    <label for="question" class="form-label">Option 1</label>
-                    <input type="text" class="form-control" onkeyup="checkCorrectAnswer()" name="option1" id="option1" placeholder="Option 1" />
+                    <label for="question" class="form-label">Option 1 (En)</label>
+                    <input type="text" class="form-control" onkeyup="checkCorrectAnswerEn()" name="option1" id="option1" placeholder="Option 1 En" />
                   </div>
                 </div>
                 <div class="col">
-                  <div class="quiz-modal-input mt-3">
+                    <div class="quiz-modal-input mt-3">
+                        <label for="question" class="form-label">Option 1 (Ar)</label>
+                        <input type="text" class="form-control" onkeyup="checkCorrectAnswerAr()" name="option1_ar" id="option1_ar" placeholder="Option 1 Ar" />
+                      </div>
+                  {{-- <div class="quiz-modal-input mt-3">
                     <label for="question" class="form-label">Option 2</label>
                     <input type="text" class="form-control" onkeyup="checkCorrectAnswer()" name="option2" id="option2" placeholder="Option 2" />
+                  </div> --}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="quiz-modal-input mt-3">
+                    <label for="question" class="form-label">Option 2 (En)</label>
+                    <input type="text" class="form-control" onkeyup="checkCorrectAnswerEn()" name="option2" id="option2" placeholder="Option 2 En" />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="quiz-modal-input mt-3">
+                    <label for="question" class="form-label">Option 2 (Ar)</label>
+                    <input type="text" class="form-control" onkeyup="checkCorrectAnswerAr()" name="option2_ar" id="option2_ar" placeholder="Option 2 Ar" />
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
                   <div class="quiz-modal-input mt-3">
-                    <label for="question" class="form-label">Option 3</label>
-                    <input type="text" class="form-control" onkeyup="checkCorrectAnswer()" name="option3" id="option3" placeholder="Option 3" />
+                    <label for="question" class="form-label">Option 3 (En)</label>
+                    <input type="text" class="form-control" onkeyup="checkCorrectAnswerEn()" name="option3" id="option3" placeholder="Option 3 En" />
                   </div>
                 </div>
                 <div class="col">
                   <div class="quiz-modal-input mt-3">
-                    <label for="question" class="form-label">Option 4</label>
-                    <input type="text" class="form-control" onkeyup="checkCorrectAnswer()" name="option4" id="option4" placeholder="Option 4" />
+                    <label for="question" class="form-label">Option 3 (Ar)</label>
+                    <input type="text" class="form-control" onkeyup="checkCorrectAnswerAr()" name="option3_ar" id="option3_ar" placeholder="Option 3 Ar" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="quiz-modal-input mt-3">
+                    <label for="question" class="form-label">Option 4 (En)</label>
+                    <input type="text" class="form-control" onkeyup="checkCorrectAnswerEn()" name="option4" id="option4" placeholder="Option 4 En" />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="quiz-modal-input mt-3">
+                    <label for="question" class="form-label">Option 4 (Ar)</label>
+                    <input type="text" class="form-control" onkeyup="checkCorrectAnswerAr()" name="option4_ar" id="option4_ar" placeholder="Option 4 Ar" />
                   </div>
                 </div>
               </div>
@@ -56,15 +93,31 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="quiz-modal-input mt-3">
-                    <label for="question" class="form-label">Correct Answer</label>
-                    <input type="text" class="form-control"  onkeyup="checkCorrectAnswer()" name="correct_answer" id="correct-option" placeholder="Correct Answer" />
+                    <label for="question" class="form-label">Correct Answer (En)</label>
+                    <input type="text" class="form-control"  onkeyup="checkCorrectAnswerEn()" name="correct_answer" id="correct-option" placeholder="Correct Answer" />
                     <div id="correct-option-error" class="error-message d-none" > Answer doesn’t match any of the provided options</div>
                   </div>
                 </div>
                 <div class="col-md-6">
+                  <div class="quiz-modal-input mt-3">
+                    <label for="question" class="form-label">Correct Answer (Ar)</label>
+                    <input type="text" class="form-control"  onkeyup="checkCorrectAnswerAr()" name="correct_answer_ar" id="correct-option-ar" placeholder="Correct Answer Ar" />
+                    <div id="correct-option-error" class="text-danger error-message-ar d-none" > الإجابة لا تتطابق مع أي من الخيارات المتوفرة</div>
+                  </div>
+                </div>
+                {{--  --}}
+              </div>
+              <div class="row">
+                <div class="col-md-6">
                     <div class="quiz-modal-input mt-3">
-                        <label for=""  class="form-label">Correct Answer Reason</label>
+                        <label for=""  class="form-label">Correct Answer Reason (En)</label>
                         <textarea id="editor" class="editor" name="correct_answer_description"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="quiz-modal-input mt-3">
+                        <label for=""  class="form-label">Correct Answer Reason (Ar)</label>
+                        <textarea id="editor_ar" class="editor" name="correct_answer_description_ar"></textarea>
                     </div>
                 </div>
               </div>
@@ -151,6 +204,11 @@
     .catch( error => {
         console.error( error );
     } );
+    ClassicEditor
+    .create( document.querySelector( '#editor_ar' ) )
+    .catch( error => {
+        console.error( error );
+    } );
     $(document).on('click', '.edit-btn', function () {
         let id = $(this).data('id');
         $.ajax({
@@ -182,7 +240,7 @@
         $('#quiz_id').removeAttr('value');
     });
 
-    function checkCorrectAnswer()
+    function checkCorrectAnswerEn()
     {
         let options = [], opt1, opt2, opt3, opt4, corr_opt, error_msg, publish_btn;
 
@@ -213,8 +271,38 @@
         }
     }
 
+    function checkCorrectAnswerAr()
+    {
+        let options = [], opt1_ar, opt2_ar, opt3_ar, opt4_ar, corr_opt_ar, error_msg_ar, publish_btn;
+
+        opt1_ar = document.getElementById('option1_ar').value;
+        opt2_ar = document.getElementById('option2_ar').value;
+        opt3_ar = document.getElementById('option3_ar').value;
+        opt4_ar = document.getElementById('option4_ar').value;
+        corr_opt_ar = document.getElementById('correct-option-ar').value;
+
+        error_msg_ar = document.getElementsByClassName('error-message-ar')[0];
+        publish_btn = document.getElementById('publish-btn');
+
+        options.push(opt1_ar, opt2_ar, opt3_ar, opt4_ar);
+        is_exists = options.includes(corr_opt_ar);
+
+        if(!is_exists)
+        {
+            error_msg_ar.classList.remove('d-none');
+            error_msg_ar.classList.add('d-block');
+            publish_btn.setAttribute('disabled', true);
+        }
+        else
+        {
+            error_msg_ar.classList.add('d-none');
+            error_msg_ar.classList.remove('d-block');
+            publish_btn.removeAttribute('disabled');
+
+        }
+    }
+
 
 </script>
 
 @endsection
-

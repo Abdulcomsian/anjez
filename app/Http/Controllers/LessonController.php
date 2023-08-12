@@ -25,15 +25,19 @@ class LessonController extends Controller
         {
             $request->validate([
                 'lesson.title' => 'required',
+                'lesson.title_ar' => 'required',
                 'lesson.video_url' => 'required',
                 'lesson.description' => 'required',
-                'thumbnail' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'lesson.description_ar' => 'required',
+                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
             $is_thumbnail = array_key_exists('thumbnail', $request->all());
             $lessonParam = $request->input('lesson');
             $title = $lessonParam['title'];
+            $title_ar = $lessonParam['title_ar'];
             $videoUrl = $lessonParam['video_url'];
             $description = $lessonParam['description'];
+            $description_ar = $lessonParam['description_ar'];
 
             if(isset($request['lesson_id']) && !empty($request['lesson_id']))
             {
@@ -44,8 +48,10 @@ class LessonController extends Controller
                 $lesson = new Lesson();
             }
             $lesson->title = $title;
+            $lesson->title_ar = $title_ar;
             $lesson->video_url = $videoUrl;
             $lesson->description = $description;
+            $lesson->description_ar = $description_ar;
             $lesson->section_id = $id;
 
             if($is_thumbnail)

@@ -18,6 +18,12 @@ class QuizOption extends Model
         'option4',
         'correct_answer',
         'correct_answer_description',
+        'option1_ar',
+        'option2_ar',
+        'option3_ar',
+        'option4_ar',
+        'correct_answer_ar',
+        'correct_answer_description_ar',
         'quiz_id'
     ];
 }

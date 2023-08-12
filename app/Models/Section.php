@@ -14,7 +14,7 @@ class Section extends Model
 
     protected $table = 'sections';
 
-    protected $fillable = ['id', 'title', 'status', 'course_id'];
+    protected $fillable = ['id', 'title', 'status','title_ar', 'status_ar', 'course_id'];
 
     public function course() :BelongsTo
     {
