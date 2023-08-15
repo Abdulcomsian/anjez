@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Crypt;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 if(!function_exists('countryCode'))
 {
@@ -110,5 +111,13 @@ if (!function_exists('editDateColumn')) {
         $date = new Carbon($date);
 
         return "<span>" . $date->format('h:i A') . "</span> <br> <span class='text-primary fw-bold'>" . $date->format('d/m/Y') . "</span>";
+    }
+}
+
+if( !function_exists('token') )
+{
+    function token ()
+    {
+        return Str::random(64);
     }
 }

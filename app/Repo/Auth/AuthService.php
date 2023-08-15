@@ -2,7 +2,10 @@
 
 namespace App\Repo\Auth;
 
+use App\Events\VerificationEvent;
 use App\Models\User;
+use App\Models\UserVerification;
+use Illuminate\Support\Str;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,8 +18,9 @@ class AuthService implements AuthInterface
         try
         {
             $country_code = countryCode($request['phone_no']);
-            DB::transaction(function () use ($request, $country_code) {
-                $user               = new User();
+            $user               = new User();
+            DB::transaction(function () use ($request, $country_code, $user) {
+                $token = token();
                 $user->first_name   = $request['first_name'] ?? null;
                 $user->last_name    = $request['last_name'] ?? null;
                 $user->email        = $request['email'] ?? null;
@@ -25,8 +29,14 @@ class AuthService implements AuthInterface
                 $user->password     = Hash::make($request['password']);
                 $user->type         = "Student" ?? null;
                 $user->save();
+
+                $user_verification = new UserVerification();
+                $user_verification->user_id = $user->id;
+                $user_verification->token = $token;
+                $user_verification->save();
+                event(new VerificationEvent($user->email, $token));
             });
-            return true;
+            return $user;
         }
         catch (Exception $ex)
         {

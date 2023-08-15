@@ -120,7 +120,7 @@
 
                         <div id="numd" class="mb-3 d-flex flex-column" style="display: none !important;">
                             <label for="phone" class="form-label">{{ __('lang.login_form.phone_number') }}</label>
-                            <input type="tel" id="phone-input" name="phone_no" class="form-control">
+                            <input type="tel" id="phone-input" max="12" name="phone_no" class="form-control">
                         </div>
                         <div>
                             <label for="password" class="form-label">{{ __('lang.login_form.password') }}</label>

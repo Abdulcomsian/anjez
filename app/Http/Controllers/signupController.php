@@ -34,7 +34,7 @@ class signupController extends Controller
         {
             $sign_user = $this->auth_service->signupUser($validated_data);
             if($sign_user)
-                return redirect()->route('login')->with('message','User Added Successfully');
+                return redirect()->route('login')->withInfo("Verification Mail Send to your Email ".$sign_user->email);
             else
                 return redirect()->back()->with('error', 'Something went wrong');
         }

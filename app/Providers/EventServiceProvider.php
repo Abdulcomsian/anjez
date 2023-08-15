@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\VerificationEvent;
+use App\Listeners\VerificationListener;
 use App\Repo\Auth\AuthInterface;
 use App\Repo\Auth\AuthService;
 use App\Repo\Quiz\QuizInterface;
@@ -26,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        VerificationEvent::class => [
+            VerificationListener::class
+        ]
     ];
 
     /**

@@ -21,6 +21,7 @@ use App\Http\Controllers\studentDashboardContrller;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Auth\LoginController as AuthLoginController;
 use App\Http\Controllers\ChangeLanguageController;
+use App\Http\Controllers\UserVerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -195,3 +196,5 @@ Route::controller(StudentScoreController::class)->middleware('auth')->group(func
 });
 
 Route::post('change-language\{id}', [ChangeLanguageController::class, 'changeLanguage'])->name('language.change');
+
+Route::get('user/verify/{token}', [UserVerificationController::class, 'verifyAccount'])->name('user.verify');

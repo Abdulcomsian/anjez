@@ -87,15 +87,15 @@
               <div class="col-6 star course">
                   {{-- <input type="text" class="form-control" id="firstname" /> --}}
                 <label for="status" class="form-label">Status</label>
-                <select class="form-select" name="status" aria-label="Default select example">
+                <select class="form-select" id="status" name="status" aria-label="Default select example">
                     <option value="Active"> Active </option>
                     <option value="Draft"> Draft </option>
                 </select>
               </div>
               <div class="col-6 star course">
                   {{-- <input type="text" class="form-control" id="firstname" /> --}}
-                <label for="status" class="form-label">Status</label>
-                <select class="form-select" name="status_ar" aria-label="Default select example">
+                <label for="status_ar"  class="form-label">Status</label>
+                <select class="form-select" id="status_ar" name="status_ar" aria-label="Default select example">
                     <option value="نشيط"> نشيط </option>
                     <option value="مسودہ"> مسودہ </option>
                 </select>
@@ -182,7 +182,8 @@ $(document).ready(function () {
                     $('#updateSectionModal').modal('show');
                     $('#title').val(response.data.title);
                     $('#title_ar').val(response.data.title_ar);
-                    $('#status').val(response.data.status)
+                    $('#status').val(response.data.status);
+                    // $('#status_ar').val(response.data.status_ar)
                     $('#section_id').val(response.data.id);
                     $('#course_id').val(response.data.course_id);
                 }

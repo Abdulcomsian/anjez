@@ -46,7 +46,7 @@
                         </div>
                         <div class="d-flex flex-column">
                             <label for="phone" class="form-label">{{ __('lang.login_form.phone_number') }}</label>
-                            <input type="tel" id="phone" class="form-control" name="phone_no" placeholder="123456789">
+                            <input type="input" id="phone" class="form-control" name="phone_no" max="12" placeholder="123456789">
                         </div>
                         <div>
                             <label for="password" class="form-label">{{ __('lang.login_form.password') }}</label>
