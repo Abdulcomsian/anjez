@@ -91,7 +91,7 @@
                         <div class="col star course">
                             <label for="title" class="form-label">Title (Ar) </label>
                             {{-- <input type="text" class="form-control" id="title" name="title" /> --}}
-                            <input type="text" class="form-control" id="title" name="lesson[title_ar]" />
+                            <input type="text" class="form-control" id="title_ar" name="lesson[title_ar]" />
                         </div>
 
                     </div>
@@ -158,12 +158,21 @@
                     $('#exampleModalCentertwo').modal('show');
                     console.log(response.data);
                     $('#title').val(response.data.title);
+                    $('#title_ar').val(response.data.title_ar);
                     $('#video_url').val(response.data.video_url)
                     $('#thumbnail').text(response.data.thumbnail);
                     ClassicEditor
                     .create( document.querySelector('#editor') )
                     .then(editor => {
                         editor.setData(response.data.description); // Assuming 'content' is the field containing the CKEditor data in your database
+                    })
+                    .catch( error => {
+                        console.error( error );
+                    } );
+                    ClassicEditor
+                    .create( document.querySelector('#editor_ar') )
+                    .then(editor => {
+                        editor.setData(response.data.description_ar); // Assuming 'content' is the field containing the CKEditor data in your database
                     })
                     .catch( error => {
                         console.error( error );
@@ -200,11 +209,11 @@
         $('#video_url').val('')
     }
 
-    console.log('Before CKEditor initialization');
+    // console.log('Before CKEditor initialization');
     ClassicEditor
         .create( document.querySelector( '#editor' ) )
         .then( editor => {
-            console.log('CKEditor initialized');
+            // console.log('CKEditor initialized');
         } )
         .catch( error => {
             console.error( error );
@@ -212,12 +221,12 @@
     ClassicEditor
         .create( document.querySelector( '#editor_ar' ) )
         .then( editor => {
-            console.log('CKEditor initialized');
+            // console.log('CKEditor initialized');
         } )
         .catch( error => {
             console.error( error );
         } );
-    console.log('After CKEditor initialization');
+    // console.log('After CKEditor initialization');
 
     let cancel_btn = document.getElementsByClassName('can')[0];
     cancel_btn.addEventListener('click', function() {

@@ -37,7 +37,7 @@
                 <div class="col-2"> <span> {{ $key+1 }} </span> </div>
                 <div class="col-2"> <span> {{ $section->title ?? '--' }} </span> </div>
                 <div class="col-2"> <span style="color: #2572CC;"> <a href="{{ route('lessons.index',['id'=>$section->id]) }}" style="text-decoration: none">Lesson: {{ $section->lessons_count }}</a>  </span> </div>
-                <div class="col-2"> @if($section->status == 'active') <span style="color: #1CB104;">{{ $section->status }}</span> @else <span style="color: #e93e28;"> {{ $section->status }}</span> @endif</div>
+                <div class="col-2"> @if($section->status == 'Active') <span style="color: #1CB104;">{{ $section->status }}</span> @else <span style="color: #e93e28;"> {{ $section->status }}</span> @endif</div>
                 <!-- <div class="col-2 dots"><img src="..../../assets/images/dots.png" alt=""></div> -->
                 <div class="col-2 dots">
                 <div class="dropdown dropdown-quiz">
@@ -88,15 +88,15 @@
                   {{-- <input type="text" class="form-control" id="firstname" /> --}}
                 <label for="status" class="form-label">Status</label>
                 <select class="form-select" name="status" aria-label="Default select example">
-                    <option value="active"> Active </option>
-                    <option value="draft"> Draft </option>
+                    <option value="Active"> Active </option>
+                    <option value="Draft"> Draft </option>
                 </select>
               </div>
               <div class="col-6 star course">
                   {{-- <input type="text" class="form-control" id="firstname" /> --}}
                 <label for="status" class="form-label">Status</label>
                 <select class="form-select" name="status_ar" aria-label="Default select example">
-                    <option value="فعال"> فعال </option>
+                    <option value="نشيط"> نشيط </option>
                     <option value="مسودہ"> مسودہ </option>
                 </select>
               </div>
@@ -128,16 +128,27 @@
               <div class="col star course">
                 <input type="hidden" name="course_id" id="course_id">
                 <input type="hidden" name="section_id" id="section_id">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" name="title" id="title" />
+                <label for="title" class="form-label">Title (En) </label>
+                <input type="text" class="form-control" name="title" id="title"/>
+              </div>
+              <div class="col star course">
+                <label for="title" class="form-label">Title (Ar) </label>
+                <input type="text" class="form-control" name="title_ar" id="title_ar"/>
               </div>
             </div>
             <div class="row mt-3">
               <div class="col star course">
-                <label for="status" class="form-label">Status fff</label>
+                <label for="status" class="form-label">Status (En)</label>
                 <select class="form-select" id="status" name="status" aria-label="Default select example">
-                    <option value="active"> Active </option>
-                    <option value="draft"> Draft </option>
+                    <option value="Active"> Active </option>
+                    <option value="Draft"> Draft </option>
+                </select>
+              </div>
+              <div class="col star course">
+                <label for="status" class="form-label">Status (Ar)</label>
+                <select class="form-select" id="status_ar" name="status_ar" aria-label="Default select example">
+                    <option value="نشيط"> نشيط </option>
+                    <option value="مسودة"> مسودة </option>
                 </select>
               </div>
             </div>
@@ -170,6 +181,7 @@ $(document).ready(function () {
                     console.log(response.data);
                     $('#updateSectionModal').modal('show');
                     $('#title').val(response.data.title);
+                    $('#title_ar').val(response.data.title_ar);
                     $('#status').val(response.data.status)
                     $('#section_id').val(response.data.id);
                     $('#course_id').val(response.data.course_id);

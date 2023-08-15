@@ -225,6 +225,12 @@
                     $('#option3').val(response.data.options.option3);
                     $('#option4').val(response.data.options.option4);
                     $('#correct-option').val(response.data.options.correct_answer);
+                    $('#question_ar').val(response.data.question_ar);
+                    $('#option1_ar').val(response.data.options.option1_ar);
+                    $('#option2_ar').val(response.data.options.option2_ar);
+                    $('#option3_ar').val(response.data.options.option3_ar);
+                    $('#option4_ar').val(response.data.options.option4_ar);
+                    $('#correct-option-ar').val(response.data.options.correct_answer_ar);
                     // var editor = ClassicEditor.instances.editor.setData('ddddd');
                     // editor.setData("ddddd");
                     // CKEDITOR.instances.editor.setData( 'sss' );

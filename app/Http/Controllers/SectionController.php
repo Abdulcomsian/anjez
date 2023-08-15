@@ -56,6 +56,8 @@ class SectionController extends Controller
         $validated_data = $this->validate($request,[
             'title'=>'required',
             'status'=>'required',
+            'title_ar'=>'required',
+            'status_ar'=>'required',
             'section_id'=>'required|exists:sections,id',
             'course_id'=>'required|exists:courses,id'
         ]);
