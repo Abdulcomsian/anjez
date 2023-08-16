@@ -63,7 +63,7 @@ class SectionController extends Controller
         ]);
         $section = $this->section->storeOrUpdate($validated_data, $validated_data['section_id']);
         if($section)
-            return redirect()->back()->with('success', 'Section Added Successfully');
+            return redirect()->back()->with('success', 'Section Updated Successfully');
         else
             return redirect()->back()->with('danger', 'Something went wrong');
     }

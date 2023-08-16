@@ -15,9 +15,17 @@ class userController extends Controller
         $this->user = $userInterface;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        if(isset($request['search']))
+        {
+            $search = $request->input('search');
+            $users = User::where('first_name','like', '%' . $search . '%')->get();
+        }
+        else
+        {
+            $users = User::all();
+        }
         return view('backend.users.index', compact('users'));
     }
 
@@ -28,7 +36,6 @@ class userController extends Controller
 
     public function store (Request $request)
     {
-        dd($request->all());
         try
         {
             $validated_data = $this->validate($request,[
@@ -38,7 +45,6 @@ class userController extends Controller
                 'phone_no'  => 'required|numeric',
                 'password'  => 'required'
             ]);
-            dd($validated_data);
             $user = $this->user->store($validated_data);
             if($user)
                 return redirect()->back()->with('success', 'User Created Successfully');

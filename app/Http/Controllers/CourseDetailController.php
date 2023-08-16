@@ -10,8 +10,8 @@ class CourseDetailController extends Controller
     public function courseDetails($id)
     {
         $id = (int)decryptParams($id);
-        $course = Course::with('sections.lessons.quiz_scores')->find($id);
-        $courses = Course::with('sections.lessons.quiz_scores')->get();
+        $course = Course::with('sections.lessons.quiz_scores')->whereStatus('Active')->find($id);
+        $courses = Course::with('sections.lessons.quiz_scores')->whereStatus('Active')->get();
         $is_payment_active = Helper::isPaymentActive();
         $data =
         [

@@ -160,7 +160,7 @@ class LessonController extends Controller
         $data =
         [
             'lesson'    => Lesson::with('quizes.options')->findOrFail($id),
-            'courses'   => Course::with('sections.lessons.quiz_scores')->get()
+            'courses'   => Course::with('sections.lessons.quiz_scores')->whereStatus('Active')->get()
         ];
         return view('frontend.studentdashboard.layouts.lesson.lesson-detail', compact('data'));
     }

@@ -41,14 +41,21 @@ use App\Helpers\Helper;
                                 @else
                                     @php
                                         $link = route('payments');
-                                    @endphp                                
+                                    @endphp
                                 @endif
                                     <div class="col py-2">
                                         <a href="{{ $link }}" style="text-decoration: none" >Lesson {{ $key+1 }} - {{ $lesson->title }}</a>
                                         <?php
                                         try
                                         {
-                                            $percentage = ($lesson->quiz_scores ? $lesson->quiz_scores->score_taken : 0)/($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0)*100;
+                                            if($lesson->is_complete == 0)
+                                            {
+                                                $percentage = ($lesson->quiz_scores ? $lesson->quiz_scores->score_taken : 0)/($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0)*100;
+                                            }
+                                            else
+                                            {
+                                                $percentage = 100;
+                                            }
                                         }
                                         catch (\Throwable $th)
                                         {
@@ -68,8 +75,8 @@ use App\Helpers\Helper;
                                                 @endif
                                             @else
                                             <div class="cate mt-2 ">
-                                                    <img src="{{ asset('assets/images/crown.png') }}" alt=""> 
-                                            </div>   
+                                                    <img src="{{ asset('assets/images/crown.png') }}" alt="">
+                                            </div>
                                             @endif
                                     </div>
                                 @endforeach

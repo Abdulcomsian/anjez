@@ -139,14 +139,14 @@
             <div class="row mt-3">
               <div class="col star course">
                 <label for="status" class="form-label">Status (En)</label>
-                <select class="form-select" id="status" name="status" aria-label="Default select example">
+                <select class="form-select" id="status_update_en" name="status" aria-label="Default select example">
                     <option value="Active"> Active </option>
                     <option value="Draft"> Draft </option>
                 </select>
               </div>
               <div class="col star course">
                 <label for="status" class="form-label">Status (Ar)</label>
-                <select class="form-select" id="status_ar" name="status_ar" aria-label="Default select example">
+                <select class="form-select" id="status_update_ar" name="status_ar" aria-label="Default select example">
                     <option value="نشيط"> نشيط </option>
                     <option value="مسودة"> مسودة </option>
                 </select>
@@ -178,12 +178,11 @@ $(document).ready(function () {
             success: function (response) {
                 if(response.status)
                 {
-                    console.log(response.data);
                     $('#updateSectionModal').modal('show');
                     $('#title').val(response.data.title);
                     $('#title_ar').val(response.data.title_ar);
-                    $('#status').val(response.data.status);
-                    // $('#status_ar').val(response.data.status_ar)
+                    $('#status_update_en').val(response.data.status);
+                    $('#status_update_ar').val(response.data.status_ar)
                     $('#section_id').val(response.data.id);
                     $('#course_id').val(response.data.course_id);
                 }

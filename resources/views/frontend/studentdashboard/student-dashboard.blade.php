@@ -29,9 +29,10 @@
                             @if(isset($course->feature_image))
                                 <img src="{{ asset('assets/courses-content/course-images/'.$course->feature_image) }}" class="card-img-top img-fluid" alt="..." />
 
-                                @else
-                                <img src="./assets/images/8138748 1.png" class="card-img-top img-fluid" alt="..." />
-                                @endif
+                            @else
+                                <img src="http://via.placeholder.com/640x360" width="180" height="120" />
+                                {{-- <img src="./assets/images/8138748 1.png" class="card-img-top img-fluid" alt="..." /> --}}
+                            @endif
                             </div>
                             </a>
                         <div class="card-body">

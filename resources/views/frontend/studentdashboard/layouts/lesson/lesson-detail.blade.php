@@ -26,26 +26,43 @@
                                     <p id="description">{!! $data['lesson']->description !!}</p>
                                 </div>
                             </div>
+                            <?php
+                                try
+                                {
+                                    if($data['lesson']->is_complete == 0)
+                                    {
+                                        $percentage = ($data['lesson']->quiz_scores ? $data['lesson']->quiz_scores->score_taken : 0)/($data['lesson']->quiz_scores ? $data['lesson']->quiz_scores->total_score : 0)*100;
+                                    }
+                                    else
+                                    {
+                                        $percentage = 100;
+                                    }
+                                }
+                                catch (\Throwable $th)
+                                {
+                                    $percentage = 0;
+                                }
+                            ?>
                             <div class="progress">
-                                <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar" style="width:{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+
+                                {{-- <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div> --}}
                             </div>
                         </div>
                         <div class="embed-responsive embed-responsive-21by9 mt-4" id="video-container">
-                            {{-- <video id="myVideo" class="embed-responsive-item" src="./assets/videos/THAILAND IN 30 SECONDS - CINEMATIC VIDEO- 4k.mp4" controls=""></video> --}}
                             {!!$data['lesson']->video_url!!}
-
-                            <button id="video-button" data-toggle="modal" data-target="#exampleModal">Test Your
-                                Knowledge</button>
+                            {{-- <button id="video-button" data-toggle="modal" data-target="#exampleModal">Test Your
+                                Knowledge</button> --}}
 
                         </div>
                         <div class="course-test-div row mt-4 justify-content-between">
                             @if(isset($data['lesson']->thumbnail) && !empty($data['lesson']->thumbnail) && !is_null($data['lesson']->thumbnail))
                                 <div class="col-4 attachment-dropdown">
                                     <div class="dropdown">
-                                        <button class="btn attach dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 10px; border-radius: 8px;">
+                                        <button class="btn attach dropdown-toggle" type="button" id="courseAttachmentMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 10px; border-radius: 8px;">
                                             Course Attachments
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <div class="dropdown-menu" aria-labelledby="courseAttachmentMenuButton">
                                             <a class="dropdown-item" target="_blank" href="{{ asset('assets/courses-content/lesson-images/'.$data['lesson']->thumbnail) }}">{{ $data['lesson']->thumbnail }}</a>
                                         </div>
                                     </div>
@@ -53,18 +70,18 @@
                             @endif
 
                             @if(count($data['lesson']->quizes)>0)
-                                <div class="@if(count($data['lesson']->quizes)>0) offset-8 @endif col-4 d-flex justify-content-end test-knowledge-btn">
+                                <div class="@if(count($data['lesson']->quizes)<=0) offset-8 @endif col-4 d-flex justify-content-end test-knowledge-btn">
                                     <button class="video-button-2" style="padding: 10px; border-radius: 8px;" id="test_quiz_btn">Test Your
                                         Knowledge
                                     </button>
                                 </div>
                             @else
-                                <div class="offset-8 col-4 d-flex justify-content-end">
-                                    <a href="{{ route('lesson.mark-as-read',['id'=>$data['lesson']->id]) }}">
-                                        <button class="mark-as-read" style="padding: 10px; border-radius: 8px;">Mark As Read
-                                        </button>
-                                    </a>
-                                </div>
+                            <div class="offset-8 col-4 d-flex justify-content-end">
+                                <a href="{{ route('lesson.mark-as-read',['id'=>$data['lesson']->id]) }}">
+                                    <button class="mark-as-read" style="padding: 10px; border-radius: 8px;">Mark As Read
+                                    </button>
+                                </a>
+                            </div>
                             @endif
                         </div>
                     </div>
@@ -129,7 +146,7 @@
 </div>
 
 <script>
-    $(document).on('click','#dropdownMenuButton', function(){
+    $(document).on('click','#courseAttachmentMenuButton', function(){
         $('.dropdown-menu').toggleClass('show');
     });
 
@@ -447,9 +464,7 @@ function restartQuiz()
                 {
                     $('.options').empty();
                     $('.test-knowledge-btn').addClass('d-none');
-
                     $('#currQuesNum').text(0);
-
                     $('.correct_answer').val('');
                     $('.ques').text('')
                     let quiz_qstns_length = 0;
@@ -461,7 +476,6 @@ function restartQuiz()
     $('.modal-body').empty();
     if(total_qstns == 1)
     {
-        console.log("if", total_qstns);
         $('.modal-body').append(`<div class="d-flex flex-column">
         <h5> Answer the questions below</h5>
         <p class="m-auto"><span id="currQuesNum"></span> / <span

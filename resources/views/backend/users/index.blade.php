@@ -14,34 +14,39 @@
             data-bs-toggle="modal" data-bs-target="#exampleModal"> + Add Users
           </button></div>
       </div>
-      <div class="row aa d-flex justify-content-between"
-        style="background-color:  #c4bfff21;  border-radius:0.2rem ;">
-        <div class="col-md-5 py-2">
-          <input type="text" class="iconss py-2" value placeholder="Search by name">
-        </div>
-        <div class="col-md-6 py-2 d-flex justify-content-end">
-          <button class="d-flex justify-content-between px-3 pt-2" type="submit"> <img class="pt-1"
-              src="{{ url('assets/images/button icon.png') }}" alt="" style="margin-right: 1%;"> Filter </button>
-        </div>
-      </div>
+      <form method="GET">
+          <div class="row aa d-flex justify-content-between"
+            style="background-color:  #c4bfff21;  border-radius:0.2rem ;">
+            <div class="col-md-5 py-2">
+              <input type="text" class="iconss py-2" name="search" value placeholder="Search by name">
+            </div>
+            <div class="col-md-6 py-2 d-flex justify-content-end">
+              <button class="d-flex justify-content-between px-3 pt-2" type="submit"> <img class="pt-1"
+                  src="{{ url('assets/images/button icon.png') }}" alt="" style="margin-right: 1%;"> Filter </button>
+            </div>
+          </div>
+      </form>
       <hr>
       <div class="row up pt-3">
-        <div class="col-2"> FIRST NAME </div>
-        <div class="col-2"> LAST NAME </div>
-        <div class="col-2"> ROLE </div>
-        <div class="col-2">EMAIL</div>
-        <div class="col-2">PHONE NO</div>
-        <div class="col-2">CREATED AT</div>
+        <div class="col-2"> Name </div>
+        <div class="col-3"> Email </div>
+        <div class="col-2"> BILING DATE </div>
+        <div class="col-2">STATUS</div>
+        <div class="col-2">AMOUNT</div>
+        {{-- <div class="col-2">CREATED AT</div> --}}
       </div>
       <hr>
       @forelse ($users as $user)
         <div class="row py-2">
-            <div class="col-2"><span class="ms-sm-2 named"> {{ $user->first_name ?? '--' }}</span></div>
-            <div class="col-2 named"> <span> {{ $user->last_name ?? '--' }} </span> </div>
-            <div class="col-2 named"> <span> {{ $user->type ?? '--' }} </span> </div>
-            <div class="col-2 named"> <span> {{ $user->email ?? '--' }} </span> </div>
-            <div class="col-2">{{ $user->phone_no ?? '' }}</div>
-            <div class="col-2"><div class="amount"> {{ dateConversion($user->created_at ?? '') ?? '--' }} </div></div>
+            <div class="col-2" style="word-wrap: break-word;padding-left: 30px;">
+                <input class="form-check-input" type="checkbox" value="" id="{{ $user['id'] }}">
+                <span class="ms-sm-2 named"> {{ $user->first_name ?? '- -' }}</span>
+            </div>
+            <div class="col-3 named" style="word-wrap: break-word;"> <span> {{ $user->email ?? '- -' }} </span> </div>
+            <div class="col-2 named" style="word-wrap: break-word;"> <span> - - </span> </div>
+            <div class="col-2 named" style="word-wrap: break-word;"> <span> - - </span> </div>
+            <div class="col-2" style="word-wrap: break-word;"> - - </div>
+            {{-- <div class="col-2" style="word-wrap: break-word;"><div class="amount"> {{ $user->created_at ? dateConversion($user->created_at) : '- -' }} </div></div> --}}
         </div>
         <hr>
       @empty

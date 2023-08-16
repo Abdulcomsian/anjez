@@ -27,24 +27,24 @@
             </div>
             <hr>
             <div class="row courses d-flex justify-content-between">
-                <div class="col-2"> <span> ID </span> </div>
+                <div class="col-1"> <span> ID </span> </div>
                 <div class="col-2"> <span> TITLE </span> </div>
-                <div class="col-2"> <span> CONTENT </span> </div>
-                <div class="col-2"> <span> QUIZ </span></div>
-                <div class="col-2"> <span> STATUS </span></div>
-                <div class="col-2"> <span> ACTION </span></div>
+                <div class="col-5"> <span> Video URL </span> </div>
+                <div class="col-1"> <span> QUIZ </span></div>
+                <div class="col-1"> <span> STATUS </span></div>
+                <div class="col-1"> <span> ACTION </span></div>
             </div>
             <hr class="mt-4">
 
             <!-- Iterate over lesson data -->
             @foreach ($lessons as $key=>$lesson)
             <div class="row course d-flex justify-content-between mt-2">
-                <div class="col-2"> <span> {{ $key+1 }} </span> </div>
+                <div class="col-1"> <span> {{ $key+1 }} </span> </div>
                 <div class="col-2"> <span> {{ $lesson->title }} </span> </div>
-                <div class="col-2"> <span style="color: #2572CC;"> {{ $lesson->video_url }} </span> </div>
-                <div class="col-2"> <span style="color: #2572CC;"> Quiz :{{ $lesson->quizes_count }} </span></div>
-                <div class="col-2"> <span style="color: #1CB104;"> Active </span></div>
-                <div class="col-2 dots">
+                <div class="col-5"> <span style="color: #2572CC;"> {{ $lesson->video_url }} </span> </div>
+                <div class="col-1"> <span style="color: #2572CC;"> Quiz :{{ $lesson->quizes_count }} </span></div>
+                <div class="col-1"> <span style="color: #1CB104;"> Active </span></div>
+                <div class="col-1 dots">
                     <div class="dropdown dropdown-quiz">
                         <img class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="">

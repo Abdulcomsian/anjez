@@ -44,7 +44,7 @@
             <div class="row course mt-2">
                 <div class="col-1"> <span> {{ $key+1 }} </span> </div>
                 <div class="col-3"> <span style="color: #2572CC;"><a href="{{ route('section.index', ['id'=>$course->id]) }}" style="text-decoration: none"> {{ $course->title ?? '--' }}</a> </span> </div>
-                <div class="col-2"> <img src="{{ url('assets/courses-content/course-images/'.$course->feature_image) }}" alt=""> </div>
+                <div class="col-2"> @if(isset($course->feature_image) && !is_null($course->feature_image)) <img src="{{ url('assets/courses-content/course-images/'.$course->feature_image) }}" alt=""> @else <img src="http://via.placeholder.com/640x360" /> @endif </div>
                 <div class="col-2"> <span> {{ $course['sections_count'] }} </span> </div>
                 <div class="col-1"><span> {{ $course->price }} </span></div>
                 <div class="col-2"> @if($course->status == 'Active') <span style="color: #1CB104;">{{ $course->status }}</span> @else <span style="color: #e93e28;"> {{ $course->status }}</span> @endif</div>
