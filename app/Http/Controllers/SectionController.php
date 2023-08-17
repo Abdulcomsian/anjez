@@ -16,13 +16,24 @@ class SectionController extends Controller
         $this->section = $sectionInterface;
     }
 
-    public function index($id)
+    public function index(Request $request, $id)
     {
-        $data =
-        [
-            'id'       => (int)$id,
-            'sections' => Section::withCount('lessons')->where('course_id', $id)->get(),
-        ];
+        if($request->input('search'))
+        {
+            $data =
+            [
+                'id'       => (int)$id,
+                'sections' => Section::withCount('lessons')->where('course_id', $id)->where('title', 'like', '%' . $request->input('search') . '%')->get(),
+            ];
+        }
+        else
+        {
+            $data =
+            [
+                'id'       => (int)$id,
+                'sections' => Section::withCount('lessons')->where('course_id', $id)->get(),
+            ];
+        }
         return view('backend.section.index', compact('data'));
     }
 

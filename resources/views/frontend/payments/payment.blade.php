@@ -4,7 +4,6 @@
 {{-- <div>
     <div class="container pricing">
         <div class="row d-flex justify-content-between mt-5 px-5 py-5">
-            <!-- left  -->
             <div class="col-lg-6 mt-2">
                 <div class="row">
                     <div class="price"> Pricing </div>
@@ -15,7 +14,6 @@
                 <div class="row">
                     <div class="price-text">Select a plan to watch unlimited videos </div>
                 </div>
-                <!-- accordian  -->
                 <div class="row mt-5">
                       <div class="accordion " id="accordionExample" style="padding-left: 0.8rem !important;">
                         <div class="accordion-item">
@@ -59,10 +57,16 @@
                 </div>
             </div>
             <div class="col-lg-5 mt-5">
+                <div class="row mt-4">
+                    <a class="" href="{{route('payments')}}">Stripe</a>
+                    <a class="" href="{{route('tabby')}}">Tabby</a>
+                  </div>
                  <div class="cards" >
                     <div class="cards-heading m-auto "> <p class="pt-2">Enter Card Information </p>  </div>
                     <div class="row">
-                        <form>
+                      <form id="payment-form" action="{{ route('process-payment') }}" method="POST">
+                        <input type="hidden" name="payment_intent_id" value="{{ $paymentIntent->id }}">
+
                             <div id="cards ">
                               <label for="card-number" class="form-label labelss mt-4 px-2 d-flex justify-content-start">Card Number</label>
                              <div class="centers d-flex justify-content-center">
@@ -109,7 +113,6 @@
                             </div>
 
                           </div>
-                       </form>
                   </div>
 
                     <div class="col-sm-2 mt-4">
@@ -124,13 +127,13 @@
                 </div>
                 <button class="card-button mt-3" type="submit">Continue</button>
             </div>
+        </form>
         </div>
     </div>
 </div> --}}
 <div>
   <div class="container pricing">
       <div class="row d-flex justify-content-between mt-5 px-5 py-5">
-          <!-- left  -->
           <div class="col-lg-6 mt-2">
               <div class="row">
                   <div class="price"> Pricing </div>
@@ -141,7 +144,6 @@
               <div class="row">
                   <div class="price-text">Select a plan to watch unlimited videos </div>
               </div>
-              <!-- accordian  -->
               <div class="row mt-5">
                     <div class="accordion " id="accordionExample" style="padding-left: 0.8rem !important;">
                       <div class="accordion-item">
@@ -186,29 +188,31 @@
           </div>
           <div class="col-lg-5 mt-5">
               <div class="row mt-4">
-                <a class="" href="{{route('payments')}}">Stripe</a>
-                <a class="" href="{{route('tabby')}}">Tabby</a>
+                <div class="col-md-6">
+                    <a class="" href="{{route('payments')}}">Stripe</a>
+                </div>
+                <div class="col-md-6">
+                    <a class="" href="{{route('tabby')}}">Tabby</a>
+                </div>
               </div>
                <div class="cards" >
-                    
-                      <div class="cards-heading m-auto "> <p class="pt-2">Enter Card Information </p>  </div>
+
+                      <div class="cards-heading m-auto "> <p class="pt-2" style="font-weight: bold">Enter Card Information </p>  </div>
                       <form id="payment-form" action="{{ route('process-payment') }}" method="POST">
                         @csrf
-                        
-                        <div class="form-group">
-                            <label for="card-element">Card Details</label>
+
+                        <div class="row form-group" style="margin-left: 7px;margin-right: 5px;">
+                            <label for="card-element" style="text-align: center;margin-top: 15px;margin-bottom: 42px;;font-weight: bold;font-size: 20px;">Card Details</label>
                             <div id="card-element">
-                                <!-- A Stripe Element will be inserted here. -->
                             </div>
-                            <!-- Used to display form errors. -->
                             <div id="card-errors" role="alert"></div>
                         </div>
-                        
+
                         <input type="hidden" name="payment_intent_id" value="{{ $paymentIntent->id }}">
-                        
-                        <button type="submit" class="btn btn-primary">Pay Now</button>
+
+                        <button type="submit" class="btn btn-primary w-75" style="background-color: #0d6efd !important; margin-top: 45px;margin-left: 45px;">Pay Now</button>
                       </form>
-            
+
                 </div>
             </div>
 
@@ -218,22 +222,28 @@
       </div>
   </div>
 </div>
+<style>
+    .__PrivateStripeElement {
+        padding: 11px !important;
+        border: 1px solid black !important;
+    }
+</style>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     const stripe = Stripe('{{ config('services.stripe.key') }}');
     const elements = stripe.elements();
     const cardElement = elements.create('card');
-    
+
     cardElement.mount('#card-element');
-    
+
     const form = document.getElementById('payment-form');
     const errorDiv = document.getElementById('card-errors');
-    
+
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
-        
+
         const { token, error } = await stripe.createToken(cardElement);
-        
+
         if (error) {
             errorDiv.textContent = error.message;
         } else {
@@ -243,7 +253,7 @@
             tokenInput.name = 'payment_method_id';
             tokenInput.value = token.id;
             form.appendChild(tokenInput);
-            
+
             form.submit();
         }
     });

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-  
+
 use Illuminate\Http\Request;
 use App\Models\Plan;
 use App\Models\User;
@@ -25,10 +25,10 @@ class PlanController extends Controller
     public function index()
     {
         $plans = Plan::get();
-  
+
         return view("plans", compact("plans"));
-    }  
-  
+    }
+
     /**
      * Write code on Method
      *
@@ -37,7 +37,7 @@ class PlanController extends Controller
     public function show(Plan $plan, Request $request)
     {
         $intent = auth()->user()->createSetupIntent();
-  
+
         return view("subscription", compact("plan", "intent"));
     }
     /**
@@ -48,10 +48,10 @@ class PlanController extends Controller
     public function subscription(Request $request)
     {
         $plan = Plan::find($request->plan);
-  
+
         $subscription = $request->user()->newSubscription($request->plan, $plan->stripe_plan)
                         ->create($request->token);
-  
+
         return view("subscription_success");
     }
 
@@ -61,15 +61,15 @@ class PlanController extends Controller
             $user = auth()->user();
 
             // dd($user->subscribed('price_1NcjMPJNSwm9Bv4bCFDo07bW'));
-            
+
             $isActiveSubscription = $user->subscribed(2);
 
             dd($isActiveSubscription);
-        
+
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
-       
+
 
     }
 
@@ -78,13 +78,13 @@ class PlanController extends Controller
         // Verify the webhook signature
         Stripe::setApiKey(config('services.stripe.secret'));
         $endpoint_secret = config('services.stripe.webhook_secret');
-        
+
         $payload = $request->getContent();
         $sig_header = $request->header('Stripe-Signature');
-        
+
         try {
             $event = Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
-            
+
             if ($event->type === 'customer.subscription.deleted') {
                 $subscription = $event->data->object;
 
@@ -105,7 +105,7 @@ class PlanController extends Controller
                     }
                 }
             }
-            
+
             return response()->json(['status' => 'success']);
         } catch (\Exception $e) {
             Log::error($e);
@@ -164,8 +164,8 @@ class PlanController extends Controller
             $payment->user_id = auth()->user()->id;
             $payment->status = 'active';
             $payment->start_date = Carbon::now();
-            $payment->end_date = Carbon::now()->addYear(); // Adding 
-            $payment->payment_method = 'stripe'; 
+            $payment->end_date = Carbon::now()->addYear(); // Adding
+            $payment->payment_method = 'stripe';
             $payment->save();
         }
 
@@ -234,8 +234,8 @@ class PlanController extends Controller
             $payment->user_id = auth()->user()->id;
             $payment->status = 'active';
             $payment->start_date = Carbon::now();
-            $payment->end_date = Carbon::now()->addYear(); // Adding 
-            $payment->payment_method = 'tabby'; 
+            $payment->end_date = Carbon::now()->addYear(); // Adding
+            $payment->payment_method = 'tabby';
             $payment->save();
             return redirect()->route('studentdashboard.student-dashboard');
     }

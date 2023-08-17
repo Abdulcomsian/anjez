@@ -26,7 +26,7 @@ use App\Helpers\Helper;
                         <div class="col-7 textss text-start ">
                             <span>{!! $data['course']->description !!}</span>
                         </div>
-                        <div class="col mt-3"> <button class="px-4" type="button"> <a href="/payment.html">
+                        <div class="col mt-3"> <button class="px-4" type="button"> <a href="{{ route('payments') }}">
                                     Subscribe </a> </button></div>
                     </div>
                     <div class="contents px-4 mt-4 pt-1">

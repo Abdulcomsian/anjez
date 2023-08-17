@@ -14,9 +14,18 @@ class CourseController extends Controller
 {
     use Image;
 
-    public function index()
+    public function index(Request $request)
     {
-        $courses = Course::withCount('sections')->where('user_id', auth()->user()->id)->get();
+        if($request->input('search'))
+        {
+            $courses = Course::withCount('sections')->where('user_id', auth()->user()->id)->where('title', 'like', '%' . $request->input('search') . '%')->get();
+        }
+        else
+        {
+            $courses = Course::withCount('sections')->where('user_id', auth()->user()->id)->get();
+        }
+            // ->orWhere('name', 'like', '%' . Input::get('name') . '%')->get();
+        // dd($request->all());
         return view('backend.courses.index', compact('courses'));
     }
 

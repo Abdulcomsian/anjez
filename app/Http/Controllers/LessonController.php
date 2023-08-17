@@ -13,9 +13,16 @@ use Illuminate\Support\Facades\File;
 class LessonController extends Controller
 {
     use Image;
-    public function index($id)
+    public function index(Request $request, $id)
     {
-        $lessons = Lesson::where('section_id', $id)->withCount('quizes')->orderBy('id', 'desc')->get();
+        if($request->input('search'))
+        {
+            $lessons = Lesson::where('section_id', $id)->where('title', 'like', '%' . $request->input('search') . '%')->withCount('quizes')->orderBy('id', 'desc')->get();
+        }
+        else
+        {
+            $lessons = Lesson::where('section_id', $id)->withCount('quizes')->orderBy('id', 'desc')->get();
+        }
         return view('backend.lesson.index', compact('lessons', 'id'));
     }
 
