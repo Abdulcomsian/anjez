@@ -16,13 +16,15 @@ use App\Helpers\Helper;
                         <div class="col  d-flex justify-content-start">
                             <div class="subject-heading"> {{ $data['course']->title }} </div>
                         </div>
-                        <div class="col d-flex justify-content-end">
-                            <div class="py-2">
-                                <input type="text" class="icons py-1  " value="" placeholder="Search">
+                        {{-- <form method="GET"> uncomment for later use
+                            <div class="col d-flex justify-content-end">
+                                <div class="py-2">
+                                    <input type="text" name="search" class="icons py-1  " value="" placeholder="Search">
+                                </div>
                             </div>
-                        </div>
+                        </form> --}}
                     </div>
-                    <div class="row flex-column">
+                    <div class="row flex-column mt-2">
                         <div class="col-7 textss text-start ">
                             <span>{!! $data['course']->description !!}</span>
                         </div>

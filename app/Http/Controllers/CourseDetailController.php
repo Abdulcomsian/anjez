@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Helpers\Helper;
 
 class CourseDetailController extends Controller
 {
-    public function courseDetails($id)
+    public function courseDetails(Request $request, $id)
     {
+        // ->where('title', 'like', '%' . $request->input('search') . '%'),
+
         $id = (int)decryptParams($id);
         $course = Course::with('sections.lessons.quiz_scores')->whereStatus('Active')->find($id);
         $courses = Course::with('sections.lessons.quiz_scores')->whereStatus('Active')->get();

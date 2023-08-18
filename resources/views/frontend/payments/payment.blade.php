@@ -187,13 +187,15 @@
               </div>
           </div>
           <div class="col-lg-5 mt-5">
-              <div class="row mt-4">
-                <div class="col-md-6">
-                    <a class="" href="{{route('payments')}}">Stripe</a>
-                </div>
-                <div class="col-md-6">
-                    <a class="" href="{{route('tabby')}}">Tabby</a>
-                </div>
+              <div class="row mt-4 mb-1">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" style="color: #0d6efd" aria-current="page" href="{{route('payments')}}">Stripe</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #495057" href="{{route('tabby')}}">Tabby</a>
+                    </li>
+                  </ul>
               </div>
                <div class="cards" >
 

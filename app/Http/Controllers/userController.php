@@ -20,11 +20,11 @@ class userController extends Controller
         if(isset($request['search']))
         {
             $search = $request->input('search');
-            $users = User::where('first_name','like', '%' . $search . '%')->get();
+            $users = User::join('payments', 'users.id', 'payments.user_id')->where('first_name','like', '%' . $search . '%')->get();
         }
         else
         {
-            $users = User::all();
+            $users = User::join('payments', 'users.id', 'payments.user_id')->get();
         }
         return view('backend.users.index', compact('users'));
     }
