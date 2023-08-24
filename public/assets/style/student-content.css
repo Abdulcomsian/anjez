@@ -1,0 +1,494 @@
+body {
+  background-color: #c4bfff21 !important;
+  width: 100%;
+}
+
+/* Navbar */
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-collapse {
+    justify-content: flex-end;
+  }
+}
+
+.navbar {
+  background-color: #fff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navbar-nav > .nav-item > .nav-link {
+  font-family: "Noto Sans";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  color: #3d474d !important;
+}
+
+.navbar-nav > .nav-item > .profile-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navbar-nav > .nav-item > .language-change {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-nav > .nav-item > .profile-content > div > img {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.navbar-nav > li > a > button {
+  background: #7e5bf6;
+  border-radius: 4px;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1620px !important;
+  }
+}
+
+/* Sidebar */
+.font-noto-sans {
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  /* margin-top: 50px !important; */
+  color: #9a9a9a;
+  height: auto;
+}
+
+.menu-item-icon {
+  color: #9a9a9a;
+}
+
+.nav > .menu-item-active {
+  background-color: #7e5bf61f;
+}
+
+.nav > .menu-item-active > a > .font-noto-sans {
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+
+  color: #000000;
+}
+
+.nav > .menu-item-active > a > .menu-item-icon {
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+
+  color: #000000;
+}
+.dropdown-toggle {
+  color: black;
+}
+.dropdown-toggle:hover {
+  color: #000000;
+  text-decoration: none;
+}
+.dropdown-menu {
+  border: none !important;
+}
+.dropdown-menu > li > a {
+  color: black;
+}
+
+/* rigt side  */
+.toggles {
+  display: none;
+}
+.subject {
+  font-family: "Manrope";
+  /* font-family: "Noto Sans"; */
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 13px;
+}
+.sub-name0 {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  display: grid;
+  place-items: center;
+  background: #7b61ff;
+}
+.sub-name1 {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  display: grid;
+  place-items: center;
+  background: #ff6187;
+}
+.sub-name2 {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  display: grid;
+  place-items: center;
+  background: #52ccc5;
+}
+.sub-name3 {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  display: grid;
+  place-items: center;
+  background: #fbba15;
+}
+.sub-name > span {
+  font-family: "Manrope";
+  /* font-family: "Noto Sans"; */
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 100%;
+}
+.sub-name1 > span {
+  font-family: "Manrope";
+  /* font-family: "Noto Sans"; */
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 100%;
+}
+.sub-name2 > span {
+  font-family: "Manrope";
+  /* font-family: "Noto Sans"; */
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 100%;
+}
+.sub-name3 > span {
+  font-family: "Manrope";
+  /* font-family: "Noto Sans"; */
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 100%;
+}
+
+/* dropdown two  */
+.two {
+  border-left: 2px solid #d0d5dd;
+  margin-left: 3rem;
+}
+.two > a {
+  color: black;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 18px;
+  font-family: "Manrope";
+  /* font-family: "Noto Sans"; */
+}
+.two > a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+/* dropdown three  */
+.three > a {
+  color: black;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 18px;
+  font-family: "Manrope";
+  /* font-family: "Noto Sans"; */
+}
+.three > a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+/* content */
+.student-content {
+  padding-top: 2%;
+  padding-left: 7%;
+  padding-right: 7%;
+  padding-bottom: 7%;
+}
+.subject-heading {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 100%;
+  font-family: "Noto Sans";
+}
+
+.icons {
+  /* background: url(/assets//images/magnifying-glass-solid.svg) no-repeat; */
+  background: url(../images/search-main.png) no-repeat;
+  background-size: 9%;
+  background-color: white;
+  border: none;
+  outline: none;
+  background-position: 10px 9px;
+  padding-left: 3rem;
+  font-family: "Noto Sans" !important;
+  height: 2.5rem;
+  border-radius: 0.9rem;
+}
+.contents {
+  background-color: white;
+}
+.contents-heading {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 100%;
+  font-family: "Noto Sans";
+}
+.col-7 > span {
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20.8px;
+  color: #9a9aa2;
+}
+
+.col > button {
+  background: #7e5bf6;
+  border-radius: 4px !important;
+  border: none;
+  color: #ffff;
+  height: 3rem;
+  font-weight: 700;
+  font-size: 16px;
+  font-family: "DM Sans" !important;
+}
+.col > button > a {
+  background: #7e5bf6 !important;
+  border-radius: 4px !important;
+  border: none;
+  color: #ffff !important;
+  height: 3rem;
+  font-weight: 700;
+  font-size: 16px !important;
+  font-family: "DM Sans";
+}
+.col > button > a:hover {
+  text-decoration: none;
+}
+.contents > .row > .col > p {
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  color: #2572cc;
+}
+.progress {
+  height: 0.5rem !important;
+}
+.cate {
+  width: 2.9rem;
+  height: 1.5rem;
+  background: rgba(28, 177, 4, 0.2);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-right: 90px !important;
+}
+.cate > p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 100%;
+  font-family: "Noto Sans";
+  color: #137903;
+  margin-top: 6px;
+}
+.cate-2 {
+  width: 1.9rem;
+  height: 1.5rem;
+  background: rgba(255, 210, 40, 0.2);
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+}
+.cate-2 > img {
+  width: 60%;
+  height: 50%;
+}
+
+/* <!-- lesson videos lectures  --> */
+.lecture {
+  padding-top: 2%;
+  padding-left: 7%;
+  padding-right: 7%;
+  padding-bottom: 7%;
+}
+.lecture > .upss > .row > .col > span {
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  color: #000000;
+}
+.cates {
+  width: 2.9rem;
+  height: 1.5rem;
+  background: rgba(28, 177, 4, 0.2);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-right: 90px !important;
+}
+.cates > p {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 100%;
+  font-family: "Noto Sans";
+  color: #137903;
+  margin-top: 6px;
+}
+.lecture > .upss > .row > .col > p {
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 130%;
+  display: flex;
+  align-items: center;
+  color: #9a9aa2;
+}
+.upss {
+  border-radius: 4px;
+}
+.video {
+  box-sizing: border-box;
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.btn {
+  background-color: white !important;
+  outline: none !important;
+}
+.attach {
+  font-family: "Noto Sans" !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  line-height: 100%;
+  color: black !important;
+}
+.btn-two {
+  background-color: #1da5df !important;
+  color: white !important;
+  height: 2.5rem !important;
+}
+.btn-one {
+  background-color: #cbcbcb !important;
+  color: white !important;
+  height: 2.5rem !important;
+}
+
+.dis {
+  display: none;
+}
+.actives {
+  background: rgba(217, 217, 217, 0.28);
+}
+
+.jane > span {
+  font-family: "Nunito";
+  font-weight: 600;
+  font-size: 16px;
+}
+#restartBtn2 > a {
+  color: #7e5bf6;
+}
+#restartBtn2 > a:hover {
+  color: #7e5bf6;
+  text-decoration: none;
+  font-family: "Segoe UI";
+  font-size: 18px;
+  font-weight: 600;
+  transition: none !important;
+}
+.button-container {
+  display: flex;
+  gap: 25px;
+}
+.quiz-button {
+  min-width: 200px;
+}
+
+
+
+/* video button  */
+.embed-responsive > button{
+  position: relative;
+  /* border: 1px solid red; */
+  width: 11.2rem !important;
+  display: grid;
+  place-items: center;
+  padding-left: 2px;
+  padding-right: 2px;
+
+}
+
+.embed-responsive > #video-button {
+  transform: translate(-45%, -180%);
+  display: none;
+  background-color: #7E5BF6;
+  color: white;
+  border-radius: 6px;
+  /* width: 20%; */
+  width: 100% ;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-left: 87%;
+}
+
+#video-container {
+  position: relative;
+}
+
+ @media (max-width:1115px){
+  .embed-responsive > #video-button  {
+    margin-left: 80%;
+  }
+ }
+ @media (max-width:840px){
+  .embed-responsive > #video-button  {
+    margin-left: 50%;
+    margin-top: 50%;
+  }
+ }
+
+ @media (max-width:578px) {
+
+ }

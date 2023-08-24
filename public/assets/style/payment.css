@@ -1,0 +1,206 @@
+body {
+  background-color: #c4bfff21 !important;
+  width: 100%;
+}
+
+/* Navbar */
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-collapse {
+    justify-content: flex-end;
+  }
+}
+
+.navbar {
+  background-color: #fff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navbar-nav > .nav-item > .nav-link {
+  font-family: "Noto Sans" !important;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  color: #3d474d !important;
+}
+
+.navbar-nav > .nav-item > .profile-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.jane > span {
+  font-family: "Nunito" !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+}
+
+.navbar-nav > .nav-item > .language-change {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-nav > .nav-item > .profile-content > div > img {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.navbar-nav > li > a > button {
+  background: #7e5bf6;
+  border-radius: 4px;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1620px !important;
+  }
+}
+
+/* contetn  */
+.pricing {
+  background-color: white;
+  min-height: 70vh;
+}
+.price {
+  color: #7e5bf6;
+  font-family: "Noto Sans";
+  font-size: 20px;
+  font-weight: 600;
+}
+.price-heading {
+  font-family: "Noto Sans";
+  font-size: 32px;
+  font-weight: 600;
+  color: black;
+}
+.price-text {
+  font-family: "Noto Sans";
+  font-size: 16px;
+  font-weight: 400;
+  color: #9a9aa2;
+}
+
+.accordion-button {
+  font-family: "Noto Sans" !important;
+  font-size: 20px !important;
+  color: #2a3342 !important;
+  font-weight: 700 !important;
+  line-height: 30px;
+  padding: 0 !important;
+  border: 1 px solid white !important;
+}
+
+.accordion-button:focus {
+  color: black !important;
+  box-shadow: none !important;
+}
+.accordion-button:not(.collapsed) {
+  background-color: white !important;
+  color: black !important;
+}
+
+/* card */
+.cards {
+  border: 1px solid #e4e5e7;
+  border-radius: 6px !important;
+}
+.cards-heading {
+  border-bottom: 1px solid #e4e5e7 !important;
+  text-align: center;
+  background-color: #e4e5e7;
+  font-family: "Noto Sans";
+  font-size: 18px;
+  font-weight: 600;
+}
+.centers > input {
+  width: 95%;
+  /* margin: 0 1rem 0 1rem; */
+}
+.labelss {
+  font-family: "Manrope";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: black;
+}
+
+
+.accordion-icon {
+  display: flex;
+  align-items: center;
+}
+
+.accordion-button.collapsed .bi-plus-circle::before {
+  content: "\F4FA"; /* Bootstrap minus icon */
+  color: #9A9AA2;
+}
+.accordion-button:not(.collapsed) .bi-plus-circle::before {
+  content: "\F2E6"; /* Bootstrap plus icon */
+  color: #9A9AA2;
+}
+
+
+
+
+
+
+.accordion-item {
+  border: none !important;
+}
+.accordion {
+  margin-right: 20px !important;
+}
+
+.accordion-body {
+  padding: 0 6rem 0 0 !important;
+  font-family: "Noto Sans";
+  font-size: 16px;
+  font-weight: 400;
+  color: #9a9aa2;
+}
+
+.accordion-button:not(.collapsed) {
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, -0.125) !important;
+}
+.accordion-button::after {
+  display: none !important;
+}
+
+.card-button {
+  background: #7e5bf6;
+  border-radius: 6px;
+  border: none;
+  color: #ffff;
+  width: 100%;
+  height: 3rem;
+  font-family: "Segoe UI";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+#expiry::placeholder , #creditCardNumber::placeholder , #security::placeholder{
+  color:#E4E5E7 !important;
+  font-family: "Noto Sans";
+font-size: 14px;
+font-weight: 400;
+line-height: 19px;
+letter-spacing: 0em;
+text-align: left;
+
+}
