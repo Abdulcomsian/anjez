@@ -1,3 +1,6 @@
+@php
+use App\Helpers\Helper;
+@endphp
 @extends('frontend.studentdashboard.layouts.course.main')
 
 @section('content')
@@ -16,9 +19,11 @@
                                     <span id="title">{{ $data['lesson']->title }}</span>
                                 </div>
                                 <div class="col me-5">
-                                    <div class="cates  ">
-                                        <p>Free</p>
-                                    </div>
+                                    @if(!Helper::isPaymentActive())
+                                        <div class="cates  ">
+                                            <p>Free</p>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">

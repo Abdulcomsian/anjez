@@ -222,11 +222,11 @@ function isValidEmail(email) {
             document.getElementById("confirmpassword-error").classList.remove("d-none");
         }
 
-        if (!isValid) {
-            event.preventDefault();
-        } else {
-            toastr.success("Registration successful! You can now log in.");
-        }
+        // if (!isValid) {
+        //     event.preventDefault();
+        // } else {
+        //     // toastr.success("Registration successful! You can now log in.");
+        // }
 
         if (!isValid) {
         event.preventDefault();

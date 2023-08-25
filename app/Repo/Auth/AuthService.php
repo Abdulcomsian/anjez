@@ -34,7 +34,7 @@ class AuthService implements AuthInterface
                 $user_verification->user_id = $user->id;
                 $user_verification->token = $token;
                 $user_verification->save();
-                event(new VerificationEvent($user->email, $token));
+                // event(new VerificationEvent($user->email, $token));
             });
             return $user;
         }

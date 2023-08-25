@@ -1,3 +1,6 @@
+@php
+use App\Helpers\Helper;
+@endphp
 @extends('frontend.layouts.main')
 
 @section('content')
@@ -113,7 +116,7 @@
         </div>
         <div class="button-2">
           <button class="signu-up">
-            <a href="./student-content" data-translate="view-courses">
+            <a href="{{route('studentdashboard.student-dashboard')}}" data-translate="view-courses">
               {{ __('lang.section1.view_courses') }}
             </a>
           </button>
@@ -144,9 +147,11 @@
           </div>
           <div class="button-line">
             <div class="button-1">
-              <button data-translate="subscribe-now">
-                {{ __('lang.section2.subscribe_now') }}
-              </button>
+              @if(!Helper::isPaymentActive())
+                <button data-translate="subscribe-now">
+                  {{ __('lang.section2.subscribe_now') }}
+                </button>
+              @endif
             </div>
             <div class="button-2">
               <button data-translate="explore-courses">
@@ -549,6 +554,7 @@
 </div>
 
 <!-- Section 8 -->
+@if(!auth()->user())
 <div>
   <div class="section-8">
     <div class="container">
@@ -569,7 +575,7 @@
     </div>
   </div>
 </div>
-
+@endif
 <!-- footer code -->
 <div>
   <footer>

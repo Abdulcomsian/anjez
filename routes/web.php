@@ -117,7 +117,7 @@ Route::get('/users', [userController::class, 'index'])->middleware(['auth', 'isA
 
 Route::get('/student-content',[studentContentController::class,'student_content'])->name('studentcontent.student-content');
 
-Route::get('/student-dashboard', [studentDashboardContrller::class, 'student_dashboard'])->name('studentdashboard.student-dashboard');
+Route::get('/student-dashboard', [studentDashboardContrller::class, 'student_dashboard'])->middleware(['auth'])->name('studentdashboard.student-dashboard');
 
 Route::get('/payments',[paymentController::class,'payments'])->name('payments');
 
