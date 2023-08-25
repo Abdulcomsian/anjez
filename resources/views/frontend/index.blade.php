@@ -63,7 +63,6 @@ use App\Helpers\Helper;
               </ul>
             </div>
           </li>
-
           @if(!Auth::check())
           <li class="nav-item left-line">
             <a class="nav-link" href="{{ route('login') }}">
@@ -76,8 +75,13 @@ use App\Helpers\Helper;
             </a>
           </li>
           @else
+        
           <li class="nav-item">
+            @if(Auth::user()->id==1)
+            <a href="{{ route('admindashboard.admin-index') }}">
+            @else
             <a href="{{ route('studentdashboard.student-dashboard') }}">
+            @endif
               <button data-translate="sign-up">Dashboard</button>
             </a>
           </li>
