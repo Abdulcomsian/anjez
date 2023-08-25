@@ -74,7 +74,7 @@
 
 
 @extends('frontend.layouts.main')
-
+<link rel="stylesheet" href="{{ asset('assets/style/login.css') }}" />
 @section('content')
 <div class="login-main">
     <div class="left-login-side">

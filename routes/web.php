@@ -182,7 +182,7 @@ Route::get("student-content2" , function(){
 //     return view('test.student-dashboard');
 // });
 
-Route::get("term-and-condition" , function(){
+Route::get("terms-conditions" , function(){
     return view('test.terms-conditions');
 });
 
