@@ -43,7 +43,8 @@
                         </div>
 
                     </div>
-                    <div class="row mt-4">
+
+                    {{-- <div class="row mt-4">
                         <div class="col star course">
                             <label for="price" class="form-label"> Price (En) </label>
                             <input type="number" name="price" class="form-control">
@@ -51,8 +52,9 @@
                         <div class="col star course">
                             <label for="price" class="form-label"> Price (Ar) </label>
                             <input type="number" name="price_ar" class="form-control">
-                        </div>
-                    </div>
+                        </div>P
+                    </div> --}}
+
                     <div class="row mt-4">
                         <div class="col-6 course">
                             <label for="state" class="form-label"> Status (En) </label>
@@ -69,6 +71,7 @@
                             </select>
                         </div>
                     </div>
+
                   <div class="row mt-4">
                     <div class="col-6 course">
                       <label for="description" class="form-label"> Description (En) </label>
@@ -101,6 +104,7 @@
                       </div>
                     </div> --}}
                   </div>
+
                   <div class="row mt-4">
                       <div class="col-6">
                         <label for="">Feature Image</label>
