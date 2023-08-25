@@ -147,12 +147,14 @@ use App\Helpers\Helper;
           </div>
           <div class="button-line">
             <div class="button-1">
-              @if (Auth::check())
-              @if(!Helper::isPaymentActive())
+              @if(Auth::check() && !Helper::isPaymentActive())
                 <button data-translate="subscribe-now">
                   {{ __('lang.section2.subscribe_now') }}
                 </button>
-              @endif
+              @else
+                <button data-translate="subscribe-now">
+                  {{ __('lang.section2.subscribe_now') }}
+                </button>
               @endif
             </div>
             <div class="button-2">
