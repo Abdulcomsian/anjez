@@ -5,6 +5,16 @@
 {{-- <div id="course" style="display: block;"> --}}
 
 <!-- <div class="user mt-5 pb-5" id="course" style="display: none;"> -->
+      @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+      @endif
+
        <div class="user mt-5 pb-5" id="add-course">
               <div class="container">
                 <div class="row ">

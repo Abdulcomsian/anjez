@@ -113,7 +113,7 @@
         </div>
         <div class="button-2">
           <button class="signu-up">
-            <a href="./student-content" data-translate="view-courses">
+            <a href="{{route('studentdashboard.student-dashboard')}}" data-translate="view-courses">
               {{ __('lang.section1.view_courses') }}
             </a>
           </button>
