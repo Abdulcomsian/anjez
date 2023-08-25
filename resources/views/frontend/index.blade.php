@@ -25,11 +25,11 @@
                   <i class="bi bi-globe"></i>
                 </div>
                 <div class="language">
-                  <span id="lang-select" data-translate="lang"> </span>
+                  <span id="lang-select" data-translate="lang">  </span>
                 </div>
                 <div><i class="bi bi-chevron-down"></i></div>
               </div>
-              <ul class="dropdown-menu" style="left: -5px;top: 40px;" aria-labelledby="dropdownMenu2">
+              <ul class="dropdown-menu"  aria-labelledby="dropdownMenu2">
 
                 <li>
                   <a class="eng_btn_bg" rel="alternate" hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
@@ -113,7 +113,7 @@
         </div>
         <div class="button-2">
           <button class="signu-up">
-            <a href="./student-content.html" data-translate="view-courses">
+            <a href="./student-content" data-translate="view-courses">
               {{ __('lang.section1.view_courses') }}
             </a>
           </button>
@@ -582,15 +582,15 @@
         </a>
       </div>
       <div>
-        <a href="./privacy-policy.html">
+        <a href="./privacy-policy" style="text-decoration:none">
           <span class="border-class" data-translate="privacy-policy">
             {{ __('lang.footer.privacy_policy') }}
           </span>
         </a>
       </div>
       <div>
-        <a href="./terms-conditions.html">
-          <span data-translate="terms-conditions">
+        <a href="./terms-conditions" style="text-decoration:none">
+          <span class="border-class" data-translate="terms-conditions">
             {{ __('lang.footer.terms_conditions') }}
           </span>
         </a>

@@ -10,11 +10,10 @@
     <title>Anjez</title>
 
     <link rel="stylesheet" href="{{ asset('assets/style/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/style/signup.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/style/login.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/style/student-content.css') }}" />
+    <!--  -->
+    <!-- <link rel="stylesheet" href="{{ asset('assets/style/student-content.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/style/payment.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/style/student-dashboard.css')}}" />
+    <link rel="stylesheet" href="{{ asset('assets/style/student-dashboard.css')}}" /> -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
