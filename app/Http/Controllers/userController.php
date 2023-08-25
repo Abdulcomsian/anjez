@@ -46,10 +46,13 @@ class userController extends Controller
                 'password'  => 'required'
             ]);
             $user = $this->user->store($validated_data);
-            if($user)
-                return redirect()->back()->with('success', 'User Created Successfully');
-            else
-                return redirect()->back()->with('danger', 'User Not Created');
+            if($user){
+                toastr()->success("User Created Successfully");
+                return redirect()->back();            }
+            else{
+                toastr()->success("User Not Created");
+                return redirect()->back();
+            }
 
         }
         catch (Exception $ex)

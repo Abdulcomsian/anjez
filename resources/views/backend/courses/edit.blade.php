@@ -50,7 +50,7 @@
                     </select>
                 </div> --}}
             </div>
-            <div class="row mt-4">
+            {{-- <div class="row mt-4">
                 <div class="col star course">
                     <label for="price" class="form-label"> Price (En) </label>
                     <input type="number" name="price" class="form-control" value="{{ $course->price }}">
@@ -59,7 +59,7 @@
                     <label for="price" class="form-label"> Price (Ar) </label>
                     <input type="text" name="price_ar" class="form-control" value="{{ $course->price_ar }}">
                 </div>
-            </div>
+            </div> --}}
             <div class="row mt-4">
                 <div class="col star course">
                     <label for="status" class="form-label">Status (En) </label>

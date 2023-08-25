@@ -33,12 +33,18 @@ class signupController extends Controller
         if($validated_data)
         {
             $sign_user = $this->auth_service->signupUser($validated_data);
-            if($sign_user)
-                return redirect()->route('login')->withInfo("Verification Mail Send to your Email ".$sign_user->email);
-            else
+            if($sign_user){
+                toastr()->success("Verification email Send to your Email ".$sign_user->email);
+                return redirect()->route('login');
+            }
+            else{
+                toastr()->success("Something went wrong");
                 return redirect()->back()->with('error', 'Something went wrong');
+            }
         }
-        else
+        else{
+            toastr()->success("Validation Error");
             return redirect()->back()->with('error', "Validation Error");
+        }
     }
 }
