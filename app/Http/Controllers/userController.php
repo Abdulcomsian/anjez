@@ -24,7 +24,7 @@ class userController extends Controller
         }
         else
         {
-            $users = User::join('payments', 'users.id', 'payments.user_id')->get();
+            $users = User::latest()->get();
         }
         return view('backend.users.index', compact('users'));
     }

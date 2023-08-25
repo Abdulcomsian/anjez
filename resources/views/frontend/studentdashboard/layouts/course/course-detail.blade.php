@@ -28,8 +28,10 @@ use App\Helpers\Helper;
                         <div class="col-7 textss text-start ">
                             <span>{!! $data['course']->description !!}</span>
                         </div>
+                        @if(!Helper::isPaymentActive())
                         <div class="col mt-3"> <button class="px-4" type="button"> <a href="{{ route('payments') }}">
                                     Subscribe </a> </button></div>
+                        @endif
                     </div>
                     <div class="contents px-4 mt-4 pt-1">
                         <div class="contents-heading d-flex justify-content-center mt-4 "> Contents </div>
