@@ -24,10 +24,15 @@ class loginController extends Controller
     public function login (Request $request)
     {
         $login = $this->auth_service->login($request->all());
-        if($login)
+        if($login){
+            // toastr()->success("Account created successfully!");
             return redirect()->route('admindashboard.admin-index');
-        else
+        }
+        else{
+            toastr()->error("Email or password incorrect!");
             return redirect()->back();
+        }
+             
     }
 
     public function logout ()

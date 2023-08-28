@@ -5,6 +5,16 @@
 {{-- <div id="course" style="display: block;"> --}}
 
 <!-- <div class="user mt-5 pb-5" id="course" style="display: none;"> -->
+      @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+      @endif
+
        <div class="user mt-5 pb-5" id="add-course">
               <div class="container">
                 <div class="row ">
@@ -43,7 +53,8 @@
                         </div>
 
                     </div>
-                    <div class="row mt-4">
+
+                    {{-- <div class="row mt-4">
                         <div class="col star course">
                             <label for="price" class="form-label"> Price (En) </label>
                             <input type="number" name="price" class="form-control">
@@ -51,8 +62,9 @@
                         <div class="col star course">
                             <label for="price" class="form-label"> Price (Ar) </label>
                             <input type="number" name="price_ar" class="form-control">
-                        </div>
-                    </div>
+                        </div>P
+                    </div> --}}
+
                     <div class="row mt-4">
                         <div class="col-6 course">
                             <label for="state" class="form-label"> Status (En) </label>
@@ -69,6 +81,7 @@
                             </select>
                         </div>
                     </div>
+
                   <div class="row mt-4">
                     <div class="col-6 course">
                       <label for="description" class="form-label"> Description (En) </label>
@@ -101,6 +114,7 @@
                       </div>
                     </div> --}}
                   </div>
+
                   <div class="row mt-4">
                       <div class="col-6">
                         <label for="">Feature Image</label>

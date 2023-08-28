@@ -30,10 +30,10 @@
       <div class="row up pt-3">
         <div class="col-2"> Name </div>
         <div class="col-3"> Email </div>
-        <div class="col-2"> BILING DATE </div>
-        <div class="col-2">STATUS</div>
-        <div class="col-2">AMOUNT</div>
-        {{-- <div class="col-2">CREATED AT</div> --}}
+        {{-- <div class="col-2"> BILING DATE </div> --}}
+        {{-- <div class="col-2">STATUS</div> --}}
+        {{-- <div class="col-2">AMOUNT</div> --}}
+        <div class="col-2">CREATED AT</div>
       </div>
       <hr>
       @forelse ($users as $user)
@@ -43,10 +43,10 @@
                 <span class="ms-sm-2 named"> {{ $user->first_name ?? '- -' }}</span>
             </div>
             <div class="col-3 named" style="word-wrap: break-word;"> <span> {{ $user->email ?? '- -' }} </span> </div>
-            <div class="col-2 named " style="word-wrap: break-word;"> <span> {{$user->start_date ? date('d/m/Y', strtotime($user->start_date)) : '- -'}} </span> </div>
-            <div class="col-2 named" style="word-wrap: break-word;font-size: 13px;"> @if($user->status == 'active')<span style="color: #7E5BF6;border-radius: 8px;background-color: #9A6CF014;padding: 2px 10px 2px 10px;">  Subscribed </span> @else <span> - - </span> @endif  </div>
-            <div class="col-2 fw-bold" style="word-wrap: break-word;"> - - </div>
-            {{-- <div class="col-2" style="word-wrap: break-word;"><div class="amount"> {{ $user->created_at ? dateConversion($user->created_at) : '- -' }} </div></div> --}}
+            {{-- <div class="col-2 named " style="word-wrap: break-word;"> <span> {{$user->start_date ? date('d/m/Y', strtotime($user->start_date)) : '- -'}} </span> </div> --}}
+            {{-- <div class="col-2 named" style="word-wrap: break-word;font-size: 13px;"> @if($user->status == 'active')<span style="color: #7E5BF6;border-radius: 8px;background-color: #9A6CF014;padding: 2px 10px 2px 10px;">  Subscribed </span> @else <span> - - </span> @endif  </div>
+            <div class="col-2 fw-bold" style="word-wrap: break-word;"> - - </div> --}}
+            <div class="col-2" style="word-wrap: break-word;"><div class="amount"> {{ $user->created_at ? dateConversion($user->created_at) : '- -' }} </div></div>
         </div>
         <hr>
       @empty
