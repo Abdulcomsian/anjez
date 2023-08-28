@@ -7,13 +7,14 @@ use App\Helpers\Helper;
 <div>
   <!-- NavBar Code -->
   <div>
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
         <a class="navbar-brand" href="/"><img src="{{ url('assets/images/Group 6.png') }}" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav"></div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           {{-- <li class="nav-item">
               <a class="nav-link" href="./student-dashboard.html"><span>student-dashboard</span></a>
@@ -91,7 +92,7 @@ use App\Helpers\Helper;
       </div>
   </div>
   </nav>
-</div>
+
 
 <!-- Section 1 -->
 <div>
@@ -634,7 +635,7 @@ use App\Helpers\Helper;
             const langSelectElement = document.getElementById('lang-select');
 
             const splits = path.split('/')
-console.log(splits);
+// console.log(splits);
             if (splits[1] === 'en') {
                 langSelectElement.textContent = 'English ';
                 console.log(path)
