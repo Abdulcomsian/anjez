@@ -73,8 +73,8 @@
             <div class="modal-header d-flex justify-content-between align-items-center"
             style="background-color: #F9FAFB;">
             <h5 class="modal-title mx-auto" id="exampleModalLongTitle">Add Lesson</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                style="margin-right: 2px;">
+            <button type="button" class="close can"  data-dismiss="exampleModalCentertwo" aria-label="Close"
+                style="margin-right: -32px;">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
@@ -184,25 +184,7 @@
         });
     });
 
-    // function isAllowToCreateLesson (id)
-    // {
-    //     $.ajax({
-    //         type: "GET",
-    //         url: "{{ url('section/lesson/quiz') }}/"+id,
-    //         success: function (response) {
-    //             console.log(response.data);
-    //             if(response.data.quizes>0)
-    //             {
-    //                 alert('You cannot upload more than 1 quiz');
-    //                 return;
-    //             }
-    //             else
-    //             {
-    //                 window.location.href = "{{ url('quiz') }}/"+id;
-    //             }
-    //         }
-    //     });
-    // }
+
 
     function add_lesson ()
     {
