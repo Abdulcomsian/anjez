@@ -6,6 +6,7 @@ use App\Models\Quiz;
 use App\Repo\Quiz\QuizInterface;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class QuizController extends Controller
 {
@@ -27,24 +28,27 @@ class QuizController extends Controller
 
     public function store(Request $request)
     {
+        // dd( $request);
+        
         $validated_data = $this->validate($request,[
             'question'      => 'required',
             'option1'       => 'required',
             'option2'       => 'required',
             'option3'       => 'required',
             'option4'       => 'required',
-            'correct_answer'=> 'required',
+            'correct_answer' => 'required',Rule::in('option1','option2','option3','option4'),
             'correct_answer_description'=> 'required',
             'question_ar'      => 'required',
             'option1_ar'       => 'required',
             'option2_ar'       => 'required',
             'option3_ar'       => 'required',
             'option4_ar'       => 'required',
-            'correct_answer_ar'=> 'required',
+            'correct_answer_ar'=> 'required',Rule::in('option1_ar','option2_ar','option3_ar','option4_ar'),
             'correct_answer_description_ar'=> 'required',
             'lesson_id'     =>'required|exists:lessons,id',
             'quiz_id'       =>'nullable|exists:quizzes,id',
         ]);
+
         if(isset($validated_data['quiz_id']) && !empty($validated_data['quiz_id']))
         {
             try
@@ -68,7 +72,7 @@ class QuizController extends Controller
                 if(isset($quiz) && !is_null($quiz))
                     return redirect()->back()->with('success', 'Quiz Added Successfully');
                 else
-                    return redirect()->back()->with('danger', 'Something went wrong');
+                    return redirect()->back()->with('error', 'Something went wrong');
             }
             catch (Exception $ex)
             {

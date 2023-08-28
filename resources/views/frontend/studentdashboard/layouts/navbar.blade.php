@@ -9,9 +9,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
               <i class="bi bi-bell-fill" style="color: #7e5bf6"></i>
-            </li>
+            </li> --}}
             <li class="nav-item">
               <div class="profile-content">
                 <div>
@@ -22,9 +22,10 @@
                     <i class="bi bi-chevron-down" onclick="$('#logout').toggleClass('d-block')"></i>
                     <div class="dropdown">
                         <div class="dropdown-menu" id="logout" style="left: -160px;top: 40px;" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="{{route("student_profile")}}"><i class="bi bi-person-circle"></i>Update Profile</a>
                           <a class="dropdown-item" href="{{ route('logout') }}"><i class="bi bi-arrow-return-left"></i>Logout</a>
                         </div>
-                      </div>
+                    </div>
                 </div>
               </div>
             </li>
