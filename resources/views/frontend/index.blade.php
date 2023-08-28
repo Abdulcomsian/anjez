@@ -7,13 +7,14 @@ use App\Helpers\Helper;
 <div>
   <!-- NavBar Code -->
   <div>
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
         <a class="navbar-brand" href="/"><img src="{{ url('assets/images/Group 6.png') }}" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav"></div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           {{-- <li class="nav-item">
               <a class="nav-link" href="./student-dashboard.html"><span>student-dashboard</span></a>
@@ -28,14 +29,15 @@ use App\Helpers\Helper;
                   <i class="bi bi-globe"></i>
                 </div>
                 <div class="language">
-                  <span id="lang-select" data-translate="lang">  </span>
+                  <span id="lang-select" data-translate="lang"> English </span>
+              
                 </div>
                 <div><i class="bi bi-chevron-down"></i></div>
               </div>
               <ul class="dropdown-menu"  aria-labelledby="dropdownMenu2">
 
                 <li>
-                  <a class="eng_btn_bg" rel="alternate" hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
+                  <a class="eng_btn_bg" rel="alternate"  hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
                     {{-- <button    ton class="dropdown-item" type="button" id="englishButton" onclick="onLangChange('English')"> --}}
                     English
                     {{-- </button> --}}
@@ -90,7 +92,7 @@ use App\Helpers\Helper;
       </div>
   </div>
   </nav>
-</div>
+
 
 <!-- Section 1 -->
 <div>
@@ -618,4 +620,31 @@ use App\Helpers\Helper;
   </footer>
 </div>
 </div>
+
+
+
+
+
+
+
+
+
+     <script>
+       function updateTextLanguage() {
+            const path = window.location.pathname;
+            const langSelectElement = document.getElementById('lang-select');
+
+            const splits = path.split('/')
+// console.log(splits);
+            if (splits[1] === 'en') {
+                langSelectElement.textContent = 'English ';
+                console.log(path)
+            } else if (splits[1] === 'ar') {
+              langSelectElement.textContent = 'Arabic ';
+            }
+        }
+        window.addEventListener('load', updateTextLanguage);
+    </script>
+
+
 @endsection

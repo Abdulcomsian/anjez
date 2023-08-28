@@ -83,9 +83,9 @@
         </div>
     </div>
     <div class="right-login-side">
-        <div class="logo-section">
+    <div class="logo-section">
             <div>
-                <a href="{{ url('/login') }}"><img src="{{ url('assets/images/Group 6.png') }}" alt="logo" /></a>
+                <a href="{{ url('/') }}"><img src="{{ url('assets/images/Group 6.png') }}" alt="logo" /></a>
             </div>
         </div>
         <div class="form-section">
