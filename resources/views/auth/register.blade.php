@@ -86,82 +86,8 @@
 
 
 
+
 <!-- <script>
-    document.getElementById("signup-form").addEventListener("submit", function(event) {
-    document.getElementById("firstname-error").textContent = "";
-    document.getElementById("lastname-error").textContent = "";
-    document.getElementById("email-error").textContent = "";
-    document.getElementById("phone-error").textContent = "";
-    document.getElementById("password-error").textContent = "";
-    document.getElementById("confirmpassword-error").textContent = "";
-
-    const firstName = document.getElementById("firstname").value.trim();
-    const lastName = document.getElementById("lastname").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const confirmpassword = document.getElementById("confirmpassword").value.trim();
-
-    let isValid = true;
-
-    if (firstName === "") {
-        isValid = false;
-        document.getElementById("firstname-error").textContent = "First name is required.";
-        document.getElementById("firstname-error").classList.remove("d-none");
-    }
-
-    if (lastName === "") {
-        isValid = false;
-        document.getElementById("lastname-error").textContent = "Last name is required.";
-    }
-
-    if (email === "") {
-        isValid = false;
-        document.getElementById("email-error").textContent = "Email is required.";
-        document.getElementById("email-error").classList.remove("d-none");
-    } else if (!isValidEmail(email)) {
-        isValid = false;
-        document.getElementById("email-error").textContent = "Invalid email format.";
-        document.getElementById("email-error").classList.remove("d-none");
-    }
-
-    if (phone === "") {
-        isValid = false;
-        document.getElementById("phone-error").textContent = "Phone number is required.";
-        document.getElementById("phone-error").classList.remove("d-none");
-    }
-
-    if (password === "") {
-        isValid = false;
-        document.getElementById("password-error").textContent = "Password is required.";
-        document.getElementById("password-error").classList.remove("d-none");
-    }
-
-    if (confirmpassword === "") {
-        isValid = false;
-        document.getElementById("confirmpassword-error").textContent = "Confirm Password is required.";
-        document.getElementById("confirmpassword-error").classList.remove("d-none");
-    } else if (confirmpassword !== password) {
-        isValid = false;
-        document.getElementById("confirmpassword-error").textContent = "Passwords do not match.";
-        document.getElementById("confirmpassword-error").classList.remove("d-none");
-    }
-
-    if (!isValid) {
-        event.preventDefault();
-    }
-});
-
-function isValidEmail(email) {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-}
-
-
-</script> -->
-
-
-<script>
     document.getElementById("signup-form").addEventListener("submit", function(event) {
         document.getElementById("firstname-error").textContent = "";
     document.getElementById("lastname-error").textContent = "";
@@ -184,6 +110,7 @@ function isValidEmail(email) {
             document.getElementById("firstname-error").textContent = "First name is required.";
             document.getElementById("firstname-error").classList.remove("d-none");
         }
+
 
         if (lastName === "") {
             isValid = false;
@@ -222,11 +149,89 @@ function isValidEmail(email) {
             document.getElementById("confirmpassword-error").classList.remove("d-none");
         }
 
-        // if (!isValid) {
-        //     event.preventDefault();
-        // } else {
-        //     // toastr.success("Registration successful! You can now log in.");
-        // }
+        if (!isValid) {
+        event.preventDefault();
+    }
+    });
+
+    function isValidEmail(email) {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailPattern.test(email);
+    }
+</script>  -->
+
+
+
+
+
+ <script>
+    document.getElementById("signup-form").addEventListener("submit", function(event) {
+        document.getElementById("firstname-error").textContent = "";
+    document.getElementById("lastname-error").textContent = "";
+    document.getElementById("email-error").textContent = "";
+    document.getElementById("phone-error").textContent = "";
+    document.getElementById("password-error").textContent = "";
+    document.getElementById("confirmpassword-error").textContent = "";
+    
+        const firstName = document.getElementById("firstname").value.trim();
+        const lastName = document.getElementById("lastname").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const confirmPassword = document.getElementById("confirmpassword").value.trim();
+
+        let isValid = true;
+
+        if (firstName === "") {
+                isValid = false;
+                document.getElementById("firstname-error").textContent = "First name is required.";
+                document.getElementById("firstname-error").classList.remove("d-none");
+            } else if (!isValidName(firstName)) {
+                isValid = false;
+                document.getElementById("firstname-error").textContent = "Invalid first name format.";
+                document.getElementById("firstname-error").classList.remove("d-none");
+            }
+
+
+            if (lastName === "") {
+                isValid = false;
+                document.getElementById("lastname-error").textContent = "Last name is required.";
+            } else if (!isValidName(lastName)) {
+                isValid = false;
+                document.getElementById("lastname-error").textContent = "Invalid last name format.";
+            }
+
+        if (email === "") {
+            isValid = false;
+            document.getElementById("email-error").textContent = "Email is required.";
+            document.getElementById("email-error").classList.remove("d-none");
+        } else if (!isValidEmail(email)) {
+            isValid = false;
+            document.getElementById("email-error").textContent = "Invalid email format.";
+            document.getElementById("email-error").classList.remove("d-none");
+        }
+
+        if (phone === "") {
+            isValid = false;
+            document.getElementById("phone-error").textContent = "Phone number is required.";
+            document.getElementById("phone-error").classList.remove("d-none");
+        }
+
+        if (password === "") {
+            isValid = false;
+            document.getElementById("password-error").textContent = "Password is required.";
+            document.getElementById("password-error").classList.remove("d-none");
+        }
+
+        if (confirmPassword === "") {
+            isValid = false;
+            document.getElementById("confirmpassword-error").textContent = "Confirm Password is required.";
+            document.getElementById("confirmpassword-error").classList.remove("d-none");
+        } else if (confirmPassword !== password) {
+            isValid = false;
+            document.getElementById("confirmpassword-error").textContent = "Passwords do not match.";
+            document.getElementById("confirmpassword-error").classList.remove("d-none");
+        }
 
         if (!isValid) {
         event.preventDefault();
@@ -237,7 +242,21 @@ function isValidEmail(email) {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailPattern.test(email);
     }
-</script> 
+    function isValidName(name) {
+            const namePattern = /^[A-Za-z]+$/;
+            return namePattern.test(name);
+    }
+</script>  
+
+
+
+
+
+
+
+
+
+
 
 
 @endsection

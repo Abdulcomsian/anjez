@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* Navbar */
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-collapse {
+    justify-content: flex-end;
+  }
+}
+
+.navbar-nav {
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.navbar-nav > .nav-item > .nav-link > span {
+  font-family: "Noto Sans";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  color: #3d474d !important;
+}
+
+.navbar-nav > .nav-item > .dropdown > .dropdown-toggle::after {
+  content: none;
+}
+
+.navbar-nav > .nav-item > .dropdown > .language-div > .language > span {
+  color: #3d474d;
+  font-family: "Noto Sans";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.navbar-nav > .nav-item > .dropdown > .language-div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.left-line {
+  border-left: 1px solid #d9d9d9;
+  padding: 0.4rem;
+}
+
+.navbar-nav > li > a > button {
+  font-family: "Noto Sans";
+  font-weight: 600;
+  font-size: 14px;
+  background: #7e5bf6;
+  border-radius: 4px;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+}
+
+/* terms-conditions */
+.term-conditions {
+  padding: 1rem;
+}
+
+/* footer */
+.footer-line-1 {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.footer-line-1 > div {
+  cursor: pointer;
+}
+
+.footer-line-1 > div > a {
+  text-decoration: none;
+}
+
+.footer-line-1 > div > a > span {
+  font-family: "Noto Sans";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 25px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: #74767e;
+  padding: 0rem 1rem 0rem 1rem;
+}
+
+.footer-line-1 > div > a > .border-class {
+  border-right: 2px solid #74767e;
+}
+
+.footer-line-2 {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+.footer-line-2 > div > span {
+  font-family: "Noto Sans";
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 25px;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: #74767e;
+}
+
+
+
+
+
+
+
+.terms{
+  margin-top: 50px;
+}
+.heading span{
+  font-size: 25px;
+  font-weight: 600;
+  font-family: "Noto Sans";
+}
+.paragraph p{
+  font-family: "Noto Sans";
+  /* font-size: 18px; */
+  font-weight: 400;
+  line-height: 1.8;
+}
+.paragraph p span{
+  font-family: "Noto Sans";
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.points ul li {
+  font-family: "Noto Sans";
+  font-weight: 400;
+  line-height: 1.8;
+}

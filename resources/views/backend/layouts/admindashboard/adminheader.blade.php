@@ -1,9 +1,9 @@
 <div>
     <!-- Navbar code -->
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light">
+      <nav class="navbar navbar-expand-lg navbar-light" >
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/AdminDashboard') }}"><img src="{{ url('assets/images/Group 6.png') }}" /></a>
+            <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ url('assets/images/Group 6.png') }}" /></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -74,7 +74,7 @@
                 </div>
               </div>
             </li> -->
-
+<!-- 
             <li class="nav-item">
                   <div class="dropdown">
                       <div class="language-div dropdown-toggle" id="dropdownMenu2"
@@ -88,25 +88,39 @@
                           <div><i class="bi bi-chevron-down"></i></div>
                       </div>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                          <li>
-                              <button class="dropdown-item" type="button" id="englishButton">
-                                  English
-                              </button>
-                          </li>
-                          <li>
-                              <button class="dropdown-item" type="button" id="arabicButton">
-                                  Arabic
-                              </button>
-                          </li>
+                      <li>
+                  <a class="eng_btn_bg" rel="alternate"  hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
+                    English
+                </li>
+                <li>
+                  <a class="eng_btn_bg" rel="alternate" hreflang="ar" href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
+                    Arabic
+                  </a>
+                </li>
                       </ul>
                   </div>
-              </li>
-
-
-
-
+              </li> -->
             </ul>
           </div>
         </div>
       </nav>
     </div>
+
+
+    
+    <script>
+       function updateTextLanguage() {
+            const path = window.location.pathname;
+            const langSelectElement = document.getElementById('lang-select');
+
+            const splits = path.split('/')
+// console.log(splits);
+            if (splits[1] === 'en') {
+                langSelectElement.textContent = 'English ';
+                console.log(path)
+            } else if (splits[1] === 'ar') {
+              langSelectElement.textContent = 'Arabic ';
+            }
+        }
+        window.addEventListener('load', updateTextLanguage);
+    </script>

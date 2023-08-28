@@ -2,6 +2,13 @@
   .navbar-expand-lg .navbar-collapse {
     justify-content: flex-end;
   }
+
+}
+
+@media screen and (max-width:992px) {
+  .left-line{
+    border: none !important;
+  }
 }
 
 .navbar-nav {
