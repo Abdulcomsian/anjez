@@ -7,8 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" /> -->
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap_css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/style/terms-conditions.css') }}" />
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 
@@ -21,7 +23,7 @@
     <div>
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand" href="/"><img src="./assets/images/Group 6.png" /></a>
+        <a class="navbar-brand" href="/"><img src="{{ url('assets/images/Group 6.png') }}" /></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -77,78 +79,6 @@
       </nav>
     </div>
   </div>
-
-  <!-- <div class="term-conditions">
-      <h1 data-translate="terms-conditions">Terms and Conditions</h1>
-
-      <h2 data-translate="acceptance-of-terms">1. Acceptance of Terms</h2>
-      <p>
-        By using our online education application, you agree to be bound by
-        these Terms and Conditions. If you do not agree to these terms, please
-        do not use the application.
-      </p>
-
-      <h2 data-translate="user-responsibilities">2. User Responsibilities</h2>
-      <p>
-        2.1 You are responsible for maintaining the confidentiality of your
-        account and password.
-      </p>
-      <p>2.2 You must not share your account credentials with others.</p>
-      <p>
-        2.3 You are responsible for all activities that occur under your
-        account.
-      </p>
-
-      <h2 data-translate="content">3. Content</h2>
-      <p>
-        3.1 The application may include content provided by third parties,
-        including instructors and other users.
-      </p>
-      <p>
-        3.2 We do not guarantee the accuracy, completeness, or usefulness of any
-        content provided by third parties.
-      </p>
-
-      <h2 data-translate="intellectual-property">4. Intellectual Property</h2>
-      <p>
-        4.1 All intellectual property rights in the application and its content
-        belong to us or our licensors.
-      </p>
-      <p>
-        4.2 You may not copy, modify, distribute, or reproduce any part of the
-        application or its content without prior written permission.
-      </p>
-
-      <h2 data-translate="limitation-of-liability">
-        5. Limitation of Liability
-      </h2>
-      <p>
-        5.1 We are not liable for any direct, indirect, incidental,
-        consequential, or exemplary damages.
-      </p>
-
-      <h2 data-translate="6-privacy-policy">6. Privacy Policy</h2>
-      <p>
-        Please refer to our
-        <a href="./privacy-policy.html">Privacy Policy</a> for information about
-        how we collect, use, and disclose your personal information.
-      </p>
-
-      <h2 data-translate="governing-law">7. Governing Law</h2>
-      <p>
-        These Terms and Conditions shall be governed by and construed in
-        accordance with the laws of [your country].
-      </p>
-
-      <h2 data-translate="contact-us">8. Contact Us</h2>
-      <p>
-        If you have any questions or concerns regarding these Terms and
-        Conditions, please contact us at [email address].
-      </p>
-    </div> -->
-
-
-
 
 
   <div class="container terms px-5">
@@ -349,45 +279,45 @@
   </div>
   <!-- footer code -->
   <div>
-    <footer>
-      <div class="footer-line-1">
-        <div>
-          <a>
-            <span class="border-class" data-translate="careers">
-              Careers
-            </span>
-          </a>
-        </div>
-        <div>
-          <a href="./privacy-policy.html">
-            <span class="border-class" data-translate="privacy-policy">
-              Privacy Policy
-            </span>
-          </a>
-        </div>
-        <div>
-          <a href="./terms-conditions.html">
-            <span data-translate="terms-conditions">
-              Terms & Conditions
-            </span>
-          </a>
-        </div>
+  <footer>
+    <div class="footer-line-1">
+      <div>
+        <a>
+          <span class="border-class" data-translate="careers">
+            {{ __('lang.footer.careers') }}
+          </span>
+        </a>
       </div>
-      <div class="footer-line-2">
-        <div>
-          <span>© 2023 Anjez Inc. </span>
-        </div>
+      <div>
+        <a href="./privacy-policy" style="text-decoration:none">
+          <span class="border-class" data-translate="privacy-policy">
+            {{ __('lang.footer.privacy_policy') }}
+          </span>
+        </a>
       </div>
-    </footer>
+      <div>
+        <a href="./terms-conditions" style="text-decoration:none">
+          <span class="border-class" data-translate="terms-conditions">
+            {{ __('lang.footer.terms_conditions') }}
+          </span>
+        </a>
+      </div>
+    </div>
+    <div class="footer-line-2">
+      <div>
+        <span>© <span id="year_span">{{ date('Y') }}</span> {{ __('lang.footer.angez_inc') }} </span>
+      </div>
+    </div>
+  </footer>
   </div>
-
+<!-- 
   <script src="./assets/js/terms-conditions.js"></script>
-  <script src="./assets/js/placeholder.js"></script>
+  <script src="./assets/js/placeholder.js"></script> -->
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
-
+    crossorigin="anonymous"></script> -->
+    <script src="{{ asset('assets/bootstrap_js/bootstrap.bundle.min.js') }}"></script>
 
 </body>
 

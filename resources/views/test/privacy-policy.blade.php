@@ -13,6 +13,7 @@
       crossorigin="anonymous"
     /> -->
     <link rel="stylesheet" href="{{ asset('assets/bootstrap_css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/style/privacy-policy.css') }}" />
 
     <link
       rel="stylesheet"
@@ -210,7 +211,7 @@
 
     <!-- footer code -->
     <div>
-    <footer>
+  <footer>
     <div class="footer-line-1">
       <div>
         <a>
@@ -240,9 +241,9 @@
       </div>
     </div>
   </footer>
-    </div>
-    <script src="./assets/js/privacy-policy.js"></script>
-    <script src="./assets/js/placeholder.js"></script>
+  </div>
+    <!-- <script src="./assets/js/privacy-policy.js"></script>
+    <script src="./assets/js/placeholder.js"></script> -->
     <!-- <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
