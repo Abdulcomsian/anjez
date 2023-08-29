@@ -23,6 +23,7 @@
             <div class="col-md-6 py-2 d-flex justify-content-end">
               <button class="d-flex justify-content-between px-3 pt-2" type="submit"> <img class="pt-1"
                   src="{{ url('assets/images/button icon.png') }}" alt="" style="margin-right: 1%;"> Filter </button>
+                  <a href="{{route('users.index')}}" class="btn btn-danger btn-sm d-flex justify-content-between px-3 pt-2">Remove Filters </a>
             </div>
           </div>
       </form>
