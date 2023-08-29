@@ -29,7 +29,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="row aa d-flex justify-content-between"
+                {{-- <div class="row aa d-flex justify-content-between"
                   style="background-color:  #c4bfff21;  border-radius:0.2rem ;">
                   <div class="col-md-5 py-2">
                     <input type="text" class="iconss py-2" value placeholder="Search by course name">
@@ -38,7 +38,7 @@
                     <button class="d-flex justify-content-between px-3 pt-2" type="submit"> <img class="pt-1"
                         src="{{ url('assets/images/button icon.png') }}" alt="" style="margin-right: 1%;"> Filter </button>
                   </div>
-                </div>
+                </div> --}}
                 <hr>
                 <form action="{{ route('courses.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
