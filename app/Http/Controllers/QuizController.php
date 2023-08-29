@@ -67,6 +67,7 @@ class QuizController extends Controller
 
             return redirect()->back()->withInput();
         }
+
         $correct_answer_ar = $request->correct_answer_ar;
         $option1_ar = $request->option1_ar;
         $option2_ar = $request->option2_ar;
@@ -82,13 +83,14 @@ class QuizController extends Controller
 
         if(isset($validated_data['quiz_id']) && !empty($validated_data['quiz_id']))
         {
+
             try
             {
                 $quiz = $this->quiz->storeOrUpdate($validated_data, $validated_data['quiz_id']);
                 if(isset($quiz) && !is_null($quiz)){
                     toastr()->success("Quiz Updated Successfully!");
 
-                    return redirect();
+                    return redirect()->back();
                 } else{
                     toastr()->error("Something went wrong!");
                     return redirect()->back()->withInput();
@@ -102,6 +104,7 @@ class QuizController extends Controller
         }
         else
         {
+
             try
             {
                 $quiz = $this->quiz->storeOrUpdate($validated_data, $id=null);
