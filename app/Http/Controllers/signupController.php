@@ -26,7 +26,7 @@ class signupController extends Controller
 
     public function signupUser (Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validatedData = $request->validate([
             'first_name'=>'required',
             'last_name'=>'required',
             'email'=>'required|unique:users',
@@ -35,11 +35,11 @@ class signupController extends Controller
             'password_confirmation' => 'min:6',
             'type'  => 'Student'
         ]);
-        if ($validator->fails()) {
-            toastr()->error("Validation Error, Please try again!");
-            return redirect()->back();
-        }
-        else{
+        // if ($validator->fails()) {
+        //     toastr()->error("Validation Error, Please try again!");
+        //     return redirect()->back();
+        // }
+        // else{
             $country_code = countryCode($request['phone_no']);
             $user               = new User();
             $token = token();
@@ -67,6 +67,6 @@ class signupController extends Controller
             //     toastr()->success("Something went wrong");
             //     return redirect()->back()->with('error', 'Something went wrong!');
             // }
-        }
+        // }
     }
 }
