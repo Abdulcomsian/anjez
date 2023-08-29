@@ -118,6 +118,17 @@ h2{
   font-family: "Noto Sans";
 }
 
+a{
+  text-decoration: none;
+  color:#212529;
+}
+a:hover{
+  color:#212529;
+  text-align: center;
+}
 
-
-
+@media screen and (max-width:992px) {
+  .left-line{
+    border: none !important;
+  }
+}
