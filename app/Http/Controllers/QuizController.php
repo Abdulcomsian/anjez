@@ -88,7 +88,7 @@ class QuizController extends Controller
                 if(isset($quiz) && !is_null($quiz)){
                     toastr()->success("Quiz Updated Successfully!");
 
-                    return redirect()->back()->withInput();
+                    return redirect();
                 } else{
                     toastr()->error("Something went wrong!");
                     return redirect()->back()->withInput();
@@ -108,7 +108,7 @@ class QuizController extends Controller
                 if(isset($quiz) && !is_null($quiz))
                 {
                     toastr()->success("Quiz Added Successfully");
-                    return redirect()->back()->withInput();
+                    return redirect()->back();
                 } else{
                     toastr()->error("Something went wrong");
                     return redirect()->back()->withInput();
