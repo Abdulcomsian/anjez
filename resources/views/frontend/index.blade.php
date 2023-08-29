@@ -168,9 +168,9 @@ use App\Helpers\Helper;
                   {{ __('lang.section2.subscribe_now') }}
                 </button>
               @else
-                <button data-translate="subscribe-now">
+                {{-- <button data-translate="subscribe-now">
                   {{ __('lang.section2.subscribe_now') }}
-                </button>
+                </button> --}}
               @endif
             </div>
             <div class="button-2">

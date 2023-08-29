@@ -20,8 +20,7 @@ class userController extends Controller
         if(isset($request['search']))
         {
             $search = $request->input('search');
-            $users = User::where('type', '!=', 'Student')
-            ->orWhere('first_name','like', '%' . $search . '%')
+            $users = User::where('first_name','like', '%' . $search . '%')
             ->orWhere('last_name','like', '%' . $search . '%')
             ->orWhere('email','like', '%' . $search . '%')
             ->orWhere('phone_no','like', '%' . $search . '%')

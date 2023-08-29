@@ -20,22 +20,6 @@ class studentDashboardContrller extends Controller
             ])
             ->whereStatus('Active')
             ->get();
-        // foreach($courses as $course)
-        // {
-        //     foreach($course->sections as $section)
-        //     {
-        //         foreach($section->lessons as $lesson)
-        //         {
-        //             if(isset($lesson->quiz_scores))
-        //             {
-        //                 $taken_score = (int)($lesson->quiz_scores->score_taken);
-        //                 $total_score = (int)($lesson->quiz_scores->total_score);
-        //                 $progress =$taken_score+$total_score;
-        //             }
-        //         }
-        //     }
-        // }
-        // dd($courses);
         $data =
         [
             'courses'   => $courses

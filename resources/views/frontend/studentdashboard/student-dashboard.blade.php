@@ -13,7 +13,7 @@
             <span> Hi {{ auth()->user()->first_name }}, <span id="greeting"> </span></span>
           </div>
           <div class="text-line-3">
-            <span>Lorem ipsum dolor sit amet consectetur. Nibh non ac</span>
+            <span>To view lessons click on the link below!</span>
           </div>
         </div>
 
