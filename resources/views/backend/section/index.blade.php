@@ -4,6 +4,15 @@
 
 <div class="user mt-5 pb-5" id="course-section">
     <div class="container">
+      @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+      @endif
       <div class="row ">
         <div class="col mt-4 d-flex justify-content-start">
           <p class="heading-text  d-flex justify-content-center">Course Section</p>
