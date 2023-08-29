@@ -38,30 +38,33 @@ class CourseController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required',
-            'price' => 'required',
-            'status' => 'required',
-            'description' => 'required',
             'title_ar' => 'required',
-            'price_ar' => 'required',
-            'status_ar' => 'required',
+            'status' => 'required',
+            // 'status_ar' => 'required',
+            'description' => 'required',
             'description_ar' => 'required',
             'feature_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'price' => 'required',
+            // 'price_ar' => 'required',
         ]);
 
         $course = new Course();
         $course->title = $validatedData['title'];
-        $course->price = $validatedData['price'];
-        $course->status = $validatedData['status'];
-        $course->description = $validatedData['description'];
         $course->title_ar = $validatedData['title_ar'];
-        $course->price_ar = $validatedData['price_ar'];
-        $course->status_ar = $validatedData['status_ar'];
+        $course->status = $validatedData['status'];
+        // $course->status_ar = $validatedData['status_ar'];
+        $course->description = $validatedData['description'];
         $course->description_ar = $validatedData['description_ar'];
         $course->feature_image = $this->storeImage(Course::PATH, $validatedData['feature_image'] ?? '');
         $course->user_id = auth()->user()->id;
         $course->save();
-        return redirect()->route('courses.index')->with('success', 'Course added successfully');
+        toastr()->success("Course added successfully");
+        return redirect()->route('courses.index');
+        // ->with('success', 'Course added successfully');
+        // $course->price = $validatedData['price'];
+        // $course->price_ar = $validatedData['price_ar'];
     }
+
 
     public function edit($id)
     {
@@ -73,27 +76,26 @@ class CourseController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required',
-            'price' => 'required',
-            'status' => 'required',
-            'description' => 'required',
             'title_ar' => 'required',
-            'price_ar' => 'required',
-            'status_ar' => 'required',
+            'status' => 'required',
+            // 'status_ar' => 'required',
+            'description' => 'required',
             'description_ar' => 'required',
             'feature_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'price' => 'required',
+            // 'price_ar' => 'required',
         ]);
 
         $course = Course::findOrFail($id);
         $course->title = $validatedData['title'];
-        $course->price = $validatedData['price'];
-        $course->status = $validatedData['status'];
-        $course->description = $validatedData['description'];
         $course->title_ar = $validatedData['title_ar'];
-        $course->price_ar = $validatedData['price_ar'];
-        $course->status_ar = $validatedData['status_ar'];
+        $course->status = $validatedData['status'];
+        // $course->status_ar = $validatedData['status_ar'];
+        $course->description = $validatedData['description'];
         $course->description_ar = $validatedData['description_ar'];
         $course->user_id = auth()->user()->id;
-
+        // $course->price_ar = $validatedData['price_ar'];
+        // $course->price = $validatedData['price'];
         $imagePath = public_path('assets/courses-content/course-images') . '/' . $course->feature_image;
         if ($request->hasFile('feature_image'))
         {
@@ -107,7 +109,10 @@ class CourseController extends Controller
             $course->feature_image = $imageName;
         }
         $course->save();
-        return redirect()->route('courses.index')->with('success', 'Course updated successfully');
+
+        toastr()->success("Course updated successfully");
+        return redirect()->route('courses.index');
+        // ->with('success', 'Course updated successfully');
     }
 
     public function destroy($id)
@@ -151,7 +156,9 @@ class CourseController extends Controller
                 }
                 $course->delete();
             }
-            return redirect()->route('courses.index')->with('success', 'Course deleted successfully');
+            toastr()->success("Course deleted successfully");
+            return redirect()->route('courses.index');
+            // ->with('success', 'Course deleted successfully');
             //code...
         }
         catch (Exception $ex)

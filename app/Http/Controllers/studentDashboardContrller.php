@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
 
 class studentDashboardContrller extends Controller
 {
@@ -38,5 +41,40 @@ class studentDashboardContrller extends Controller
             'courses'   => $courses
         ];
         return view('frontend.studentdashboard.student-dashboard', compact('data'));
+    }
+
+    public function studentProfile()
+    {
+        return view('frontend.student_profile');
+    }
+
+    public function studentProfileUpdate(Request $request)
+    {
+        // Validate the input data
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'password' => 'nullable|string|min:8', // Optional password field
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Update the user's profile
+        $user = Auth::user();
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->email = $request->input('email');
+
+        // Check if a new password was provided
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->input('password'));
+        }
+        $user->save();
+        return redirect()->back()->with('success', 'Profile updated successfully');
     }
 }

@@ -20,11 +20,17 @@ class userController extends Controller
         if(isset($request['search']))
         {
             $search = $request->input('search');
-            $users = User::join('payments', 'users.id', 'payments.user_id')->where('first_name','like', '%' . $search . '%')->get();
+            $users = User::where('type', '!=', 'Student')
+            ->orWhere('first_name','like', '%' . $search . '%')
+            ->orWhere('last_name','like', '%' . $search . '%')
+            ->orWhere('email','like', '%' . $search . '%')
+            ->orWhere('phone_no','like', '%' . $search . '%')
+            ->latest()
+            ->get();
         }
         else
         {
-            $users = User::join('payments', 'users.id', 'payments.user_id')->get();
+            $users = User::where('type', '=', 'Student')->latest()->get();
         }
         return view('backend.users.index', compact('users'));
     }
@@ -46,10 +52,13 @@ class userController extends Controller
                 'password'  => 'required'
             ]);
             $user = $this->user->store($validated_data);
-            if($user)
-                return redirect()->back()->with('success', 'User Created Successfully');
-            else
-                return redirect()->back()->with('danger', 'User Not Created');
+            if($user){
+                toastr()->success("User Created Successfully");
+                return redirect()->back();            }
+            else{
+                toastr()->success("User Not Created");
+                return redirect()->back();
+            }
 
         }
         catch (Exception $ex)

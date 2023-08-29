@@ -117,7 +117,12 @@ Route::get('/users', [userController::class, 'index'])->middleware(['auth', 'isA
 
 Route::get('/student-content',[studentContentController::class,'student_content'])->name('studentcontent.student-content');
 
-Route::get('/student-dashboard', [studentDashboardContrller::class, 'student_dashboard'])->name('studentdashboard.student-dashboard');
+Route::get('/student-dashboard', [studentDashboardContrller::class, 'student_dashboard'])->middleware(['auth'])->name('studentdashboard.student-dashboard');
+
+Route::get('/student-profile', [studentDashboardContrller::class, 'studentProfile'])->middleware(['auth'])->name('student_profile');
+
+Route::post('/student-profile-update', [studentDashboardContrller::class, 'studentProfileUpdate'])->middleware(['auth'])->name('profile.update');
+
 
 Route::get('/payments',[paymentController::class,'payments'])->name('payments');
 
@@ -182,7 +187,7 @@ Route::get("student-content2" , function(){
 //     return view('test.student-dashboard');
 // });
 
-Route::get("term-and-condition" , function(){
+Route::get("terms-conditions" , function(){
     return view('test.terms-conditions');
 });
 

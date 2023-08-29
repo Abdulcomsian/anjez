@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap CSS -->
-    <link
+    <!-- <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
-    />
+    /> -->
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap_css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/style/privacy-policy.css') }}" />
 
     <link
       rel="stylesheet"
@@ -24,88 +26,91 @@
     <div>
       <!-- NavBar Code -->
       <div>
-        <nav class="navbar navbar-expand-lg navbar-light">
-          <div class="container">
-            <a class="navbar-brand" href="/"
-              ><img src="./assets/images/Group 6.png"
-            /></a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="./student-dashboard.html"
-                    ><span>student-dashboard</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="./admin-dashboard.html"
-                    ><span>Admin-dashboard</span></a
-                  >
-                </li>
-                <li class="nav-item">
-                  <div class="dropdown">
-                    <div
-                      class="language-div dropdown-toggle"
-                      id="dropdownMenu2"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <div>
-                        <i class="bi bi-globe"></i>
-                      </div>
-                      <div class="language">
-                        <span id="lang-select" data-translate="lang"> </span>
-                      </div>
-                      <div><i class="bi bi-chevron-down"></i></div>
-                    </div>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                      <li>
-                        <button
-                          class="dropdown-item"
-                          type="button"
-                          onclick="onLangChange('English')"
-                        >
-                          English
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          class="dropdown-item"
-                          type="button"
-                          onclick="onLangChange('Arabic')"
-                        >
-                          Arabic
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+        <a class="navbar-brand" href="/"><img src="{{ url('assets/images/Group 6.png') }}" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          {{-- <li class="nav-item">
+              <a class="nav-link" href="./student-dashboard.html"><span>student-dashboard</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./admin-dashboard.html"><span>Admin-dashboard</span></a>
+            </li> --}}
+          <li class="nav-item">
+            <div class="dropdown">
+              <div class="language-div dropdown-toggle" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                <div>
+                  <i class="bi bi-globe"></i>
+                </div>
+                <div class="language">
+                  <span id="lang-select" data-translate="lang"> English </span>
+              
+                </div>
+                <div><i class="bi bi-chevron-down"></i></div>
+              </div>
+              <ul class="dropdown-menu"  aria-labelledby="dropdownMenu2">
 
-                <li class="nav-item left-line">
-                  <a class="nav-link" href="./login.html">
-                    <span data-translate="log-in">Log In</span>
+                <li>
+                  <a class="eng_btn_bg" rel="alternate"  hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
+                    {{-- <button    ton class="dropdown-item" type="button" id="englishButton" onclick="onLangChange('English')"> --}}
+                    English
+                    {{-- </button> --}}
+                    {{-- English --}}
                   </a>
+                  {{-- <form action="{{ route('language.change',['id'=>'en']) }}" method="post">
+                  @csrf --}}
+                  {{-- </form> --}}
+                  {{-- <a href="{{ route('language.change',['lang'=>'en']) }}">
+                  </a> --}}
+
                 </li>
-                <li class="nav-item">
-                  <a href="./signup.html">
-                    <button data-translate="sign-up">Sign Up</button>
+                <li>
+                  {{-- <form action="{{ route('language.change',['id'=>'ar']) }}" method="post">
+                  @csrf --}}
+                  <a class="eng_btn_bg" rel="alternate" hreflang="ar" href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
+                    {{-- <button class="dropdown-item" type="button" id="arabicButton" onclick="onLangChange('Arabic')"> --}}
+                    Arabic
+                    {{-- </button> --}}
+                    {{-- English --}}
                   </a>
+                  {{-- </form> --}}
+
                 </li>
               </ul>
             </div>
-          </div>
-        </nav>
+          </li>
+          @if(!Auth::check())
+          <li class="nav-item left-line">
+            <a class="nav-link" href="{{ route('login') }}">
+              <span data-translate="log-in">{{ __('lang.navbar.login') }}</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('signup-page') }}">
+              <button data-translate="sign-up">{{ __('lang.navbar.signup') }}</button>
+            </a>
+          </li>
+          @else
+        
+          <li class="nav-item">
+            @if(Auth::user()->id==1)
+            <a href="{{ route('admindashboard.admin-index') }}">
+            @else
+            <a href="{{ route('studentdashboard.student-dashboard') }}">
+            @endif
+              <button data-translate="sign-up">Dashboard</button>
+            </a>
+          </li>
+          @endif
+        </ul>
       </div>
+  </div>
+  </nav>
     </div>
 
     <div class="privacy-policy px-5 mt-5">
@@ -206,45 +211,60 @@
 
     <!-- footer code -->
     <div>
-      <footer>
-        <div class="footer-line-1">
-          <div>
-            <a>
-              <span class="border-class" data-translate="careers">
-                Careers
-              </span>
-            </a>
-          </div>
-          <div>
-            <a href="./privacy-policy.html">
-              <span class="border-class" data-translate="privacy-policy">
-                Privacy Policy
-              </span>
-            </a>
-          </div>
-          <div>
-            <a href="./terms-conditions.html">
-              <span data-translate="terms-conditions">
-                Terms & Conditions
-              </span>
-            </a>
-          </div>
-        </div>
-        <div class="footer-line-2">
-          <div>
-            <span>© 2023 Anjez Inc. </span>
-          </div>
-        </div>
-      </footer>
+  <footer>
+    <div class="footer-line-1">
+      <div>
+        <a>
+          <span class="border-class" data-translate="careers">
+            {{ __('lang.footer.careers') }}
+          </span>
+        </a>
+      </div>
+      <div>
+        <a href="./privacy-policy" style="text-decoration:none">
+          <span class="border-class" data-translate="privacy-policy">
+            {{ __('lang.footer.privacy_policy') }}
+          </span>
+        </a>
+      </div>
+      <div>
+        <a href="./terms-conditions" style="text-decoration:none">
+          <span class="border-class" data-translate="terms-conditions">
+            {{ __('lang.footer.terms_conditions') }}
+          </span>
+        </a>
+      </div>
     </div>
-    <script src="./assets/js/privacy-policy.js"></script>
-    <script src="./assets/js/placeholder.js"></script>
-    <script
+    <div class="footer-line-2">
+      <div>
+        <span>© <span id="year_span">{{ date('Y') }}</span> {{ __('lang.footer.angez_inc') }} </span>
+      </div>
+    </div>
+  </footer>
+  </div>
+    <!-- <script src="./assets/js/privacy-policy.js"></script>
+    <script src="./assets/js/placeholder.js"></script> -->
+    <!-- <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
+    <script src="{{ asset('assets/bootstrap_js/bootstrap.bundle.min.js') }}"></script>
+    <script>
+       function updateTextLanguage() {
+            const path = window.location.pathname;
+            const langSelectElement = document.getElementById('lang-select');
 
-
+            const splits = path.split('/')
+// console.log(splits);
+            if (splits[1] === 'en') {
+                langSelectElement.textContent = 'English ';
+                console.log(path)
+            } else if (splits[1] === 'ar') {
+              langSelectElement.textContent = 'Arabic ';
+            }
+        }
+        window.addEventListener('load', updateTextLanguage);
+    </script>
   </body>
 </html>

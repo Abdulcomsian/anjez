@@ -74,7 +74,7 @@
 
 
 @extends('frontend.layouts.main')
-
+<link rel="stylesheet" href="{{ asset('assets/style/login.css') }}" />
 @section('content')
 <div class="login-main">
     <div class="left-login-side">
@@ -83,9 +83,9 @@
         </div>
     </div>
     <div class="right-login-side">
-        <div class="logo-section">
+    <div class="logo-section">
             <div>
-                <a href="{{ url('/login') }}"><img src="{{ url('assets/images/Group 6.png') }}" alt="logo" /></a>
+                <a href="{{ url('/') }}"><img src="{{ url('assets/images/Group 6.png') }}" alt="logo" /></a>
             </div>
         </div>
         <div class="form-section">
