@@ -68,13 +68,13 @@
                         <option value="Draft" @if($course->status == 'Draft') selected @endif>Draft</option>
                     </select>
                 </div>
-                <div class="col">
+                {{-- <div class="col">
                     <label for="status" class="form-label">Status (Ar) </label>
                     <select class="form-select" name="status_ar" aria-label="Default select example">
                         <option value="نشيط" @if($course->status_ar == 'نشيط') selected @endif>نشيط</option>
                         <option value="مسودة" @if($course->status_ar == 'مسودة') selected @endif>مسودة</option>
                     </select>
-                </div>
+                </div> --}}
             </div>
             <div class="row mt-4">
                 <div class="col-6 course">

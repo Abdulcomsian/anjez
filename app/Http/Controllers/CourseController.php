@@ -40,7 +40,7 @@ class CourseController extends Controller
             'title' => 'required',
             'title_ar' => 'required',
             'status' => 'required',
-            'status_ar' => 'required',
+            // 'status_ar' => 'required',
             'description' => 'required',
             'description_ar' => 'required',
             'feature_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -52,7 +52,7 @@ class CourseController extends Controller
         $course->title = $validatedData['title'];
         $course->title_ar = $validatedData['title_ar'];
         $course->status = $validatedData['status'];
-        $course->status_ar = $validatedData['status_ar'];
+        // $course->status_ar = $validatedData['status_ar'];
         $course->description = $validatedData['description'];
         $course->description_ar = $validatedData['description_ar'];
         $course->feature_image = $this->storeImage(Course::PATH, $validatedData['feature_image'] ?? '');
@@ -78,7 +78,7 @@ class CourseController extends Controller
             'title' => 'required',
             'title_ar' => 'required',
             'status' => 'required',
-            'status_ar' => 'required',
+            // 'status_ar' => 'required',
             'description' => 'required',
             'description_ar' => 'required',
             'feature_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -90,7 +90,7 @@ class CourseController extends Controller
         $course->title = $validatedData['title'];
         $course->title_ar = $validatedData['title_ar'];
         $course->status = $validatedData['status'];
-        $course->status_ar = $validatedData['status_ar'];
+        // $course->status_ar = $validatedData['status_ar'];
         $course->description = $validatedData['description'];
         $course->description_ar = $validatedData['description_ar'];
         $course->user_id = auth()->user()->id;

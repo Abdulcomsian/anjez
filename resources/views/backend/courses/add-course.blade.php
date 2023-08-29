@@ -73,13 +73,13 @@
                                 <option value="Draft"> Draft </option>
                             </select>
                         </div>
-                        <div class="col-6 course">
+                        {{-- <div class="col-6 course">
                             <label for="state" class="form-label"> Status (Ar) </label>
                             <select class="form-select" name="status_ar" aria-label="Default select example">
                                 <option value="نشيط"> نشيط </option>
                                 <option value="مسودہ"> مسودہ </option>
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
 
                   <div class="row mt-4">

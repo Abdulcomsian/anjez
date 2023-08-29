@@ -43,7 +43,7 @@ class SectionController extends Controller
             'title'=>'required',
             'status'=>'required',
             'title_ar'=>'required',
-            'status_ar'=>'required',
+            // 'status_ar'=>'required',
             'course_id'=>'required|exists:courses,id'
         ]);
         $section = $this->section->storeOrUpdate($validated_data, $id=null);
@@ -68,7 +68,7 @@ class SectionController extends Controller
             'title'=>'required',
             'status'=>'required',
             'title_ar'=>'required',
-            'status_ar'=>'required',
+            // 'status_ar'=>'required',
             'section_id'=>'required|exists:sections,id',
             'course_id'=>'required|exists:courses,id'
         ]);
