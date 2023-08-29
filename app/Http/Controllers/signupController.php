@@ -30,7 +30,7 @@ class signupController extends Controller
             'first_name'=>'required',
             'last_name'=>'required',
             'email'=>'required|unique:users',
-            'phone_no'=>'required',
+            'phone_no'=>'required|unique:users',
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
             'password_confirmation' => 'min:6',
             'type'  => 'Student'
