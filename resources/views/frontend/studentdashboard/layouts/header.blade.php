@@ -11,13 +11,13 @@
     <link rel="stylesheet" href="{{ asset('assets/style/payment.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/style/student-dashboard.css')}}" />
     <link rel="stylesheet" href="{{ asset('assets/style/quiz.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/bootstrap.bundle.min.js') }}" />
+    <!-- <link rel="stylesheet" href="{{ asset('assets/bootstrap.bundle.min.js') }}" /> -->
 
     <link rel="stylesheet" href="{{ asset('assets/bootstrap_css/bootstrap.min.css') }}" />
     <!-- <link rel="stylesheet" href="{{ asset('assets/bootstrap_css/bootstrap.css') }}" /> -->
     <script src="{{ asset('assets/bootstrap_js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/bootstrap_js/bootstrap.js') }}"></script>
-    <script src="{{ asset('assets/bootstrap.bundle.min.js') }}"></script>
+    <!-- <script src="{{ asset('assets/bootstrap.bundle.min.js') }}"></script> -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -98,7 +98,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" /> -->
 
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->

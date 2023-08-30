@@ -35,12 +35,6 @@
           </button>
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          {{-- <li class="nav-item">
-              <a class="nav-link" href="./student-dashboard.html"><span>student-dashboard</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./admin-dashboard.html"><span>Admin-dashboard</span></a>
-            </li> --}}
           <li class="nav-item">
             <div class="dropdown">
               <div class="language-div dropdown-toggle" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,29 +50,15 @@
               <ul class="dropdown-menu"  aria-labelledby="dropdownMenu2">
 
                 <li>
-                  <a class="eng_btn_bg" rel="alternate"  hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
-                    {{-- <button    ton class="dropdown-item" type="button" id="englishButton" onclick="onLangChange('English')"> --}}
+                  <a class="eng_btn_bg" style="margin-left:20px;" rel="alternate"  hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">  
                     English
-                    {{-- </button> --}}
-                    {{-- English --}}
                   </a>
-                  {{-- <form action="{{ route('language.change',['id'=>'en']) }}" method="post">
-                  @csrf --}}
-                  {{-- </form> --}}
-                  {{-- <a href="{{ route('language.change',['lang'=>'en']) }}">
-                  </a> --}}
-
                 </li>
                 <li>
-                  {{-- <form action="{{ route('language.change',['id'=>'ar']) }}" method="post">
-                  @csrf --}}
-                  <a class="eng_btn_bg" rel="alternate" hreflang="ar" href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
-                    {{-- <button class="dropdown-item" type="button" id="arabicButton" onclick="onLangChange('Arabic')"> --}}
+
+                  <a class="eng_btn_bg" style="margin-left:20px;" rel="alternate" hreflang="ar" href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
                     Arabic
-                    {{-- </button> --}}
-                    {{-- English --}}
                   </a>
-                  {{-- </form> --}}
 
                 </li>
               </ul>
