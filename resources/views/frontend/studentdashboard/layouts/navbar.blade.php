@@ -77,32 +77,30 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+                <li class="nav-item">
+                  <div class="dropdown">
+                      <div class="language-div dropdown-toggle" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
+                          <div>
+                          <div class="profile-content-1">
 
-
-<li class="nav-item">
-    <div class="dropdown">
-        <div class="language-div dropdown-toggle" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
-            <div>
-            <div class="profile-content-1">
-
-            </div>
-                
-            </div>
-            <div class="jane">
-                <span style="color: #3d474d;">{{ auth()->user()->first_name ?? 'Student' }}</span>
-            </div>
-            <div><i class="bi bi-chevron-down"></i></div>
-        </div>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="left: 0; top: 74%;">
-            <li>
-                <a class="dropdown-item" href="{{ route('logout') }}">
-                    <i class="bi bi-arrow-return-left"></i> Logout
-                </a>
-            </li>
-        </ul>
-    </div>
-  </li>
-  <li class="nav-item">
+                          </div>
+                              
+                          </div>
+                          <div class="jane">
+                              <span style="color: #3d474d;">{{ auth()->user()->first_name ?? 'Student' }}</span>
+                          </div>
+                          <div><i class="bi bi-chevron-down"></i></div>
+                      </div>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" style="left: 0; top: 74%;">
+                          <li>
+                              <a class="dropdown-item" href="{{ route('logout') }}">
+                                  <i class="bi bi-arrow-return-left"></i> Logout
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+                </li>
+                <li class="nav-item">
                   <div class="dropdown">
                       <div class="language-div dropdown-toggle" id="dropdownMenu2"
                           data-bs-toggle="dropdown" aria-expanded="false">
@@ -115,18 +113,19 @@
                           <div><i class="bi bi-chevron-down"></i></div>
                       </div>
                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                      <li>
-                  <a class="eng_btn_bg" rel="alternate"  hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
-                    English
-                </li>
-                <li>
-                  <a class="eng_btn_bg" rel="alternate" hreflang="ar" href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
-                    Arabic
-                  </a>
-                </li>
+                        <li>
+                          <a class="eng_btn_bg" rel="alternate"  hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
+                            English
+                          </a>
+                        </li>
+                        <li>
+                          <a class="eng_btn_bg" rel="alternate" hreflang="ar" href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
+                            Arabic
+                          </a>
+                        </li>
                       </ul>
                   </div>
-              </li>
+                </li>
             </ul>
           </div>
         </div>
