@@ -22,7 +22,7 @@ class SectionService implements SectionInterface
                 $section->title        =  $request['title'];
                 $section->status       =  $request['status'];
                 $section->title_ar        =  $request['title_ar'];
-                $section->status_ar       =  $request['status_ar'];
+                // $section->status_ar       =  $request['status_ar'];
                 $section->course_id    =  $course_id;
                 $section->save();
             });

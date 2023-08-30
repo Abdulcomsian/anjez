@@ -4,6 +4,15 @@
 
 <div class="user mt-5 pb-5" id="course-section">
     <div class="container">
+      @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+      @endif
       <div class="row ">
         <div class="col mt-4 d-flex justify-content-start">
           <p class="heading-text  d-flex justify-content-center">Course Section</p>
@@ -94,14 +103,13 @@
                     <option value="Draft"> Draft </option>
                 </select>
               </div>
-              <div class="col-6 star course">
-                  {{-- <input type="text" class="form-control" id="firstname" /> --}}
+              {{-- <div class="col-6 star course">
                 <label for="status_ar"  class="form-label">Status</label>
                 <select class="form-select" id="status_ar" name="status_ar" aria-label="Default select example">
                     <option value="نشيط"> نشيط </option>
                     <option value="مسودہ"> مسودہ </option>
                 </select>
-              </div>
+              </div> --}}
             </div>
         </div>
         <div class="modal-footer d-flex justify-content-center">
@@ -146,13 +154,13 @@
                     <option value="Draft"> Draft </option>
                 </select>
               </div>
-              <div class="col star course">
+              {{-- <div class="col star course">
                 <label for="status" class="form-label">Status (Ar)</label>
                 <select class="form-select" id="status_update_ar" name="status_ar" aria-label="Default select example">
                     <option value="نشيط"> نشيط </option>
                     <option value="مسودة"> مسودة </option>
                 </select>
-              </div>
+              </div> --}}
             </div>
         </div>
         <div class="modal-footer d-flex justify-content-center">
@@ -184,7 +192,7 @@ $(document).ready(function () {
                     $('#title').val(response.data.title);
                     $('#title_ar').val(response.data.title_ar);
                     $('#status_update_en').val(response.data.status);
-                    $('#status_update_ar').val(response.data.status_ar)
+                    // $('#status_update_ar').val(response.data.status_ar)
                     $('#section_id').val(response.data.id);
                     $('#course_id').val(response.data.course_id);
                 }

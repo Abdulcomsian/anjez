@@ -13,13 +13,18 @@
             <span> Hi {{ auth()->user()->first_name }}, <span id="greeting"> </span></span>
           </div>
           <div class="text-line-3">
-            <span>Lorem ipsum dolor sit amet consectetur. Nibh non ac</span>
+            <span>To view lessons click on the link below!</span>
           </div>
         </div>
 
         <div class="subject-list">
           <div class="row">
-
+            @php
+              $text_end_class = '';
+              if(app()->getLocale() == 'ar'){
+                $text_end_class = 'text-end';
+              }
+            @endphp
             @forelse ($data['courses'] as $course)
             {{-- @dump($course); --}}
                 <div class="col-lg-3 col-md-6 col-sm-8">
@@ -37,11 +42,14 @@
                             </a>
                         <div class="card-body">
                         <div class="card-text">
-                            <div class="text-line-1">
-                                <span><a href="{{ route('course.details', ['id'=>encryptParams($course->id)]) }}"> {{ $course->title}} </a> </span>
+                            <div class="text-line-1 {{$text_end_class}}">
+                                <span><a href="{{ route('course.details', ['id'=>encryptParams($course->id)]) }}"> {{ app()->getLocale() == 'en' ? $course->title : $course->title_ar }} </a> </span>
                             </div>
-                            <div class="text-line-2">
-                                <span>{!! $course->description !!}</span>
+                            <div class="text-line-2 {{$text_end_class}}">
+                                {{-- <span>{!! Str::words($course->description_ar, $words = 20, $end = '...') !!}</span> --}}
+
+                                <span>{!! app()->getLocale() == 'en' ? Str::words(strip_tags($course->description), $words = 20, $end = '...') : Str::words(strip_tags($course->description_ar), $words = 20, $end = '...') !!}</span>
+
                             </div>
                             <?php
                                 if(isset($course->sections) && count($course->sections)>0 && !is_null($course->sections) && !empty($course->sections))

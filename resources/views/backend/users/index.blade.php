@@ -23,6 +23,7 @@
             <div class="col-md-6 py-2 d-flex justify-content-end">
               <button class="d-flex justify-content-between px-3 pt-2" type="submit"> <img class="pt-1"
                   src="{{ url('assets/images/button icon.png') }}" alt="" style="margin-right: 1%;"> Filter </button>
+                  <a href="{{route('users.index')}}" class="btn btn-danger btn-sm d-flex justify-content-between px-3 pt-2">Remove Filters </a>
             </div>
           </div>
       </form>
@@ -30,7 +31,7 @@
       <div class="row up pt-3">
         <div class="col-2"> Name </div>
         <div class="col-3"> Email </div>
-        {{-- <div class="col-2"> BILING DATE </div> --}}
+        <div class="col-2"> Phone No </div>
         {{-- <div class="col-2">STATUS</div> --}}
         {{-- <div class="col-2">AMOUNT</div> --}}
         <div class="col-2">CREATED AT</div>
@@ -43,9 +44,7 @@
                 <span class="ms-sm-2 named"> {{ $user->first_name ?? '- -' }}</span>
             </div>
             <div class="col-3 named" style="word-wrap: break-word;"> <span> {{ $user->email ?? '- -' }} </span> </div>
-            {{-- <div class="col-2 named " style="word-wrap: break-word;"> <span> {{$user->start_date ? date('d/m/Y', strtotime($user->start_date)) : '- -'}} </span> </div> --}}
-            {{-- <div class="col-2 named" style="word-wrap: break-word;font-size: 13px;"> @if($user->status == 'active')<span style="color: #7E5BF6;border-radius: 8px;background-color: #9A6CF014;padding: 2px 10px 2px 10px;">  Subscribed </span> @else <span> - - </span> @endif  </div>
-            <div class="col-2 fw-bold" style="word-wrap: break-word;"> - - </div> --}}
+            <div class="col-2 named" style="word-wrap: break-word;"> <span> {{ $user->phone_no ?? '- -' }} </span> </div>
             <div class="col-2" style="word-wrap: break-word;"><div class="amount"> {{ $user->created_at ? dateConversion($user->created_at) : '- -' }} </div></div>
         </div>
         <hr>

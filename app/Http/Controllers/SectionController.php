@@ -39,18 +39,21 @@ class SectionController extends Controller
 
     public function store (Request $request)
     {
+        try{
+
         $validated_data = $this->validate($request,[
             'title'=>'required',
             'status'=>'required',
             'title_ar'=>'required',
-            'status_ar'=>'required',
+            // 'status_ar'=>'required',
             'course_id'=>'required|exists:courses,id'
         ]);
-        $section = $this->section->storeOrUpdate($validated_data, $id=null);
-        if($section)
+            $section = $this->section->storeOrUpdate($validated_data, $id=null);
             return redirect()->back()->with('success', 'Section Added Successfully');
-        else
+        } catch(\Exception $e){
+            // dd($e->getMessage());
             return redirect()->back()->with('danger', 'Something went wrong');
+        }
     }
 
     public function edit ($id)
@@ -68,7 +71,7 @@ class SectionController extends Controller
             'title'=>'required',
             'status'=>'required',
             'title_ar'=>'required',
-            'status_ar'=>'required',
+            // 'status_ar'=>'required',
             'section_id'=>'required|exists:sections,id',
             'course_id'=>'required|exists:courses,id'
         ]);

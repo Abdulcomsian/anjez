@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('sections', function (Blueprint $table) {
             $table->string('title_ar')->nullable();
-            $table->string('status_ar')->nullable();
+            // $table->string('status_ar')->nullable();
         });
     }
 

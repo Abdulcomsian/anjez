@@ -8,91 +8,101 @@ use App\Helpers\Helper;
   <!-- NavBar Code -->
   <div>
   <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
+      <div class="container">
         <a class="navbar-brand" href="/"><img src="{{ url('assets/images/Group 6.png') }}" /></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          {{-- <li class="nav-item">
-              <a class="nav-link" href="./student-dashboard.html"><span>student-dashboard</span></a>
+          <ul class="navbar-nav">
+            {{-- <li class="nav-item">
+                <a class="nav-link" href="./student-dashboard.html"><span>student-dashboard</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./admin-dashboard.html"><span>Admin-dashboard</span></a>
+              </li> --}}
+            <li class="nav-item">
+              <div class="dropdown">
+                <div class="language-div dropdown-toggle" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div>
+                    <i class="bi bi-globe"></i>
+                  </div>
+                  <div class="language">
+                    <span id="lang-select" data-translate="lang"> English </span>
+                
+                  </div>
+                  <div><i class="bi bi-chevron-down"></i></div>
+                </div>
+                <ul class="dropdown-menu"  aria-labelledby="dropdownMenu2">
+
+                  <li>
+                    <a class="eng_btn_bg" rel="alternate"  hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
+                      {{-- <button    ton class="dropdown-item" type="button" id="englishButton" onclick="onLangChange('English')"> --}}
+                      English
+                      {{-- </button> --}}
+                      {{-- English --}}
+                    </a>
+                    {{-- <form action="{{ route('language.change',['id'=>'en']) }}" method="post">
+                    @csrf --}}
+                    {{-- </form> --}}
+                    {{-- <a href="{{ route('language.change',['lang'=>'en']) }}">
+                    </a> --}}
+
+                  </li>
+                  <li>
+                    {{-- <form action="{{ route('language.change',['id'=>'ar']) }}" method="post">
+                    @csrf --}}
+                    <a class="eng_btn_bg" rel="alternate" hreflang="ar" href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
+                      {{-- <button class="dropdown-item" type="button" id="arabicButton" onclick="onLangChange('Arabic')"> --}}
+                      Arabic
+                      {{-- </button> --}}
+                      {{-- English --}}
+                    </a>
+                    {{-- </form> --}}
+
+                  </li>
+                </ul>
+              </div>
+            </li>
+            @if(!Auth::check())
+            <li class="nav-item left-line">
+              <a class="nav-link" href="{{ route('login') }}">
+                <span data-translate="log-in">{{ __('lang.navbar.login') }}</span>
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./admin-dashboard.html"><span>Admin-dashboard</span></a>
-            </li> --}}
-          <li class="nav-item">
-            <div class="dropdown">
-              <div class="language-div dropdown-toggle" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                <div>
-                  <i class="bi bi-globe"></i>
-                </div>
-                <div class="language">
-                  <span id="lang-select" data-translate="lang"> English </span>
-              
-                </div>
-                <div><i class="bi bi-chevron-down"></i></div>
-              </div>
-              <ul class="dropdown-menu"  aria-labelledby="dropdownMenu2">
-
-                <li>
-                  <a class="eng_btn_bg" rel="alternate"  hreflang="en" href="{{ LaravelLocalization::getLocalizedURL('en', null, [], true) }}">
-                    {{-- <button    ton class="dropdown-item" type="button" id="englishButton" onclick="onLangChange('English')"> --}}
-                    English
-                    {{-- </button> --}}
-                    {{-- English --}}
-                  </a>
-                  {{-- <form action="{{ route('language.change',['id'=>'en']) }}" method="post">
-                  @csrf --}}
-                  {{-- </form> --}}
-                  {{-- <a href="{{ route('language.change',['lang'=>'en']) }}">
-                  </a> --}}
-
-                </li>
-                <li>
-                  {{-- <form action="{{ route('language.change',['id'=>'ar']) }}" method="post">
-                  @csrf --}}
-                  <a class="eng_btn_bg" rel="alternate" hreflang="ar" href="{{ LaravelLocalization::getLocalizedURL('ar', null, [], true) }}">
-                    {{-- <button class="dropdown-item" type="button" id="arabicButton" onclick="onLangChange('Arabic')"> --}}
-                    Arabic
-                    {{-- </button> --}}
-                    {{-- English --}}
-                  </a>
-                  {{-- </form> --}}
-
-                </li>
-              </ul>
-            </div>
-          </li>
-          @if(!Auth::check())
-          <li class="nav-item left-line">
-            <a class="nav-link" href="{{ route('login') }}">
-              <span data-translate="log-in">{{ __('lang.navbar.login') }}</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('signup-page') }}">
-              <button data-translate="sign-up">{{ __('lang.navbar.signup') }}</button>
-            </a>
-          </li>
-          @else
-        
-          <li class="nav-item">
-            @if(Auth::user()->id==1)
-            <a href="{{ route('admindashboard.admin-index') }}">
+              <a href="{{ route('signup-page') }}">
+                <button data-translate="sign-up">{{ __('lang.navbar.signup') }}</button>
+              </a>
+            </li>
             @else
-            <a href="{{ route('studentdashboard.student-dashboard') }}">
+          
+            <li class="nav-item">
+              @if(Auth::user()->id==1)
+              <a href="{{ route('admindashboard.admin-index') }}">
+              @else
+              <a href="{{ route('studentdashboard.student-dashboard') }}">
+              @endif
+                <button data-translate="sign-up">Dashboard</button>
+              </a>
+            </li>
             @endif
-              <button data-translate="sign-up">Dashboard</button>
-            </a>
-          </li>
-          @endif
-        </ul>
+          </ul>
+        </div>
       </div>
-  </div>
   </nav>
-
+  @if(auth()->user() && auth()->user()->type == 'Admin')
+    @php
+      $dashboard_route = route('admindashboard.admin-index');
+      $courses_route = route('courses.index');
+    @endphp
+  @else
+    @php
+      $courses_route = route('studentdashboard.student-dashboard');
+      $dashboard_route = route('studentdashboard.student-dashboard');
+    @endphp
+  @endif
 
 <!-- Section 1 -->
 <div>
@@ -116,15 +126,15 @@ use App\Helpers\Helper;
       </div>
       <div class="button-section">
         <div class="button-1">
-          <button class="signu-up">
-            <a href="./signup" data-translate="sign-up">{{ __('lang.navbar.signup') }}</a>
-          </button>
+            <button class="signu-up">
+              <a href="{{route("signup-page")}}" data-translate="sign-up">{{ __('lang.navbar.signup') }}</a>
+            </button>
         </div>
         <div class="button-2">
           <button class="signu-up">
-            <a href="{{route('studentdashboard.student-dashboard')}}" data-translate="view-courses">
-              {{ __('lang.section1.view_courses') }}
-            </a>
+              <a href="{{$courses_route}}" data-translate="view-courses">
+                {{ __('lang.section1.view_courses') }}
+              </a>
           </button>
         </div>
       </div>
@@ -158,9 +168,9 @@ use App\Helpers\Helper;
                   {{ __('lang.section2.subscribe_now') }}
                 </button>
               @else
-                <button data-translate="subscribe-now">
+                {{-- <button data-translate="subscribe-now">
                   {{ __('lang.section2.subscribe_now') }}
-                </button>
+                </button> --}}
               @endif
             </div>
             <div class="button-2">
