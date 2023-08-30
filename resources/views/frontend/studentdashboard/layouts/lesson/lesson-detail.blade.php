@@ -16,7 +16,7 @@ use App\Helpers\Helper;
                         <div class="upss pb-3 px-3" style="background-color: white;">
                             <div class="row pt-4 pb-2">
                                 <div class="col">
-                                    <span id="title">{{ $data['lesson']->title }}</span>
+                                    <span id="title">{{ app()->getLocale() == 'en' ? $data['lesson']->title : $data['lesson']->title_ar}}</span>
                                 </div>
                                 <div class="col me-5">
                                     @if(!Helper::isPaymentActive())
@@ -28,7 +28,7 @@ use App\Helpers\Helper;
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <p id="description">{!! $data['lesson']->description !!}</p>
+                                    <p id="description">{!! app()->getLocale() == 'en' ? $data['lesson']->description : $data['lesson']->description_ar !!}</p>
                                 </div>
                             </div>
                             <?php
@@ -50,22 +50,17 @@ use App\Helpers\Helper;
                             ?>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" style="width:{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
-
-                                {{-- <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div> --}}
                             </div>
                         </div>
                         <div class="embed-responsive embed-responsive-21by9 mt-4" id="video-container">
                             {!!$data['lesson']->video_url!!}
-                            {{-- <button id="video-button" data-toggle="modal" data-target="#exampleModal">Test Your
-                                Knowledge</button> --}}
-
                         </div>
                         <div class="course-test-div row mt-4 justify-content-between">
                             @if(isset($data['lesson']->thumbnail) && !empty($data['lesson']->thumbnail) && !is_null($data['lesson']->thumbnail))
                                 <div class="col-4 attachment-dropdown">
                                     <div class="dropdown">
                                         <button class="btn attach dropdown-toggle" type="button" id="courseAttachmentMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 10px; border-radius: 8px;">
-                                            Course Attachments
+                                            {{app()->getLocale() == 'en' ? 'Course Attachments' : 'مرفقات الدورة' }}
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="courseAttachmentMenuButton">
                                             <a class="dropdown-item" target="_blank" href="{{ asset('assets/courses-content/lesson-images/'.$data['lesson']->thumbnail) }}">{{ $data['lesson']->thumbnail }}</a>
@@ -76,14 +71,15 @@ use App\Helpers\Helper;
 
                             @if(count($data['lesson']->quizes)>0)
                                 <div class="@if(count($data['lesson']->quizes)<=0) offset-8 @endif col-4 d-flex justify-content-end test-knowledge-btn">
-                                    <button class="video-button-2" style="padding: 10px; border-radius: 8px;" id="test_quiz_btn">Test Your
-                                        Knowledge
+                                    <button class="video-button-2" style="padding: 10px; border-radius: 8px;" id="test_quiz_btn">
+                                        {{app()->getLocale() == 'en' ? 'Test Your Knowledge' : 'اختبر معرفتك' }}
                                     </button>
                                 </div>
                             @else
                             <div class="offset-8 col-4 d-flex justify-content-end">
                                 <a href="{{ route('lesson.mark-as-read',['id'=>$data['lesson']->id]) }}">
-                                    <button class="mark-as-read" style="padding: 10px; border-radius: 8px;">Mark As Read
+                                    <button class="mark-as-read" style="padding: 10px; border-radius: 8px;">
+                                        {{app()->getLocale() == 'en' ? 'Mark As Read' : 'وسّم كمقروء' }}
                                     </button>
                                 </a>
                             </div>
@@ -110,39 +106,52 @@ use App\Helpers\Helper;
             </div>
             <div class="modal-body px-5">
                 <div class="d-flex flex-column">
-                    <h5> Answer the questions below</h5>
-                    <p class="m-auto"><span id="currQuesNum">1</span> / <span
-                            id="totalQuesNum">{{ (int)count($data['lesson']->quizes) }}</span></p>
+                    <h5>
+                        @if (app()->getLocale() == 'ar')
+                            قم بالإجابة على الأسئلة أدناه
+                        @else
+                            Answer the questions below
+                        @endif
+                    </h5>
+                    <p class="m-auto"><span id="currQuesNum">1</span> / <span id="totalQuesNum">{{ (int)count($data['lesson']->quizes) }}</span></p>
                     <div class="question m-auto" id="ques">
-                        {{ $data['lesson']->quizes[0]->question ?? '' }}
+                        {{ app()->getLocale() == 'ar' ? $data['lesson']->quizes[0]->question_ar ?? '' : $data['lesson']->quizes[0]->question ?? '' }}
                     </div>
                 </div>
-
+                
                 <div class="options mt-5" id="opts">
+                    @foreach ($data['lesson']->quizes as $quiz)
                     <div class="option">
-                        <input type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option1 : '' }}"><label style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option1 : '' }}</label>
+                        <input type="radio" name="answer" value="{{ $quiz->options->correct_answer }}">
+                        <label style="text-decoration: none">
+                            {{ app()->getLocale() == 'ar' ? $quiz->options->option_ar : $quiz->options->option }}
+                        </label>
                     </div>
-                    <div class="option">
-                        <input type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option2 : '' }}"><label style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option2 : '' }}</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option3 : '' }}"><label style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option3 : '' }}</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option4 : '' }}"><label style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option4 : '' }}</label>
-                    </div>
+                    @endforeach
                 </div>
-                <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.  Correct Option is <span id='corr_ans'> .</span> Reason <span id="corr_ans_reason"></span> </div>
-                {{-- <div style="color: green" class="d-none correct-answer-div"></div> --}}
 
+                <div style="color: red" class="d-none incorrect-answer-div">
+                    @if (app()->getLocale() == 'ar')
+                        إجابة غير صحيحة. الخيار الصحيح هو <span id='corr_ans'>.</span> السبب <span id="corr_ans_reason"></span>
+                    @else
+                        Incorrect Answer. Correct Option is <span id='corr_ans'>.</span> Reason <span id="corr_ans_reason"></span>
+                    @endif
+                </div>
+                
                 <div class="modal-footer d-flex flex-column justify-content-center">
-                    <input type="hidden" name="correct_answer" class="correct_answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->correct_answer : '' }}">
+                    <input type="hidden" name="correct_answer" class="correct_answer" value="{{ $data['lesson']->quizes[0]->options->correct_answer }}">
                     <input type="hidden" name="lesson_id" class="lesson_id" value="{{ $data['lesson']->id }}">
                     <input type="hidden" name="question_no" class="question_no">
                     <input type="hidden" name="score" class="score" value="0">
                     <input type="hidden" name="total_qstns" class="total_qstns" value="{{ (int)count($data['lesson']->quizes) }}">
-                    <input type="hidden" name="correct-answer-description" class="correct_answer_description" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->correct_answer_description : '' }}">
-                    <button onclick="checkAns()" id="btn">Next Question</button>
+                    <input type="hidden" name="correct-answer-description" class="correct_answer_description" value="{{ $data['lesson']->quizes[0]->options->correct_answer_description }}">
+                    <button onclick="checkAns()" id="btn">
+                        @if (app()->getLocale() == 'ar')
+                            السؤال التالي
+                        @else
+                            Next Question
+                        @endif
+                    </button>
                 </div>
 
             </div>
@@ -151,6 +160,7 @@ use App\Helpers\Helper;
 </div>
 
 <script>
+    var selectedLanguage = "{{ app()->getLocale() }}";
     $(document).on('click','#courseAttachmentMenuButton', function(){
         $('.dropdown-menu').toggleClass('show');
     });
@@ -185,56 +195,56 @@ use App\Helpers\Helper;
 
             $.ajax({
                 type: "GET",
-                url: "{{ url('get-lesson/') }}/"+id,
+                url: '{{url("get-lesson/")}}/' + id,
                 success: function (response) {
-                    // console.log(response.data.lesson);
-                    $('.lesson_id').val(response.data.lesson.id)
+                    $('#currQuesNum').text(question_no + 1);
+                    $('.lesson_id').val(response.data.lesson.id);
                     let lesson_quizes = response.data.lesson.quizes;
                     let title = document.getElementById('title');
                     let description = document.getElementById('description');
 
+                    let quiz_count = lesson_quizes.length;
+
                     title.innerHTML = response.data.lesson.title;
                     description.innerHTML = response.data.lesson.description;
 
-                    if(response.data.lesson.quizes != null && response.data.lesson.quizes.length>0 && response.data.lesson.quizes!=[])
-                    {
-
-                        $('.total_qstns').val(response.data.lesson.quizes.length);
-
-                        $('.options').empty();
-                        $('.question_no').val(0);
-                        $('.test-knowledge-btn').removeClass('d-none');
-                        $('#currQuesNum').text(1);
-                        lesson_quizes.forEach((qstn, index) => {
-
-                            if(index == 0)
-                            {
-                                $('.correct_answer_description').val(qstn.options.correct_answer_description);
-                                $('.correct_answer').val(qstn.options.correct_answer);
-                                showQuiz(qstn.question, qstn.options.option1, qstn.options.option2, qstn.options.option3, qstn.options.option4, qstn.options.correct_answer);
-                            }
-                        });
-                        let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
-                        $('#totalQuesNum').text(quiz_qstns_length);
+                    if (question_no + 1 == quiz_count) {
+                        $('#btn').text("Finish");
+                        $('#btn').removeAttr('onclick');
+                        $('#btn').addClass('finish');
+                    } else {
+                        $('#btn').text("Next Question");
+                        $('#btn').removeClass('finish');
                     }
 
-                    else
-                    {
+                    if (response.data.lesson.quizes != null && response.data.lesson.quizes.length > 0 && response.data.lesson.quizes != []) {
                         $('.options').empty();
-                        $('.test-knowledge-btn').addClass('d-none');
 
-                        $('#currQuesNum').text(0);
+                        lesson_quizes.forEach((qstn, index) => {
+                            if (index == question_no) {
+                                var correct_answer_description = selectedLanguage == 'ar' ? qstn.options.correct_answer_description_ar : qstn.options.correct_answer_description;
+                                var correct_answer = selectedLanguage == 'ar' ? qstn.options.correct_answer_ar : qstn.options.correct_answer;
+                                $('.correct_answer_description').val(correct_answer_description);
+                                $('.correct_answer').val(correct_answer);
 
-                        $('.correct_answer').val('');
-                        $('.ques').text('')
-                        // showQuiz();
+                                // Handle options based on the selected language
+                                let option1 = selectedLanguage == 'ar' ? qstn.options.option1_ar : qstn.options.option1;
+                                let option2 = selectedLanguage == 'ar' ? qstn.options.option2_ar : qstn.options.option2;
+                                let option3 = selectedLanguage == 'ar' ? qstn.options.option3_ar : qstn.options.option3;
+                                let option4 = selectedLanguage == 'ar' ? qstn.options.option4_ar : qstn.options.option4;
 
-                        // console.log("else");
+                                showQuiz(qstn.question, option1, option2, option3, option4, qstn.options.correct_answer);
+                            }
+                        });
+
+                        let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
+                    } else {
                         let quiz_qstns_length = 0;
                         $('#totalQuesNum').text(quiz_qstns_length);
                     }
                 }
             });
+
     }
 
     function checkAns() {
