@@ -14,7 +14,11 @@ use App\Helpers\Helper;
                 <div class="student-content">
                     <div class="row d-flex justify-content-between">
                         <div class="col  d-flex justify-content-start">
-                            <div class="subject-heading"> {{ $data['course']->title ?? '' }} </div>
+                            @if(app()->getLocale() == 'en')
+                                <div class="subject-heading"> {{ $data['course']->title ?? '' }} </div>
+                            @else
+                                <div class="subject-heading"> {{ $data['course']->title_ar ?? '' }} </div>
+                            @endif
                         </div>
                         {{-- <form method="GET"> uncomment for later use
                             <div class="col d-flex justify-content-end">
@@ -24,9 +28,13 @@ use App\Helpers\Helper;
                             </div>
                         </form> --}}
                     </div>
-                    <div class="row flex-column mt-2">
-                        <div class="col-7 textss text-start ">
-                            <span>{!! $data['course']->description ?? '' !!}</span>
+                    <div class="row flex-column {{app()->getLocale() == 'en' ? 'mt-2' : 'mt-5'}}">
+                        <div class="col-7 textss">
+                            @if(app()->getLocale() == 'en')
+                                <span>{!! $data['course']->description ?? '' !!}</span>
+                            @else
+                                <span>{!! $data['course']->description_ar ?? '' !!}</span>
+                            @endif
                         </div>
                         @if(!Helper::isPaymentActive())
                         <div class="col mt-3"> <button class="px-4" type="button"> <a href="{{ route('payments') }}">
@@ -36,6 +44,90 @@ use App\Helpers\Helper;
                     <div class="contents px-4 mt-4 pt-1">
                         <div class="contents-heading d-flex justify-content-center mt-4 "> Contents </div>
                         <div class="row mt-4">
+                            @if($data['course'])
+                                @forelse ($data['course']['sections'] as $section)
+                                    @foreach($section['lessons'] as $key=>$lesson)
+                                        @if ($data['is_payment_active'] || $key === 0)
+                                            @php
+                                                $link = route('lesson.quizes',['id'=>encryptParams($lesson->id)]);
+                                            @endphp
+                                        @else
+                                            @php
+                                                $link = route('payments');
+                                            @endphp
+                                        @endif
+                                        <div class="col py-2">
+                                            <a href="{{ $link }}" style="text-decoration: none" >
+                                                @if (app()->getLocale() == 'ar')
+                                                    الدرس {{ $key+1 }} - {{ $lesson->title_ar }}
+                                                @else
+                                                    Lesson {{ $key+1 }} - {{ $lesson->title }}
+                                                @endif
+                                            </a>
+                                            <?php
+                                            try
+                                            {
+                                                if($lesson->is_complete == 0)
+                                                {
+                                                    $percentage = ($lesson->quiz_scores ? $lesson->quiz_scores->score_taken : 0)/($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0)*100;
+                                                }
+                                                else
+                                                {
+                                                    $percentage = 100;
+                                                }
+                                            }
+                                            catch (\Throwable $th)
+                                            {
+                                                $percentage = 0;
+                                            }
+                                            ?>
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" style="width:{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                            @if ($data['is_payment_active'] || $key === 0)
+                                                @if($key === 0)
+                                                    <div class="cate mt-2 ">
+                                                        @if (app()->getLocale() == 'ar')
+                                                            <p>مجاني</p>
+                                                        @else
+                                                            <p>Free</p>
+                                                        @endif
+                                                    </div>
+                                                @elseif($data['is_payment_active'])
+                                                    {{-- Display something related to payment --}}
+                                                @endif
+                                            @else
+                                                <div class="cate mt-2 ">
+                                                    <img src="{{ asset('assets/images/crown.png') }}" alt="">
+                                                </div>
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                @empty
+                                    <div class="col py-2">
+                                        <h4>
+                                            @if (app()->getLocale() == 'ar')
+                                                لا توجد دروس !
+                                            @else
+                                                No Lesson Found!
+                                            @endif
+                                        </h4>
+                                    </div>
+                                @endforelse
+                            @else
+                                <div class="col py-2">
+                                    <h4>
+                                        @if (app()->getLocale() == 'ar')
+                                            لا توجد دورة !
+                                        @else
+                                            No Course Found!
+                                        @endif
+                                    </h4>
+                                </div>
+                            @endif
+                        </div>
+                        
+                        {{-- <div class="row mt-4">
                             @if($data['course'])
                                 @forelse ($data['course']['sections'] as $section)
                                     @foreach($section['lessons'] as $key=>$lesson)
@@ -76,7 +168,6 @@ use App\Helpers\Helper;
                                                                     <p>Free</p>
                                                         </div>
                                                         @elseif($data['is_payment_active'])
-                                                        {{-- <p></p> --}}
                                                     @endif
                                                 @else
                                                 <div class="cate mt-2 ">
@@ -95,7 +186,7 @@ use App\Helpers\Helper;
                                     <h4>No Course Found !</h4>
                                 </div>
                             @endif
-                        </div>
+                        </div> --}}
 
 
                     </div>
