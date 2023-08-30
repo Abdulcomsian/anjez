@@ -86,7 +86,15 @@ use App\Helpers\Helper;
               @endif
                 <button data-translate="sign-up">Dashboard</button>
               </a>
+              
             </li>
+            @endif
+            @if(auth()->user())
+              <li class="nav-item">
+                <a href="{{ route('logout') }}">
+                  <button data-translate="sign-up">Logout</button>
+                </a> 
+              </li>
             @endif
           </ul>
         </div>
@@ -125,11 +133,13 @@ use App\Helpers\Helper;
         </span>
       </div>
       <div class="button-section">
-        <div class="button-1">
-            <button class="signu-up">
-              <a href="{{route("signup-page")}}" data-translate="sign-up">{{ __('lang.navbar.signup') }}</a>
-            </button>
-        </div>
+        @if(!auth()->user())
+          <div class="button-1">
+              <button class="signu-up">
+                <a href="{{route("signup-page")}}" data-translate="sign-up">{{ __('lang.navbar.signup') }}</a>
+              </button>
+          </div>
+        @endif
         <div class="button-2">
           <button class="signu-up">
               <a href="{{$courses_route}}" data-translate="view-courses">
@@ -175,7 +185,9 @@ use App\Helpers\Helper;
             </div>
             <div class="button-2">
               <button data-translate="explore-courses">
-                {{ __('lang.section2.explore_courses') }}
+                <a href="{{$courses_route}}" data-translate="view-courses">
+                  {{ __('lang.section2.explore_courses') }}
+                </a>
               </button>
             </div>
           </div>
