@@ -3,6 +3,49 @@ use App\Helpers\Helper;
 @endphp
 @extends('frontend.layouts.main')
 
+<style>
+  .custom-button{
+    background: #7e5bf6;
+    border:1px solid #7e5bf6 !important;
+    border-radius: 4px !important;
+    border: none;
+    color: #ffff !important;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: "DM Sans" !important;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 1rem 4rem 1rem 4rem;
+}
+.custom-button-1{
+    background: #fff;
+    border:1px solid #74767e !important;
+    border-radius: 4px !important;
+    color: #3d474d !important;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: "DM Sans" !important;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 1rem 2.6rem 1rem 2.6rem;
+}
+.custom-button-2{
+    background: transparent;
+    border:1px solid #74767e !important;
+    border-radius: 4px !important;
+    color: #3d474d !important;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: "DM Sans" !important;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 1rem 2.6rem 1rem 2.6rem;
+}
+</style>
+
 @section('content')
 <div>
   <!-- NavBar Code -->
@@ -43,17 +86,27 @@ use App\Helpers\Helper;
       <div class="button-section">
         @if(!auth()->user())
           <div class="button-1">
-              <button class="signu-up">
+              <!-- <button class="signu-up">
                 <a href="{{route("signup-page")}}" data-translate="sign-up">{{ __('lang.navbar.signup') }}</a>
-              </button>
+              </button> -->
+
+              <div class="signu-up">
+                <a class="text-decoration-none custom-button " href="{{route("signup-page")}}" data-translate="sign-up">{{ __('lang.navbar.signup') }}</a>
+              </div>
           </div>
         @endif
         <div class="button-2">
-          <button class="signu-up">
+          <!-- <button class="signu-up">
               <a href="{{$courses_route}}" data-translate="view-courses">
                 {{ __('lang.section1.view_courses') }}
               </a>
-          </button>
+          </button> -->
+
+          <div class="signu-up">
+              <a class="text-decoration-none custom-button-1 " href="{{$courses_route}}" data-translate="view-courses">
+                {{ __('lang.section1.view_courses') }}
+              </a>
+          </div>
         </div>
       </div>
     </div>
@@ -82,22 +135,34 @@ use App\Helpers\Helper;
           <div class="button-line">
             <div class="button-1">
               @if(Auth::check() && !Helper::isPaymentActive())
-                <button data-translate="subscribe-now">
+                <!-- <button data-translate="subscribe-now">
                   {{ __('lang.section2.subscribe_now') }}
-                </button>
+                </button> -->
+
+                <div class="sign-up" data-translate="subscribe-now">
+                    <a class="text-decoration-none custom-button-2" href="#" style="color:#fff !important; background: #7e5bf6; border:1px solid #7e5bf6 !important; curser:pointer;  data-translate="subscribe-now">
+                        {{ __('lang.section2.subscribe_now') }}
+                    </a>
+                </div>
+                
               @else
                 {{-- <button data-translate="subscribe-now">
                   {{ __('lang.section2.subscribe_now') }}
                 </button> --}}
               @endif
             </div>
-            <div class="button-2">
+            <!-- <div class="button-2">
               <button data-translate="explore-courses">
                 <a href="{{$courses_route}}" data-translate="view-courses">
                   {{ __('lang.section2.explore_courses') }}
                 </a>
               </button>
-            </div>
+            </div> -->
+              <div class="signu-up" data-translate="explore-courses">
+                <a  class="text-decoration-none custom-button-2" href="{{$courses_route}}" data-translate="view-courses">
+                  {{ __('lang.section2.explore_courses') }}
+                </a>
+              </div>
           </div>
         </div>
       </div>
@@ -520,14 +585,14 @@ use App\Helpers\Helper;
 <div>
   <footer>
     <div class="footer-line-1">
-      <div>
+      <!-- <div>
         <a>
           <span class="border-class" data-translate="careers">
             {{ __('lang.footer.careers') }}
           </span>
         </a>
-      </div>
-      <div>
+      </div> -->
+      <div style="margin-left:3.5rem;">
         <a href="./privacy-policy" style="text-decoration:none">
           <span class="border-class" data-translate="privacy-policy">
             {{ __('lang.footer.privacy_policy') }}
@@ -536,7 +601,7 @@ use App\Helpers\Helper;
       </div>
       <div>
         <a href="./terms-conditions" style="text-decoration:none">
-          <span class="border-class" data-translate="terms-conditions">
+          <span class="" data-translate="terms-conditions">
             {{ __('lang.footer.terms_conditions') }}
           </span>
         </a>

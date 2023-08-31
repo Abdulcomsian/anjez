@@ -1090,7 +1090,7 @@
                         id="exampleModalLongTitle"
                         data-translate="add-lesson"
                       >
-                        Add Lesson
+                        Add Lesson 
                       </h5>
                       <button
                         type="button"

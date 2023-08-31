@@ -2,6 +2,25 @@
 use App\Helpers\Helper;
 @endphp
 @extends('frontend.studentdashboard.layouts.course.main')
+<style>
+.subscribe {
+    display: flex;
+    justify-content: start;
+}
+.custom-button{
+    background: #7e5bf6;
+    border-radius: 4px !important;
+    border: none;
+    color: #ffff !important;
+    height: 3rem;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: "DM Sans" !important;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+</style>
 
 @section('content')
 <div>
@@ -37,8 +56,10 @@ use App\Helpers\Helper;
                             @endif
                         </div>
                         @if(!Helper::isPaymentActive())
-                        <div class="col mt-3"> <button class="px-4" type="button"> <a href="{{ route('payments') }}">
-                                    Subscribe </a> </button></div>
+                        <!-- <div class="col mt-3"> <button class="px-4" type="button"> <a class="text-decoration-none" href="{{ route('payments') }}">
+                                    Subscribe </a> </button></div> -->
+                                    <div class="col mt-3 subscribe">  <a class="text-decoration-none custom-button px-4 " type="button" href="{{ route('payments') }}">
+                                    Subscribe </a> </div>
                         @endif
                     </div>
                     <div class="contents px-4 mt-4 pt-1">
