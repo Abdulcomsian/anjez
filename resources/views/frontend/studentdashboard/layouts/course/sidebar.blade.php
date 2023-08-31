@@ -1,14 +1,48 @@
 @php
 use App\Helpers\Helper;
+
 @endphp
-<div class="col-auto col-md-3 col-xl-2 px-0 bg-white">
+<style>
+
+.sidebar {
+    transition: width 0.3s ease-in-out;
+}
+.navbar-toggler{
+    cursor: pointer;
+}
+
+.sidebar.expanded {
+    width: 200px;
+}
+
+/* @media (max-width: 700px) {
+    .sidebar .content {
+        display: none;
+    }
+} */
+@media (min-width: 700px) {
+    #newButtonContainer {
+        display: none;
+    }
+}
+
+</style>
+
+
+<div class="col-auto col-md-3 col-xl-2 px-0 bg-white sidebar" id="sidebar">
     <div class="d-flex flex-column align-items-center align-items-sm-start pt-2 text-white">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100 mt-3" id="menu">
+<div id="newButtonContainer">
+<div class="navbar-toggler" id="sidebar-toggler "  onclick="dd()"> <i class="fa-solid fa-bars" style="color: #903df5;"></i> </div>
+</div>
+
+<div class="content " id="content">
+
+
             <div class="one" onclick="dropOne()">
                 <li class="dropdown font-noto-sans nav-item w-100 px-lg-3 px-sm-0 mt-3 ms-3 open" onclick="dropOne()">
-                    <!-- <img src="./assets/images/corses icon.png" alt="" onclick="dropOne()"> -->
                     <img src="{{ asset('assets/images/corses icon.png') }}" alt="" onclick="dropOne()">
-                    <a class="dropdown-toggle ms-2 text-decoration-none" data-toggle="dropdown" href="#" onclick="dropOne()" aria-expanded="true">
+                    <a class="dropdown-toggle ms-2 text-decoration-none abc" data-toggle="dropdown" href="#" onclick="dropOne()" aria-expanded="true">
                          {{app()->getLocale() == 'en' ? 'Courses' : 'دروس' }} 
                          <span class="caret"></span>
                     </a>
@@ -16,6 +50,7 @@ use App\Helpers\Helper;
             </div>
             <div id="all">
             <!-- dropdown-one  -->
+            
             @forelse ($courses as $key=>$course)
                 <?php
                     if($key>=4)
@@ -113,7 +148,7 @@ use App\Helpers\Helper;
             @empty
             @endforelse
             </div>
-
+</div>
 
         </ul>
     </div>
@@ -158,28 +193,52 @@ use App\Helpers\Helper;
         @endforeach
     @endforeach
 
-    var video = document.getElementById("myVideo");
-    var progressBar = document.getElementById("progress-bar");
+    // var video = document.getElementById("myVideo");
+    // var progressBar = document.getElementById("progress-bar");
 
-    // When the video is paused, update the progress bar accordingly
-    video.addEventListener("pause", function () {
-        var progress = (video.currentTime / video.duration) * 100;
-        progressBar.style.width = progress + "%";
-        progressBar.setAttribute("aria-valuenow", progress);
-    });
+    // // When the video is paused, update the progress bar accordingly
+    // video.addEventListener("pause", function () {
+    //     var progress = (video.currentTime / video.duration) * 100;
+    //     progressBar.style.width = progress + "%";
+    //     progressBar.setAttribute("aria-valuenow", progress);
+    // });
 
-    // When the video ends, set the progress bar to 100%
-    video.addEventListener("ended", function () {
-        progressBar.style.width = "100%";
-        progressBar.setAttribute("aria-valuenow", 100);
-    });
+    // // When the video ends, set the progress bar to 100%
+    // video.addEventListener("ended", function () {
+    //     progressBar.style.width = "100%";
+    //     progressBar.setAttribute("aria-valuenow", 100);
+    // });
 
 
 
 
     function dropOne() 
-    {
+                    {
                         document.getElementById("all").classList.toggle("toggles");     
                     }
+
+
+
+
+                    function updateContentVisibility() {
+  var contentElement = document.getElementById('content');
+  if (window.innerWidth < 700) {
+    contentElement.classList.add('d-none');
+  } else {
+    contentElement.classList.remove('d-none');
+  }
+}
+
+updateContentVisibility();
+window.addEventListener('resize', function() {
+  updateContentVisibility();
+});
+
+
+
+
+function dd(){
+    document.getElementById('content').classList.toggle('d-none')
+}
 
 </script>

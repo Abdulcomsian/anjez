@@ -1,8 +1,16 @@
 @extends('backend.layouts.main')
-
+<style>
+  .course >td > img{
+    width: 3rem;
+    height: 3rem;
+  }
+  .table thead th {
+    vertical-align: bottom;
+    border-bottom: 1px solid lightgray !important;
+}
+</style>
 @section('content')
 <div id="course" style="display: block;">
-{{-- <div class="user mt-5 pb-5" id="course" style="display: none;"> --}}
     <div class="user mt-5 pb-5" id="main-course">
         <div class="container">
           <div class="row ">
@@ -31,9 +39,9 @@
                 </div>
               </div>
           </form>
-          <hr>
-
-          <div class="row courses d-flex justify-content-between">
+          <!-- <hr> -->
+<!-- 
+           <div class="row courses d-flex justify-content-between">
             <div class="col-1"> <span> ID </span> </div>
             <div class="col-3"> <span> TITLE </span> </div>
             <div class="col-2"> <span>ICON</span></div>
@@ -51,7 +59,6 @@
                 <div class="col-2"> <span> {{ $course['sections_count'] }} </span> </div>
                 <div class="col-1"><span> {{ $course->price }} </span></div>
                 <div class="col-2"> @if($course->status == 'Active') <span style="color: #1CB104;">{{ $course->status }}</span> @else <span style="color: #e93e28;"> {{ $course->status }}</span> @endif</div>
-                <!-- <div class="col-1"><img src="..../../assets/images/dots.png" alt=""></div> -->
                 <div class="col-1 dots">
                 <div class="dropdown dropdown-quiz">
                     <img class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -66,7 +73,63 @@
             @empty
                 <div class="col-9"> <span> No Course Found </span> </div>
             @endforelse
-        </div>
+        </div>  -->
+
+        <div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr class="courses">
+        <th scope="col" class="py-4">ID</th>
+        <th scope="col" class="py-4">TITLE</th>
+        <th scope="col" class="py-4">ICON</th>
+        <th scope="col" class="py-4">MAIN TOPIC</th>
+        <th scope="col" class="py-4">PRICE</th>
+        <th scope="col" class="py-4">STATUS</th>
+        <th scope="col" class="py-4">ACTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      @forelse ($courses as $key => $course)
+        <tr class="course ">
+          <td><span>{{ $key + 1 }} </span> </td>
+          <td>
+            <span style="color: #2572CC;"><a href="{{ route('section.index', ['id'=>$course->id]) }}" style="text-decoration: none"> {{ $course->title ?? '--' }}</a> </span> 
+          </td>
+          <td>
+            @if(isset($course->feature_image) && !is_null($course->feature_image))
+              <img src="{{ url('assets/courses-content/course-images/'.$course->feature_image) }}" alt="">
+            @else
+              <img src="http://via.placeholder.com/640x360" alt="">
+            @endif
+          </td>
+          <td> <span>{{ $course['sections_count'] }} </span> </td>
+          <td> <span>{{ $course->price }} </span> </td>
+          <td>
+            @if($course->status == 'Active')
+              <span style="color: #1CB104;">{{ $course->status }}</span>
+            @else
+              <span style="color: #e93e28;">{{ $course->status }}</span>
+            @endif
+          </td>
+          <td>
+            <div class="dropdown dropdown-quiz">
+              <img class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="">
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{{ url('courses/'.$course->id.'/edit') }}">Edit</a>
+                <a class="dropdown-item" href="{{ route('courses.destroy',['id'=>$course->id]) }}">Delete</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      @empty
+        <tr>
+          <td colspan="7">No Course Found</td>
+        </tr>
+      @endforelse
+    </tbody>
+  </table>
+</div>
+
       </div>
     </div>
 @endsection
