@@ -121,6 +121,13 @@
                         <div id="numd" class="mb-3 d-flex flex-column" style="display: none !important;">
                             <label for="phone" class="form-label">{{ __('lang.login_form.phone_number') }}</label>
                             <input type="tel" id="phone-input" max="12" name="phone_no" class="form-control">
+                            <input
+                                name="is_phone"
+                                type="hidden"
+                                class="form-control"
+                                id="is_phone"
+                                value="0"
+                            />
                         </div>
                         <div>
                             <label for="password" class="form-label">{{ __('lang.login_form.password') }}</label>
@@ -148,6 +155,7 @@
         document.getElementById("numd").style.display="block";
         document.getElementById("mail").classList.remove("show");
         document.getElementById("no").classList.add("show");
+        document.getElementById("is_phone").value = 1;
     }
 
     function showEmail(){
@@ -155,7 +163,8 @@
         document.getElementById("numd").style.setProperty("display", "none", "important");
         document.getElementById("mail").classList.add("show");
         document.getElementById("no").classList.remove("show");
-    }
+        document.getElementById("is_phone").value = null;
+}
 </script>
 @endsection
 

@@ -106,13 +106,13 @@
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col course course_description">
+                    <div class="col course star course_description">
                         <label for="description" class="form-label">Description (En) </label>
                         <textarea id="editor" name="lesson[description]"></textarea>
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col course course_description">
+                    <div class="col course star course_description">
                         <label for="description" class="form-label">Description (Ar) </label>
                         <textarea id="editor_ar" name="lesson[description_ar]"></textarea>
                     </div>

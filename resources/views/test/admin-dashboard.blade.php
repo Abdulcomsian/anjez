@@ -1090,7 +1090,7 @@
                         id="exampleModalLongTitle"
                         data-translate="add-lesson"
                       >
-                        Add Lesson
+                        Add Lesson 
                       </h5>
                       <button
                         type="button"
@@ -1127,7 +1127,7 @@
                           </div>
                         </div>
                         <div class="row mt-3">
-                          <div class="col course form-ar">
+                          <div class="col star course form-ar">
                             <label for="status" class="form-label" data-translate="description"
                               >Description</label
                             >

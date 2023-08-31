@@ -44,7 +44,7 @@ Route::group([
 ], function () {
 
 // User Routes
-Route::get('/', [IndexController::class, 'index']);
+Route::get('/', [IndexController::class, 'index'])->name('frontend');
 
 // Admin Route
 Route::get('/AdminDashboard', [adminDashboardController::class, 'AdminDashboard'])->middleware(['auth', 'isAdmin'])->name('admindashboard.admin-index');

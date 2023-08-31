@@ -46,7 +46,7 @@ class AuthService implements AuthInterface
 
     public function login ($request)
     {
-        if(isset($request['email']))
+        if(!$request['is_phone'])
         {
             $credientials =
             [

@@ -77,12 +77,12 @@
                 </div> --}}
             </div>
             <div class="row mt-4">
-                <div class="col-6 course">
+                <div class="col-6 star course">
                     <label for="description" class="form-label">Description (En)</label>
                     <textarea class="form-control" name="description" id="description"
                         rows="5">{{ $course->description }}</textarea>
                 </div>
-                <div class="col-6 course">
+                <div class="col-6 star course">
                     <label for="description" class="form-label">Description (Ar)</label>
                     <textarea class="form-control" name="description_ar" id="description_ar"
                         rows="5">{{ $course->description_ar }}</textarea>

@@ -191,16 +191,16 @@
 
     <!-- footer code -->
     <div>
-  <footer>
+    <footer>
     <div class="footer-line-1">
-      <div>
+      <!-- <div>
         <a>
           <span class="border-class" data-translate="careers">
             {{ __('lang.footer.careers') }}
           </span>
         </a>
-      </div>
-      <div>
+      </div> -->
+      <div style="margin-left:3.5rem;">
         <a href="./privacy-policy" style="text-decoration:none">
           <span class="border-class" data-translate="privacy-policy">
             {{ __('lang.footer.privacy_policy') }}
@@ -209,7 +209,7 @@
       </div>
       <div>
         <a href="./terms-conditions" style="text-decoration:none">
-          <span class="border-class" data-translate="terms-conditions">
+          <span class="" data-translate="terms-conditions">
             {{ __('lang.footer.terms_conditions') }}
           </span>
         </a>

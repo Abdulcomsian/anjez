@@ -83,14 +83,14 @@
                     </div>
 
                   <div class="row mt-4">
-                    <div class="col-6 course">
+                    <div class="col-6 star course">
                       <label for="description" class="form-label"> Description (En) </label>
                       <textarea id="editor" name="description"></textarea>
 
                       {{-- <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5"></textarea> --}}
                     </div>
 
-                    <div class="col-6 course">
+                    <div class="col-6 star course">
                         <label for="description" class="form-label"> Description (Ar) </label>
                         <textarea id="editor_ar" name="description_ar"></textarea>
 

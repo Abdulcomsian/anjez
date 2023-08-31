@@ -16,7 +16,7 @@ use App\Helpers\Helper;
                         <div class="upss pb-3 px-3" style="background-color: white;">
                             <div class="row pt-4 pb-2">
                                 <div class="col">
-                                    <span id="title">{{ $data['lesson']->title }}</span>
+                                    <span id="title">{{ app()->getLocale() == 'en' ? $data['lesson']->title : $data['lesson']->title_ar}}</span>
                                 </div>
                                 <div class="col me-5">
                                     @if(!Helper::isPaymentActive())
@@ -28,7 +28,7 @@ use App\Helpers\Helper;
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <p id="description">{!! $data['lesson']->description !!}</p>
+                                    <p id="description">{!! app()->getLocale() == 'en' ? $data['lesson']->description : $data['lesson']->description_ar !!}</p>
                                 </div>
                             </div>
                             <?php
@@ -65,7 +65,7 @@ use App\Helpers\Helper;
                                 <div class="col-4 attachment-dropdown">
                                     <div class="dropdown">
                                         <button class="btn attach dropdown-toggle" type="button" id="courseAttachmentMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 10px; border-radius: 8px;">
-                                            Course Attachments
+                                            {{app()->getLocale() == 'en' ? 'Course Attachments' : 'مرفقات الدورة' }}
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="courseAttachmentMenuButton">
                                             <a class="dropdown-item" target="_blank" href="{{ asset('assets/courses-content/lesson-images/'.$data['lesson']->thumbnail) }}">{{ $data['lesson']->thumbnail }}</a>
@@ -76,14 +76,15 @@ use App\Helpers\Helper;
 
                             @if(count($data['lesson']->quizes)>0)
                                 <div class="@if(count($data['lesson']->quizes)<=0) offset-8 @endif col-4 d-flex justify-content-end test-knowledge-btn">
-                                    <button class="video-button-2" style="padding: 10px; border-radius: 8px;" id="test_quiz_btn">Test Your
-                                        Knowledge
+                                    <button class="video-button-2" style="padding: 10px; border-radius: 8px;" id="test_quiz_btn">
+                                        {{app()->getLocale() == 'en' ? 'Test Your Knowledge' : 'اختبر معرفتك' }}
                                     </button>
                                 </div>
                             @else
                             <div class="offset-8 col-4 d-flex justify-content-end">
                                 <a href="{{ route('lesson.mark-as-read',['id'=>$data['lesson']->id]) }}">
-                                    <button class="mark-as-read" style="padding: 10px; border-radius: 8px;">Mark As Read
+                                    <button class="mark-as-read" style="padding: 10px; border-radius: 8px;">
+                                        {{app()->getLocale() == 'en' ? 'Mark As Read' : 'وسّم كمقروء' }}
                                     </button>
                                 </a>
                             </div>
@@ -110,11 +111,18 @@ use App\Helpers\Helper;
             </div>
             <div class="modal-body px-5">
                 <div class="d-flex flex-column">
-                    <h5> Answer the questions below</h5>
+                    <h5>  
+                        @if (app()->getLocale() == 'ar')
+                        قم بالإجابة على الأسئلة أدناه
+                        @else
+                            Answer the questions below
+                        @endif
+                    </h5>
                     <p class="m-auto"><span id="currQuesNum">1</span> / <span
                             id="totalQuesNum">{{ (int)count($data['lesson']->quizes) }}</span></p>
                     <div class="question m-auto" id="ques">
-                        {{ $data['lesson']->quizes[0]->question ?? '' }}
+                        {{ app()->getLocale() == 'ar' ? ($data['lesson']->quizes[0]->question_ar ?? '') : ($data['lesson']->quizes[0]->question ?? '') }}
+                        {{-- {{ ($data['lesson']->quizes[0]->question ?? '') }} --}}
                     </div>
                 </div>
 
