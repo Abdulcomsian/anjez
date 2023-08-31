@@ -212,8 +212,8 @@ use App\Helpers\Helper;
             <div class="modal-body px-5">
                 <div class="d-flex flex-column">
                     <h5> Answer the questions below</h5>
-                    <p class="m-auto"><span id="currQuesNum"></span> / <span
-                            id="totalQuesNum"></span></p>
+                    <p class="m-auto"><span id="currQuesNum"></span> / 
+                    <span id="totalQuesNum"></span></p>
                     <div class="question m-auto" id="ques">
 
                     </div>

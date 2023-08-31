@@ -116,7 +116,61 @@ use App\Helpers\Helper;
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+{{-- <div id="lessons" class="d-none col-md-10">
+    <div class="col py-3" id="lessons">
+        <div class="lecture">
+            <div class="upss pb-3 px-3" style="background-color: white;">
+                <div class="row pt-4 pb-2">
+                    <div class="col">
+                        <span id="title"> </span>
+                    </div>
+                    <div class="col me-5">
+                        <div class="cates  ">
+                            <p>Free</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p id="description"></p>
+                    </div>
+                </div>
+                <div class="progress">
+                    <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+            <div class="embed-responsive embed-responsive-21by9 mt-4" id="video-container">
+                <video id="myVideo" class="embed-responsive-item" src="./assets/videos/THAILAND IN 30 SECONDS - CINEMATIC VIDEO- 4k.mp4" controls=""></video>
+                <button id="video-button" data-toggle="modal" data-target="#exampleModal">Test Your
+                    Knowledge</button>
+
+            </div>
+            <div class="course-test-div row mt-4 justify-content-between">
+                <div class="col-4 attachment-dropdown">
+                    <div class="dropdown">
+                        <button class="btn attach dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 10px; border-radius: 8px;">
+                            Course Attachments
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            {{-- <a class="dropdown-item" href="#">Attachment 1</a>
+                            <a class="dropdown-item" href="#">Attachment 2</a>
+                            <a class="dropdown-item" href="#">Attachment 3</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 d-flex justify-content-end d-none test-knowledge-btn">
+                    <button class="video-button-2" style="padding: 10px; border-radius: 8px;" id="test_quiz_btn">Test Your
+                        Knowledge</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div> --}}
+{{-- {{ view('frontend.studentdashboard.layouts.course.lessons') }} --}}
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
     <script src="{{ asset('assets/js/quiz.js') }}"></script>
     {{-- <script src="./assets/js/student-content.js"></script>
     <script src="./assets/js/placeholder.js"></script> --}}
