@@ -146,76 +146,87 @@
    </div>
 </div>
 
-
 <script>
-       $(document).on('click', '.edit-btn', function () {
-        let id = $(this).data('id');
-        $('.lesson_id').val(id);
-        $.ajax({
-            type: "GET",
-            url: '{{ url('section/lesson/edit') }}/'+id,
-            success: function (response) {
-                if(response.status)
-                {
-                    $('#exampleModalCentertwo').modal('show');
-                    console.log(response.data);
-                    $('#title').val(response.data.title);
-                    $('#title_ar').val(response.data.title_ar);
-                    $('#video_url').val(response.data.video_url)
-                    $('#thumbnail').text(response.data.thumbnail);
+    let editorInstanceEn = null;
+let editorInstanceAr = null;
+
+$(document).on('click', '.edit-btn', function () {
+    let id = $(this).data('id');
+    $('.lesson_id').val(id);
+
+    $.ajax({
+        type: "GET",
+        url: '{{ url('section/lesson/edit') }}/'+id,
+        success: function (response) {
+            if (response.status) {
+                $('#exampleModalCentertwo').modal('show');
+                console.log(response.data);
+                $('#title').val(response.data.title);
+                $('#title_ar').val(response.data.title_ar);
+                $('#video_url').val(response.data.video_url);
+                $('#thumbnail').text(response.data.thumbnail);
+
+                // Initialize CKEditor if not already done
+                if (!editorInstanceEn) {
                     ClassicEditor
-                    .create( document.querySelector('#editor') )
-                    .then(editor => {
-                        editor.setData(response.data.description); // Assuming 'content' is the field containing the CKEditor data in your database
-                    })
-                    .catch( error => {
-                        console.error( error );
-                    } );
+                        .create(document.querySelector('#editor'))
+                        .then(editor => {
+                            editorInstanceEn = editor;
+                            editorInstanceEn.setData(response.data.description);
+                        });
+                } else {
+                    editorInstanceEn.setData(response.data.description);
+                }
+
+                if (!editorInstanceAr) {
                     ClassicEditor
-                    .create( document.querySelector('#editor_ar') )
-                    .then(editor => {
-                        editor.setData(response.data.description_ar); // Assuming 'content' is the field containing the CKEditor data in your database
-                    })
-                    .catch( error => {
-                        console.error( error );
-                    } );
+                        .create(document.querySelector('#editor_ar'))
+                        .then(editor => {
+                            editorInstanceAr = editor;
+                            editorInstanceAr.setData(response.data.description_ar);
+                        });
+                } else {
+                    editorInstanceAr.setData(response.data.description_ar);
                 }
             }
-        });
-    });
-
-
-
-    function add_lesson ()
-    {
-        $('#exampleModalCentertwo').modal('show');
-        $('#title').val('');
-        $('#video_url').val('')
     }
-
-    // console.log('Before CKEditor initialization');
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .then( editor => {
-            // console.log('CKEditor initialized');
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
-    ClassicEditor
-        .create( document.querySelector( '#editor_ar' ) )
-        .then( editor => {
-            // console.log('CKEditor initialized');
-        } )
-        .catch( error => {
-            console.error( error );
-        } );
-    // console.log('After CKEditor initialization');
-
-    let cancel_btn = document.getElementsByClassName('can')[0];
-    cancel_btn.addEventListener('click', function() {
-        $('#exampleModalCentertwo').modal('hide');
     });
+});
+
+function add_lesson() {
+    $('#exampleModalCentertwo').modal('show');
+    $('#title').val('');
+    $('#video_url').val('');
+
+    // Clear CKEditor data
+    if (!editorInstanceEn) {
+                    ClassicEditor
+                        .create(document.querySelector('#editor'))
+                        .then(editor => {
+                            editorInstanceEn = editor;
+                            editorInstanceEn.setData("");
+                        });
+                }else {
+                    editorInstanceEn.setData("");
+                }
+
+ 
+                if (!editorInstanceAr) {
+                    ClassicEditor
+                        .create(document.querySelector('#editor_ar'))
+                        .then(editor => {
+                            editorInstanceAr = editor;
+                            editorInstanceAr.setData("");
+                        });
+                }else {
+                    editorInstanceAr.setData("");
+                }
+}
+
+$('.can').on('click', function() {
+    $('#exampleModalCentertwo').modal('hide');
+});
+
 
 </script>
 @endsection
