@@ -107,7 +107,7 @@ use App\Helpers\Helper;
                                             </div>
                                             @if ($data['is_payment_active'] || $key === 0)
                                                 @if($key === 0)
-                                                    <div class="cate mt-2 ">
+                                                    <div class="cate-free mt-2 ">
                                                         @if (app()->getLocale() == 'ar')
                                                             <p>مجاني</p>
                                                         @else
