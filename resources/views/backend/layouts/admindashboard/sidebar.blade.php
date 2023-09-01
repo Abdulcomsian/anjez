@@ -33,6 +33,3 @@
     </div>
     <div class="col py-3 overflow-auto">
       <!-- Right Side Content -->
-    </div>
-  </div>
-</div>
