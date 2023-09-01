@@ -120,7 +120,7 @@ use App\Helpers\Helper;
                             @if(count($mainTopic->lessons) > 0)
                             <div class="d-flex justify-content-between align-items-center" style="padding-right: 4%;">
                                 <div>
-                                    <a class="dropdown-toggle ms-2 mt-3 text-decoration-none sub-topic-{{ $mainTopic->id }}" data-toggle="dropdown" href="{{ route('course.details', ['id'=>encryptParams($course->id)]) }}">
+                                    <a style="font-size: 16px;" class="dropdown-toggle ms-2 mt-3 text-decoration-none sub-topic-{{ $mainTopic->id }}" data-toggle="dropdown" href="{{ route('course.details', ['id'=>encryptParams($course->id)]) }}">
                                         @if (app()->getLocale() == 'ar')
                                         {{ $mainTopic->title_ar }}
                                         @else
