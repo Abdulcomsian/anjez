@@ -1,5 +1,10 @@
 @extends('backend.layouts.main')
-
+<style>
+      .table thead th {
+    vertical-align: bottom;
+    border-bottom: 1px solid lightgray !important;
+}
+</style>
 @section('content')
 
     <div class="user mt-5 pb-5" id="course-lesson-list">
@@ -27,7 +32,7 @@
                     </div>
                 </div>
             </form>
-            <hr>
+            <!-- <hr>
             <div class="row courses d-flex justify-content-between">
                 <div class="col-1"> <span> ID </span> </div>
                 <div class="col-2"> <span> TITLE </span> </div>
@@ -37,8 +42,6 @@
                 <div class="col-1"> <span> ACTION </span></div>
             </div>
             <hr class="mt-4">
-
-            <!-- Iterate over lesson data -->
             @foreach ($lessons as $key=>$lesson)
             <div class="row course d-flex justify-content-between mt-2">
                 <div class="col-1"> <span> {{ $key+1 }} </span> </div>
@@ -60,7 +63,51 @@
                 </div>
             </div>
             @endforeach
-        </div>
+        </div> -->
+
+
+        <div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr class="courses">
+        <th scope="col" class="py-4">ID</th>
+        <th scope="col" class="py-4">TITLE</th>
+        <th scope="col" class="py-4">Video URL</th>
+        <th scope="col" class="py-4">QUIZ</th>
+        <th scope="col" class="py-4">STATUS</th>
+        <th scope="col" class="py-4">ACTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach ($lessons as $key=>$lesson)
+      <tr class="course">
+        <td class="py-4"> <span> {{ $key+1 }}</span> </td>
+        <td class="py-4"> <span>{{ $lesson->title }} </span></td>
+        <td class="py-4" style="color: #2572CC;"> <span>{{ $lesson->video_url }}  </span></td>
+        <td class="py-4" style="color: #2572CC;"><span>Quiz: {{ $lesson->quizes_count }}  </span></td>
+        <td class="py-4" style="color: #1CB104;"> <span>  Active</span></td>
+        <td class="py-4">
+          <div class="dropdown dropdown-quiz">
+            <img class="dropdown-toggle-1" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="">
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <p class="dropdown-item edit-btn" data-id="{{ $lesson->id }}">Edit</p>
+              <a class="dropdown-item" href="{{ route('lesson.delete',['id'=>$lesson->id]) }}">Delete</a>
+              <a class="dropdown-item" onclick="isAllowToCreateLesson()" href="{{ route('quiz.index', ['id'=>$lesson->id]) }}">Create Quiz</a>
+              {{-- <p class="dropdown-item" onclick="isAllowToCreateLesson({{ $lesson->id }})">Create Quiz</p> --}}
+            </div>
+          </div>
+        </td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
     </div>
 
 
