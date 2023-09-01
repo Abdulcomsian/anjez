@@ -114,7 +114,7 @@ use App\Helpers\Helper;
                     </div>
                     <!-- dropdown-two  -->
                     @if(isset($course->sections) && count($course->sections) > 0)
-                    <div id="section{{ $course->id }}" class="">
+                    <div id="section{{ $course->id }}" class="py-2">
                         <div class="two d-flex flex-column">
                             @foreach($course['sections'] as $mainTopic)
                             @if(count($mainTopic->lessons) > 0)
@@ -144,7 +144,7 @@ use App\Helpers\Helper;
                                 @endphp
                                 @if(Helper::isPaymentActive() || $count == 1)
                                 <div class="three d-flex flex-column">
-                                    <a class="ms-4 mt-3 px-2" id="sub" href="{{ route('lesson.quizes',['id'=>encryptParams($lesson->id)]) }}" style=" width: inherit;">
+                                    <a class="ms-4 px-2 text-decoration-none" id="sub" href="{{ route('lesson.quizes',['id'=>encryptParams($lesson->id)]) }}" style=" width: inherit;">
                                         @if (app()->getLocale() == 'ar')
                                         {{ $lesson->title_ar }}
                                         @else
@@ -155,7 +155,7 @@ use App\Helpers\Helper;
                                 </div>
                                 @else
                                 <div class="three d-flex flex-column">
-                                    <a class="ms-4 mt-3 px-2" id="sub" href="{{ route('payments') }}" style=" width: 100%;">
+                                    <a class="ms-4 mt-3 px-2 text-decoration-none" id="sub" href="{{ route('payments') }}" style=" width: 100%;">
                                         @if (app()->getLocale() == 'ar')
                                         {{ $lesson->title_ar }}
                                         @else
@@ -169,7 +169,7 @@ use App\Helpers\Helper;
                             </div>
                             @endif
                             @else
-                            <a class=" ms-2 mt-3 text-decoration-none" href="{{ route('course.details', ['id'=>encryptParams($course->id)]) }}">
+                            <a class="ms-2 text-decoration-none" href="{{ route('course.details', ['id'=>encryptParams($course->id)]) }}">
                                 @if (app()->getLocale() == 'ar')
                                 {{ $mainTopic->title_ar }}
                                 @else
