@@ -64,7 +64,7 @@ use App\Helpers\Helper;
                     </div>
                     <div class="contents px-4 mt-4 pt-1">
                         <div class="contents-heading d-flex justify-content-center mt-4 "> Contents </div>
-                        <div class="row mt-4">
+                        <div class="row data mt-4">
                             @if($data['course'])
                                 @forelse ($data['course']['sections'] as $section)
                                     @foreach($section['lessons'] as $key=>$lesson)
@@ -78,7 +78,7 @@ use App\Helpers\Helper;
                                             @endphp
                                         @endif
                                         <div class="col py-2">
-                                            <a href="{{ $link }}" style="text-decoration: none" >
+                                            <a href="{{ $link }}" >
                                                 @if (app()->getLocale() == 'ar')
                                                     الدرس {{ $key+1 }} - {{ $lesson->title_ar }}
                                                 @else
@@ -107,7 +107,7 @@ use App\Helpers\Helper;
                                             </div>
                                             @if ($data['is_payment_active'] || $key === 0)
                                                 @if($key === 0)
-                                                    <div class="cate mt-2 ">
+                                                    <div class="cate-free mt-2 ">
                                                         @if (app()->getLocale() == 'ar')
                                                             <p>مجاني</p>
                                                         @else
