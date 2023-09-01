@@ -1,5 +1,16 @@
 @extends('backend.layouts.main')
+<style>
+    .table thead th {
+    vertical-align: bottom;
+    border-bottom: 1px solid lightgray !important;
+}
 
+@media screen and (max-width:888) {
+  .heading-text{
+font-size:24px !important;
+  }
+}
+</style>
 @section('content')
 
 <div class="user mt-5 pb-5" id="course-section">
@@ -34,7 +45,7 @@
             </div>
           </div>
       </form>
-      <hr>
+      <!-- <hr>
       <div class="row courses d-flex justify-content-between">
         <div class="col-2"> <span> ID </span> </div>
         <div class="col-2"> <span> TITLE </span> </div>
@@ -49,7 +60,7 @@
                 <div class="col-2"> <span> {{ $section->title ?? '--' }} </span> </div>
                 <div class="col-2"> <span style="color: #2572CC;"> <a href="{{ route('lessons.index',['id'=>$section->id]) }}" style="text-decoration: none">Lesson: {{ $section->lessons_count }}</a>  </span> </div>
                 <div class="col-2"> @if($section->status == 'Active') <span style="color: #1CB104;">{{ $section->status }}</span> @else <span style="color: #e93e28;"> {{ $section->status }}</span> @endif</div>
-                <!-- <div class="col-2 dots"><img src="..../../assets/images/dots.png" alt=""></div> -->
+               
                 <div class="col-2 dots">
                 <div class="dropdown dropdown-quiz">
                     <img class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
@@ -64,7 +75,62 @@
         @empty
             <div class="col-10"> <span> No Section Found </span> </div>
         @endforelse
-    </div>
+    </div> -->
+
+
+<div class="table-responsive">
+  <table class="table ">
+    <thead>
+      <tr class="courses">
+        <th scope="col"  class="py-4">ID</th>
+        <th scope="col"  class="py-4">TITLE</th>
+        <th scope="col"  class="py-4">LESSONS</th>
+        <th scope="col"  class="py-4">STATUS</th>
+        <th scope="col"  class="py-4">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @forelse ($data['sections'] as $key=>$section)
+      <tr class="course ">
+        <td class="py-4"> <span>{{ $key+1 }} </span> </td>
+        <td class="py-4"> <span> {{ $section->title ?? '--' }} </span></td>
+        <td class="py-4"> <span>
+        <a href="{{ route('lessons.index',['id'=>$section->id]) }}" style="text-decoration: none; color: #2572CC;">
+            Lesson: {{ $section->lessons_count }}
+          </a>
+        </span>
+        
+        </td>
+        <td class="py-4">
+          @if($section->status == 'Active')
+          <span style="color: #1CB104;">{{ $section->status }}</span>
+          @else
+          <span style="color: #e93e28;">{{ $section->status }}</span>
+          @endif
+        </td>
+        <td class="py-4">
+          <div class="dropdown dropdown-quiz">
+            <img class="dropdown-toggle-1" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="">
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <p class="dropdown-item edit-btn" data-id="{{ $section->id }}">Edit</p>
+              <a href="{{ route('section.delete',['id'=>$section->id]) }}" class="dropdown-item">Delete</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+      @empty
+      <tr>
+        <td colspan="5">No Section Found</td>
+      </tr>
+      @endforelse
+    </tbody>
+  </table>
+</div>
+
+
+
+
   </div>
 
   <!-- corurse section modal  -->
