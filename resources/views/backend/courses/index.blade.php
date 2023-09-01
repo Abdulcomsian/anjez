@@ -113,7 +113,7 @@
           </td>
           <td>
             <div class="dropdown dropdown-quiz">
-              <img class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="">
+              <img class="dropdown-toggle-1" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="">
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="{{ url('courses/'.$course->id.'/edit') }}">Edit</a>
                 <a class="dropdown-item" href="{{ route('courses.destroy',['id'=>$course->id]) }}">Delete</a>

@@ -1,5 +1,10 @@
 @extends('backend.layouts.main')
-
+<style>
+        .table thead th {
+    vertical-align: bottom;
+    border-bottom: 1px solid lightgray !important;
+}
+</style>
 @section('content')
 
 {{-- <div id="quiz" style="display: none;"> --}}
@@ -162,23 +167,24 @@
           </div>
           <div class="row ">
             <div class="col">
-              <table class="table">
+            <div class="table-responsive">
+            <table class="table">
                 <thead>
-                    <tr>
-                        <th class="question-id-column">Question ID</th>
-                        <th class="description-column">Question</th>
+                    <tr class="courses">
+                        <th class="question-id-column py-4"> <span>  Question ID </span></th>
+                        <th class="description-column py-4"> <span>  Question </span></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @if(count($data['quizes'])>0)
                         @forelse ($data['quizes'] as $key=>$quiz)
-                            <tr>
-                                <td class="question-id-column">{{ $key+1 }}</td>
-                                <td class="description-column">{{ $quiz->question }}</td>
-                                <td  >
+                            <tr class="course">
+                                <td class="question-id-column py-4"> <span> {{ $key+1 }} </span></td>
+                                <td class="description-column py-4"> <span>{{ $quiz->question }} </span></td>
+                                <td  class="py-4">
                                 <div class="dropdown dropdown-quiz">
-                                    <img class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    <img class="dropdown-toggle-1" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false" src="{{ url('assets/images/dots.png') }}" alt="" style="cursor: pointer;">
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <p class="dropdown-item edit-btn" data-id="{{ $quiz->id }}">Edit</p>
@@ -200,6 +206,7 @@
                     @endif
                 </tbody>
             </table>
+            </div>
             </div>
           </div>
         </div>

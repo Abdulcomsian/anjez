@@ -477,6 +477,9 @@ font-size: 18px;
       width: 33%;
       height: 40%;
     }
+    .heading-text{
+      font-size: 24px;
+    }
 
 }
 
