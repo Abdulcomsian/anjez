@@ -287,7 +287,7 @@ use App\Helpers\Helper;
                 // console.log("check ans qstn no", question_no);
             } else {
                 $('#corr_ans').text(correct_value);
-                $('#corr_ans_reason').val(corr_ans_desc);
+                $('#corr_ans_reason').html(corr_ans_desc);
                 $('.incorrect-answer-div').removeClass('d-none').addClass('d-block');
                 // console.log("Incorrect");
                 return;
@@ -295,7 +295,7 @@ use App\Helpers\Helper;
             nextQuestion();
         } else {
             $('#corr_ans').text(correct_value);
-            $('#corr_ans_reason').text(corr_ans_desc);
+            $('#corr_ans_reason').html(corr_ans_desc);
             $('.incorrect-answer-div').removeClass('d-none').addClass('d-block');
             // console.log("Please select an answer");
             return;
@@ -399,13 +399,13 @@ use App\Helpers\Helper;
                 });
             } else {
                 $('#corr_ans').text(correct_value);
-                $('#corr_ans_reason').text(corr_ans_desc);
+                $('#corr_ans_reason').html(corr_ans_desc);
                 $('.incorrect-answer-div').removeClass('d-none').addClass('d-block');
                 return;
             }
         } else {
             $('#corr_ans').text(correct_value);
-            $('#corr_ans_reason').text(corr_ans_desc);
+            $('#corr_ans_reason').html(corr_ans_desc);
             $('.incorrect-answer-div').removeClass('d-none').addClass('d-block');
             return;
         }
