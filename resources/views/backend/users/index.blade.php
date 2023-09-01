@@ -1,9 +1,47 @@
 @extends('backend.layouts.main')
+<style>
 
+
+
+.form-check-input {
+    position: relative !important;
+    margin-top: 0.3rem;
+    margin-left: -1.25rem;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: transparent !important;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 1px solid lightgray !important;
+}
+
+  .dtHorizontalExampleWrapper {
+  /* max-width: 600px; */
+  margin: 0 auto;
+}
+#dtHorizontalExample th, td {
+  white-space: nowrap;
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+ bottom: .5em;
+}
+</style>
 @section('content')
 
 <!-- users  -->
-{{-- <div class="user mt-5 pb-5" id="users" style="display: none;"> --}}
     <div class="user mt-5 pb-5" id="main-user">
     <div class="container ">
       <div class="row ">
@@ -27,13 +65,11 @@
             </div>
           </div>
       </form>
-      <hr>
-      <div class="row up pt-3">
+      <!-- <hr> -->
+      <!-- <div class="row up pt-3">
         <div class="col-2"> Name </div>
         <div class="col-3"> Email </div>
         <div class="col-2"> Phone No </div>
-        {{-- <div class="col-2">STATUS</div> --}}
-        {{-- <div class="col-2">AMOUNT</div> --}}
         <div class="col-2">CREATED AT</div>
       </div>
       <hr>
@@ -55,7 +91,51 @@
 
 
     </div>
-  </div>
+  </div> -->
+
+
+<div class="table-responsive">
+  <table id="dtHorizontalExample" class="table  table-sm" cellspacing="0"
+  width="100%">
+  <thead>
+    <tr>
+      <th  class="pt-5 pb-3">Name </th>
+      <th class="py-3 ">Email</th>
+      <th class="py-3">Phone No</th>
+      <th class="py-3">CREATED AT</th>
+  </thead>
+  <tbody>
+  @forelse ($users as $user)
+    <tr>
+      <td  class="py-4">
+          <input class="form-check-input" style="margin-left:1px;" type="checkbox" value="" id="{{ $user['id'] }}">
+          <span class="ms-sm-2 named" style="margin-left:3px !important;"> {{ $user->first_name ?? '- -' }}</span>
+      </td>
+      <td  class="py-4">
+      <div class=" named " style="word-wrap: break-word;"> <span> {{ $user->email ?? '- -' }} </span> </div>
+      </td>
+      <td  class="py-4">
+      <div class=" named" style="word-wrap: break-word;"> <span> {{ $user->phone_no ?? '- -' }} </span> </div>
+      </td>
+      <td class="py-4">
+      <div class="" style="word-wrap: break-word;"><div class="amount"> {{ $user->created_at ? dateConversion($user->created_at) : '- -' }} </div></div>
+      </td>
+
+    </tr>
+    @empty
+        <div class="col-md-12">No User Found</div>
+      @endforelse
+
+  </tbody>
+</table>
+</div>
+
+
+
+
+
+
+
 
 
           <!-- user Modal -->
@@ -109,5 +189,16 @@
               </div>
             </div>
           </div>
+
+
+<script>
+  $(document).ready(function () {
+  $('#dtHorizontalExample').DataTable({
+    "scrollX": true
+  });
+  $('.dataTables_length').addClass('bs-select');
+});
+</script>
+
 
   @endsection
