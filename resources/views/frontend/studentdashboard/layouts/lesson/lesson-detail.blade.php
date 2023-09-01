@@ -4,13 +4,46 @@ use App\Helpers\Helper;
 @extends('frontend.studentdashboard.layouts.course.main')
 
 @section('content')
+<style>
+    #video-container>iframe {
+        width: inherit;
+    }
+
+    @media (max-width: 786px) {
+        .lecture {
+            padding-top: 2%;
+            padding-left: 1%;
+            padding-right: 2%;
+            padding-bottom: 0%;
+        }
+
+        #quizModal .custom-modal-dialog {
+            max-width: 100% !important;
+        }
+
+        #quizModal .custom-modal-dialog .options .option {
+            padding: 0.4rem 0 0.4rem 0.3rem;
+        }
+
+        #quizModal .custom-modal-dialog .modal-body {
+            padding-right: 1rem !important;
+            padding-left: 1rem !important;
+        }
+
+        #quizModal .custom-modal-dialog .options .option label {
+            margin-left: 5px;
+
+            font-size: 13px;
+        }
+    }
+</style>
 <div>
     {{-- @dd($data['courses']); --}}
     <div class="container-fluid mt-1">
         <div class="row flex-nowrap" style="min-height: 100vh;">
             {{ view('frontend.studentdashboard.layouts.course.sidebar', [ 'courses'=>$data['courses'] ]) }}
             <!-- right side content  -->
-            <div id="lessons" class="col-md-10">
+            <div id="lessons" class="flex-shrink-1">
                 <div class="col py-3" id="lessons">
                     <div class="lecture">
                         <div class="upss pb-3 px-3" style="background-color: white;">
@@ -20,9 +53,9 @@ use App\Helpers\Helper;
                                 </div>
                                 <div class="col me-5">
                                     @if(!Helper::isPaymentActive())
-                                        <div class="cates  ">
-                                            <p>Free</p>
-                                        </div>
+                                    <div class="cates  ">
+                                        <p>Free</p>
+                                    </div>
                                     @endif
                                 </div>
                             </div>
@@ -32,21 +65,15 @@ use App\Helpers\Helper;
                                 </div>
                             </div>
                             <?php
-                                try
-                                {
-                                    if($data['lesson']->is_complete == 0)
-                                    {
-                                        $percentage = ($data['lesson']->quiz_scores ? $data['lesson']->quiz_scores->score_taken : 0)/($data['lesson']->quiz_scores ? $data['lesson']->quiz_scores->total_score : 0)*100;
-                                    }
-                                    else
-                                    {
-                                        $percentage = 100;
-                                    }
+                            try {
+                                if ($data['lesson']->is_complete == 0) {
+                                    $percentage = ($data['lesson']->quiz_scores ? $data['lesson']->quiz_scores->score_taken : 0) / ($data['lesson']->quiz_scores ? $data['lesson']->quiz_scores->total_score : 0) * 100;
+                                } else {
+                                    $percentage = 100;
                                 }
-                                catch (\Throwable $th)
-                                {
-                                    $percentage = 0;
-                                }
+                            } catch (\Throwable $th) {
+                                $percentage = 0;
+                            }
                             ?>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" style="width:{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
@@ -54,7 +81,7 @@ use App\Helpers\Helper;
                                 {{-- <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div> --}}
                             </div>
                         </div>
-                        <div class="embed-responsive embed-responsive-21by9 mt-4" id="video-container">
+                        <div class="embed-responsive embed-responsive-21by9 mt-4" id="video-container" style="width: 100%;">
                             {!!$data['lesson']->video_url!!}
                             {{-- <button id="video-button" data-toggle="modal" data-target="#exampleModal">Test Your
                                 Knowledge</button> --}}
@@ -62,24 +89,24 @@ use App\Helpers\Helper;
                         </div>
                         <div class="course-test-div row mt-4 justify-content-between">
                             @if(isset($data['lesson']->thumbnail) && !empty($data['lesson']->thumbnail) && !is_null($data['lesson']->thumbnail))
-                                <div class="col-4 attachment-dropdown">
-                                    <div class="dropdown">
-                                        <button class="btn attach dropdown-toggle" type="button" id="courseAttachmentMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 10px; border-radius: 8px;">
-                                            {{app()->getLocale() == 'en' ? 'Course Attachments' : 'مرفقات الدورة' }}
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="courseAttachmentMenuButton">
-                                            <a class="dropdown-item" target="_blank" href="{{ asset('assets/courses-content/lesson-images/'.$data['lesson']->thumbnail) }}">{{ $data['lesson']->thumbnail }}</a>
-                                        </div>
+                            <div class="col-4 attachment-dropdown">
+                                <div class="dropdown">
+                                    <button class="btn attach dropdown-toggle" type="button" id="courseAttachmentMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 10px; border-radius: 8px;">
+                                        {{app()->getLocale() == 'en' ? 'Course Attachments' : 'مرفقات الدورة' }}
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="courseAttachmentMenuButton">
+                                        <a class="dropdown-item" target="_blank" href="{{ asset('assets/courses-content/lesson-images/'.$data['lesson']->thumbnail) }}">{{ $data['lesson']->thumbnail }}</a>
                                     </div>
                                 </div>
+                            </div>
                             @endif
 
                             @if(count($data['lesson']->quizes)>0)
-                                <div class="@if(count($data['lesson']->quizes)<=0) offset-8 @endif col-4 d-flex justify-content-end test-knowledge-btn">
-                                    <button class="video-button-2" style="padding: 10px; border-radius: 8px;" id="test_quiz_btn">
-                                        {{app()->getLocale() == 'en' ? 'Test Your Knowledge' : 'اختبر معرفتك' }}
-                                    </button>
-                                </div>
+                            <div class="@if(count($data['lesson']->quizes)<=0) offset-8 @endif col-4 justify-content-end test-knowledge-btn">
+                                <button class="video-button-2" style="padding: 10px; border-radius: 8px;" id="test_quiz_btn">
+                                    {{app()->getLocale() == 'en' ? 'Test Your Knowledge' : 'اختبر معرفتك' }}
+                                </button>
+                            </div>
                             @else
                             <div class="offset-8 col-4 d-flex justify-content-end">
                                 <a href="{{ route('lesson.mark-as-read',['id'=>$data['lesson']->id]) }}">
@@ -111,15 +138,14 @@ use App\Helpers\Helper;
             </div>
             <div class="modal-body px-5">
                 <div class="d-flex flex-column">
-                    <h5>  
+                    <h5>
                         @if (app()->getLocale() == 'ar')
                         قم بالإجابة على الأسئلة أدناه
                         @else
-                            Answer the questions below
+                        Answer the questions below
                         @endif
                     </h5>
-                    <p class="m-auto"><span id="currQuesNum">1</span> / <span
-                            id="totalQuesNum">{{ (int)count($data['lesson']->quizes) }}</span></p>
+                    <p class="m-auto"><span id="currQuesNum">1</span> / <span id="totalQuesNum">{{ (int)count($data['lesson']->quizes) }}</span></p>
                     <div class="question m-auto" id="ques">
                         {{ app()->getLocale() == 'ar' ? ($data['lesson']->quizes[0]->question_ar ?? '') : ($data['lesson']->quizes[0]->question ?? '') }}
                         {{-- {{ ($data['lesson']->quizes[0]->question ?? '') }} --}}
@@ -140,7 +166,7 @@ use App\Helpers\Helper;
                         <input type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option4 : '' }}"><label style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option4 : '' }}</label>
                     </div>
                 </div>
-                <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.  Correct Option is <span id='corr_ans'> .</span> Reason <span id="corr_ans_reason"></span> </div>
+                <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer. Correct Option is <span id='corr_ans'> .</span> Reason <span id="corr_ans_reason"></span> </div>
                 {{-- <div style="color: green" class="d-none correct-answer-div"></div> --}}
 
                 <div class="modal-footer d-flex flex-column justify-content-center">
@@ -159,20 +185,17 @@ use App\Helpers\Helper;
 </div>
 
 <script>
-    $(document).on('click','#courseAttachmentMenuButton', function(){
+    $(document).on('click', '#courseAttachmentMenuButton', function() {
         $('.dropdown-menu').toggleClass('show');
     });
 
-    $(document).on('click', '#test_quiz_btn', function(){
+    $(document).on('click', '#test_quiz_btn', function() {
         let total_qstns = $('.total_qstns').val();
-        if(total_qstns == 1)
-        {
+        if (total_qstns == 1) {
             $('#btn').text("Finish");
             $('#btn').removeAttr('onclick');
             $('#btn').addClass('finish');
-        }
-        else
-        {
+        } else {
             $('#btn').text("Next Question");
             $('#btn').attr('onclick', 'checkAns()');
             $('#btn').removeAttr('class');
@@ -181,68 +204,63 @@ use App\Helpers\Helper;
 
     });
 
-    $(document).on('click', '.close_modal_btn', function(){
+    $(document).on('click', '.close_modal_btn', function() {
         $('#quizModal').modal('hide');
     });
 
-    function lesson(id){
-            let courses = document.getElementById('courses');
-            let lessons = document.getElementById('lessons');
-            courses.classList.add('d-none');
-            lessons.classList.remove('d-none');
+    function lesson(id) {
+        let courses = document.getElementById('courses');
+        let lessons = document.getElementById('lessons');
+        courses.classList.add('d-none');
+        lessons.classList.remove('d-none');
 
-            $.ajax({
-                type: "GET",
-                url: "{{ url('get-lesson/') }}/"+id,
-                success: function (response) {
-                    // console.log(response.data.lesson);
-                    $('.lesson_id').val(response.data.lesson.id)
-                    let lesson_quizes = response.data.lesson.quizes;
-                    let title = document.getElementById('title');
-                    let description = document.getElementById('description');
+        $.ajax({
+            type: "GET",
+            url: "{{ url('get-lesson/') }}/" + id,
+            success: function(response) {
+                // console.log(response.data.lesson);
+                $('.lesson_id').val(response.data.lesson.id)
+                let lesson_quizes = response.data.lesson.quizes;
+                let title = document.getElementById('title');
+                let description = document.getElementById('description');
 
-                    title.innerHTML = response.data.lesson.title;
-                    description.innerHTML = response.data.lesson.description;
+                title.innerHTML = response.data.lesson.title;
+                description.innerHTML = response.data.lesson.description;
 
-                    if(response.data.lesson.quizes != null && response.data.lesson.quizes.length>0 && response.data.lesson.quizes!=[])
-                    {
+                if (response.data.lesson.quizes != null && response.data.lesson.quizes.length > 0 && response.data.lesson.quizes != []) {
 
-                        $('.total_qstns').val(response.data.lesson.quizes.length);
+                    $('.total_qstns').val(response.data.lesson.quizes.length);
 
-                        $('.options').empty();
-                        $('.question_no').val(0);
-                        $('.test-knowledge-btn').removeClass('d-none');
-                        $('#currQuesNum').text(1);
-                        lesson_quizes.forEach((qstn, index) => {
+                    $('.options').empty();
+                    $('.question_no').val(0);
+                    $('.test-knowledge-btn').removeClass('d-none');
+                    $('#currQuesNum').text(1);
+                    lesson_quizes.forEach((qstn, index) => {
 
-                            if(index == 0)
-                            {
-                                $('.correct_answer_description').val(qstn.options.correct_answer_description);
-                                $('.correct_answer').val(qstn.options.correct_answer);
-                                showQuiz(qstn.question, qstn.options.option1, qstn.options.option2, qstn.options.option3, qstn.options.option4, qstn.options.correct_answer);
-                            }
-                        });
-                        let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
-                        $('#totalQuesNum').text(quiz_qstns_length);
-                    }
+                        if (index == 0) {
+                            $('.correct_answer_description').val(qstn.options.correct_answer_description);
+                            $('.correct_answer').val(qstn.options.correct_answer);
+                            showQuiz(qstn.question, qstn.options.option1, qstn.options.option2, qstn.options.option3, qstn.options.option4, qstn.options.correct_answer);
+                        }
+                    });
+                    let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
+                    $('#totalQuesNum').text(quiz_qstns_length);
+                } else {
+                    $('.options').empty();
+                    $('.test-knowledge-btn').addClass('d-none');
 
-                    else
-                    {
-                        $('.options').empty();
-                        $('.test-knowledge-btn').addClass('d-none');
+                    $('#currQuesNum').text(0);
 
-                        $('#currQuesNum').text(0);
+                    $('.correct_answer').val('');
+                    $('.ques').text('')
+                    // showQuiz();
 
-                        $('.correct_answer').val('');
-                        $('.ques').text('')
-                        // showQuiz();
-
-                        // console.log("else");
-                        let quiz_qstns_length = 0;
-                        $('#totalQuesNum').text(quiz_qstns_length);
-                    }
+                    // console.log("else");
+                    let quiz_qstns_length = 0;
+                    $('#totalQuesNum').text(quiz_qstns_length);
                 }
-            });
+            }
+        });
     }
 
     function checkAns() {
@@ -257,18 +275,17 @@ use App\Helpers\Helper;
             if (selectedAnsValue == correct_value) {
                 let score = parseInt($('.score').val());
                 // console.log("score", score);
-                score+=1;
+                score += 1;
                 $('.score').val(score);
 
                 $('.incorrect-answer-div').removeClass('d-block').addClass('d-none');
 
                 // console.log("Correct");
                 let question_no = parseInt($('.question_no').val());
-                question_no+=1;
+                question_no += 1;
                 $('.question_no').val(question_no);
                 // console.log("check ans qstn no", question_no);
-            }
-            else{
+            } else {
                 $('#corr_ans').text(correct_value);
                 $('#corr_ans_reason').val(corr_ans_desc);
                 $('.incorrect-answer-div').removeClass('d-none').addClass('d-block');
@@ -285,19 +302,18 @@ use App\Helpers\Helper;
         }
     }
 
-    function nextQuestion()
-    {
+    function nextQuestion() {
         let corr_ans_desc = $('.correct_answer_description').val(); // correct answer description
         console.log('here corr_ans_desc', corr_ans_desc);
         let id = parseInt($('.lesson_id').val());
         let question_no = parseInt($('#currQuesNum').text());
-        console.log("question_no ", question_no+1);
+        console.log("question_no ", question_no + 1);
         $.ajax({
             type: "GET",
-            url: '{{url("get-lesson/")}}/'+id,
-            success: function (response) {
+            url: '{{url("get-lesson/")}}/' + id,
+            success: function(response) {
                 // console.log(response.data.lesson);
-                $('#currQuesNum').text(question_no+1);
+                $('#currQuesNum').text(question_no + 1);
                 // console.log(response.data.lesson);
                 $('.lesson_id').val(response.data.lesson.id)
                 let lesson_quizes = response.data.lesson.quizes;
@@ -309,27 +325,22 @@ use App\Helpers\Helper;
                 title.innerHTML = response.data.lesson.title;
                 description.innerHTML = response.data.lesson.description;
                 // corr_ans_desc.val(response.data.lesson.options.correct_answer_description);
-                if(question_no+1 == quiz_count)
-                {
+                if (question_no + 1 == quiz_count) {
                     $('#btn').text("Finish");
                     $('#btn').removeAttr('onclick');
                     $('#btn').addClass('finish');
-                }
-                else
-                {
+                } else {
                     $('#btn').text("Next Question");
                     $('#btn').removeClass('finish');
                 }
 
-                if(response.data.lesson.quizes != null && response.data.lesson.quizes.length>0 && response.data.lesson.quizes != [])
-                {
+                if (response.data.lesson.quizes != null && response.data.lesson.quizes.length > 0 && response.data.lesson.quizes != []) {
                     $('.options').empty();
 
                     lesson_quizes.forEach((qstn, index) => {
 
                         // console.log("qstn = ",qstn, "index = ", index);
-                        if(index == question_no)
-                        {
+                        if (index == question_no) {
                             $('.correct_answer_description').val(qstn.options.correct_answer_description);
                             $('.correct_answer').val(qstn.options.correct_answer);
                             showQuiz(qstn.question, qstn.options.option1, qstn.options.option2, qstn.options.option3, qstn.options.option4, qstn.options.correct_answer);
@@ -338,9 +349,7 @@ use App\Helpers\Helper;
                     });
                     let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
                     // $('#totalQuesNum').text(quiz_qstns_length);
-                }
-                else
-                {
+                } else {
                     // console.log("else");
                     let quiz_qstns_length = 0;
                     $('#totalQuesNum').text(quiz_qstns_length);
@@ -349,8 +358,7 @@ use App\Helpers\Helper;
         });
     }
 
-    function showQuiz (qstn, option1, option2, option3, option4, correct_opt)
-    {
+    function showQuiz(qstn, option1, option2, option3, option4, correct_opt) {
         $('.correct_answer').val(correct_opt);
         $('#ques').text(qstn);
         $('#opts').append(`<div class="option"><input type="radio" name="answer" value="${option1}"><label style="text-decoration: none">${option1}</label></div>
@@ -360,22 +368,22 @@ use App\Helpers\Helper;
     }
 
 
-function finishQuestions(){
-    let corr_ans_desc = $('.correct_answer_description').val(); // correct answer description
+    function finishQuestions() {
+        let corr_ans_desc = $('.correct_answer_description').val(); // correct answer description
 
-    const selectedAns = document.querySelector('input[name="answer"]:checked');
-    let total_qstns = parseInt($('.total_qstns').val());
-    let lesson_id = parseInt($('.lesson_id').val());
-    let correct_value = $('.correct_answer').val();
+        const selectedAns = document.querySelector('input[name="answer"]:checked');
+        let total_qstns = parseInt($('.total_qstns').val());
+        let lesson_id = parseInt($('.lesson_id').val());
+        let correct_value = $('.correct_answer').val();
         if (selectedAns) {
             const selectedAnsValue = selectedAns.value;
             if (selectedAnsValue == correct_value) {
                 let score = parseInt($('.score').val());
-                score+=1;
+                score += 1;
                 $('.score').val(score);
                 $('.incorrect-answer-div').removeClass('d-block').addClass('d-none');
                 let question_no = parseInt($('.question_no').val());
-                question_no+=1;
+                question_no += 1;
                 $('.question_no').val(question_no);
                 $.ajax({
                     type: "GET",
@@ -385,12 +393,11 @@ function finishQuestions(){
                         total_score: total_qstns,
                         score: score
                     },
-                    success: function (response) {
+                    success: function(response) {
                         console.log(response);
                     }
                 });
-            }
-            else{
+            } else {
                 $('#corr_ans').text(correct_value);
                 $('#corr_ans_reason').text(corr_ans_desc);
                 $('.incorrect-answer-div').removeClass('d-none').addClass('d-block');
@@ -404,8 +411,8 @@ function finishQuestions(){
         }
 
         let new_score = $('.score').val();
-    $('.modal-body').empty();
-    $('.modal-body').append(`<div id="score" style="display: block;"><h2>Congratulations!</h2> <p> You answered </p> <h2> <span id="new_score">${new_score}</span> / <span id="total_score">${total_qstns}</span> </h2> <h3> question correct </h3></div>
+        $('.modal-body').empty();
+        $('.modal-body').append(`<div id="score" style="display: block;"><h2>Congratulations!</h2> <p> You answered </p> <h2> <span id="new_score">${new_score}</span> / <span id="total_score">${total_qstns}</span> </h2> <h3> question correct </h3></div>
         <div class=" d-flex flex-column">
         </div>
         <input type="hidden" name="lesson_id" class="lesson_id" value="${lesson_id}">
@@ -426,26 +433,24 @@ function finishQuestions(){
             <div class="col-3">
                 <button id="restartBtn2" style="display: inline-block;"> <a href="{{ route('lesson.next',['id'=>encryptParams($data['lesson']->id) ] ) }}" > Next Lesson</a> </button>
             </div>
-        </div>`
-    )
+        </div>`)
 
-}
+    }
 
-$(document).on('click', '.finish', function(){
-    finishQuestions();
-});
+    $(document).on('click', '.finish', function() {
+        finishQuestions();
+    });
 
-function restartQuiz()
-{
-    let id = $('.lesson_id').val();
-    // console.log("lesson_id", id);
-    $('#new_score').text(0);
-    $('#total_score').text(0);
-    let new_score = $('.score').val();
-    $.ajax({
+    function restartQuiz() {
+        let id = $('.lesson_id').val();
+        // console.log("lesson_id", id);
+        $('#new_score').text(0);
+        $('#total_score').text(0);
+        let new_score = $('.score').val();
+        $.ajax({
             type: "GET",
-            url: "{{ url('get-lesson/') }}/"+id,
-            success: function (response) {
+            url: "{{ url('get-lesson/') }}/" + id,
+            success: function(response) {
                 $('.lesson_id').val(response.data.lesson.id)
                 let lesson_quizes = response.data.lesson.quizes;
                 let title = document.getElementById('title');
@@ -454,16 +459,14 @@ function restartQuiz()
                 title.innerHTML = response.data.lesson.title;
                 description.innerHTML = response.data.lesson.description;
 
-                if(response.data.lesson.quizes != null && response.data.lesson.quizes.length>0 && response.data.lesson.quizes!=[])
-                {
+                if (response.data.lesson.quizes != null && response.data.lesson.quizes.length > 0 && response.data.lesson.quizes != []) {
                     $('.total_qstns').val(response.data.lesson.quizes.length);
                     $('.options').empty();
                     $('.question_no').val(0);
                     $('.test-knowledge-btn').removeClass('d-none');
                     $('#currQuesNum').text(1);
                     lesson_quizes.forEach((qstn, index) => {
-                        if(index == 0)
-                        {
+                        if (index == 0) {
                             $('.correct_answer_description').val(qstn.options.correct_answer_description);
                             $('.correct_answer').val(qstn.options.correct_answer);
                             showQuiz(qstn.question, qstn.options.option1, qstn.options.option2, qstn.options.option3, qstn.options.option4, qstn.options.correct_answer);
@@ -471,10 +474,7 @@ function restartQuiz()
                     });
                     let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
                     $('#totalQuesNum').text(quiz_qstns_length);
-                }
-
-                else
-                {
+                } else {
                     $('.options').empty();
                     $('.test-knowledge-btn').addClass('d-none');
                     $('#currQuesNum').text(0);
@@ -485,11 +485,10 @@ function restartQuiz()
                 }
             }
         });
-    let total_qstns = parseInt($('.total_qstns').val());
-    $('.modal-body').empty();
-    if(total_qstns == 1)
-    {
-        $('.modal-body').append(`<div class="d-flex flex-column">
+        let total_qstns = parseInt($('.total_qstns').val());
+        $('.modal-body').empty();
+        if (total_qstns == 1) {
+            $('.modal-body').append(`<div class="d-flex flex-column">
         <h5> Answer the questions below</h5>
         <p class="m-auto"><span id="currQuesNum"></span> / <span
                 id="totalQuesNum"></span></p>
@@ -512,10 +511,8 @@ function restartQuiz()
         <input type="hidden" name="total_qstns" class="total_qstns">
             <button id="btn" class="finish">Finish</button>
     </div>`);
-    }
-    else
-    {
-        $('.modal-body').append(`<div class="d-flex flex-column">
+        } else {
+            $('.modal-body').append(`<div class="d-flex flex-column">
         <h5> Answer the questions below</h5>
         <p class="m-auto"><span id="currQuesNum"></span> / <span
                 id="totalQuesNum"></span></p>
@@ -539,21 +536,21 @@ function restartQuiz()
             <button onclick="checkAns()" id="btn" class="next-qstn">Next Question</button>
     </div>`);
 
-    }
-}
-
-function redirect () {
-    window.location.reload();
-}
-$(document).on('click', 'mark-as-read', function(){
-    let lesson_id = parseInt($('.lesson_id').val());
-    $.ajax({
-        type: "GET",
-        url: "{{ url('lesson/mark-as-read') }}/"+lesson_id,
-        success: function (response) {
-            window.location.reload();
         }
+    }
+
+    function redirect() {
+        window.location.reload();
+    }
+    $(document).on('click', 'mark-as-read', function() {
+        let lesson_id = parseInt($('.lesson_id').val());
+        $.ajax({
+            type: "GET",
+            url: "{{ url('lesson/mark-as-read') }}/" + lesson_id,
+            success: function(response) {
+                window.location.reload();
+            }
+        });
     });
-});
 </script>
 @endsection
