@@ -129,8 +129,8 @@ body {
   font-family: "Manrope";
   /* font-family: "Noto Sans"; */
   font-style: normal;
-  font-weight: 500;
-  font-size: 13px;
+  font-weight: 600;
+  font-size: 16px;
   line-height: 13px;
 }
 
@@ -227,7 +227,7 @@ body {
 .three>a {
   color: black;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 13px;
   line-height: 18px;
   font-family: "Manrope";
