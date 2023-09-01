@@ -20,6 +20,21 @@ use App\Helpers\Helper;
         #quizModal .custom-modal-dialog {
             max-width: 100% !important;
         }
+
+        #quizModal .custom-modal-dialog .options .option {
+            padding: 0.4rem 0 0.4rem 0.3rem;
+        }
+
+        #quizModal .custom-modal-dialog .modal-body {
+            padding-right: 1rem !important;
+            padding-left: 1rem !important;
+        }
+
+        #quizModal .custom-modal-dialog .options .option label {
+            margin-left: 5px;
+
+            font-size: 13px;
+        }
     }
 </style>
 <div>
