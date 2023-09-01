@@ -16,6 +16,10 @@ use App\Helpers\Helper;
             padding-right: 2%;
             padding-bottom: 0%;
         }
+
+        #quizModal .custom-modal-dialog {
+            max-width: 100% !important;
+        }
     }
 </style>
 <div>
