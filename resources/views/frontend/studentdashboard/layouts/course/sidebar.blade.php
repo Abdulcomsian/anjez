@@ -40,6 +40,14 @@ use App\Helpers\Helper;
         background-position: center center;
         background-repeat: no-repeat;
     }
+
+    .active-dropdown-item {
+        background-color: #7E5BF6;
+    }
+
+    .active-dropdown-item > a {
+        color: white !important;
+    }
 </style>
 
 
