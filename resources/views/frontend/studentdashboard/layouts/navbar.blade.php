@@ -8,8 +8,9 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            {{-- <li class="nav-item">
+           <ul class="navbar-nav">
+            @if (Auth::check())
+            <li class="nav-item">
               <div class="dropdown">
                 <div class="language-div dropdown-toggle" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
                   <div>
@@ -31,7 +32,8 @@
                   </li>
                 </ul>
               </div>
-            </li> --}}
+            </li> 
+            @endif
             <li class="nav-item">
               <div class="dropdown">
                 <div class="language-div dropdown-toggle" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
