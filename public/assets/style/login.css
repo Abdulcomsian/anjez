@@ -1,3 +1,5 @@
+@import url(../segoe-ui/stylesheet.css);
+
 .login-main {
   display: flex;
   flex-direction: row;

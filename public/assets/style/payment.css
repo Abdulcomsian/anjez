@@ -1,3 +1,5 @@
+@import url(../segoe-ui/stylesheet.css);
+
 body {
   background-color: #c4bfff21 !important;
   width: 100%;
@@ -21,7 +23,7 @@ body {
   gap: 2rem;
 }
 
-.navbar-nav > .nav-item > .nav-link {
+.navbar-nav>.nav-item>.nav-link {
   font-family: "Noto Sans" !important;
   font-size: 16px;
   font-weight: 400;
@@ -30,32 +32,32 @@ body {
   color: #3d474d !important;
 }
 
-.navbar-nav > .nav-item > .profile-content {
+.navbar-nav>.nav-item>.profile-content {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-.jane > span {
+.jane>span {
   font-family: "Nunito" !important;
   font-weight: 600 !important;
   font-size: 16px !important;
 }
 
-.navbar-nav > .nav-item > .language-change {
+.navbar-nav>.nav-item>.language-change {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.navbar-nav > .nav-item > .profile-content > div > img {
+.navbar-nav>.nav-item>.profile-content>div>img {
   height: 50px;
   width: 50px;
   object-fit: cover;
   border-radius: 50%;
 }
 
-.navbar-nav > li > a > button {
+.navbar-nav>li>a>button {
   background: #7e5bf6;
   border-radius: 4px;
   color: #fff;
@@ -74,18 +76,21 @@ body {
   background-color: white;
   min-height: 70vh;
 }
+
 .price {
   color: #7e5bf6;
   font-family: "Noto Sans";
   font-size: 20px;
   font-weight: 600;
 }
+
 .price-heading {
   font-family: "Noto Sans";
   font-size: 32px;
   font-weight: 600;
   color: black;
 }
+
 .price-text {
   font-family: "Noto Sans";
   font-size: 16px;
@@ -107,6 +112,7 @@ body {
   color: black !important;
   box-shadow: none !important;
 }
+
 .accordion-button:not(.collapsed) {
   background-color: white !important;
   color: black !important;
@@ -117,6 +123,7 @@ body {
   border: 1px solid #e4e5e7;
   border-radius: 6px !important;
 }
+
 .cards-heading {
   border-bottom: 1px solid #e4e5e7 !important;
   text-align: center;
@@ -125,10 +132,12 @@ body {
   font-size: 18px;
   font-weight: 600;
 }
-.centers > input {
+
+.centers>input {
   width: 95%;
   /* margin: 0 1rem 0 1rem; */
 }
+
 .labelss {
   font-family: "Manrope";
   font-size: 14px;
@@ -146,11 +155,14 @@ body {
 }
 
 .accordion-button.collapsed .bi-plus-circle::before {
-  content: "\F4FA"; /* Bootstrap minus icon */
+  content: "\F4FA";
+  /* Bootstrap minus icon */
   color: #9A9AA2;
 }
+
 .accordion-button:not(.collapsed) .bi-plus-circle::before {
-  content: "\F2E6"; /* Bootstrap plus icon */
+  content: "\F2E6";
+  /* Bootstrap plus icon */
   color: #9A9AA2;
 }
 
@@ -162,6 +174,7 @@ body {
 .accordion-item {
   border: none !important;
 }
+
 .accordion {
   margin-right: 20px !important;
 }
@@ -177,6 +190,7 @@ body {
 .accordion-button:not(.collapsed) {
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, -0.125) !important;
 }
+
 .accordion-button::after {
   display: none !important;
 }
@@ -194,13 +208,15 @@ body {
   font-size: 18px;
 }
 
-#expiry::placeholder , #creditCardNumber::placeholder , #security::placeholder{
-  color:#E4E5E7 !important;
+#expiry::placeholder,
+#creditCardNumber::placeholder,
+#security::placeholder {
+  color: #E4E5E7 !important;
   font-family: "Noto Sans";
-font-size: 14px;
-font-weight: 400;
-line-height: 19px;
-letter-spacing: 0em;
-text-align: left;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
 
 }
