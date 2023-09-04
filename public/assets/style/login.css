@@ -1,4 +1,4 @@
-@import url(../segoe-ui/stylesheet.css);
+/* @import url(../segoe-ui/stylesheet.css); */
 
 .login-main {
   display: flex;
@@ -44,7 +44,7 @@
 }
 
 .login-main>.right-login-side>.form-section>div>.text-container>.text-line-1>span {
-  font-family: "Segoe UI";
+  /* font-family: "Segoe UI"; */
   font-style: normal;
   font-weight: 700;
   font-size: 40px;
@@ -60,7 +60,7 @@
 }
 
 .login-main>.right-login-side>.form-section>div>.text-container>.text-line-2>span {
-  font-family: "Segoe UI";
+  /* font-family: "Segoe UI"; */
   font-style: normal;
   font-weight: 500;
   font-size: 17px;
@@ -69,7 +69,7 @@
 }
 
 .login-main>.right-login-side>.form-section>div>.text-container>.text-line-2>span>a {
-  font-family: "Segoe UI";
+  /* font-family: "Segoe UI"; */
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -82,7 +82,7 @@
 }
 
 .login-main>.right-login-side>.form-section>div>.form-container>form>div>label {
-  font-family: "Segoe UI";
+  /* font-family: "Segoe UI"; */
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -107,7 +107,7 @@ input[type="password"] {
   color: #ffff;
   width: 100%;
   height: 3rem;
-  font-family: "Segoe UI";
+  /* font-family: "Segoe UI"; */
   font-style: normal;
   font-weight: 600;
   font-size: 18px;

@@ -1,4 +1,4 @@
-@import url(../segoe-ui/stylesheet.css);
+/* @import url(../segoe-ui/stylesheet.css); */
 
 body {
   background-color: #c4bfff21 !important;
@@ -509,7 +509,7 @@ body {
 #restartBtn2>a:hover {
   color: #7e5bf6;
   text-decoration: none;
-  font-family: "Segoe UI";
+  /* font-family: "Segoe UI"; */
   font-size: 18px;
   font-weight: 600;
   transition: none !important;
