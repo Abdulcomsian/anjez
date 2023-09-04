@@ -1,16 +1,13 @@
 @extends('frontend.layouts.main')
-
 <style>
-    .error-message{
-        color:red;
-        margin-bottom:22px;
-        margin-top:-20px;
+    .error-message {
+        color: red;
+        margin-bottom: 22px;
+        margin-top: -20px;
     }
 </style>
 
-
-
-    <link rel="stylesheet" href="{{ asset('assets/style/signup.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/style/signup.css') }}" />
 
 @section('content')
 <div class="signup-main">
@@ -29,7 +26,7 @@
             <div>
                 <div class="text-container mt-3">
                     <div class="text-line-1 mt-5">
-                        <span>{{ __('lang.signup_form.get_started_with') }}<span>{{ __('lang.login_form.angez') }}</span> </span>
+                        <span>{{ __('lang.signup_form.get_started_with') }} <span>{{ __('lang.login_form.angez') }}</span> </span>
                     </div>
                     <div class="text-line-2">
                         <span>
@@ -37,31 +34,29 @@
                         </span>
                     </div>
                 </div>
-                
+
                 <div class="form-container">
                     @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                     @endif
                     <form method="POST" id="signup-form" action="{{ route('user.signup') }}">
                         @csrf
                         <div class="nav-div">
                             <div>
                                 <label for="firstname" class="form-label">{{ __('lang.signup_form.first_name') }}</label>
-                                <input style="width: 100%" type="text" class="form-control" name="first_name" id="firstname"
-                                    placeholder="{{ __('lang.signup_form.first_name') }}" />
-                                    <div class="error-message d-none" id="firstname-error"></div>
+                                <input style="width: 100%" type="text" class="form-control" name="first_name" id="firstname" placeholder="{{ __('lang.signup_form.first_name') }}" />
+                                <div class="error-message d-none" id="firstname-error"></div>
                             </div>
                             <div>
                                 <label for="lastname" class="form-label">{{ __('lang.signup_form.last_name') }}</label>
-                                <input style="width: 100%" type="text" class="form-control" name="last_name" id="lastname"
-                                    placeholder="{{ __('lang.signup_form.last_name') }}" />
-                                    <div class="error-message" id="lastname-error"></div>
+                                <input style="width: 100%" type="text" class="form-control" name="last_name" id="lastname" placeholder="{{ __('lang.signup_form.last_name') }}" />
+                                <div class="error-message" id="lastname-error"></div>
                             </div>
                         </div>
                         <div>
@@ -93,9 +88,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 <!-- <script>
     document.getElementById("signup-form").addEventListener("submit", function(event) {
@@ -170,19 +162,15 @@
     }
 </script>  -->
 
-
-
-
-
- <script>
+<script>
     document.getElementById("signup-form").addEventListener("submit", function(event) {
         document.getElementById("firstname-error").textContent = "";
-    document.getElementById("lastname-error").textContent = "";
-    document.getElementById("email-error").textContent = "";
-    document.getElementById("phone-error").textContent = "";
-    document.getElementById("password-error").textContent = "";
-    document.getElementById("confirmpassword-error").textContent = "";
-    
+        document.getElementById("lastname-error").textContent = "";
+        document.getElementById("email-error").textContent = "";
+        document.getElementById("phone-error").textContent = "";
+        document.getElementById("password-error").textContent = "";
+        document.getElementById("confirmpassword-error").textContent = "";
+
         const firstName = document.getElementById("firstname").value.trim();
         const lastName = document.getElementById("lastname").value.trim();
         const email = document.getElementById("email").value.trim();
@@ -193,23 +181,23 @@
         let isValid = true;
 
         if (firstName === "") {
-                isValid = false;
-                document.getElementById("firstname-error").textContent = "First name is required.";
-                document.getElementById("firstname-error").classList.remove("d-none");
-            } else if (!isValidName(firstName)) {
-                isValid = false;
-                document.getElementById("firstname-error").textContent = "Invalid first name format.";
-                document.getElementById("firstname-error").classList.remove("d-none");
-            }
+            isValid = false;
+            document.getElementById("firstname-error").textContent = "First name is required.";
+            document.getElementById("firstname-error").classList.remove("d-none");
+        } else if (!isValidName(firstName)) {
+            isValid = false;
+            document.getElementById("firstname-error").textContent = "Invalid first name format.";
+            document.getElementById("firstname-error").classList.remove("d-none");
+        }
 
 
-            if (lastName === "") {
-                isValid = false;
-                document.getElementById("lastname-error").textContent = "Last name is required.";
-            } else if (!isValidName(lastName)) {
-                isValid = false;
-                document.getElementById("lastname-error").textContent = "Invalid last name format.";
-            }
+        if (lastName === "") {
+            isValid = false;
+            document.getElementById("lastname-error").textContent = "Last name is required.";
+        } else if (!isValidName(lastName)) {
+            isValid = false;
+            document.getElementById("lastname-error").textContent = "Invalid last name format.";
+        }
 
         if (email === "") {
             isValid = false;
@@ -244,30 +232,18 @@
         }
 
         if (!isValid) {
-        event.preventDefault();
-    }
+            event.preventDefault();
+        }
     });
 
     function isValidEmail(email) {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailPattern.test(email);
     }
+
     function isValidName(name) {
-            const namePattern = /^[A-Za-z]+$/;
-            return namePattern.test(name);
+        const namePattern = /^[A-Za-z]+$/;
+        return namePattern.test(name);
     }
-</script>  
-
-
-
-
-
-
-
-
-
-
-
-
+</script>
 @endsection
-

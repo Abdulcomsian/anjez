@@ -4,50 +4,44 @@
   /* height: 100vh; */
 }
 
-.signup-main > .left-signup-side {
+.signup-main>.left-signup-side {
   background-color: #7e5bf669;
   width: 55%;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  min-height: 100vh ;
+  min-height: 100vh;
 }
 
-.signup-main > .left-signup-side > div > img {
+.signup-main>.left-signup-side>div>img {
   height: auto;
   width: 100%;
 }
 
-.signup-main > .right-signup-side {
+.signup-main>.right-signup-side {
   width: 45%;
   padding-left: 6%;
   padding-right: 6%;
 }
 
-.signup-main > .right-signup-side > .logo-section {
+.signup-main>.right-signup-side>.logo-section {
   height: 10vh;
   display: flex;
   align-items: center;
 }
 
-.signup-main > .right-signup-side > .form-section {
+.signup-main>.right-signup-side>.form-section {
   /* height: 80vh; */
   display: flex;
   align-items: center;
 }
 
-.signup-main > .right-signup-side > .form-section > div {
+.signup-main>.right-signup-side>.form-section>div {
   width: 100%;
 }
 
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .text-container
-  > .text-line-1
-  > span {
+.signup-main>.right-signup-side>.form-section>div>.text-container>.text-line-1>span {
   font-family: "Segoe UI";
   font-style: normal;
   font-weight: 700;
@@ -57,49 +51,24 @@
   /* white-space: nowrap; */
 }
 
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .text-container
-  > .text-line-1
-  > span
-  > span {
+.signup-main>.right-signup-side>.form-section>div>.text-container>.text-line-1>span>span {
   color: #7e5bf6;
 }
 
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .text-container
-  > .text-line-2 {
+.signup-main>.right-signup-side>.form-section>div>.text-container>.text-line-2 {
   margin-top: 1rem;
 }
 
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .text-container
-  > .text-line-2
-  > span {
+.signup-main>.right-signup-side>.form-section>div>.text-container>.text-line-2>span {
   font-family: "Segoe UI";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 16px;
   line-height: 26px;
   /* white-space: nowrap; */
 }
 
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .text-container
-  > .text-line-2
-  > span
-  > a {
+.signup-main>.right-signup-side>.form-section>div>.text-container>.text-line-2>span>a {
   font-family: "Segoe UI";
   font-style: normal;
   font-weight: 600;
@@ -108,46 +77,20 @@
   color: #7e5bf6;
 }
 
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .form-container
-  > form {
+.signup-main>.right-signup-side>.form-section>div>.form-container>form {
   margin-top: 2rem;
 }
 
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .form-container
-  > form
-  > .nav-div {
+.signup-main>.right-signup-side>.form-section>div>.form-container>form>.nav-div {
   display: flex;
   gap: 1rem;
 }
 
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .form-container
-  > form
-  > .nav-div
-  > div {
+.signup-main>.right-signup-side>.form-section>div>.form-container>form>.nav-div>div {
   width: 100%;
 }
 
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .form-container
-  > form
-  > .nav-div
-  > div
-  > label {
+.signup-main>.right-signup-side>.form-section>div>.form-container>form>.nav-div>div>label {
   font-family: "Noto Sans";
   font-style: normal;
   font-weight: 600;
@@ -157,28 +100,12 @@
   margin-top: -10px;
 }
 
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .form-container
-  > form
-  > .nav-div
-  > div
-  > label::after {
+.signup-main>.right-signup-side>.form-section>div>.form-container>form>.nav-div>div>label::after {
   content: " *";
   color: red;
 }
 
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .form-container
-  > form
-  > .nav-div
-  > div
-  > input {
+.signup-main>.right-signup-side>.form-section>div>.form-container>form>.nav-div>div>input {
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 1.5rem;
@@ -187,14 +114,7 @@
   box-sizing: border-box;
 }
 
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .form-container
-  > form
-  > div
-  > label {
+.signup-main>.right-signup-side>.form-section>div>.form-container>form>div>label {
   font-family: "Noto Sans";
   font-style: normal;
   font-weight: 600;
@@ -203,6 +123,7 @@
   /* margin-top: -10px !important; */
   margin: 0.2rem;
 }
+
 #phone {
   width: 100% !important;
   /* height: 2.7rem; */
@@ -211,27 +132,15 @@
 #pass {
   margin-top: 15px !important;
 }
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .form-container
-  > form
-  > div
-  > label::after {
+
+.signup-main>.right-signup-side>.form-section>div>.form-container>form>div>label::after {
   content: " *";
   color: red;
 }
 
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .form-container
-  > form
-  > div
-  > input[type="text"],
-input[type="password"] {
+.signup-main>.right-signup-side>.form-section>div>.form-container>form>div>input[type="text"],
+.signup-main>.right-signup-side>.form-section>div>.form-container>form>div>input[type="password"],
+.signup-main>.right-signup-side>.form-section>div>.form-container>form>div>input[type="input"] {
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 1.5rem;
@@ -240,14 +149,7 @@ input[type="password"] {
   box-sizing: border-box;
 }
 
-.signup-main
-  > .right-signup-side
-  > .form-section
-  > div
-  > .form-container
-  > form
-  > div
-  > button {
+.signup-main>.right-signup-side>.form-section>div>.form-container>form>div>button {
   background: #7e5bf6;
   border-radius: 6px;
   border: none;
@@ -257,10 +159,11 @@ input[type="password"] {
 }
 
 @media screen and (max-width: 768px) {
-  .signup-main > .left-signup-side {
+  .signup-main>.left-signup-side {
     width: 45%;
   }
-  .signup-main > .right-signup-side {
+
+  .signup-main>.right-signup-side {
     padding-left: 3rem;
     padding-right: 3rem;
     width: 55%;
@@ -268,10 +171,11 @@ input[type="password"] {
 }
 
 @media screen and (max-width: 425px) {
-  .signup-main > .left-signup-side {
+  .signup-main>.left-signup-side {
     display: none;
   }
-  .signup-main > .right-signup-side {
+
+  .signup-main>.right-signup-side {
     width: 100%;
   }
 }

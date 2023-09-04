@@ -596,7 +596,7 @@ use App\Helpers\Helper;
       </div> -->
           <div style="margin-left:3.5rem;">
             <a href="./privacy-policy" style="text-decoration:none">
-              <span class="border-class" data-translate="privacy-policy">
+              <span id="border-selector" class="border-left" data-translate="privacy-policy">
                 {{ __('lang.footer.privacy_policy') }}
               </span>
             </a>
@@ -662,11 +662,11 @@ use App\Helpers\Helper;
     const langSelectElement = document.getElementById('lang-select');
 
     const splits = path.split('/')
-    // console.log(splits);
     if (splits[1] === 'en') {
+      document.getElementById('border-selector').classList = ['border-right'];
       langSelectElement.textContent = 'English ';
-      console.log(path)
     } else if (splits[1] === 'ar') {
+      document.getElementById('border-selector').classList = ['border-left']
       langSelectElement.textContent = 'Arabic ';
     }
   }
