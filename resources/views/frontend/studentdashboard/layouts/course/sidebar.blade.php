@@ -31,8 +31,8 @@ use App\Helpers\Helper;
     }
 
     .caret-arrow {
-        background-color: #F7F6FF;
-        border: 1px solid #D0D5DD;
+        /* background-color: #F7F6FF;
+        border: 1px solid #D0D5DD; */
         /* padding: 4%; */
         height: 2rem;
         width: 2rem;

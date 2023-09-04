@@ -3,23 +3,24 @@ use App\Helpers\Helper;
 @endphp
 @extends('frontend.studentdashboard.layouts.course.main')
 <style>
-.subscribe {
-    display: flex;
-    justify-content: start;
-}
-.custom-button{
-    background: #7e5bf6;
-    border-radius: 4px !important;
-    border: none;
-    color: #ffff !important;
-    height: 3rem;
-    font-weight: 700;
-    font-size: 16px;
-    font-family: "DM Sans" !important;
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-}
+    .subscribe {
+        display: flex;
+        justify-content: start;
+    }
+
+    .custom-button {
+        background: #7e5bf6;
+        border-radius: 4px !important;
+        border: none;
+        color: #ffff !important;
+        height: 3rem;
+        font-weight: 700;
+        font-size: 16px;
+        font-family: "DM Sans" !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
 
 @section('content')
@@ -34,9 +35,9 @@ use App\Helpers\Helper;
                     <div class="row d-flex justify-content-between">
                         <div class="col  d-flex justify-content-start">
                             @if(app()->getLocale() == 'en')
-                                <div class="subject-heading"> {{ $data['course']->title ?? '' }} </div>
+                            <div class="subject-heading"> {{ $data['course']->title ?? '' }} </div>
                             @else
-                                <div class="subject-heading"> {{ $data['course']->title_ar ?? '' }} </div>
+                            <div class="subject-heading"> {{ $data['course']->title_ar ?? '' }} </div>
                             @endif
                         </div>
                         {{-- <form method="GET"> uncomment for later use
@@ -50,104 +51,98 @@ use App\Helpers\Helper;
                     <div class="row flex-column {{app()->getLocale() == 'en' ? 'mt-2' : 'mt-5'}}">
                         <div class="col-7 textss">
                             @if(app()->getLocale() == 'en')
-                                <span>{!! $data['course']->description ?? '' !!}</span>
+                            <span>{!! $data['course']->description ?? '' !!}</span>
                             @else
-                                <span>{!! $data['course']->description_ar ?? '' !!}</span>
+                            <span>{!! $data['course']->description_ar ?? '' !!}</span>
                             @endif
                         </div>
                         @if(!Helper::isPaymentActive())
                         <!-- <div class="col mt-3"> <button class="px-4" type="button"> <a class="text-decoration-none" href="{{ route('payments') }}">
                                     Subscribe </a> </button></div> -->
-                                    <div class="col mt-3 subscribe">  <a class="text-decoration-none custom-button px-4 " type="button" href="{{ route('payments') }}">
-                                    Subscribe </a> </div>
+                        <div class="col mt-3 subscribe"> <a class="text-decoration-none custom-button px-4 " type="button" href="{{ route('payments') }}">
+                                Subscribe </a> </div>
                         @endif
                     </div>
                     <div class="contents px-4 mt-4 pt-1">
                         <div class="contents-heading d-flex justify-content-center mt-4 "> Contents </div>
                         <div class="row data mt-4">
                             @if($data['course'])
-                                @forelse ($data['course']['sections'] as $section)
-                                    @foreach($section['lessons'] as $key=>$lesson)
-                                        @if ($data['is_payment_active'] || $key === 0)
-                                            @php
-                                                $link = route('lesson.quizes',['id'=>encryptParams($lesson->id)]);
-                                            @endphp
-                                        @else
-                                            @php
-                                                $link = route('payments');
-                                            @endphp
-                                        @endif
-                                        <div class="col py-2">
-                                            <a href="{{ $link }}" >
-                                                @if (app()->getLocale() == 'ar')
-                                                    الدرس {{ $key+1 }} - {{ $lesson->title_ar }}
-                                                @else
-                                                    Lesson {{ $key+1 }} - {{ $lesson->title }}
-                                                @endif
-                                            </a>
-                                            <?php
-                                            try
-                                            {
-                                                if($lesson->is_complete == 0)
-                                                {
-                                                    $percentage = ($lesson->quiz_scores ? $lesson->quiz_scores->score_taken : 0)/($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0)*100;
-                                                }
-                                                else
-                                                {
-                                                    $percentage = 100;
-                                                }
-                                            }
-                                            catch (\Throwable $th)
-                                            {
-                                                $percentage = 0;
-                                            }
-                                            ?>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width:{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                            @if ($data['is_payment_active'] || $key === 0)
-                                                @if($key === 0)
-                                                    <div class="cate-free mt-2 ">
-                                                        @if (app()->getLocale() == 'ar')
-                                                            <p>مجاني</p>
-                                                        @else
-                                                            <p>Free</p>
-                                                        @endif
-                                                    </div>
-                                                @elseif($data['is_payment_active'])
-                                                    {{-- Display something related to payment --}}
-                                                @endif
-                                            @else
-                                                <div class="cate mt-2 ">
-                                                    <img src="{{ asset('assets/images/crown.png') }}" alt="">
-                                                </div>
-                                            @endif
-                                        </div>
-                                    @endforeach
-                                @empty
-                                    <div class="col py-2">
-                                        <h4>
-                                            @if (app()->getLocale() == 'ar')
-                                                لا توجد دروس !
-                                            @else
-                                                No Lesson Found!
-                                            @endif
-                                        </h4>
-                                    </div>
-                                @endforelse
+                            @forelse ($data['course']['sections'] as $section)
+                            @foreach($section['lessons'] as $key=>$lesson)
+                            @if ($data['is_payment_active'] || $key === 0)
+                            @php
+                            $link = route('lesson.quizes',['id'=>encryptParams($lesson->id)]);
+                            @endphp
                             @else
-                                <div class="col py-2">
-                                    <h4>
-                                        @if (app()->getLocale() == 'ar')
-                                            لا توجد دورة !
-                                        @else
-                                            No Course Found!
-                                        @endif
-                                    </h4>
+                            @php
+                            $link = route('payments');
+                            @endphp
+                            @endif
+                            <div class="col py-2">
+                                <a href="{{ $link }}">
+                                    @if (app()->getLocale() == 'ar')
+                                    الدرس {{ $key+1 }} - {{ $lesson->title_ar }}
+                                    @else
+                                    Lesson {{ $key+1 }} - {{ $lesson->title }}
+                                    @endif
+                                </a>
+                                <?php
+                                try {
+                                    if ($lesson->is_complete == 0) {
+                                        $percentage = ($lesson->quiz_scores ? $lesson->quiz_scores->score_taken : 0) / ($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0) * 100;
+                                    } else {
+                                        $percentage = 100;
+                                    }
+                                } catch (\Throwable $th) {
+                                    $percentage = 0;
+                                }
+                                ?>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width:{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
+                                @if ($data['is_payment_active'] || $key === 0)
+                                @if($key === 0)
+                                <div class="cate-free mt-2 ">
+                                    @if (app()->getLocale() == 'ar')
+                                    <p>مجاني</p>
+                                    @else
+                                    <p>Free</p>
+                                    @endif
+                                </div>
+                                @elseif($data['is_payment_active'])
+                                {{-- Display something related to payment --}}
+                                @endif
+                                @else
+                                <div class="cate mt-2 ">
+                                    <img src="{{ asset('assets/images/crown.png') }}" alt="">
+                                </div>
+                                @endif
+                            </div>
+                            @endforeach
+                            @empty
+                            <div class="col py-2">
+                                <h4>
+                                    @if (app()->getLocale() == 'ar')
+                                    لا توجد دروس !
+                                    @else
+                                    No Lesson Found!
+                                    @endif
+                                </h4>
+                            </div>
+                            @endforelse
+                            @else
+                            <div class="col py-2">
+                                <h4>
+                                    @if (app()->getLocale() == 'ar')
+                                    لا توجد دورة !
+                                    @else
+                                    No Course Found!
+                                    @endif
+                                </h4>
+                            </div>
                             @endif
                         </div>
-                        
+
                         {{-- <div class="row mt-4">
                             @if($data['course'])
                                 @forelse ($data['course']['sections'] as $section)
@@ -163,60 +158,54 @@ use App\Helpers\Helper;
                                     @endif
                                         <div class="col py-2">
                                             <a href="{{ $link }}" style="text-decoration: none" >Lesson {{ $key+1 }} - {{ $lesson->title }}</a>
-                                            <?php
-                                            try
-                                            {
-                                                if($lesson->is_complete == 0)
-                                                {
-                                                    $percentage = ($lesson->quiz_scores ? $lesson->quiz_scores->score_taken : 0)/($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0)*100;
-                                                }
-                                                else
-                                                {
-                                                    $percentage = 100;
-                                                }
-                                            }
-                                            catch (\Throwable $th)
-                                            {
-                                                $percentage = 0;
-                                            }
-                                            ?>
-                                            <div class="progress">
-                                                <div class="progress-bar" role="progressbar" style="width:{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                                @if ($data['is_payment_active'] || $key === 0)
-                                                    @if($key === 0)
-                                                        <div class="cate mt-2 ">
-                                                                    <p>Free</p>
-                                                        </div>
-                                                        @elseif($data['is_payment_active'])
-                                                    @endif
-                                                @else
-                                                <div class="cate mt-2 ">
-                                                        <img src="{{ asset('assets/images/crown.png') }}" alt="">
-                                                </div>
-                                                @endif
-                                        </div>
-                                    @endforeach
-                                @empty
-                                <div class="col py-2">
-                                    <h4>No Lesson Found !</h4>
-                                </div>
-                                @endforelse
-                            @else
-                                <div class="col py-2">
-                                    <h4>No Course Found !</h4>
-                                </div>
-                            @endif
-                        </div> --}}
-
-
+                        <?php
+                        try {
+                            if ($lesson->is_complete == 0) {
+                                $percentage = ($lesson->quiz_scores ? $lesson->quiz_scores->score_taken : 0) / ($lesson->quiz_scores ? $lesson->quiz_scores->total_score : 0) * 100;
+                            } else {
+                                $percentage = 100;
+                            }
+                        } catch (\Throwable $th) {
+                            $percentage = 0;
+                        }
+                        ?>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width:{{ $percentage }}%" aria-valuenow="{{ $percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        @if ($data['is_payment_active'] || $key === 0)
+                        @if($key === 0)
+                        <div class="cate mt-2 ">
+                            <p>Free</p>
+                        </div>
+                        @elseif($data['is_payment_active'])
+                        @endif
+                        @else
+                        <div class="cate mt-2 ">
+                            <img src="{{ asset('assets/images/crown.png') }}" alt="">
+                        </div>
+                        @endif
                     </div>
-                </div>
+                    @endforeach
+                    @empty
+                    <div class="col py-2">
+                        <h4>No Lesson Found !</h4>
+                    </div>
+                    @endforelse
+                    @else
+                    <div class="col py-2">
+                        <h4>No Course Found !</h4>
+                    </div>
+                    @endif
+                </div> --}}
+
+
             </div>
-
-
         </div>
     </div>
+
+
+</div>
+</div>
 </div>
 
 {{-- Modal --}}
@@ -233,8 +222,9 @@ use App\Helpers\Helper;
             <div class="modal-body px-5">
                 <div class="d-flex flex-column">
                     <h5> Answer the questions below</h5>
-                    <p class="m-auto"><span id="currQuesNum"></span> / 
-                    <span id="totalQuesNum"></span></p>
+                    <p class="m-auto"><span id="currQuesNum"></span> /
+                        <span id="totalQuesNum"></span>
+                    </p>
                     <div class="question m-auto" id="ques">
 
                     </div>
@@ -242,7 +232,7 @@ use App\Helpers\Helper;
 
                 <div class="options mt-5" id="opts">
                 </div>
-                <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer.  Correct Option is <span id='corr_ans'> .</span> Reason <span id="corr_ans_reason"></span> </div>
+                <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer. Correct Option is <span id='corr_ans'> .</span> Reason <span id="corr_ans_reason"></span> </div>
                 {{-- <div style="color: green" class="d-none correct-answer-div"></div> --}}
 
                 <div class="modal-footer d-flex flex-column justify-content-center">
@@ -261,20 +251,17 @@ use App\Helpers\Helper;
 </div>
 
 <script>
-    $(document).on('click','#dropdownMenuButton', function(){
+    $(document).on('click', '#dropdownMenuButton', function() {
         $('.dropdown-menu').toggleClass('show');
     });
 
-    $(document).on('click', '#test_quiz_btn', function(){
+    $(document).on('click', '#test_quiz_btn', function() {
         let total_qstns = $('.total_qstns').val();
-        if(total_qstns == 1)
-        {
+        if (total_qstns == 1) {
             $('#btn').text("Finish");
             $('#btn').removeAttr('onclick');
             $('#btn').addClass('finish');
-        }
-        else
-        {
+        } else {
             $('#btn').text("Next Question");
             $('#btn').attr('onclick', 'checkAns()');
             $('#btn').removeAttr('class');
@@ -283,80 +270,71 @@ use App\Helpers\Helper;
 
     });
 
-    $(document).on('click', '.close_modal_btn', function(){
+    $(document).on('click', '.close_modal_btn', function() {
         $('#quizModal').modal('hide');
     });
 
-    function lesson(id){
-            let courses = document.getElementById('courses');
-            let lessons = document.getElementById('lessons');
-            courses.classList.add('d-none');
-            lessons.classList.remove('d-none');
+    function lesson(id) {
+        let courses = document.getElementById('courses');
+        let lessons = document.getElementById('lessons');
+        courses.classList.add('d-none');
+        lessons.classList.remove('d-none');
 
-            $.ajax({
-                type: "GET",
-                url: "{{ url('get-lesson/') }}/"+id,
-                success: function (response) {
-                    // console.log(response.data.lesson);
-                    $('.lesson_id').val(response.data.lesson.id)
-                    let lesson_quizes = response.data.lesson.quizes;
-                    let title = document.getElementById('title');
-                    let description = document.getElementById('description');
+        $.ajax({
+            type: "GET",
+            url: "{{ url('get-lesson/') }}/" + id,
+            success: function(response) {
+                // console.log(response.data.lesson);
+                $('.lesson_id').val(response.data.lesson.id)
+                let lesson_quizes = response.data.lesson.quizes;
+                let title = document.getElementById('title');
+                let description = document.getElementById('description');
 
-                    title.innerHTML = response.data.lesson.title;
-                    description.innerHTML = response.data.lesson.description;
-                    if(response.data.lesson.thumbnail != null)
-                    {
-                        $('.dropdown-menu').empty();
-                        $('.dropdown-menu').append(`<a class="dropdown-item" href="{{ asset('assets/courses-content/lesson-images/${response.data.lesson.thumbnail}') }}" target="_blank" >${response.data.lesson.thumbnail}</a>`);
-                    }
-                    else
-                    {
-                        $('.dropdown-menu').empty();
-                        $('.dropdown-menu').removeClass('show')
-                    }
-
-                    // console.log(response.data.lesson.quizes);
-                    if(response.data.lesson.quizes != null && response.data.lesson.quizes.length>0 && response.data.lesson.quizes!=[])
-                    {
-
-                        $('.total_qstns').val(response.data.lesson.quizes.length);
-
-                        $('.options').empty();
-                        $('.question_no').val(0);
-                        $('.test-knowledge-btn').removeClass('d-none');
-                        $('#currQuesNum').text(1);
-                        lesson_quizes.forEach((qstn, index) => {
-
-                            if(index == 0)
-                            {
-                                $('.correct_answer_description').text(qstn.options.correct_answer_description);
-                                $('.correct_answer').val(qstn.options.correct_answer);
-                                showQuiz(qstn.question, qstn.options.option1, qstn.options.option2, qstn.options.option3, qstn.options.option4, qstn.options.correct_answer);
-                            }
-                        });
-                        let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
-                        $('#totalQuesNum').text(quiz_qstns_length);
-                    }
-
-                    else
-                    {
-                        $('.options').empty();
-                        $('.test-knowledge-btn').addClass('d-none');
-
-                        $('#currQuesNum').text(0);
-
-                        $('.correct_answer').val('');
-                        $('.ques').text('')
-                        // showQuiz();
-
-                        // console.log("else");
-                        let quiz_qstns_length = 0;
-                        $('#totalQuesNum').text(quiz_qstns_length);
-                    }
+                title.innerHTML = response.data.lesson.title;
+                description.innerHTML = response.data.lesson.description;
+                if (response.data.lesson.thumbnail != null) {
+                    $('.dropdown-menu').empty();
+                    $('.dropdown-menu').append(`<a class="dropdown-item" href="{{ asset('assets/courses-content/lesson-images/${response.data.lesson.thumbnail}') }}" target="_blank" >${response.data.lesson.thumbnail}</a>`);
+                } else {
+                    $('.dropdown-menu').empty();
+                    $('.dropdown-menu').removeClass('show')
                 }
-            });
-    }
 
+                // console.log(response.data.lesson.quizes);
+                if (response.data.lesson.quizes != null && response.data.lesson.quizes.length > 0 && response.data.lesson.quizes != []) {
+
+                    $('.total_qstns').val(response.data.lesson.quizes.length);
+
+                    $('.options').empty();
+                    $('.question_no').val(0);
+                    $('.test-knowledge-btn').removeClass('d-none');
+                    $('#currQuesNum').text(1);
+                    lesson_quizes.forEach((qstn, index) => {
+
+                        if (index == 0) {
+                            $('.correct_answer_description').text(qstn.options.correct_answer_description);
+                            $('.correct_answer').val(qstn.options.correct_answer);
+                            showQuiz(qstn.question, qstn.options.option1, qstn.options.option2, qstn.options.option3, qstn.options.option4, qstn.options.correct_answer);
+                        }
+                    });
+                    let quiz_qstns_length = parseInt(response.data.lesson.quizes.length);
+                    $('#totalQuesNum').text(quiz_qstns_length);
+                } else {
+                    $('.options').empty();
+                    $('.test-knowledge-btn').addClass('d-none');
+
+                    $('#currQuesNum').text(0);
+
+                    $('.correct_answer').val('');
+                    $('.ques').text('')
+                    // showQuiz();
+
+                    // console.log("else");
+                    let quiz_qstns_length = 0;
+                    $('#totalQuesNum').text(quiz_qstns_length);
+                }
+            }
+        });
+    }
 </script>
 @endsection
