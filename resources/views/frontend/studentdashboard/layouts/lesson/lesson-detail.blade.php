@@ -154,16 +154,16 @@ use App\Helpers\Helper;
 
                 <div class="options mt-5" id="opts">
                     <div class="option">
-                        <input type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option1 : '' }}"><label style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option1 : '' }}</label>
+                        <input id="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option1 : '' }}" type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option1 : '' }}"><label for="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option1 : '' }}" style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option1 : '' }}</label>
                     </div>
                     <div class="option">
-                        <input type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option2 : '' }}"><label style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option2 : '' }}</label>
+                        <input id="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option2 : '' }}" type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option2 : '' }}"><label for="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option2 : '' }}" style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option2 : '' }}</label>
                     </div>
                     <div class="option">
-                        <input type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option3 : '' }}"><label style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option3 : '' }}</label>
+                        <input id="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option3 : '' }}" type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option3 : '' }}"><label for="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option3 : '' }}" style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option3 : '' }}</label>
                     </div>
                     <div class="option">
-                        <input type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option4 : '' }}"><label style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option4 : '' }}</label>
+                        <input id="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option4 : '' }}" type="radio" name="answer" value="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option4 : '' }}"><label for="{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option4 : '' }}" style="text-decoration: none">{{ count($data['lesson']->quizes)>0 ? $data['lesson']->quizes[0]->options->option4 : '' }}</label>
                     </div>
                 </div>
                 <div style="color: red" class="d-none incorrect-answer-div">Incorrect Answer. Correct Option is <span id='corr_ans'> .</span> Reason <span id="corr_ans_reason"></span> </div>
@@ -361,10 +361,10 @@ use App\Helpers\Helper;
     function showQuiz(qstn, option1, option2, option3, option4, correct_opt) {
         $('.correct_answer').val(correct_opt);
         $('#ques').text(qstn);
-        $('#opts').append(`<div class="option"><input type="radio" name="answer" value="${option1}"><label style="text-decoration: none">${option1}</label></div>
-        <div class="option"><input type="radio" name="answer" value="${option2}"><label style="text-decoration: none">${option2}</label></div>
-        <div class="option"><input type="radio" name="answer" value="${option3}"><label style="text-decoration: none">${option3}</label></div>
-        <div class="option"><input type="radio" name="answer" value="${option4}"><label style="text-decoration: none">${option4}</label></div>`);
+        $('#opts').append(`<div class="option"><input id="${option1}" type="radio" name="answer" value="${option1}"><label for="${option1}" style="text-decoration: none">${option1}</label></div>
+        <div class="option"><input id="${option2}" type="radio" name="answer" value="${option2}"><label for="${option2}" style="text-decoration: none">${option2}</label></div>
+        <div class="option"><input id="${option3}" type="radio" name="answer" value="${option3}"><label for="${option3}" style="text-decoration: none">${option3}</label></div>
+        <div class="option"><input id="${option4}" type="radio" name="answer" value="${option4}"><label for="${option4}" style="text-decoration: none">${option4}</label></div>`);
     }
 
 

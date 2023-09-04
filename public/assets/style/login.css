@@ -1,12 +1,10 @@
-
-
 .login-main {
   display: flex;
   flex-direction: row;
   height: 100vh;
 }
 
-.login-main > .left-login-side {
+.login-main>.left-login-side {
   background-color: #7e5bf669;
   width: 55%;
   display: flex;
@@ -16,91 +14,59 @@
   height: 100vh;
 }
 
-.login-main > .left-login-side > div > img {
+.login-main>.left-login-side>div>img {
   height: auto;
   width: 100%;
 }
 
-.login-main > .right-login-side {
+.login-main>.right-login-side {
   width: 45%;
   padding-left: 6%;
   padding-right: 6%;
 }
 
-.login-main > .right-login-side > .logo-section {
+.login-main>.right-login-side>.logo-section {
   height: 10vh;
   display: flex;
   align-items: center;
 }
 
-.login-main > .right-login-side > .form-section {
+.login-main>.right-login-side>.form-section {
   height: 80vh;
   display: flex;
   align-items: center;
 }
 
-.login-main > .right-login-side > .form-section > div {
+.login-main>.right-login-side>.form-section>div {
   width: 100%;
 }
 
-.login-main
-  > .right-login-side
-  > .form-section
-  > div
-  > .text-container
-  > .text-line-1
-  > span {
+.login-main>.right-login-side>.form-section>div>.text-container>.text-line-1>span {
   font-family: "Segoe UI";
   font-style: normal;
   font-weight: 700;
-  font-size: 29px;
-  line-height: 39px;
-
+  font-size: 40px;
+  line-height: 45px;
 }
 
-.login-main
-  > .right-login-side
-  > .form-section
-  > div
-  > .text-container
-  > .text-line-1
-  > span
-  > span {
+.login-main>.right-login-side>.form-section>div>.text-container>.text-line-1>span>span {
   color: #7e5bf6;
 }
 
-.login-main
-  > .right-login-side
-  > .form-section
-  > div
-  > .text-container
-  > .text-line-2 {
+.login-main>.right-login-side>.form-section>div>.text-container>.text-line-2 {
   margin-top: 1rem;
 }
 
-.login-main
-  > .right-login-side
-  > .form-section
-  > div
-  > .text-container
-  > .text-line-2
-  > span {
+.login-main>.right-login-side>.form-section>div>.text-container>.text-line-2>span {
   font-family: "Segoe UI";
   font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 17px;
   line-height: 26px;
 
 }
 
-.login-main
-  > .right-login-side
-  > .form-section
-  > div
-  > .text-container
-  > .text-line-2
-  > span
-  > a {
+.login-main>.right-login-side>.form-section>div>.text-container>.text-line-2>span>a {
   font-family: "Segoe UI";
   font-style: normal;
   font-weight: 600;
@@ -109,18 +75,11 @@
   color: #7e5bf6;
 }
 
-.login-main > .right-login-side > .form-section > div > .form-container > form {
+.login-main>.right-login-side>.form-section>div>.form-container>form {
   margin-top: 2rem;
 }
 
-.login-main
-  > .right-login-side
-  > .form-section
-  > div
-  > .form-container
-  > form
-  > div
-  > label {
+.login-main>.right-login-side>.form-section>div>.form-container>form>div>label {
   font-family: "Segoe UI";
   font-style: normal;
   font-weight: 600;
@@ -129,14 +88,7 @@
   margin: 0.2rem;
 }
 
-.login-main
-  > .right-login-side
-  > .form-section
-  > div
-  > .form-container
-  > form
-  > div
-  > input[type="text"],
+.login-main>.right-login-side>.form-section>div>.form-container>form>div>input[type="text"],
 input[type="password"] {
   width: 100%;
   padding: 0.5rem;
@@ -146,14 +98,7 @@ input[type="password"] {
   box-sizing: border-box;
 }
 
-.login-main
-  > .right-login-side
-  > .form-section
-  > div
-  > .form-container
-  > form
-  > div
-  > button {
+.login-main>.right-login-side>.form-section>div>.form-container>form>div>button {
   background: #7e5bf6;
   border-radius: 6px;
   border: none;
@@ -167,11 +112,13 @@ input[type="password"] {
 }
 
 
-#mail , #no{
+#mail,
+#no {
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 16px;
 }
+
 /* #email::placeholder{
   font-family: "Segoe UI";
 font-size: 16px;
@@ -181,23 +128,25 @@ letter-spacing: 0em;
 text-align: left;
 color: #444150;
 } */
-.show{
+.show {
   color: #7e5bf6;
   text-decoration: underline;
   text-underline-offset: 0.5rem;
   text-decoration-thickness: 0.1rem;
- 
+
 }
+
 #phone-input {
   width: 100% !important;
 
 }
 
 @media screen and (max-width: 768px) {
-  .login-main > .left-login-side {
+  .login-main>.left-login-side {
     width: 45%;
   }
-  .login-main > .right-login-side {
+
+  .login-main>.right-login-side {
     padding-left: 3rem;
     padding-right: 3rem;
     width: 55%;
@@ -205,10 +154,11 @@ color: #444150;
 }
 
 @media screen and (max-width: 425px) {
-  .login-main > .left-login-side {
+  .login-main>.left-login-side {
     display: none;
   }
-  .login-main > .right-login-side {
+
+  .login-main>.right-login-side {
     width: 100%;
   }
 }
