@@ -509,7 +509,7 @@ body {
 #restartBtn2>a:hover {
   color: #7e5bf6;
   text-decoration: none;
-  /* font-family: "Segoe UI"; */
+
   font-size: 18px;
   font-weight: 600;
   transition: none !important;
