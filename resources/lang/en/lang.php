@@ -20,7 +20,9 @@ return
         ],
         "forget_password" => 
         [
-            "enter_email" => "Enter the email associated with your account and we'll send you a link to reset your password."
+            "enter_email" => "Enter the email associated with your account and we'll send you a link to reset your password.",
+            "forget_password2" => "Don't rembember password?.",
+            "forget_password_link" => "Forget Password.",
         ],
         "reset-password" =>
         [

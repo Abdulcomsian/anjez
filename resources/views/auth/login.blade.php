@@ -143,6 +143,11 @@
                             <button type="submit">{{ __('lang.navbar.login') }}</button>
                         </div>
                     </form>
+                    <div class="text-line-2">
+                        <span>
+                            {{ __('lang.forget_password.forget_password2') }} <a href="{{ route('password.request') }}">{{ __('lang.forget_password.forget_password_link') }}</a>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
