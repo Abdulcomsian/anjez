@@ -102,10 +102,19 @@
 </style>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
+  var style = {
+  base: {
+    // Add your CSS styles for the card element here
+    fontSize: '16px',
+    color: '#333', // Text color
+    // Add other styles as needed
+  }
+};
+
     const stripe = Stripe('{{ config('services.stripe.key') }}');
     const elements = stripe.elements();
-    const cardElement = elements.create('card');
-
+    const cardElement = elements.create('card', {style: style, hidePostalCode : true});
+    // var card = elements.create('card', {style: style, value: {hidePostalCode: true}});
     cardElement.mount('#card-element');
 
     const form = document.getElementById('payment-form');
