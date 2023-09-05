@@ -1,3 +1,5 @@
+/* @import url(../segoe-ui/stylesheet.css); */
+
 .signup-main {
   display: flex;
   flex-direction: row;
@@ -42,7 +44,7 @@
 }
 
 .signup-main>.right-signup-side>.form-section>div>.text-container>.text-line-1>span {
-  font-family: "Segoe UI";
+
   font-style: normal;
   font-weight: 700;
   font-size: 29px;
@@ -60,7 +62,7 @@
 }
 
 .signup-main>.right-signup-side>.form-section>div>.text-container>.text-line-2>span {
-  font-family: "Segoe UI";
+
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -69,7 +71,7 @@
 }
 
 .signup-main>.right-signup-side>.form-section>div>.text-container>.text-line-2>span>a {
-  font-family: "Segoe UI";
+
   font-style: normal;
   font-weight: 600;
   font-size: 16px;

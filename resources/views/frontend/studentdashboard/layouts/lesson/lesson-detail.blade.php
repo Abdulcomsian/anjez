@@ -361,10 +361,10 @@ use App\Helpers\Helper;
     function showQuiz(qstn, option1, option2, option3, option4, correct_opt) {
         $('.correct_answer').val(correct_opt);
         $('#ques').text(qstn);
-        $('#opts').append(`<div class="option"><input id="${option1}" type="radio" name="answer" value="${option1}"><label for="${option1}" style="text-decoration: none">${option1}</label></div>
-        <div class="option"><input id="${option2}" type="radio" name="answer" value="${option2}"><label for="${option2}" style="text-decoration: none">${option2}</label></div>
-        <div class="option"><input id="${option3}" type="radio" name="answer" value="${option3}"><label for="${option3}" style="text-decoration: none">${option3}</label></div>
-        <div class="option"><input id="${option4}" type="radio" name="answer" value="${option4}"><label for="${option4}" style="text-decoration: none">${option4}</label></div>`);
+        $('#opts').append(`<div class="option" for="${option1}"><input id="${option1}" type="radio" name="answer" value="${option1}"><label for="${option1}" style="text-decoration: none">${option1}</label></div>
+        <div class="option" for="${option2}"><input id="${option2}" type="radio" name="answer" value="${option2}"><label for="${option2}" style="text-decoration: none">${option2}</label></div>
+        <div class="option"for="${option3}"><input id="${option3}" type="radio" name="answer" value="${option3}"><label for="${option3}" style="text-decoration: none">${option3}</label></div>
+        <div class="option" for="${option4}"><input id="${option4}" type="radio" name="answer" value="${option4}"><label for="${option4}" style="text-decoration: none">${option4}</label></div>`);
     }
 
 

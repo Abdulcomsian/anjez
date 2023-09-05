@@ -21,21 +21,24 @@ class loginController extends Controller
         return view('auth.login');
     }
 
-    public function login (Request $request)
+    public function forgetPassword()
+    {
+        return view('auth.forgetPassword');
+    }
+
+    public function login(Request $request)
     {
         $login = $this->auth_service->login($request->all());
-        if($login){
+        if ($login) {
             // toastr()->success("Account created successfully!");
             return redirect()->route('admindashboard.admin-index');
-        }
-        else{
+        } else {
             toastr()->error("Email or password incorrect!");
             return redirect()->back();
         }
-             
     }
 
-    public function logout ()
+    public function logout()
     {
         Session::flush();
         Auth::logout();
