@@ -6,6 +6,7 @@
             "login" => "Log In",
             "signup"=> "Sign Up",
             "dashboard"     => "Dashboard",
+            "submit" => "Submit"
         ],
         "login_form"    =>
         [
@@ -16,6 +17,7 @@
             "phone_number"  => "Phone Number",
             "your_email" => "Your Email",
             "password"  => "Password",
+            "forget_password" => "Enter the email associated with your account and we'll send you a link to reset your password."
         ],
         "signup_form"   =>
         [

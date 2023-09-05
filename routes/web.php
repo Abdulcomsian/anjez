@@ -66,6 +66,7 @@ Route::get('/course-delete/{id}', [CourseController::class, 'destroy'])->middlew
 
 Route::get('logout', [AuthLoginController::class, 'logout'])->name('logout');
 Route::get('/login', [loginController::class, 'create'])->name('login');
+Route::get('/forget-password', [loginController::class, 'forgetPassword'])->name('forgetPassword');
 Route::post('/login-user', [loginController::class, 'login'])->name('login-user');
 
 Route::get('/signup', [signupController::class, 'create'])->name('signup-page');
