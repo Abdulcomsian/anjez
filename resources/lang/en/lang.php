@@ -1,10 +1,10 @@
 <?php
-    return
+return
     [
         "navbar"    =>
         [
             "login" => "Log In",
-            "signup"=> "Sign Up",
+            "signup" => "Sign Up",
             "dashboard"     => "Dashboard",
             "submit" => "Submit"
         ],
@@ -17,7 +17,14 @@
             "phone_number"  => "Phone Number",
             "your_email" => "Your Email",
             "password"  => "Password",
-            "forget_password" => "Enter the email associated with your account and we'll send you a link to reset your password."
+        ],
+        "forget_password" => 
+        [
+            "enter_email" => "Enter the email associated with your account and we'll send you a link to reset your password."
+        ],
+        "reset-password" =>
+        [
+            "new_password" => "Enter New Password"
         ],
         "signup_form"   =>
         [
