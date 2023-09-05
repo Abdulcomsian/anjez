@@ -26,6 +26,11 @@ class loginController extends Controller
         return view('auth.forgetPassword');
     }
 
+    public function resetPassword()
+    {
+        return view('auth.resetPassword');
+    }
+
     public function login(Request $request)
     {
         $login = $this->auth_service->login($request->all());
